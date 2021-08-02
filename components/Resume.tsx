@@ -19,6 +19,17 @@ const Resume = ({ data }: ResumeProps) => {
       </div>
     );
   });
+  const certification = data.certification.map(function (x) {
+    return (
+      <div key={x.name}>
+        <h3>{x.name}</h3>
+        <p className="info">
+          {x.provider} <span> &bull; </span>{" "}
+          <em className="date">{x.graduated}</em>
+        </p>
+      </div>
+    );
+  });
   const work = data.work.map(function (work) {
     return (
       <div key={work.company}>
@@ -51,6 +62,14 @@ const Resume = ({ data }: ResumeProps) => {
         </h1>
 
         <div className="resume-detail">{education}</div>
+      </div>
+
+      <div className="resume-row">
+        <h1>
+          <span>Certification</span>
+        </h1>
+
+        <div className="resume-detail">{certification}</div>
       </div>
 
       <div className="resume-row">

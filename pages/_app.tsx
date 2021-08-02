@@ -1,0 +1,21 @@
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
+import Router from "next/router";
+import { Provider } from "next-auth/client";
+import { wrapper } from "../stores/store";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+
+// https://vpilip.com/next-js-page-loading-indicator-improve-ux-of-next-js-app/
+Router.events.on("routeChangeStart", () => NProgress.start());
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeError", () => NProgress.done());
+
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <Provider session={pageProps.session}>
+      <Component {...pageProps} />
+    </Provider>
+  );
+}
+export default wrapper.withRedux(MyApp);

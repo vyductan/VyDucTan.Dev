@@ -51,6 +51,7 @@ const Header = ({ data }: HeaderProps) => {
     <header
       id="home"
       style={{
+        backgroundColor: "#161415",
         backgroundImage: `url(/header-background.jpg)`,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "top center",

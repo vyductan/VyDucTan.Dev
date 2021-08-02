@@ -1,7 +1,7 @@
 import Image from "next/image";
 import logo from "../../../public/logo.png";
 import HeaderIcon from "./HeaderIcon";
-import { navItems } from "../../config/nav";
+import { navItems } from "./data/nav";
 import Icon from "../../Icon";
 import Right from "./Right";
 import { ButtonOpenSidebar } from "../Sidebar/Sidebar";

@@ -11,8 +11,8 @@ export const resumeData = {
     email: "vdt5snet@gmail.com",
     phone: "+84 961034723",
     address: {
-      street: "Long Thanh 1, Pho Thanh",
-      city: "Duc Pho",
+      street: "Pho Thanh, Duc Pho",
+      city: "VyDucTan",
       state: "Quang Ngai",
       zip: "570 000",
     },

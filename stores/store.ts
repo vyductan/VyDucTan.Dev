@@ -1,7 +1,6 @@
 import { configureStore, Store } from "@reduxjs/toolkit";
 import createSagaMiddleware, { Task } from "redux-saga";
-import { createWrapper, Context, HYDRATE } from "next-redux-wrapper";
-import { groupsReducer, groupsSlice } from "./groups/groupsSlice";
+import { createWrapper } from "next-redux-wrapper";
 import { settingsReducer } from "./settings";
 import rootSaga from "./saga";
 
@@ -32,7 +31,6 @@ const makeStore = () => {
   const store = configureStore({
     reducer: {
       settings: settingsReducer,
-      [groupsSlice.name]: groupsSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(sagaMiddleware),

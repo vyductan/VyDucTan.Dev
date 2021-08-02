@@ -34,10 +34,13 @@ const Footer = ({ data }: FooterProps) => {
         </div>
 
         <div id="go-top" className="absolute -top-5 m-auto">
-          <Link to="home" smooth={true}>
-            <a className="icon hover:bg-[#11ABB0]" title="Back to Top">
-              <Icon name="ArrowUp2" />
-            </a>
+          <Link
+            className="icon hover:bg-[#11ABB0]"
+            to="home"
+            smooth={true}
+            title="Back to Top"
+          >
+            <Icon name="ArrowUp2" />
           </Link>
         </div>
       </div>

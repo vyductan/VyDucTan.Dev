@@ -1,6 +1,6 @@
 import { Tooltip } from "antd";
-import Icon from "../../@vyductan/Icon";
-import { IconType, IconName } from "../../@vyductan/Icon/Icon";
+import Icon from "../../Icon";
+import { IconType, IconName } from "../../Icon/Icon";
 
 type HeaderIconProps = {
   tooltip: string;

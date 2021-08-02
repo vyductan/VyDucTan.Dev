@@ -1,40 +1,21 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { ResumeData } from "../config/resumeData";
 import useHandleOutsideClick from "./@vyductan/hooks/useHandleOutsideClick";
 import Icon from "./@vyductan/Icon";
-import TypeWriter from "react-typewriter";
+// import TypeWriter from "react-typewriter";
+import TypeWriter from "typewriter-effect";
 import { IconName } from "./@vyductan/Icon/Icon";
-import { Link, Events } from "react-scroll";
+import { Link } from "react-scroll";
 import { useScrollPosition } from "@n8tb1t/use-scroll-position";
 
 type HeaderProps = {
   data: ResumeData["main"];
 };
 const Header = ({ data }: HeaderProps) => {
-  if (!data) return <></>;
-  const { name, occupation, description } = data;
-  const city = data.address.city;
-  const networks = data.social.map(function (network) {
-    return (
-      <li key={network.name}>
-        <a href={network.url}>
-          <Icon name={network.iconName as IconName} />
-        </a>
-      </li>
-    );
-  });
-
   const ref = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
   useHandleOutsideClick(ref, visible, () => setVisible(false));
 
-  useEffect(() => {
-    Events.scrollEvent.register("begin", (to, element) => {
-      console.log(to, element);
-    });
-
-    // return () => Events.scrollEvent.remove("begin");
-  });
   useScrollPosition(({ currPos }) => {
     const elm = document.getElementById("nav");
     if (currPos.y < -100) {
@@ -51,6 +32,20 @@ const Header = ({ data }: HeaderProps) => {
       if (elm) elm.style.backgroundColor = "transparent";
     }
   }, []);
+
+  if (!data) return <></>;
+  const { name, occupation, description } = data;
+  const city = data.address.city;
+  const networks = data.social.map(function (network) {
+    return (
+      <li key={network.name}>
+        <a href={network.url}>
+          <Icon name={network.iconName as IconName} />
+        </a>
+      </li>
+    );
+  });
+
   return (
     <header
       id="home"
@@ -78,15 +73,6 @@ const Header = ({ data }: HeaderProps) => {
               to="home"
               smooth={true}
               spy={true}
-              // onSetActive={(to) => {
-              //   const elm = document.getElementById("nav-wrap");
-              //   if (elm) elm.style.backgroundColor = "transparent";
-              // }}
-              //               onSetInactive={() => {
-              //                 const elm = document.getElementById("nav");
-              //
-              //                 if (elm) elm.style.backgroundColor = "#333";
-              //               }}
             >
               Home
             </Link>
@@ -152,7 +138,14 @@ const Header = ({ data }: HeaderProps) => {
       <div className="flex-grow flex items-center justify-center">
         <div className="">
           <h1 className="text-white text-[50px] sm:text-[65px] md:text-[80px] lg:text-[100px] leading-normal font-bold text-center">
-            <TypeWriter typing={0.5}>{name ? `I'm ${name}.` : null}</TypeWriter>
+            <TypeWriter
+              options={{
+                strings: `I'm ${name}.`,
+                autoStart: true,
+                cursor: "",
+                delay: 100,
+              }}
+            />
           </h1>
           <h3 className="text-[#A8A8A8] text-center text-base md:text-lg lg:text-xl font-serif max-w-[80%] md:max-w-[100%] m-auto">
             Based in {city}. <span className="text-white">{occupation}</span>.{" "}

@@ -1,5 +1,5 @@
 // https://stackoverflow.com/questions/32553158/detect-click-outside-react-component
-import { MutableRefObject, RefObject, useEffect } from "react";
+import { RefObject, useEffect } from "react";
 
 const useHandleOutsideClick = (
   // ref: RefObject<HTMLDivElement>,
@@ -26,7 +26,7 @@ const useHandleOutsideClick = (
       // Unbind the event listener on clean up
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [ref, condition]);
+  }, [ref, condition, cb]);
 };
 
 export default useHandleOutsideClick;

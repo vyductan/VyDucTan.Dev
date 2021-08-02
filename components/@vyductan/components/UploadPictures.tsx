@@ -4,6 +4,7 @@ import {
   UploadChangeParam,
   UploadFile,
 } from "antd/lib/upload/interface";
+import Image from "next/image";
 import React, { useState } from "react";
 import Icon from "../Icon";
 
@@ -57,10 +58,16 @@ const UploadPictures = React.forwardRef((props, ref) => {
         footer={null}
         onCancel={handleCancel}
       >
-        <img alt="example" style={{ width: "100%" }} src={previewImage} />
+        <Image
+          alt="preview"
+          layout="fill"
+          objectFit="contain"
+          src={previewImage || ""}
+        />
       </Modal>
     </>
   );
 });
 
+UploadPictures.displayName = "UploadPictures";
 export default UploadPictures;

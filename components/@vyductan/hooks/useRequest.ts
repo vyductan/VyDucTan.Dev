@@ -61,7 +61,7 @@ function useRequest<R>(service: () => Promise<R>): Result<R> {
       setData(data);
       setLoading(false);
     });
-  }, []);
+  }, [service]);
   return { loading, data };
 }
 // const useRequest = (service: () => Promise<T>): BaseResult<R['data'], P> => {

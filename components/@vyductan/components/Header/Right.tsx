@@ -2,10 +2,9 @@ import Image from "next/image";
 import { Tooltip, Badge } from "antd";
 import { signOut, useSession } from "next-auth/client";
 import { Dispatch, SetStateAction, useRef, useState } from "react";
-import useHandleOutsideClick from "../../@vyductan/hooks/useHandleOutsideClick";
-import Icon from "../../@vyductan/Icon";
-import { menuAccount } from "../../config/menuAccount";
-import { MenuModalItem } from "../../config/types";
+import useHandleOutsideClick from "../../hooks/useHandleOutsideClick";
+import Icon from "../../Icon";
+import { menuAccount, MenuModalItem } from "./data/menuAccount";
 
 const Right = () => {
   const [session] = useSession();

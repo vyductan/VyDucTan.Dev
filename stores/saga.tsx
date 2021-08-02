@@ -1,23 +1,22 @@
 import { all, call, spawn } from "redux-saga/effects";
-import groupsSaga from "./groups/groupsSaga";
 
 export default function* rootSaga() {
-  const sagas = [groupsSaga];
-
-  yield all(
-    sagas.map((saga) =>
-      spawn(function* () {
-        while (true) {
-          try {
-            yield call(saga);
-            break;
-          } catch (e) {
-            console.error("Saga error, the saga will be restarted", e);
-          }
-        }
-      })
-    )
-  );
+  //   const sagas = [];
+  //
+  //   yield all(
+  //     sagas.map((saga) =>
+  //       spawn(function* () {
+  //         while (true) {
+  //           try {
+  //             yield call(saga);
+  //             break;
+  //           } catch (e) {
+  //             console.error("Saga error, the saga will be restarted", e);
+  //           }
+  //         }
+  //       })
+  //     )
+  //   );
 }
 
 // another way: https://github.com/redux-saga/redux-saga/issues/760#issuecomment-273737022

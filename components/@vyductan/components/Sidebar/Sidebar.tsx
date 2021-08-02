@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import Icon from "../../Icon";
-import { useAppDispatch, useAppSelector } from "../../../stores/hooks";
-import { toggleSidebarVisible } from "../../../stores/settings";
+import { useAppDispatch, useAppSelector } from "../../../../stores/hooks";
+import { toggleSidebarVisible } from "../../../../stores/settings";
 // import User from "../User";
 import SidebarItem from "./SidebarItem";
 import { IconName, IconType } from "../../Icon/Icon";

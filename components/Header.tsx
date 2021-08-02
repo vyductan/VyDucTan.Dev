@@ -7,6 +7,7 @@ import TypeWriter from "typewriter-effect";
 import { IconName } from "./@vyductan/Icon/Icon";
 import { Link } from "react-scroll";
 import { useScrollPosition } from "@n8tb1t/use-scroll-position";
+import Image from "next/image";
 
 type HeaderProps = {
   data: ResumeData["main"];
@@ -25,7 +26,7 @@ const Header = ({ data }: HeaderProps) => {
     }
     if (currPos.y < -window.innerHeight + 10) {
       if (elm) elm.style.display = "";
-      if (elm) elm.style.backgroundColor = "#333";
+      if (elm) elm.style.backgroundColor = "#000";
     }
     if (currPos.y > -100) {
       if (elm) elm.style.display = "";
@@ -58,11 +59,12 @@ const Header = ({ data }: HeaderProps) => {
       className="h-screen flex flex-col"
     >
       <nav ref={ref} id="nav" className="nav">
-        <button
-          className="rounded-none w-12 h-12 flex items-center justify-center float-right bg-[#CC5200] p-1 md:hidden p-2"
-          onClick={() => setVisible(!visible)}
-        >
-          <Icon name="Menu" className="h-10" />
+        <div className="logo">
+          <Image src="/logo.png" width={67} height={40} />
+        </div>
+
+        <button className="nav-toggle" onClick={() => setVisible(!visible)}>
+          <Icon name="Menu" />
         </button>
 
         <ul className={`${!visible && "hidden"}`}>

@@ -83,7 +83,7 @@ section .container .detail {
   @apply uppercase text-gray-500 leading-relaxed font-semibold;
 }
 .portfolio-detail {
-  @apply mt-10 grid grid-cols-4 gap-7;
+  @apply mt-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7;
 }
 .portfolio-item-meta {
 }

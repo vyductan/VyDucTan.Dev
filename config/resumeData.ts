@@ -6,7 +6,7 @@ export const resumeData = {
     description: "I eat, sleep and breathe React",
     image: "profilepic.jpg",
     bio:
-      "Hi there! I am Tan! A developer with a Computer. I've been coding for over 2 years now. As a Full Stack developer Currently I'm freelance at Upwork, Fiverr",
+      "Hi there! I am Tan! A developer with with experience in building websites for small and medium sized businesses. I can build the Web Application from scratch and responsive for Mobile.",
     contactMessage: "Get in touch with me if you need something from me!",
     email: "vdt5snet@gmail.com",
     phone: "+84 961034723",

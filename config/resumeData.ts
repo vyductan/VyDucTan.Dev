@@ -96,6 +96,12 @@ export const resumeData = {
         image: "hulu.png",
         url: "https://hulu-yt-clone-rho.vercel.app/",
       },
+      {
+        title: "TasksVW (React JS)",
+        category: "",
+        image: "tasksvw.png",
+        url: "https://tasksvw.vercel.app/",
+      },
     ],
   },
   testimonials: {

@@ -35,7 +35,7 @@ const Footer = ({ data }: FooterProps) => {
 
         <div id="go-top" className="absolute -top-5 m-auto">
           <Link
-            className="icon hover:bg-[#11ABB0]"
+            className="icon hover:bg-[#000] hover:text-white"
             to="home"
             smooth={true}
             title="Back to Top"

@@ -25,9 +25,13 @@ const Contact = ({ data }: ContactProps) => {
   //       body: JSON.stringify(formData),
   //     });
   //   };
-  const handleFinish = (values: any) => {
+  const handleFinish = async (values: any) => {
     console.log(values);
     // TODO
+    await fetch("/api/mail", {
+      method: "POST",
+      body: JSON.stringify(values),
+    });
   };
   return (
     <section id="contact">

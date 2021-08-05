@@ -30,13 +30,15 @@ const Header = ({ data }: HeaderProps) => {
     }
     if (currPos.y > -100) {
       if (elm) elm.style.display = "";
-      if (elm) elm.style.backgroundColor = "transparent";
+      if (elm) elm.style.backgroundColor = "";
+      // if (elm) elm.style.backgroundColor = "transparent";
+      // if (elm) elm.classList.add("bg-blur-30");
     }
   }, []);
 
   if (!data) return <></>;
   const { name, occupation, description } = data;
-  const city = data.address.city;
+  // const city = data.address.city;
   const networks = data.social.map(function (network) {
     return (
       <li key={network.name}>
@@ -52,7 +54,7 @@ const Header = ({ data }: HeaderProps) => {
       id="home"
       style={{
         backgroundColor: "#161415",
-        backgroundImage: `url(/header-background.jpg)`,
+        backgroundImage: `url(/header-background-2.jpg)`,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "top center",
         backgroundSize: "cover",
@@ -139,7 +141,7 @@ const Header = ({ data }: HeaderProps) => {
       </nav>
 
       <div className="flex-grow flex items-center justify-center">
-        <div className="">
+        <div className="p-20 bg-gray-900 bg-opacity-30 rounded">
           <h1 className="text-white text-[50px] sm:text-[65px] md:text-[80px] lg:text-[100px] leading-normal font-bold text-center">
             <TypeWriter
               options={{
@@ -150,9 +152,10 @@ const Header = ({ data }: HeaderProps) => {
               }}
             />
           </h1>
-          <h3 className="text-[#A8A8A8] text-center text-base md:text-lg lg:text-xl font-serif max-w-[80%] md:max-w-[100%] m-auto">
-            Based in {city}. <span className="text-white">{occupation}</span>.{" "}
-            {description}.
+          <h3 className="text-[#A8A8A8] text-center text-lg md:text-xl lg:text-2xl font-serif max-w-[80%] md:max-w-[100%] m-auto">
+            <span className="text-white shadow">
+              {occupation}. {description}.
+            </span>
           </h3>
           <hr className="my-5 border-[#9696961a]" />
           <ul className="networks">{networks}</ul>
@@ -161,7 +164,7 @@ const Header = ({ data }: HeaderProps) => {
 
       <div className="flex justify-center mb-2 md:mb-10">
         <Link
-          className="icon hover:bg-[#11ABB0] hover:text-[#000]"
+          className="icon hover:bg-[#000] hover:text-white"
           to="about"
           smooth={true}
         >

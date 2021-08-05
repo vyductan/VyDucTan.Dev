@@ -28,7 +28,7 @@ export default function Home({ data }: HomeProps) {
         <About data={data.main} />
         <Resume data={resumeData.resume} />
         <Portfolio data={resumeData.portfolio} />
-        <Testimonials data={resumeData.testimonials} />
+        {/*<Testimonials data={resumeData.testimonials} />*/}
         <Contact data={resumeData.main} />
         <Footer data={resumeData.main} />
       </main>

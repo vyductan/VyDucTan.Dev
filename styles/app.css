@@ -18,7 +18,7 @@ section .container .detail {
 }
 
 .nav {
-  @apply z-50 fixed top-0 text-white font-bold w-full;
+  @apply z-50 fixed top-0 text-white font-bold w-full bg-gray-900 bg-opacity-30;
 }
 .nav-toggle {
   @apply fixed top-2 right-[5%] w-10 h-10 flex items-center justify-center bg-[#000] md:hidden p-2;

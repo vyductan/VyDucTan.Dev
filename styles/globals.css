@@ -7,6 +7,9 @@
   body {
     @apply text-base;
   }
+  .bg-blur-30 {
+    @apply bg-gray-900 bg-opacity-30;
+  }
 
   .image-effect-zoom-with-meta {
     @apply relative;

@@ -152,7 +152,7 @@ const Header = ({ data }: HeaderProps) => {
               }}
             />
           </h1>
-          <h3 className="text-[#cccccc] text-center text-lg md:text-xl lg:text-2xl font-serif max-w-[80%] md:max-w-[100%] m-auto">
+          <h3 className="text-white text-opacity-80 text-center text-lg md:text-xl lg:text-2xl font-serif max-w-[80%] md:max-w-[100%] m-auto">
             <h3>
               Based in VietNam.{" "}
               <span className="text-white shadow">{occupation}</span>.{" "}

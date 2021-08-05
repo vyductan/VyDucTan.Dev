@@ -63,7 +63,7 @@ const Header = ({ data }: HeaderProps) => {
     >
       <nav ref={ref} id="nav" className="nav">
         <div className="logo">
-          <Image src="/logo.png" width={67} height={40} />
+          <Image alt="logo" src="/logo.png" width={67} height={40} />
         </div>
 
         <button className="nav-toggle" onClick={() => setVisible(!visible)}>
@@ -141,8 +141,8 @@ const Header = ({ data }: HeaderProps) => {
       </nav>
 
       <div className="flex-grow flex items-center justify-center">
-        <div className="p-10 md:p-20 bg-gray-900 bg-opacity-30 rounded">
-          <h1 className="text-white text-[30px] sm:text-[65px] md:text-[80px] lg:text-[100px] leading-normal font-bold text-center">
+        <div className="p-10 md:p-20 bg-gray-900 bg-opacity-40 rounded">
+          <h1 className="text-white text-[40px] sm:text-[65px] md:text-[80px] lg:text-[100px] leading-normal font-bold text-center">
             <TypeWriter
               options={{
                 strings: `I'm ${name}.`,

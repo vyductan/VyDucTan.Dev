@@ -2,8 +2,9 @@ export type ResumeData = typeof resumeData;
 export const resumeData = {
   main: {
     name: "Vy Duc Tan",
-    occupation: "Full Stack Developer",
-    description: "I eat, sleep and breathe React",
+    occupation: "A Full Stack Developer",
+    description:
+      "Constantly learning, working, and looking for happiness in the life",
     image: "profilepic.jpg",
     bio:
       "Hi there! I am Tan! A Full Stack Developer with experience in building websites for small and medium sized businesses. With React, NodeJs, NextJs as well as tons of NoSQL knowledge, I have performed built dynamic front end interfaces and complicated back-end APIs or database integrations. I enjoy working with the various technologies on the internet. I will provide high quality results and hard work until you are satisfied.",
@@ -12,7 +13,7 @@ export const resumeData = {
     phone: "+84 961034723",
     address: {
       street: "Pho Thanh, Duc Pho",
-      city: "VyDucTan",
+      city: "Quang Ngai",
       state: "Quang Ngai",
       zip: "570 000",
     },

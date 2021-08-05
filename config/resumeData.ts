@@ -9,7 +9,7 @@ export const resumeData = {
     bio:
       "Hi there! I am Tan! A Full Stack Developer with experience in building websites for small and medium sized businesses. With React, NodeJs, NextJs as well as tons of NoSQL knowledge, I have performed built dynamic front end interfaces and complicated back-end APIs or database integrations. I enjoy working with the various technologies on the internet. I will provide high quality results and hard work until you are satisfied.",
     contactMessage: "Get in touch with me if you need something from me!",
-    email: "vdt5snet@gmail.com",
+    email: "vyductanlk@gmail.com",
     phone: "+84 961034723",
     address: {
       street: "Pho Thanh, Duc Pho",

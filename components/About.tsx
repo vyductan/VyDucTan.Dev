@@ -32,7 +32,7 @@ const About = ({ data }: AboutProps) => {
                 <span>
                   {address.street}
                   <br />
-                  {address.city} {address.state}, {address.zip}
+                  {address.state}, {address.zip}
                 </span>
                 <br />
                 <span>{phone}</span>

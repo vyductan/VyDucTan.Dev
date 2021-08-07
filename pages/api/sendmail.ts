@@ -15,17 +15,14 @@ type RessultData = {
   success: boolean;
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<RessultData>
-) {
+const post = async (req: NextApiRequest, res: NextApiResponse<RessultData>) => {
   try {
     const { name, email, subject, message }: MailItem = JSON.parse(req.body);
 
     const transporter = nodemailder.createTransport({
       host: "smtp.zoho.com",
       secure: true,
-      port: "465",
+      port: 465,
       auth: {
         user: process.env.ZOHO_EMAIL_ADDRESS,
         pass: process.env.ZOHO_APP_PASSWORD,
@@ -44,4 +41,18 @@ export default async function handler(
   } catch (error) {
     res.status(200).json({ success: false });
   }
+};
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<RessultData>
+) {
+  switch (req.method) {
+    case "POST":
+      await post(req, res);
+      break;
+    default:
+      res.status(405).end(); //Method Not Allowed
+      break;
+  }
+  // res.status(404).end();
 }

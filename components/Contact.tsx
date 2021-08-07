@@ -1,4 +1,5 @@
-import { Form, message } from "antd";
+import { Form, notification } from "antd";
+import { useState } from "react";
 import { ResumeData } from "../config/resumeData";
 import FormItem from "./@vyductan/components/FormItem";
 import Input from "./@vyductan/components/Input";
@@ -9,19 +10,35 @@ type ContactProps = {
   data: ResumeData["main"];
 };
 const Contact = ({ data }: ContactProps) => {
+  const [submitting, setSubmitting] = useState(false);
+  const [form] = Form.useForm();
   if (!data) return <></>;
   const { name, address, phone, email, contactMessage } = data;
 
   const handleFinish = async (values: any) => {
-    const res = await fetch("/api/sendmail", {
-      method: "POST",
-      body: JSON.stringify(values),
-    });
-    const r = await res.json();
-    if (r.success) {
-      message.success("Success!");
-    } else {
-      message.error("Error!");
+    try {
+      setSubmitting(true);
+      const res = await fetch("/api/sendmail", {
+        method: "POST",
+        body: JSON.stringify(values),
+      });
+      const r = await res.json();
+      if (r.success) {
+        notification.success({
+          message: "Success! Thanks for your contact.",
+          placement: "bottomRight",
+        });
+      } else {
+        throw "ERROR";
+      }
+    } catch (error) {
+      notification.error({
+        message: "Error!",
+        placement: "bottomRight",
+      });
+    } finally {
+      setSubmitting(false);
+      form.resetFields();
     }
   };
   return (
@@ -34,7 +51,7 @@ const Contact = ({ data }: ContactProps) => {
 
         <div className="detail">
           <p>{contactMessage}</p>
-          <Form onFinish={handleFinish}>
+          <Form form={form} onFinish={handleFinish}>
             <FormItem label="Name" name="name" rules={[{ required: true }]}>
               <Input />
             </FormItem>
@@ -61,8 +78,8 @@ const Contact = ({ data }: ContactProps) => {
             </FormItem>
 
             <div className="flex justify-center">
-              <button type="submit" className="submit">
-                Submit
+              <button type="submit" className="submit" disabled={submitting}>
+                {submitting ? "Sending" : "Submit"}
               </button>
             </div>
           </Form>

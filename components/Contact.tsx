@@ -1,7 +1,8 @@
-import { Form } from "antd";
+import { Form, message } from "antd";
 import { ResumeData } from "../config/resumeData";
 import FormItem from "./@vyductan/components/FormItem";
 import Input from "./@vyductan/components/Input";
+import TextArea from "./@vyductan/components/TextArea";
 import Icon from "./@vyductan/Icon";
 
 type ContactProps = {
@@ -11,27 +12,17 @@ const Contact = ({ data }: ContactProps) => {
   if (!data) return <></>;
   const { name, address, phone, email, contactMessage } = data;
 
-  //   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-  //     e.preventDefault();
-  //     const formData: { [key: string]: string | null } = {};
-  //     Array.from(e.currentTarget.elements).forEach((field) => {
-  //       const x = field as HTMLInputElement;
-  //       if (!x.name) return;
-  //       formData[x.name] = x.value;
-  //     });
-  //
-  //     await fetch("/api/mail", {
-  //       method: "POST",
-  //       body: JSON.stringify(formData),
-  //     });
-  //   };
   const handleFinish = async (values: any) => {
-    console.log(values);
-    // TODO
-    await fetch("/api/mail", {
+    const res = await fetch("/api/sendmail", {
       method: "POST",
       body: JSON.stringify(values),
     });
+    const r = await res.json();
+    if (r.success) {
+      message.success("Success!");
+    } else {
+      message.error("Error!");
+    }
   };
   return (
     <section id="contact">
@@ -66,7 +57,7 @@ const Contact = ({ data }: ContactProps) => {
               name="message"
               rules={[{ required: true, message: "Please enter Message!" }]}
             >
-              <textarea rows={15} name="message" />
+              <TextArea rows={15} />
             </FormItem>
 
             <div className="flex justify-center">

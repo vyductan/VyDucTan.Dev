@@ -75,7 +75,7 @@
   .form-item input:active + label,
   .form-item textarea:active + label,
   .form-item input.filled + label,
-  .form-item input.filled + label {
+  .form-item textarea.filled + label {
     @apply text-sm top-0;
   }
   .ant-form-item-has-error .form-item {

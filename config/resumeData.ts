@@ -66,8 +66,7 @@ export const resumeData = {
         company: "VyDucTan",
         title: "Founder, Developer and CEO",
         years: "March 2021 - Present",
-        description:
-          "Build the website for customers. Share everything useful to the world!",
+        description: "Freelance Web Developer.",
       },
     ],
     skills: [

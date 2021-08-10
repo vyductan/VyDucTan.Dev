@@ -25,7 +25,7 @@ const post = async (req: NextApiRequest, res: NextApiResponse<RessultData>) => {
     )
       throw "ERROR";
     mail.setApiKey(process.env.SENDGRID_API_KEY);
-    await mail.send({
+    const r = await mail.send({
       from: { name: process.env.SEND_NAME, email: process.env.SEND_EMAIL },
       to: process.env.RECEIVE_EMAIL,
       replyTo: email,
@@ -34,9 +34,9 @@ const post = async (req: NextApiRequest, res: NextApiResponse<RessultData>) => {
             <p><b>Message</b>: ${message}</p>
       <a href="vyductan.me">VyDucTan.Me</a>`,
     });
-    res.status(200).json({ success: true });
+    res.status(200).json({ success: true, msg: r });
   } catch (error) {
-    res.status(200).json({ success: false });
+    res.status(200).json({ success: false, msg: error });
   }
 };
 export default async function handler(

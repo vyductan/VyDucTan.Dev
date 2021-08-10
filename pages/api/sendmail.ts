@@ -10,6 +10,7 @@ type MailItem = {
 };
 type RessultData = {
   success: boolean;
+  msg?: string;
 };
 
 const post = async (req: NextApiRequest, res: NextApiResponse<RessultData>) => {
@@ -28,7 +29,7 @@ const post = async (req: NextApiRequest, res: NextApiResponse<RessultData>) => {
     });
     res.status(200).json({ success: true });
   } catch (error) {
-    res.status(200).json({ success: false });
+    res.status(200).json({ success: false, msg: error });
   }
 };
 export default async function handler(

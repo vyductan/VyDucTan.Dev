@@ -51,7 +51,7 @@ const Contact = ({ data }: ContactProps) => {
 
         <div className="detail">
           <p>{contactMessage}</p>
-          <Form form={form} onFinish={handleFinish}>
+          <Form onFinish={handleFinish}>
             <FormItem label="Name" name="name" rules={[{ required: true }]}>
               <Input />
             </FormItem>

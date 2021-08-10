@@ -10,7 +10,7 @@ type MailItem = {
 };
 type RessultData = {
   success: boolean;
-  msg?: string;
+  msg?: any;
 };
 
 const post = async (req: NextApiRequest, res: NextApiResponse<RessultData>) => {
@@ -19,7 +19,7 @@ const post = async (req: NextApiRequest, res: NextApiResponse<RessultData>) => {
 
     if (!process.env.SENDGRID_API_KEY || !process.env.SEND_EMAIL) throw "ERROR";
     mail.setApiKey(process.env.SENDGRID_API_KEY);
-    mail.send({
+    const r = await mail.send({
       from: process.env.SEND_EMAIL,
       to: process.env.RECEIVE_EMAIL,
       subject: subject,
@@ -27,7 +27,7 @@ const post = async (req: NextApiRequest, res: NextApiResponse<RessultData>) => {
             <p><b>Message</b>: ${message}</p>
       <a href="vyductan.me">VyDucTan.Me</a>`,
     });
-    res.status(200).json({ success: true });
+    res.status(200).json({ success: true, msg: r });
   } catch (error) {
     res.status(200).json({ success: false, msg: error });
   }

@@ -1,20 +1,16 @@
 import Image from "next/image";
 import {
-  Component,
   Dispatch,
   MouseEvent,
-  RefObject,
   SetStateAction,
   useEffect,
-  useRef,
   useState,
 } from "react";
-import moment, { Moment } from "moment";
+import moment from "moment";
 import tw, { styled } from "twin.macro";
 import Icon from "../@vyductan/Icon";
 import { Vocabulary } from "../../services/english";
 import { DatePicker } from "antd";
-import { PickerProps } from "antd/lib/date-picker/generatePicker";
 import { motion } from "framer-motion";
 
 const Button = styled.button({
@@ -82,6 +78,7 @@ const MusicPlayer = ({
     const secPerPx = voiceTime / 280;
     player.currentTime = secPerPx * newWidth;
   };
+
   const handleClickPlay = async () => {
     setPlayState(!playState);
   };
@@ -126,10 +123,10 @@ const MusicPlayer = ({
         const nextId = (currentId + 1) % dataSource.length;
 
         // end of list -> pause
-        if (nextId != currentId || currentId != dataSource.length - 1) {
+        if (nextId != currentId && currentId != dataSource.length - 1) {
           setCurrentId(nextId);
         } else {
-          player.pause();
+          setPlayState(false);
         }
       }
     }, 1000);

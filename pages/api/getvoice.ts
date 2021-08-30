@@ -48,8 +48,11 @@ export default async function handler(
   readable.push(null); // requestment
   readable.readableLength;
   res.writeHead(200, {
-    // "content-type": "audio/wav",
+    "accept-ranges": "bytes",
+    "Content-Type": "audio/mp3",
     "Content-Length": readable.readableLength,
+    "Content-Range":
+      "bytes 0-" + readable.readableLength + "/" + readable.readableLength,
   });
   readable.pipe(res);
 }

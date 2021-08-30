@@ -2,10 +2,6 @@ import axios from "axios";
 import moment from "moment";
 import "moment/locale/vi";
 moment.locale("vi");
-import firebase from "firebase";
-import { selectCollection } from "./firebase";
-
-const db = selectCollection("english");
 
 const API_KEY = "AIzaSyBXwLFPCc1y24upUslWUkF_sQSuoy0aw6U";
 const SHEET_ID = "1sI37NLM_670eUcirywS9g0Kupw2d-2Cgw9NIYbsm3Ao";
@@ -21,19 +17,6 @@ const VALUES_GET_URL =
   "/values/Daily" +
   "?majorDimension=ROWS&key=" +
   API_KEY;
-export type ParagraphItem = {
-  paragraph: string;
-  created_at: firebase.firestore.Timestamp;
-};
-export async function addParagraph(newData: ParagraphItem) {
-  try {
-    await db.add(newData);
-    return { success: true };
-  } catch (error) {
-    console.log(error);
-    return { success: false };
-  }
-}
 
 export type Vocabulary = {
   vocabulary: string;

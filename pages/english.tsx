@@ -1,28 +1,13 @@
-import { Form, Modal, Table } from "antd";
-import firebase from "firebase";
+import { Table } from "antd";
 import { useEffect, useState } from "react";
-import FormItem from "../components/@vyductan/components/FormItem";
-import TextArea from "../components/@vyductan/components/TextArea";
 import MusicPlayer from "../components/English/MusicPlayer";
-import {
-  addParagraph,
-  getDailyEnglish,
-  ParagraphItem,
-  Vocabulary,
-} from "../services/english";
+import { getDailyEnglish, Vocabulary } from "../services/english";
 
 type EnglishProps = {};
 const English = ({}: EnglishProps) => {
   const [loading, setLoading] = useState(true);
   const [dailyEnglish, setDailyEnglish] = useState<Vocabulary[]>([]);
   const [datePicked, setDatePicked] = useState<string>();
-
-  const onFinish = async (values: ParagraphItem) => {
-    values.created_at = firebase.firestore.Timestamp.fromDate(new Date());
-
-    // console.log(values);
-    await addParagraph(values);
-  };
 
   const columns = [
     {
@@ -98,15 +83,6 @@ const English = ({}: EnglishProps) => {
         rowKey="vocabulary"
         style={{ fontSize: 16, whiteSpace: "pre", marginTop: 20 }}
       />
-
-      <Modal>
-        <Form onFinish={onFinish}>
-          <FormItem label="Paragraph" name="paragraph">
-            <TextArea />
-          </FormItem>
-          <button type="submit">Save</button>
-        </Form>
-      </Modal>
     </div>
   );
 };

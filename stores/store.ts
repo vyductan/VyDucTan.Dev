@@ -3,7 +3,6 @@ import createSagaMiddleware, { Task } from "redux-saga";
 import { createWrapper } from "next-redux-wrapper";
 import { settingsSlice } from "./settings";
 import rootSaga from "./saga";
-import { paragraphSlice } from "./english/paragraph";
 
 // const sagaMiddleware = createSagaMiddleware();
 //
@@ -33,7 +32,6 @@ const makeStore = () => {
   const store = configureStore({
     reducer: {
       [settingsSlice.name]: settingsSlice.reducer,
-      [paragraphSlice.name]: paragraphSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(sagaMiddleware),

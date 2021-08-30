@@ -141,6 +141,7 @@ const MusicPlayer = ({
       <div className="flex flex-col items-center">
         <div className="w-40 h-40 relative">
           <Image
+            alt="header image"
             src="/images/music-player.jpg"
             layout="fill"
             objectFit="cover"

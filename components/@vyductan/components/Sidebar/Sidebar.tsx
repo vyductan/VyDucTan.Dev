@@ -1,15 +1,18 @@
 import { ReactNode } from "react";
 import Icon from "../../Icon";
 import { useAppDispatch, useAppSelector } from "../../../../stores/hooks";
-import { toggleSidebarVisible } from "../../../../stores/settings";
 // import User from "../User";
 import SidebarItem from "./SidebarItem";
 import { IconName, IconType } from "../../Icon/Icon";
+import { sideBarSlice } from "./redux/sideBarSlice";
 
 export const ButtonOpenSidebar = () => {
   const dispatch = useAppDispatch();
   return (
-    <div className="icon" onClick={() => dispatch(toggleSidebarVisible())}>
+    <div
+      className="icon"
+      onClick={() => dispatch(sideBarSlice.actions.toggleSidebarVisible())}
+    >
       <Icon name="Menu" />
     </div>
   );
@@ -27,9 +30,13 @@ type SidebarProps = {
 };
 const Sidebar = ({ items, Header, Footer }: SidebarProps) => {
   // const [sidebarVisible, setSidebarVisiable] = useState(true);
-  const sidebarVisible = useAppSelector(
-    (state) => state.settings.sidebarVisible
-  );
+
+  // to use -> add sidebar to store.tsx and comment under
+  const sidebarVisible = true;
+
+  // const sidebarVisible = useAppSelector(
+  //   (state) => state.sidebar.sidebarVisible
+  // );
 
   return (
     <div

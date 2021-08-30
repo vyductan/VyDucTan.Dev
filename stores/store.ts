@@ -1,8 +1,9 @@
 import { configureStore, Store } from "@reduxjs/toolkit";
 import createSagaMiddleware, { Task } from "redux-saga";
 import { createWrapper } from "next-redux-wrapper";
-import { settingsReducer } from "./settings";
+import { settingsSlice } from "./settings";
 import rootSaga from "./saga";
+import { paragraphSlice } from "./english/paragraph";
 
 // const sagaMiddleware = createSagaMiddleware();
 //
@@ -26,11 +27,13 @@ export interface SagaStore extends Store {
   sagaTask: Task;
 }
 
+// *********** MAIN
 const makeStore = () => {
   const sagaMiddleware = createSagaMiddleware();
   const store = configureStore({
     reducer: {
-      settings: settingsReducer,
+      [settingsSlice.name]: settingsSlice.reducer,
+      [paragraphSlice.name]: paragraphSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(sagaMiddleware),

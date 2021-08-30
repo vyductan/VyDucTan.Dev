@@ -3,12 +3,12 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 type Res = {
   success: boolean;
-  name: string;
+  data: any;
 };
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Res>
 ) {
-  res.status(200).json({ success: true, name: "John Doe" });
+  res.status(200).json({ success: true, data: "ok" });
 }

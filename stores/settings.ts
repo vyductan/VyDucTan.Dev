@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { HYDRATE } from "next-redux-wrapper";
 
 type State = {
   sidebarVisible: boolean;
@@ -7,7 +8,7 @@ const initialState: State = {
   sidebarVisible: false,
 };
 
-export const slice = createSlice({
+export const settingsSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
@@ -15,8 +16,16 @@ export const slice = createSlice({
       state.sidebarVisible = !state.sidebarVisible;
     },
   },
+  extraReducers: {
+    [HYDRATE]: (state, action) => {
+      return {
+        ...state,
+        ...action.payload.groups,
+      };
+    },
+  },
 });
 
-export const { toggleSidebarVisible } = slice.actions;
+// export const { toggleSidebarVisible } = settingsSlice.actions;
 
-export const settingsReducer = slice.reducer;
+// export const settingsReducer = settingsSlice.reducer;

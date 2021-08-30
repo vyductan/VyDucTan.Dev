@@ -4,7 +4,7 @@ import { Rule } from "antd/lib/form";
 type FormItemProps = {
   children: React.ReactNode;
   label: string;
-  name?: string;
+  name: string;
   rules?: Rule[];
 };
 const FormItem = ({ children, label, name, rules }: FormItemProps) => {

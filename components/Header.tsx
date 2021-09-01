@@ -54,7 +54,7 @@ const Header = ({ data }: HeaderProps) => {
       id="home"
       style={{
         backgroundColor: "#161415",
-        backgroundImage: `url(/header-background-2.jpg)`,
+        backgroundImage: `url(/header-background-10.webp)`,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "top center",
         backgroundSize: "cover",
@@ -66,7 +66,11 @@ const Header = ({ data }: HeaderProps) => {
           <Image alt="logo" src="/logo.png" width={67} height={40} />
         </div>
 
-        <button className="nav-toggle" onClick={() => setVisible(!visible)}>
+        <button
+          className="nav-toggle"
+          onClick={() => setVisible(!visible)}
+          aria-label="Menu"
+        >
           <Icon name="Menu" />
         </button>
 

@@ -11,7 +11,7 @@ const TextArea = ({ name, label, rows, rules }: TextAreaProps) => {
   const [value, setValue] = useState<string>();
   const required = rules?.some((x) => Object.keys(x).includes("required"));
   return (
-    <Form.Item rules={rules} name={name}>
+    <Form.Item rules={rules}>
       <div className="form-item">
         <textarea
           id={name}

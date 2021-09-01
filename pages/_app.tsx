@@ -1,3 +1,4 @@
+import "antd/dist/antd.css";
 import "../styles/globals.css";
 import globalStyles from "../styles/globalStyles";
 import type { AppProps } from "next/app";

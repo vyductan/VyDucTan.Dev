@@ -102,3 +102,6 @@ svg {
 .ant-form-item-has-error :not(.ant-input-disabled).ant-input:focus {
   box-shadow: none;
 }
+.ant-input {
+  padding: 3px 0;
+}

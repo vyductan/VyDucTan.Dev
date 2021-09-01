@@ -12,7 +12,7 @@ const Footer = ({ data }: FooterProps) => {
   const networks = data.social.map(function (network) {
     return (
       <li key={network.name}>
-        <a href={network.url}>
+        <a href={network.url} aria-label={network.name}>
           <Icon name={network.iconName as IconName} />
         </a>
       </li>
@@ -28,7 +28,7 @@ const Footer = ({ data }: FooterProps) => {
             {`© ${new Date().getFullYear()} `}
             Made by{" "}
           </span>
-          <a title="PAPA" href={website}>
+          <a title="VyDucTan" href={website}>
             VyDucTan
           </a>
         </div>

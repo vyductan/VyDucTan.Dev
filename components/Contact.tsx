@@ -52,30 +52,23 @@ const Contact = ({ data }: ContactProps) => {
         <div className="detail">
           <p>{contactMessage}</p>
           <Form form={form} onFinish={handleFinish}>
-            <FormItem label="Name" name="name" rules={[{ required: true }]}>
-              <Input />
-            </FormItem>
-            <FormItem
+            <Input label="Name" name="name" rules={[{ required: true }]} />
+            <Input
               label="Email"
               name="email"
               rules={[{ required: true }, { type: "email" }]}
-            >
-              <Input />
-            </FormItem>
-            <FormItem
+            />
+            <Input
               label="Subject"
               name="subject"
               rules={[{ required: true }]}
-            >
-              <Input />
-            </FormItem>
-            <FormItem
+            />
+            <TextArea
+              rows={15}
               label="Message"
               name="message"
               rules={[{ required: true, message: "Please enter Message!" }]}
-            >
-              <TextArea rows={15} />
-            </FormItem>
+            />
 
             <div className="flex justify-center">
               <button type="submit" className="submit" disabled={submitting}>

@@ -1,4 +1,7 @@
-module.exports = {
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+const config = {
   reactStrictMode: true,
   images: {
     domains: ["platform-lookaside.fbsbx.com", "firebasestorage.googleapis.com"],
@@ -14,3 +17,4 @@ module.exports = {
     return config;
   },
 };
+module.exports = withBundleAnalyzer(config);

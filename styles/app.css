@@ -51,7 +51,7 @@ a {
   @apply text-white font-bold text-xl;
 }
 #about p {
-  @apply text-[#7A7A7A] leading-relaxed;
+  @apply text-[#b7b7b7] leading-relaxed;
 }
 #about .btn-download {
   @apply bg-[#444] hover:bg-white text-white hover:text-gray-900 flex items-center justify-center p-3 font-bold rounded space-x-2;
@@ -69,7 +69,7 @@ a {
 #resume .resume-detail {
   @apply flex flex-col items-center md:flex-1;
 }
-#resume h3 {
+#resume h2 {
   @apply text-center text-3xl font-bold;
 }
 #resume .info {
@@ -103,7 +103,7 @@ a {
   @apply flex flex-col items-center max-w-[1024px] m-auto;
 }
 .portfolio-row h1 {
-  @apply uppercase text-gray-500 leading-relaxed font-semibold;
+  @apply uppercase text-[#494e58] leading-relaxed font-semibold;
 }
 .portfolio-detail {
   @apply mt-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7;

@@ -9,7 +9,7 @@ const Resume = ({ data }: ResumeProps) => {
   const education = data.education.map(function (education) {
     return (
       <div key={education.school}>
-        <h3>{education.school}</h3>
+        <h2>{education.school}</h2>
         <p className="info">
           {education.degree}
           <span> &bull; </span>
@@ -22,7 +22,7 @@ const Resume = ({ data }: ResumeProps) => {
   const certification = data.certification.map(function (x) {
     return (
       <div key={x.name}>
-        <h3>{x.name}</h3>
+        <h2>{x.name}</h2>
         <p className="info">
           {x.provider} <span> &bull; </span>{" "}
           <em className="date">{x.graduated}</em>
@@ -33,7 +33,7 @@ const Resume = ({ data }: ResumeProps) => {
   const work = data.work.map(function (work) {
     return (
       <div key={work.company}>
-        <h3>{work.company}</h3>
+        <h2>{work.company}</h2>
         <p className="info">
           {work.title}
           <span> &bull; </span> <em className="date">{work.years}</em>

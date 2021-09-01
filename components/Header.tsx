@@ -42,7 +42,7 @@ const Header = ({ data }: HeaderProps) => {
   const networks = data.social.map(function (network) {
     return (
       <li key={network.name}>
-        <a href={network.url}>
+        <a href={network.url} aria-label={network.name}>
           <Icon name={network.iconName as IconName} />
         </a>
       </li>
@@ -152,11 +152,11 @@ const Header = ({ data }: HeaderProps) => {
               }}
             />
           </h1>
-          <h3 className="text-[#d6d6d6] text-center text-base sm:text-lg md:text-xl lg:text-2xl font-serif max-w-[90%] md:max-w-[100%] m-auto">
+          <h2 className="text-[#d6d6d6] text-center text-base sm:text-lg md:text-xl lg:text-2xl font-serif max-w-[90%] md:max-w-[100%] m-auto">
             Based in VietNam.{" "}
             <span className="text-white shadow">{occupation}</span>.{" "}
             {description}.
-          </h3>
+          </h2>
           <hr className="my-5 border-[#9696961a]" />
           <ul className="networks">{networks}</ul>
         </div>

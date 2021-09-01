@@ -23,7 +23,6 @@ export type Vocabulary = {
   pos: string;
   ipa: string;
   meaning: string;
-  example: string;
   synonym: string;
   antonym: string;
   topic: string;
@@ -52,12 +51,11 @@ export async function getDailyEnglish(
           pos: item[2],
           ipa: item[3],
           meaning: item[4],
-          example: item[5],
-          synonym: item[6],
-          antonym: item[7],
-          topic: item[8],
-          subtopic: item[9],
-          vietnamese: item[10],
+          vietnamese: item[5],
+          topic: item[6],
+          subtopic: item[7],
+          synonym: item[8],
+          antonym: item[9],
         };
         memo.push(newItem);
       }

@@ -5,7 +5,8 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 const securityHeaders = [
   {
     key: "Content-Security-Policy",
-    value: "default-src 'self' vitals.vercel-insights.com",
+    value:
+      "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' vitals.vercel-insights.com",
   },
   {
     key: "X-XSS-Protection",

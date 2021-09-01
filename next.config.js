@@ -6,7 +6,7 @@ const securityHeaders = [
   {
     key: "Content-Security-Policy",
     value:
-      "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' vitals.vercel-insights.com",
+      "default-src 'none'; style-src 'self' 'unsafe-inline'; script-src 'self' connect-src vitals.vercel-insights.com; img-src 'self' data:",
   },
   {
     key: "X-XSS-Protection",

@@ -71,7 +71,12 @@ const Contact = ({ data }: ContactProps) => {
             />
 
             <div className="flex justify-center">
-              <button type="submit" className="submit" disabled={submitting}>
+              <button
+                type="submit"
+                className="submit"
+                disabled={submitting}
+                aria-label="Submit"
+              >
                 {submitting ? "Sending" : "Submit"}
               </button>
             </div>

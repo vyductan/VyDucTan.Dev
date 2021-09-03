@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Icon from "../../icons";
+import { Icon } from "../../icons";
 import { useAppDispatch, useAppSelector } from "../../../../stores/hooks";
 // import User from "../User";
 import SidebarItem from "./SidebarItem";

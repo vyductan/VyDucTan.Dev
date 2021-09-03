@@ -3,7 +3,7 @@ import { Tooltip, Badge } from "antd";
 import { signOut, useSession } from "next-auth/client";
 import { Dispatch, SetStateAction, useRef, useState } from "react";
 import useHandleOutsideClick from "../../hooks/useHandleOutsideClick";
-import Icon from "../../icons";
+import { Icon } from "../../icons";
 import { menuAccount, MenuModalItem } from "./data/menuAccount";
 
 const Right = () => {

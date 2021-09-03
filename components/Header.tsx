@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ResumeData } from "../config/resumeData";
 import useHandleOutsideClick from "./@vyductan/hooks/useHandleOutsideClick";
 import TypeWriter from "typewriter-effect";
-import Icon, { IconName } from "./@vyductan/icons";
+import { Icon, IconName } from "./@vyductan/icons";
 import { Link } from "react-scroll";
 import Image from "next/image";
 import { ArrowDown2Icon } from "./@vyductan/icons";

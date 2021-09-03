@@ -1,4 +1,4 @@
-import Icon, { IconName } from "../../icons";
+import { Icon, IconName } from "../../icons";
 
 type SidebarItemProps = {
   title: string;

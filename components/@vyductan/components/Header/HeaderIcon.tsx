@@ -1,5 +1,5 @@
 import { Tooltip } from "antd";
-import Icon, { IconName } from "../../icons";
+import { Icon, IconName } from "../../icons";
 
 type HeaderIconProps = {
   tooltip: string;

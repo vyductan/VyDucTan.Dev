@@ -1,4 +1,4 @@
-export { default } from "./components/Icon";
+export { default as Icon } from "./components/Icon";
 export type { IconName } from "./components/typings";
 export { default as AddIcon } from "./lib/AddIcon";
 export { default as AngryThemedIcon } from "./lib/AngryThemedIcon";

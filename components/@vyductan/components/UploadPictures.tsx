@@ -6,7 +6,7 @@ import {
 } from "antd/lib/upload/interface";
 import Image from "next/image";
 import React, { useState } from "react";
-import Icon from "../icons";
+import { Icon } from "../icons";
 
 const getBase64 = (file: RcFile): Promise<string> => {
   return new Promise((resolve, reject) => {

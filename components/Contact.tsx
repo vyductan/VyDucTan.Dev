@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ResumeData } from "../config/resumeData";
 import Input from "./@vyductan/components/Input";
 import TextArea from "./@vyductan/components/TextArea";
-import Icon from "./@vyductan/icons";
+import { Icon } from "./@vyductan/icons";
 
 type ContactProps = {
   data: ResumeData["main"];

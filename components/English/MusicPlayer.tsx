@@ -8,7 +8,7 @@ import {
 } from "react";
 import moment from "moment";
 import tw, { styled } from "twin.macro";
-import Icon from "../@vyductan/icons";
+import { Icon } from "../@vyductan/icons";
 import { Vocabulary } from "../../services/english";
 import { DatePicker } from "antd";
 import { motion } from "framer-motion";

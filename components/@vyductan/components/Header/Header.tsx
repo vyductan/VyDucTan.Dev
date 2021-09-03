@@ -2,7 +2,7 @@ import Image from "next/image";
 import logo from "../../../public/logo.png";
 import HeaderIcon from "./HeaderIcon";
 import { navItems } from "./data/nav";
-import Icon from "../../icons";
+import { Icon } from "../../icons";
 import Right from "./Right";
 import { ButtonOpenSidebar } from "../Sidebar/Sidebar";
 const Left = () => {

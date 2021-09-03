@@ -1,7 +1,6 @@
 import { Link } from "react-scroll";
 import { ResumeData } from "../config/resumeData";
-import Icon from "./@vyductan/Icon";
-import { IconName } from "./@vyductan/Icon/Icon";
+import Icon, { IconName } from "./@vyductan/icons";
 
 type FooterProps = {
   data: ResumeData["main"];

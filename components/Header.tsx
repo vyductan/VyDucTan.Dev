@@ -1,13 +1,11 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ResumeData } from "../config/resumeData";
 import useHandleOutsideClick from "./@vyductan/hooks/useHandleOutsideClick";
-import Icon from "./@vyductan/Icon";
-// import TypeWriter from "react-typewriter";
 import TypeWriter from "typewriter-effect";
-import { IconName } from "./@vyductan/Icon/Icon";
+import Icon, { IconName } from "./@vyductan/icons";
 import { Link } from "react-scroll";
-import { useScrollPosition } from "@n8tb1t/use-scroll-position";
 import Image from "next/image";
+import { ArrowDown2Icon } from "./@vyductan/icons";
 
 type HeaderProps = {
   data: ResumeData["main"];
@@ -17,25 +15,28 @@ const Header = ({ data }: HeaderProps) => {
   const [visible, setVisible] = useState(false);
   useHandleOutsideClick(ref, visible, () => setVisible(false));
 
-  useScrollPosition(({ currPos }) => {
+  useEffect(() => {
     const elm = document.getElementById("nav");
-    if (currPos.y < -100) {
-      // if (elm) elm.style.backgroundColor = "rbg(0 0 0 / 40%)";
-      // if (elm) elm.style.backgroundColor = "rgb(0 0 0 / 70%)";
-      if (elm) elm.style.display = "none";
-    }
-    if (currPos.y < -window.innerHeight + 10) {
-      if (elm) elm.style.display = "";
-      if (elm) elm.style.backgroundColor = "#000";
-    }
-    if (currPos.y > -100) {
-      if (elm) elm.style.display = "";
-      if (elm) elm.style.backgroundColor = "";
-      // if (elm) elm.style.backgroundColor = "transparent";
-      // if (elm) elm.classList.add("bg-blur-30");
-    }
-  }, []);
+    const f = () => {
+      if (window.scrollY > 100) {
+        if (elm) elm.style.display = "none";
+      }
+      if (window.scrollY > window.innerHeight - 56) {
+        // 56 is height of nav
+        if (elm) elm.style.display = "";
+        if (elm) elm.style.backgroundColor = "#000";
+      }
+      if (window.scrollY < 100) {
+        if (elm) elm.style.display = "";
+        if (elm) elm.style.backgroundColor = "";
+      }
+    };
+    document.addEventListener("scroll", f);
 
+    return () => {
+      document.removeEventListener("scroll", f);
+    };
+  }, []);
   if (!data) return <></>;
   const { name, occupation, description } = data;
   // const city = data.address.city;
@@ -119,6 +120,7 @@ const Header = ({ data }: HeaderProps) => {
               Works
             </Link>
           </li>
+          {/*
           <li>
             <Link
               className="uppercase"
@@ -130,6 +132,7 @@ const Header = ({ data }: HeaderProps) => {
               Testimonials
             </Link>
           </li>
+          */}
           <li>
             <Link
               className="uppercase"
@@ -166,13 +169,13 @@ const Header = ({ data }: HeaderProps) => {
         </div>
       </div>
 
-      <div className="flex justify-center mb-2 md:mb-10">
+      <div className="flex justify-center mb-2 md:mb-5">
         <Link
-          className="icon hover:bg-[#000] hover:text-white"
+          className="text-white hover:text-primary"
           to="about"
           smooth={true}
         >
-          <Icon name="ArrowDown2" className="w-7 h-7 md:w-10 md:h-10" />
+          <ArrowDown2Icon className="text-4xl md:text-5xl" />
         </Link>
       </div>
     </header>

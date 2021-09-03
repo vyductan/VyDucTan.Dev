@@ -2,7 +2,7 @@ import Image from "next/image";
 import logo from "../../../public/logo.png";
 import HeaderIcon from "./HeaderIcon";
 import { navItems } from "./data/nav";
-import Icon from "../../Icon";
+import Icon from "../../icons";
 import Right from "./Right";
 import { ButtonOpenSidebar } from "../Sidebar/Sidebar";
 const Left = () => {
@@ -34,10 +34,7 @@ const Center = () => {
               key={x.iconName}
               tooltip={x.name}
               active={active}
-              icon={{
-                type: x.iconType,
-                name: active ? x.iconActive : x.iconName,
-              }}
+              iconName={active ? x.iconActive : x.iconName}
             />
           );
         })}

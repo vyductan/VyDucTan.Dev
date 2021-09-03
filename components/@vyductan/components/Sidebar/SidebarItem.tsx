@@ -1,17 +1,15 @@
-import Icon from "../../Icon";
-import { IconType, IconName } from "../../Icon/Icon";
+import Icon, { IconName } from "../../icons";
 
 type SidebarItemProps = {
   title: string;
   active?: boolean;
-  icon: { type?: IconType; name: IconName };
+  iconName: IconName;
 };
-const SidebarItem = ({ title, icon, active }: SidebarItemProps) => {
+const SidebarItem = ({ title, iconName, active }: SidebarItemProps) => {
   return (
     <div className="item group">
       <Icon
-        type={icon.type}
-        name={icon.name}
+        name={iconName}
         className={`group-hover:text-blue-500 ${active && "text-blue-500"}`}
       />
       <div className="title">{title}</div>

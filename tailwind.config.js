@@ -1,14 +1,5 @@
 const { screens } = require("tailwindcss/defaultTheme");
-const { presetPalettes } = require("@ant-design/colors");
 
-const colorMap = {};
-Object.keys(presetPalettes).map((x) => {
-  const temp = {};
-  presetPalettes[x].map((y, i) => {
-    temp[i] = y;
-  });
-  colorMap[x] = temp;
-});
 module.exports = {
   mode: "jit",
   purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
@@ -23,10 +14,8 @@ module.exports = {
       ...screens,
     },
     extend: {
-      primary: colorMap.blue["5"],
-      secondary: colorMap.blue["4"],
       colors: {
-        ...colorMap,
+        primary: "#f40612",
       },
       transitionProperty: {
         border: "border",

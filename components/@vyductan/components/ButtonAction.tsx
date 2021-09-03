@@ -1,5 +1,5 @@
 import { Popconfirm, Tooltip } from "antd";
-import Icon from "../Icon";
+import Icon from "../icons";
 
 type ButtonActionProps = {
   // type: keyof typeof actionMap;

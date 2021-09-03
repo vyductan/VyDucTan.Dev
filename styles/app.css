@@ -29,22 +29,21 @@ section .container .detail {
 .nav ul {
   @apply fixed md:static top-14 right-[5%] w-60 bg-[#000] p-4 space-y-5 md:flex items-center justify-center md:w-full md:space-y-0 md:space-x-5 md:bg-transparent text-sm;
 }
-.nav ul li,
-a {
-  @apply cursor-pointer hover:text-red-500;
+.nav ul li a {
+  @apply cursor-pointer hover:text-primary text-base font-extrabold;
 }
 .logo {
   @apply fixed top-2 left-[5%];
 }
 .active {
-  @apply text-red-500;
+  @apply text-primary;
 }
 
 .networks {
   @apply text-white flex space-x-5 justify-center;
 }
 .networks svg {
-  @apply h-6 md:h-7;
+  @apply text-2xl md:text-3xl;
 }
 
 #about h2 {

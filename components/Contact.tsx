@@ -1,10 +1,9 @@
 import { Form, notification } from "antd";
 import { useState } from "react";
 import { ResumeData } from "../config/resumeData";
-import FormItem from "./@vyductan/components/FormItem";
 import Input from "./@vyductan/components/Input";
 import TextArea from "./@vyductan/components/TextArea";
-import Icon from "./@vyductan/Icon";
+import Icon from "./@vyductan/icons";
 
 type ContactProps = {
   data: ResumeData["main"];

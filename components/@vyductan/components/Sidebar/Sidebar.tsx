@@ -1,9 +1,9 @@
 import { ReactNode } from "react";
-import Icon from "../../Icon";
+import Icon from "../../icons";
 import { useAppDispatch, useAppSelector } from "../../../../stores/hooks";
 // import User from "../User";
 import SidebarItem from "./SidebarItem";
-import { IconName, IconType } from "../../Icon/Icon";
+import { IconName } from "../../icons";
 import { sideBarSlice } from "./redux/sideBarSlice";
 
 export const ButtonOpenSidebar = () => {
@@ -20,7 +20,6 @@ export const ButtonOpenSidebar = () => {
 
 type SidebarItem = {
   title: string;
-  iconType: IconType;
   iconName: IconName;
 };
 type SidebarProps = {
@@ -48,11 +47,7 @@ const Sidebar = ({ items, Header, Footer }: SidebarProps) => {
 
       {items.map((x) => {
         return (
-          <SidebarItem
-            key={x.title}
-            title={x.title}
-            icon={{ type: x.iconType, name: x.iconName }}
-          />
+          <SidebarItem key={x.title} title={x.title} iconName={x.iconName} />
         );
       })}
 

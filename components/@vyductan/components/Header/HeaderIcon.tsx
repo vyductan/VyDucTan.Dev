@@ -1,13 +1,12 @@
 import { Tooltip } from "antd";
-import Icon from "../../Icon";
-import { IconType, IconName } from "../../Icon/Icon";
+import Icon, { IconName } from "../../icons";
 
 type HeaderIconProps = {
   tooltip: string;
   active?: boolean;
-  icon: { type?: IconType; name: IconName };
+  iconName: IconName;
 };
-const HeaderIcon = ({ tooltip, icon, active }: HeaderIconProps) => {
+const HeaderIcon = ({ tooltip, iconName, active }: HeaderIconProps) => {
   return (
     <Tooltip title={tooltip}>
       <div
@@ -16,8 +15,7 @@ const HeaderIcon = ({ tooltip, icon, active }: HeaderIconProps) => {
       group"
       >
         <Icon
-          type={icon.type}
-          name={icon.name}
+          name={iconName}
           className={`text-gray-500 h-5 sm:h-7 group-hover:text-blue-500 ${
             active && "text-blue-500"
           }`}

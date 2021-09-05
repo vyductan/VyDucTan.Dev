@@ -1,19 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { ResumeData } from "../config/resumeData";
-import useHandleOutsideClick from "./@vyductan/hooks/useHandleOutsideClick";
 import TypeWriter from "typewriter-effect";
-import { Icon, IconName } from "./@vyductan/icons";
 import { Link } from "react-scroll";
 import Image from "next/image";
-import { ArrowDown2Icon } from "./@vyductan/icons";
+import { ArrowDown2Icon, MenuIcon } from "./@vyductan/icons";
+import Social from "./Index/common/Social";
 
 type HeaderProps = {
   data: ResumeData["main"];
 };
+
 const Header = ({ data }: HeaderProps) => {
-  const ref = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
-  useHandleOutsideClick(ref, visible, () => setVisible(false));
+  const [navVisible, setNavVisible] = useState(false);
 
   useEffect(() => {
     const elm = document.getElementById("nav");
@@ -40,15 +38,6 @@ const Header = ({ data }: HeaderProps) => {
   if (!data) return <></>;
   const { name, occupation, description } = data;
   // const city = data.address.city;
-  const networks = data.social.map(function (network) {
-    return (
-      <li key={network.name}>
-        <a href={network.url} aria-label={network.name}>
-          <Icon name={network.iconName as IconName} />
-        </a>
-      </li>
-    );
-  });
 
   return (
     <header
@@ -62,20 +51,29 @@ const Header = ({ data }: HeaderProps) => {
       }}
       className="h-screen flex flex-col"
     >
-      <nav ref={ref} id="nav" className="nav">
+      <nav
+        id="nav"
+        className="nav"
+        style={
+          navVisible && window.innerWidth < 768
+            ? { height: "100%", backgroundColor: "transparent" }
+            : {}
+        }
+        onClick={() => setNavVisible(!navVisible)}
+      >
         <div className="logo">
           <Image alt="logo" src="/logo.png" width={67} height={40} />
         </div>
 
         <button
           className="nav-toggle"
-          onClick={() => setVisible(!visible)}
+          onClick={() => setNavVisible(!navVisible)}
           aria-label="Menu"
         >
-          <Icon name="Menu" />
+          <MenuIcon />
         </button>
 
-        <ul className={`${!visible && "hidden"}`}>
+        <ul className={`${!navVisible ? "hidden" : ""}`}>
           <li className="current">
             <Link
               className="uppercase"
@@ -165,7 +163,9 @@ const Header = ({ data }: HeaderProps) => {
             {description}.
           </h2>
           <hr className="my-5 border-[#9696961a]" />
-          <ul className="networks">{networks}</ul>
+          <ul className="networks">
+            <Social social={data.social} />
+          </ul>
         </div>
       </div>
 

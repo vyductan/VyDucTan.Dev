@@ -1,6 +1,7 @@
 import { Link } from "react-scroll";
-import { ResumeData } from "../config/resumeData";
-import { Icon, IconName } from "./@vyductan/icons";
+import type { ResumeData } from "../config/resumeData";
+import { ArrowUp2Icon } from "./@vyductan/icons";
+import Social from "./Index/common/Social";
 
 type FooterProps = {
   data: ResumeData["main"];
@@ -8,19 +9,13 @@ type FooterProps = {
 const Footer = ({ data }: FooterProps) => {
   if (!data) return <></>;
   const { website } = data;
-  const networks = data.social.map(function (network) {
-    return (
-      <li key={network.name}>
-        <a href={network.url} aria-label={network.name}>
-          <Icon name={network.iconName as IconName} />
-        </a>
-      </li>
-    );
-  });
+
   return (
     <footer className="relative">
       <div className="container">
-        <ul className="networks">{networks}</ul>
+        <ul className="networks">
+          <Social social={data.social} />
+        </ul>
 
         <div className="text-white mt-10">
           <span className="opacity-50">
@@ -39,7 +34,7 @@ const Footer = ({ data }: FooterProps) => {
             smooth={true}
             title="Back to Top"
           >
-            <Icon name="ArrowUp2" />
+            <ArrowUp2Icon />
           </Link>
         </div>
       </div>

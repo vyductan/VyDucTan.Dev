@@ -1,5 +1,5 @@
 import { ResumeData } from "../config/resumeData";
-import { Icon } from "./@vyductan/icons";
+import { QuoteLeftIcon } from "./@vyductan/icons";
 
 type TestimonialsProps = {
   data: ResumeData["testimonials"];
@@ -21,7 +21,7 @@ const Testimonials = ({ data }: TestimonialsProps) => {
       <div className="container">
         <h1>
           <span>Client Testimonials</span>
-          <Icon name="QuoteLeft" />
+          <QuoteLeftIcon />
         </h1>
 
         <div className="detail">

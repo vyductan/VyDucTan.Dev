@@ -28,17 +28,17 @@ export const resumeData = {
       {
         name: "facebook",
         url: "https://www.facebook.com/vyductan",
-        iconName: "Facebook",
+        iconName: "facebook",
       },
       {
         name: "linkedin",
         url: "https://www.linkedin.com/in/vyductan",
-        iconName: "Linkedin",
+        iconName: "linkedin",
       },
       {
         name: "github",
         url: "https://github.com/VyDucTan",
-        iconName: "Github",
+        iconName: "github",
       },
     ],
   },

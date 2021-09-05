@@ -8,7 +8,15 @@ import {
 } from "react";
 import moment from "moment";
 import tw, { styled } from "twin.macro";
-import { Icon } from "../@vyductan/icons";
+import {
+  ArrowRepeatIcon,
+  HeartOutlinedIcon,
+  PauseIcon,
+  PlayIcon,
+  ShuffleIcon,
+  SkipBackwardIcon,
+  SkipForwardIcon,
+} from "../@vyductan/icons";
 import { Vocabulary } from "../../services/english";
 import { DatePicker } from "antd";
 import { motion } from "framer-motion";
@@ -189,30 +197,28 @@ const MusicPlayer = ({
       </div>
       <div className="flex space-x-4 justify-evenly items-center">
         <Button variant="normal">
-          <Icon
-            name="SkipBackward"
+          <SkipBackwardIcon
             onClick={() => setCurrentId((currentId - 1) % dataSource.length)}
           />
         </Button>
         <Button variant="primary" onClick={handleClickPlay}>
-          <Icon name={playState ? "Pause" : "Play"} />
+          {playState ? <PauseIcon /> : <PlayIcon />}
         </Button>
         <Button variant="normal">
-          <Icon
-            name="SkipForward"
+          <SkipForwardIcon
             onClick={() => setCurrentId((currentId + 1) % dataSource.length)}
           />
         </Button>
       </div>
       <div className="flex space-x-4 justify-evenly">
         <Button variant="normal">
-          <Icon name="Shuffle" />
+          <ShuffleIcon />
         </Button>
         <Button variant="normal">
-          <Icon name="HeartOutline" />
+          <HeartOutlinedIcon />
         </Button>
         <Button variant="normal">
-          <Icon name="ArrowRepeat" />
+          <ArrowRepeatIcon />
         </Button>
       </div>
     </div>

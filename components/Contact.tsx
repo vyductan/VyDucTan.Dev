@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ResumeData } from "../config/resumeData";
 import Input from "./@vyductan/components/Input";
 import TextArea from "./@vyductan/components/TextArea";
-import { Icon } from "./@vyductan/icons";
+import { MailIcon } from "./@vyductan/icons";
 
 type ContactProps = {
   data: ResumeData["main"];
@@ -45,7 +45,7 @@ const Contact = ({ data }: ContactProps) => {
       <div className="container">
         <h1>
           <span className="lg:hidden">Get In Touch.</span>
-          <Icon name="Mail" className="hidden lg:block" />
+          <MailIcon className="hidden lg:block" />
         </h1>
 
         <div className="detail">

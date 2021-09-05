@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ResumeData } from "../config/resumeData";
-import { Icon } from "./@vyductan/icons";
+import { DownloadIcon } from "./@vyductan/icons";
 
 type AboutProps = {
   data: ResumeData["main"];
@@ -42,7 +42,7 @@ const About = ({ data }: AboutProps) => {
             </div>
             <div>
               <a href={resumeDownload} className="btn-download">
-                <Icon name="Download" className="h-7" />
+                <DownloadIcon className="text-3xl" />
                 <span>Download Resume</span>
               </a>
             </div>

@@ -1,11 +1,11 @@
-import "antd/dist/antd.css";
+import "antd/dist/reset.css";
 import "../styles/globals.css";
 import globalStyles from "../styles/globalStyles";
 import type { AppProps } from "next/app";
 import Router from "next/router";
-import { wrapper } from "../stores/store";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import { wrapper } from "~/stores/store";
 
 // https://vpilip.com/next-js-page-loading-indicator-improve-ux-of-next-js-app/
 Router.events.on("routeChangeStart", () => NProgress.start());

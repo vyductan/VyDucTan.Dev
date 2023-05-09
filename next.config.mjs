@@ -1,4 +1,11 @@
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
+import withPlugins from "next-compose-plugins";
+import withTwin from "./withTwin.mjs";
+import bundleAnalyzer from "@next/bundle-analyzer";
+// const withBundleAnalyzer = require("@next/bundle-analyzer")({
+//   enabled: process.env.ANALYZE === "true",
+// });
+
+const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
 
@@ -16,4 +23,4 @@ const config = {
     return config;
   },
 };
-export default withBundleAnalyzer(config);
+export default withPlugins([[withBundleAnalyzer], [withTwin]], config);

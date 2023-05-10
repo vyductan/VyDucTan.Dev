@@ -1,9 +1,10 @@
+"use client";
 import { Form, notification } from "antd";
 import { useState } from "react";
 import { ResumeData } from "../config/resumeData";
-import Input from "./@vyductan/components/Input";
-import TextArea from "./@vyductan/components/TextArea";
-import { MailIcon } from "./@vyductan/icons";
+import Input from "@vyductan/components/Input";
+import TextArea from "@vyductan/components/TextArea";
+import { MailIcon } from "@vyductan/icons";
 
 type ContactProps = {
   data: ResumeData["main"];

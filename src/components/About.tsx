@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ResumeData } from "../config/resumeData";
-import { DownloadIcon } from "./@vyductan/icons";
+import { DownloadIcon } from "@vyductan/icons";
 
 type AboutProps = {
   data: ResumeData["main"];
@@ -13,11 +13,10 @@ const About = ({ data }: AboutProps) => {
       <div className="max-w-[1024px] m-auto lg:flex">
         <div className="relative w-[100px] h-[100px] lg:w-[150px] lg:h-[150px] m-auto mb-3 lg:mt-0">
           <Image
-            className="rounded-full"
+            className="rounded-full object-cover"
             src={profilepic}
-            alt="Sonny's Profile Pic"
-            layout="fill"
-            objectFit="cover"
+            alt="VyDucTan's Profile Pic"
+            fill={true}
           />
         </div>
         <div className="flex-1  lg:ml-28">

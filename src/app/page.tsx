@@ -1,3 +1,4 @@
+"use client";
 import { GetServerSideProps } from "next";
 import dynamic from "next/dynamic";
 import { Session } from "next-auth";
@@ -17,11 +18,7 @@ import Footer from "../components/Footer";
 // const Contact = dynamic(() => import("../components/Contact"));
 // const Footer = dynamic(() => import("../components/Footer"));
 
-type HomeProps = {
-  session: Session;
-  data: ResumeData;
-};
-export default function Home({ data }: HomeProps) {
+export default function Home() {
   return (
     <div>
       <Head>
@@ -31,8 +28,8 @@ export default function Home({ data }: HomeProps) {
       </Head>
 
       <main>
-        <Header data={data.main} />
-        <About data={data.main} />
+        <Header data={resumeData.main} />
+        <About data={resumeData.main} />
         <Resume data={resumeData.resume} />
         <Portfolio data={resumeData.portfolio} />
         {/*<Testimonials data={resumeData.testimonials} />*/}
@@ -42,11 +39,3 @@ export default function Home({ data }: HomeProps) {
     </div>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  return {
-    props: {
-      data: resumeData,
-    },
-  };
-};

@@ -2,8 +2,11 @@ import { type Config } from "tailwindcss";
 import { screens } from "tailwindcss/defaultTheme";
 
 export default {
-  content: ["./src/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class",
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./@vyductan/react/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     fontFamily: {
       libre: ["librebaskerville", "serif"],

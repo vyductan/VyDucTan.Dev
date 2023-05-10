@@ -1,5 +1,5 @@
 import type { ResumeData } from "../../../config/resumeData";
-import { FacebookIcon, GithubIcon, LinkedinIcon } from "../../@vyductan/icons";
+import { FacebookIcon, GithubIcon, LinkedinIcon } from "@vyductan/icons";
 
 const IconMap = {
   facebook: <FacebookIcon />,

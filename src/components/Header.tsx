@@ -3,7 +3,7 @@ import { ResumeData } from "../config/resumeData";
 import TypeWriter from "typewriter-effect";
 import { Link } from "react-scroll";
 import Image from "next/image";
-import { ArrowDown2Icon, MenuIcon } from "./@vyductan/icons";
+import { ArrowDown2Icon, MenuIcon } from "@vyductan/icons";
 import Social from "./Index/common/Social";
 
 type HeaderProps = {

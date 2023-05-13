@@ -1,6 +1,8 @@
+"use client";
+import { Form, Input as InputAntd } from "antd";
+import { type Rule } from "antd/lib/form";
 import { useState } from "react";
-import { Input as InputAntd, Form } from "antd";
-import { Rule } from "antd/lib/form";
+
 type InputProps = {
   name: string;
   label: string;

@@ -3,7 +3,7 @@ import '../styles/globals.css'
 
 import { getCssText } from 'stitches.config'
 
-import { TrpcProvider } from '~/utils/trpc-provider'
+// import { TrpcProvider } from '~/utils/trpc-provider'
 
 export default function RootLayout({
   // Layouts must accept a children prop.
@@ -21,7 +21,8 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <TrpcProvider>{children}</TrpcProvider>
+        {/* <TrpcProvider>{children}</TrpcProvider>*/}
+        {children}
       </body>
     </html>
   )

@@ -1,5 +1,6 @@
-import { ResumeData } from "../config/resumeData";
-import { QuoteLeftIcon } from "./@vyductan/icons";
+import { QuoteLeftIcon } from "@vyductan/icons";
+
+import { type ResumeData } from "../config/resumeData";
 
 type TestimonialsProps = {
   data: ResumeData["testimonials"];

@@ -1,4 +1,4 @@
-import { ResumeData } from "../config/resumeData";
+import { type ResumeData } from "../config/resumeData";
 
 type ResumeProps = {
   data: ResumeData["resume"];
@@ -43,7 +43,7 @@ const Resume = ({ data }: ResumeProps) => {
     );
   });
   const skills = data.skills.map(function (skills) {
-    var className = "bar-expand " + skills.name.toLowerCase();
+    const className = "bar-expand " + skills.name.toLowerCase();
     return (
       <li key={skills.name}>
         <em>{skills.name}</em>

@@ -1,6 +1,7 @@
-import Image from "next/image";
-import { ResumeData } from "../config/resumeData";
 import { DownloadIcon } from "@vyductan/icons";
+import Image from "next/image";
+
+import { type ResumeData } from "../config/resumeData";
 
 type AboutProps = {
   data: ResumeData["main"];

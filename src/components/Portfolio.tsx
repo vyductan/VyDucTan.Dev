@@ -1,6 +1,7 @@
-import Image from "next/image";
-import { ResumeData } from "../config/resumeData";
 import { LinkIcon } from "@vyductan/icons";
+import Image from "next/image";
+
+import { type ResumeData } from "../config/resumeData";
 
 type PortfolioProps = {
   data: ResumeData["portfolio"];

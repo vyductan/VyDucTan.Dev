@@ -1,6 +1,7 @@
-import { Link } from "react-scroll";
-import type { ResumeData } from "../config/resumeData";
 import { ArrowUp2Icon } from "@vyductan/icons";
+import { Link } from "react-scroll";
+
+import type { ResumeData } from "../config/resumeData";
 import Social from "./Index/common/Social";
 
 type FooterProps = {

@@ -1,46 +1,50 @@
 "use client";
-import { Form, notification } from "antd";
-import { useState } from "react";
-import { ResumeData } from "../config/resumeData";
 import Input from "@vyductan/components/Input";
 import TextArea from "@vyductan/components/TextArea";
 import { MailIcon } from "@vyductan/icons";
+import { Form
+  // , notification
+} from "antd";
+
+// import { useState } from "react";
+import { type ResumeData } from "../config/resumeData";
 
 type ContactProps = {
   data: ResumeData["main"];
 };
 const Contact = ({ data }: ContactProps) => {
-  const [submitting, setSubmitting] = useState(false);
+  // const [submitting, setSubmitting] = useState(false);
   const [form] = Form.useForm();
   if (!data) return <></>;
   const { name, address, phone, email, contactMessage } = data;
 
-  const handleFinish = async (values: any) => {
-    try {
-      setSubmitting(true);
-      const res = await fetch("/api/sendmail", {
-        method: "POST",
-        body: JSON.stringify(values),
-      });
-      const r = await res.json();
-      if (r.success) {
-        notification.success({
-          message: "Success! Thanks for your contact.",
-          placement: "bottomRight",
-        });
-      } else {
-        throw "ERROR";
-      }
-    } catch (error) {
-      notification.error({
-        message: "Error!",
-        placement: "bottomRight",
-      });
-    } finally {
-      setSubmitting(false);
-      form.resetFields();
-    }
-  };
+  // const handleFinish = (values: unknown) => {
+  //   try {
+  //     setSubmitting(true);
+  //     const res = await fetch("/api/sendmail", {
+  //       method: "POST",
+  //       body: JSON.stringify(values),
+  //     });
+  //     const r = await res.json() as {success: boolean};
+  //     if (r.success) {
+  //       notification.success({
+  //         message: "Success! Thanks for your contact.",
+  //         placement: "bottomRight",
+  //       });
+  //     } else {
+  //       throw "ERROR";
+  //     }
+  //   } catch (error) {
+  //     notification.error({
+  //       message: "Error!",
+  //       placement: "bottomRight",
+  //     });
+  //   } finally {
+  //     setSubmitting(false);
+  //     form.resetFields();
+  //   }
+  // };
+
   return (
     <section id="contact">
       <div className="container">
@@ -51,7 +55,9 @@ const Contact = ({ data }: ContactProps) => {
 
         <div className="detail">
           <p>{contactMessage}</p>
-          <Form form={form} onFinish={handleFinish}>
+          <Form form={form} 
+            // onFinish={async (values) => {await handleFinish(values)}}
+          >
             <Input label="Name" name="name" rules={[{ required: true }]} />
             <Input
               label="Email"
@@ -74,10 +80,10 @@ const Contact = ({ data }: ContactProps) => {
               <button
                 type="submit"
                 className="submit"
-                disabled={submitting}
+                // disabled={submitting}
                 aria-label="Submit"
               >
-                {submitting ? "Sending" : "Submit"}
+                {/* {submitting ? "Sending" : "Submit"} */}
               </button>
             </div>
           </Form>

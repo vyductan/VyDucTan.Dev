@@ -1,4 +1,4 @@
-import { clsm } from '@vyductan/react/utils'
+import { clsm } from '@vyductan/react'
 import {
   type AnchorHTMLAttributes,
   type ButtonHTMLAttributes,

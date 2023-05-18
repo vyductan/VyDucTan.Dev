@@ -1,3 +1,4 @@
+'use client'
 import {
   Listbox as HeadlessUIListBox,
   type ListboxButtonProps,

@@ -57,7 +57,7 @@ export default function TranslatePage() {
               key={idx}
               className={clsm(
                 'flex max-w-2/3 rounded-base p-2',
-                message?.role === 'user' && 'bg-brand-600 ml-auto text-white',
+                message?.role === 'user' && 'ml-auto bg-primary-600 text-white',
                 message?.role === 'assistant' && 'mr-auto bg-gray-100'
               )}
             >

@@ -64,7 +64,7 @@ const ListboxRoot = <
                     clsm(
                       'flex cursor-pointer items-center px-2 py-1 text-sm font-semibold',
                       active ? 'bg-slate-100 dark:bg-slate-600/30' : '',
-                      selected ? 'text-brand-500' : ''
+                      selected ? 'text-primary-500' : ''
                     )
                   }
                 >

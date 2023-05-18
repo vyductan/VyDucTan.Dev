@@ -13,7 +13,7 @@ const config = {
         project: path.join(__dirname, 'tsconfig.json'),
       },
       rules: {
-        '@typescript-eslint/no-unsafe-assignment': 'off',
+        // '@typescript-eslint/no-unsafe-assignment': 'off',
       },
     },
   ],
@@ -21,11 +21,12 @@ const config = {
   parserOptions: {
     project: path.join(__dirname, 'tsconfig.json'),
   },
-  plugins: ['@typescript-eslint', 'simple-import-sort', 'import'],
+  plugins: ['@typescript-eslint', 'simple-import-sort', 'import', 'jsx-a11y'],
   extends: [
     'next/core-web-vitals',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:jsx-a11y/recommended',
   ],
   rules: {
     '@typescript-eslint/consistent-type-imports': [

@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-scroll'
 import TypeWriter from 'typewriter-effect'
 
-import { type ResumeData } from '../config/resumeData'
-import Social from './Index/common/Social'
+import Social from '~/app/home/_components/Social'
+import { type ResumeData } from '~/app/home/resumeData'
 
 type HeaderProps = {
   data: ResumeData['main']
@@ -16,6 +16,11 @@ type HeaderProps = {
 const Header = ({ data }: HeaderProps) => {
   const [navVisible, setNavVisible] = useState(false)
 
+  // const handleKeyPress: KeyboardEventHandler = (event) => {
+  //   if (event.key === 'esc') {
+  //     setNavVisible(false)
+  //   }
+  // }
   useEffect(() => {
     const elm = document.getElementById('nav')
     const f = () => {
@@ -52,17 +57,19 @@ const Header = ({ data }: HeaderProps) => {
         backgroundPosition: 'top center',
         backgroundSize: 'cover',
       }}
-      className='h-screen flex flex-col'
+      className='flex h-screen flex-col'
     >
       <nav
         id='nav'
+        role='navigation'
         className='nav'
         style={
           navVisible && window.innerWidth < 768
             ? { height: '100%', backgroundColor: 'transparent' }
             : {}
         }
-        onClick={() => setNavVisible(!navVisible)}
+        // onClick={() => setNavVisible(!navVisible)}
+        // onKeyPress={handleKeyPress}
       >
         <div className='logo'>
           <Image
@@ -153,9 +160,9 @@ const Header = ({ data }: HeaderProps) => {
         </ul>
       </nav>
 
-      <div className='flex-grow flex items-center justify-center'>
-        <div className='p-10 md:p-20 bg-gray-900 bg-opacity-40 rounded'>
-          <h1 className='text-white text-[40px] sm:text-[65px] md:text-[80px] lg:text-[100px] leading-normal font-bold text-center'>
+      <div className='flex flex-grow items-center justify-center'>
+        <div className='rounded bg-gray-900 bg-opacity-40 p-10 md:p-20'>
+          <h1 className='text-center text-[40px] font-bold leading-normal text-white sm:text-[65px] md:text-[80px] lg:text-[100px]'>
             <TypeWriter
               options={{
                 strings: `I'm ${name}.`,
@@ -165,7 +172,7 @@ const Header = ({ data }: HeaderProps) => {
               }}
             />
           </h1>
-          <h2 className='text-[#d6d6d6] text-center text-base sm:text-lg md:text-xl lg:text-2xl font-serif max-w-[90%] md:max-w-[100%] m-auto'>
+          <h2 className='font-serif m-auto max-w-[90%] text-center text-base text-[#d6d6d6] sm:text-lg md:max-w-[100%] md:text-xl lg:text-2xl'>
             Based in VietNam.{' '}
             <span className='text-white shadow'>{occupation}</span>.{' '}
             {description}.
@@ -177,9 +184,9 @@ const Header = ({ data }: HeaderProps) => {
         </div>
       </div>
 
-      <div className='flex justify-center mb-2 md:mb-5'>
+      <div className='mb-2 flex justify-center md:mb-5'>
         <Link
-          className='text-white hover:text-primary'
+          className='hover:text-primary text-white'
           to='about'
           smooth={true}
         >

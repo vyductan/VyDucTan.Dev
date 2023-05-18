@@ -9,7 +9,7 @@ export default function TranslatePage() {
   const [currentInput, setCurrentInput] = useState('')
   const [messages, setMessages] = useState<ChatGptMessages>([])
 
-  const handleKeyDown: KeyboardEventHandler<HTMLDivElement> = (event) => {
+  const handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (event) => {
     if (event.key === 'Enter' && event.metaKey) {
       void handleSubmitMessage('english')
       return
@@ -57,7 +57,7 @@ export default function TranslatePage() {
               key={idx}
               className={clsm(
                 'flex max-w-2/3 rounded-base p-2',
-                message?.role === 'user' && 'ml-auto bg-brand-600 text-white',
+                message?.role === 'user' && 'bg-brand-600 ml-auto text-white',
                 message?.role === 'assistant' && 'mr-auto bg-gray-100'
               )}
             >
@@ -70,10 +70,7 @@ export default function TranslatePage() {
           ))}
         </div>
 
-        <div
-          className='flex items-center gap-4 border-t p-6'
-          onKeyDown={handleKeyDown}
-        >
+        <div className='flex items-center gap-4 border-t p-6'>
           <TextArea
             autoSize={{ maxRows: 10 }}
             size='large'
@@ -81,6 +78,7 @@ export default function TranslatePage() {
             placeholder='Send a message...'
             value={currentInput}
             onChange={handleInputUserMessageChange}
+            onKeyDown={handleKeyDown}
           />
           <Button
             type='primary'

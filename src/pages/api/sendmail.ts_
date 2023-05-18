@@ -1,21 +1,21 @@
 // https://spacejelly.dev/posts/how-to-send-emails-with-sendgrid-and-next-js-serverless-functions-for-a-contact-form/
-import type { NextApiRequest, NextApiResponse } from "next";
-import mail from "@sendgrid/mail";
+import mail from '@sendgrid/mail'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 type MailItem = {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-};
+  name: string
+  email: string
+  subject: string
+  message: string
+}
 type RessultData = {
-  success: boolean;
-  msg?: any;
-};
+  success: boolean
+  msg?: any
+}
 
 const post = async (req: NextApiRequest, res: NextApiResponse<RessultData>) => {
   try {
-    const { name, email, subject, message }: MailItem = JSON.parse(req.body);
+    const { name, email, subject, message }: MailItem = JSON.parse(req.body)
 
     if (
       !process.env.SENDGRID_API_KEY ||
@@ -23,8 +23,8 @@ const post = async (req: NextApiRequest, res: NextApiResponse<RessultData>) => {
       !process.env.SEND_NAME ||
       !process.env.RECEIVE_EMAIL
     )
-      throw "ERROR";
-    mail.setApiKey(process.env.SENDGRID_API_KEY);
+      throw 'ERROR'
+    mail.setApiKey(process.env.SENDGRID_API_KEY)
     await mail.send({
       from: { name: process.env.SEND_NAME, email: process.env.SEND_EMAIL },
       to: process.env.RECEIVE_EMAIL,
@@ -33,22 +33,22 @@ const post = async (req: NextApiRequest, res: NextApiResponse<RessultData>) => {
       html: `<div><b>Contact:</b> ${name} - ${email}</div>
             <p><b>Message</b>: ${message}</p>
       <a href="vyductan.me">VyDucTan.Me</a>`,
-    });
-    res.status(200).json({ success: true });
+    })
+    res.status(200).json({ success: true })
   } catch (error) {
-    res.status(200).json({ success: false });
+    res.status(200).json({ success: false })
   }
-};
+}
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<RessultData>
 ) {
   switch (req.method) {
-    case "POST":
-      await post(req, res);
-      break;
+    case 'POST':
+      await post(req, res)
+      break
     default:
-      res.status(405).end(); //Method Not Allowed
-      break;
+      res.status(405).end() //Method Not Allowed
+      break
   }
 }

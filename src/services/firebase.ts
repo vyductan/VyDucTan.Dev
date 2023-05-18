@@ -1,6 +1,6 @@
-import firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/storage";
+import firebase, { initializeApp } from 'firebase/app'
+import { getFirestore } from 'firebase/firestore'
+import { getStorage } from 'firebase/storage'
 
 // const firebaseConfig = {
 //   apiKey: process.env.FIREBASE_API_KEY,
@@ -13,28 +13,32 @@ import "firebase/storage";
 // };
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDhXEoQ_4wciL0z2gxYtt4YuEZDepkVznw",
-  authDomain: "vyductanme.firebaseapp.com",
-  projectId: "vyductanme",
-  storageBucket: "vyductanme.appspot.com",
-  messagingSenderId: "613154305702",
-  appId: "1:613154305702:web:4e3502880272aa703f6667",
-};
+  apiKey: 'AIzaSyDhXEoQ_4wciL0z2gxYtt4YuEZDepkVznw',
+  authDomain: 'vyductanme.firebaseapp.com',
+  projectId: 'vyductanme',
+  storageBucket: 'vyductanme.appspot.com',
+  messagingSenderId: '613154305702',
+  appId: '1:613154305702:web:4e3502880272aa703f6667',
+}
 
-const app = !firebase.apps.length
-  ? firebase.initializeApp(firebaseConfig)
-  : firebase.app();
+const app = !firebase.getApps().length
+  ? initializeApp(firebaseConfig)
+  : firebase.getApp()
 
-const db = app.firestore();
-const storage = firebase.storage();
+const db = getFirestore(app)
+const storage = getStorage(app)
 
-const converter = <T>() => ({
-  toFirestore: (data: T) => data,
-  fromFirestore: (snap: firebase.firestore.QueryDocumentSnapshot) =>
-    snap.data() as T,
-});
+// const converter = <T>() => ({
+//   toFirestore: (data: T) => data,
+//   fromFirestore: (snap: firebase.firestore.QueryDocumentSnapshot) =>
+//     snap.data() as T,
+// })
+//
+// const selectCollection = <T>(collectionPath: string) =>
+//   firebase.firestore().collection(collectionPath).withConverter(converter<T>())
 
-const selectCollection = <T>(collectionPath: string) =>
-  firebase.firestore().collection(collectionPath).withConverter(converter<T>());
-
-export { db, storage, selectCollection };
+export {
+  db,
+  //selectCollection,
+  storage,
+}

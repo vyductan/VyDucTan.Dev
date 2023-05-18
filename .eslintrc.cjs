@@ -27,6 +27,7 @@ const config = {
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:jsx-a11y/recommended',
+    'plugin:tailwindcss/recommended',
   ],
   rules: {
     '@typescript-eslint/consistent-type-imports': [
@@ -43,6 +44,11 @@ const config = {
     'import/first': 'error',
     'import/newline-after-import': 'error',
     'import/no-duplicates': 'error',
+  },
+  settings: {
+    tailwindcss: {
+      callees: ['clsm'],
+    },
   },
 }
 

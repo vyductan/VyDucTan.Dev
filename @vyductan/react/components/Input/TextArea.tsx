@@ -1,12 +1,22 @@
-import { clsm, getInputCls, type InputProps } from '@vyductan/react'
+'use client'
+import {
+  clsm,
+  type FormItemChildProps,
+  getInputCls,
+  getValidateStatus,
+  type InputProps,
+} from '@vyductan/react'
 import {
   type ChangeEventHandler,
+  forwardRef,
   type KeyboardEventHandler,
+  type Ref,
   type TextareaHTMLAttributes,
   useState,
 } from 'react'
 
 export type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement> &
+  FormItemChildProps &
   Pick<InputProps, 'size'> & {
     autoSize?:
       | boolean
@@ -15,15 +25,19 @@ export type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement> &
           maxRows?: number
         }
   }
-export const TextArea = ({
-  className,
-  rows,
-  autoSize,
-  size,
-  onChange,
-  onKeyDown,
-  ...rest
-}: TextAreaProps) => {
+const TextAreaInternal = (
+  {
+    className,
+    rows,
+    autoSize,
+    size,
+    validateStatus,
+    onChange,
+    onKeyDown,
+    ...rest
+  }: TextAreaProps,
+  ref: Ref<HTMLTextAreaElement>
+) => {
   const [inititalRows] = useState(
     typeof autoSize === 'boolean' || (autoSize && !autoSize?.minRows)
       ? 1
@@ -74,17 +88,21 @@ export const TextArea = ({
 
   return (
     <textarea
-      {...rest}
+      ref={ref}
       rows={inititalRows}
       className={clsm(
         'form-textarea',
         '[transition:all_.3s,height_0s]',
         getInputCls(size),
+        getValidateStatus(validateStatus),
         autoSize && 'resize-none',
         className
       )}
       onChange={handleChange}
       onKeyDown={handleKeyDown}
+      {...rest}
     />
   )
 }
+
+export const TextArea = forwardRef(TextAreaInternal)

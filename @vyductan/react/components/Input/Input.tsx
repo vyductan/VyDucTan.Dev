@@ -1,19 +1,33 @@
-import { clsm, getInputCls } from '@vyductan/react'
-import { type InputHTMLAttributes } from 'react'
+import {
+  clsm,
+  type FormItemChildProps,
+  getInputCls,
+  getValidateStatus,
+} from '@vyductan/react'
+import { forwardRef, type InputHTMLAttributes, type Ref } from 'react'
 
-export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> & {
-  size?: 'small' | 'default' | 'large'
-}
-export const Input = ({ className, size, ...rest }: InputProps) => {
+export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> &
+  FormItemChildProps & {
+    size?: 'small' | 'default' | 'large'
+  }
+export const InputInternal = (
+  { className, size, type = 'text', validateStatus, ...rest }: InputProps,
+  ref: Ref<HTMLInputElement>
+) => {
+  console.log('rest', rest)
   return (
     <input
-      {...rest}
+      ref={ref}
       className={clsm(
-        'form-input',
         '[transition:all_.2s]',
         getInputCls(size),
+        getValidateStatus(validateStatus),
         className
       )}
+      type={type}
+      {...rest}
     />
   )
 }
+
+export const Input = forwardRef(InputInternal)

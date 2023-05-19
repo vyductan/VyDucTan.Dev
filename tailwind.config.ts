@@ -66,9 +66,12 @@ export default {
       // },
 
       height: ({ theme }) => ({
-        sm: theme('spacing.6') as string,
-        base: theme('spacing.8') as string,
+        xxs: theme('spacing.6') as string,
+        xs: theme('spacing.7') as string,
+        sm: theme('spacing.8') as string,
+        md: theme('spacing.9') as string,
         lg: theme('spacing.10') as string,
+        xl: theme('spacing.12') as string,
       }),
       // height: ({theme}) => ({
       //   sm: theme("height.6"),

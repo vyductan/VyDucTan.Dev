@@ -1,6 +1,8 @@
 import bundleAnalyzer from '@next/bundle-analyzer'
 import withPlugins from 'next-compose-plugins'
 
+import withTwin from './withTwin.mjs'
+
 // import withTwin from './withTwin.mjs'
 
 const withBundleAnalyzer = bundleAnalyzer({
@@ -24,4 +26,4 @@ const config = {
     serverActions: true,
   },
 }
-export default withPlugins([[withBundleAnalyzer]], config)
+export default withPlugins([withBundleAnalyzer, withTwin], config)

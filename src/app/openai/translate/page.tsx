@@ -32,17 +32,15 @@ export default function TranslatePage() {
         setMessages((messages) => [
           ...messages,
           {
-            message: {
-              role: 'user',
-              content: currentInputFormated,
-            },
+            role: 'user',
+            content: currentInputFormated,
           },
         ])
-        const choices = await translateByChatGptAction(
+        const response = await translateByChatGptAction(
           currentInputFormated,
           desLanguage
         )
-        setMessages((messages) => [...messages, ...choices])
+        setMessages((messages) => [...messages, ...response])
       }
     } catch (error) {
       console.log('Error', error)
@@ -52,19 +50,19 @@ export default function TranslatePage() {
     <div className='flex h-full justify-center'>
       <div className='relative m-6 flex w-full max-w-screen-lg flex-col justify-end rounded-base border'>
         <div className='flex flex-col gap-2 overflow-auto p-6 text-xl'>
-          {messages.map(({ message }, idx) => (
+          {messages.map(({ content, role }, idx) => (
             <div
               key={idx}
               className={clsm(
                 'flex max-w-2/3 rounded-base p-2',
-                message?.role === 'user' && 'ml-auto bg-primary-600 text-white',
-                message?.role === 'assistant' && 'mr-auto bg-gray-100'
+                role === 'user' && 'ml-auto bg-primary-600 text-white',
+                role === 'assistant' && 'mr-auto bg-gray-100'
               )}
             >
-              {message?.role === 'user' ? (
-                <>{message.content}</>
-              ) : message?.role === 'assistant' ? (
-                <>{message.content}</>
+              {role === 'user' ? (
+                <>{content}</>
+              ) : role === 'assistant' ? (
+                <>{content}</>
               ) : null}
             </div>
           ))}

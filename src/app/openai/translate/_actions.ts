@@ -1,6 +1,10 @@
 'use server'
 
-import { Configuration, OpenAIApi } from 'openai'
+import {
+  type ChatCompletionResponseMessage,
+  Configuration,
+  OpenAIApi,
+} from 'openai'
 
 import { env } from '~/env.mjs'
 
@@ -28,4 +32,6 @@ export const translateByChatGptAction = async (
     ],
   })
   return response.data.choices
+    .map((c) => c.message)
+    .filter((m): m is ChatCompletionResponseMessage => !!m)
 }

@@ -45,13 +45,13 @@ export default function TranslatePage() {
         setMessages((messages) => [...messages, ...choices])
       }
     } catch (error) {
-      console.log('error', error)
+      console.log('Error', error)
     }
   }
   return (
     <div className='flex h-full justify-center'>
       <div className='relative m-6 flex w-full max-w-screen-lg flex-col justify-end rounded-base border'>
-        <div className='flex flex-col gap-2 overflow-auto p-6'>
+        <div className='flex flex-col gap-2 overflow-auto p-6 text-xl'>
           {messages.map(({ message }, idx) => (
             <div
               key={idx}
@@ -73,7 +73,7 @@ export default function TranslatePage() {
         <div className='flex items-center gap-4 border-t p-6'>
           <TextArea
             autoSize={{ maxRows: 10 }}
-            size='large'
+            size='xl'
             className='w-full'
             placeholder='Send a message...'
             value={currentInput}
@@ -81,17 +81,17 @@ export default function TranslatePage() {
             onKeyDown={handleKeyDown}
           />
           <Button
-            type='primary'
-            size='large'
-            htmlType='submit'
+            size='xl'
+            type='submit'
+            variant='primary'
             onClick={() => void handleSubmitMessage('vietnamese')}
           >
             <span className='icon-[circle-flags--vn]' />
           </Button>
           <Button
-            type='primary'
-            size='large'
-            htmlType='submit'
+            size='xl'
+            variant='primary'
+            type='submit'
             onClick={() => void handleSubmitMessage('english')}
           >
             <span className='icon-[circle-flags--us]' />

@@ -6,15 +6,16 @@ import {
 } from '@vyductan/react'
 import { forwardRef, type InputHTMLAttributes, type Ref } from 'react'
 
+import { type ComponentSize } from '../types'
+
 export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> &
   FormItemChildProps & {
-    size?: 'small' | 'default' | 'large'
+    size?: ComponentSize
   }
 export const InputInternal = (
   { className, size, type = 'text', validateStatus, ...rest }: InputProps,
   ref: Ref<HTMLInputElement>
 ) => {
-  console.log('rest', rest)
   return (
     <input
       ref={ref}

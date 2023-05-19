@@ -48,6 +48,7 @@ const TextAreaInternal = (
       : 2
   )
 
+  // handle autosize
   const handleChange: ChangeEventHandler<HTMLTextAreaElement> = (event) => {
     if (autoSize) {
       event.target.style.height = 'auto'
@@ -91,8 +92,7 @@ const TextAreaInternal = (
       ref={ref}
       rows={inititalRows}
       className={clsm(
-        'form-textarea',
-        '[transition:all_.3s,height_0s]',
+        // '[transition:all_.3s,height_0s]',
         getInputCls(size),
         getValidateStatus(validateStatus),
         autoSize && 'resize-none',

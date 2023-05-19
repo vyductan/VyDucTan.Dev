@@ -5,30 +5,36 @@ import {
   type ReactNode,
 } from 'react'
 
-type ButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type'> &
-  AnchorHTMLAttributes<HTMLAnchorElement> & {
-    children: ReactNode
-    href?: string
-    type?: 'primary'
-    htmlType?: ButtonHTMLAttributes<HTMLButtonElement>['type']
-    size?: 'small' | 'default' | 'large'
-  }
+import { type ComponentSize } from '../types'
+
+type ButtonProps = {
+  children: ReactNode
+  href?: string
+  variant?: 'primary'
+  size?: ComponentSize
+} & ButtonHTMLAttributes<HTMLButtonElement> &
+  AnchorHTMLAttributes<HTMLAnchorElement>
+
 export const Button = ({
   href,
   children,
   className,
-  type,
-  htmlType,
-  size,
+  variant,
+  size = 'md',
   ...rest
 }: ButtonProps) => {
   const cls = clsm(
-    'inline-flex items-center font-medium rounded-base text-sm text-center',
-    'transition-all duration-200',
-    type === 'primary' && 'text-white bg-primary-600 hover:bg-primary-500',
-    'h-base py-1 px-3 text-sm',
-    size === 'small' && 'h-sm py-0 px-2',
-    size === 'large' && 'h-lg py-2 px-4 text-md',
+    'inline-flex items-center rounded-base text-center font-semibold',
+    // 'transition-all duration-200',
+    '[transition:all_.2s,box-shadow_0s]',
+    'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600',
+    'active:ring-2 active:ring-gray-100',
+    variant === 'primary' &&
+      'bg-primary-600 text-white hover:bg-primary-500  active:ring-primary-100',
+    size === 'sm' && 'h-sm px-2 py-0',
+    size === 'md' && 'h-md px-3 py-2 text-sm',
+    size === 'lg' && 'h-lg px-4 py-2 text-lg',
+    size === 'xl' && 'h-xl px-4 text-xl',
     className
   )
 
@@ -43,11 +49,11 @@ export const Button = ({
       </a>
     )
   }
+
   return (
     <button
-      {...rest}
       className={cls}
-      type={htmlType}
+      {...rest}
     >
       {children}
     </button>

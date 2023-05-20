@@ -3,9 +3,10 @@
 @tailwind utilities;
 
 @layer components {
-  body {
-    @apply text-base;
-  }
+  /* html, */
+  /* body { */
+  /*   @apply h-full w-full; */
+  /* } */
   .bg-blur-30 {
     @apply bg-gray-900 bg-opacity-30;
   }
@@ -14,60 +15,60 @@
     @apply relative;
   }
   .image-effect-zoom-with-meta .meta {
-    @apply absolute top-0 flex flex-col items-center justify-center w-full h-full hidden;
+    @apply absolute top-0 flex hidden h-full w-full flex-col items-center justify-center;
   }
   .image-effect-zoom-with-meta:hover .meta {
     @apply flex bg-gray-900 bg-opacity-50;
   }
   .image-effect-zoom-with-meta:hover img {
-    @apply transform scale-105;
+    @apply scale-105 transform;
   }
   .image-effect-zoom-with-meta .meta-title {
-    @apply text-white font-bold;
+    @apply font-bold text-white;
   }
   .image-effect-zoom-with-meta svg {
     @apply h-7 text-white;
   }
 
   .btn-icon {
-    @apply text-white p-1 rounded-sm inline-flex items-center justify-center;
+    @apply inline-flex items-center justify-center rounded-sm p-1 text-white;
   }
   .btn-icon svg {
     @apply h-5;
   }
   .icon {
-    @apply inline-flex items-center justify-center p-2 h-10 w-10 bg-gray-200 rounded-full text-gray-700 cursor-pointer hover:bg-gray-300;
+    @apply inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-gray-200 p-2 text-gray-700 hover:bg-gray-300;
   }
   .icon svg {
     @apply h-5;
   }
   .button-login-with {
-    @apply flex items-center justify-center font-semibold w-80 rounded-lg border border-gray-300 p-3 hover:bg-gray-100 text-gray-900;
+    @apply flex w-80 items-center justify-center rounded-lg border border-gray-300 p-3 font-semibold text-gray-900 hover:bg-gray-100;
   }
   .button-login-with svg {
-    @apply h-7 mr-5;
+    @apply mr-5 h-7;
   }
 
   .sidebar-item {
-    @apply flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-200 cursor-pointer active:border-b-2 active:border-blue-500;
+    @apply flex cursor-pointer items-center space-x-3 rounded-lg p-2 hover:bg-gray-200 active:border-b-2 active:border-blue-500;
   }
   .sidebar-item svg {
     @apply h-7;
   }
 
   .form-item {
-    @apply relative border border-gray-300 bg-white rounded h-auto px-3 pt-5 pb-2 focus-within:border-gray-600 transition-border duration-200 ease-in-out;
+    @apply relative h-auto rounded border border-gray-300 bg-white px-3 pb-2 pt-5 transition-border duration-200 ease-in-out focus-within:border-gray-600;
   }
   .form-item label {
-    @apply absolute top-0 left-3 text-sm text-gray-500;
+    @apply absolute left-3 top-0 text-sm text-gray-500;
   }
   .form-item input,
   .form-item textarea {
-    @apply text-base appearance-none w-full outline-none border-none shadow-none;
+    @apply w-full appearance-none border-none text-base shadow-none outline-none;
   }
   .form-item input + label,
   .form-item textarea + label {
-    @apply top-4 text-base cursor-text transition-all duration-200 ease-out;
+    @apply top-4 cursor-text text-base transition-all duration-200 ease-out;
   }
   .form-item input:focus + label,
   .form-item textarea:focus + label,
@@ -75,7 +76,7 @@
   .form-item textarea:active + label,
   .form-item input.filled + label,
   .form-item textarea.filled + label {
-    @apply text-sm top-0;
+    @apply top-0 text-sm;
   }
   .ant-form-item-has-error .form-item {
     @apply border-[#ff4d4f];
@@ -86,7 +87,7 @@
   /*  */
   /* App */
   /*  */
-  @import "app.css";
+  @import 'app.css';
 }
 /*  */
 /* Custom Ant Design */

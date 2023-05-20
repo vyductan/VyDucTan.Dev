@@ -1,10 +1,10 @@
-import tw, { globalStyles, theme } from 'twin.macro'
+import tw, { globalStyles } from 'twin.macro'
 
 import { globalCss } from '../../stitches.config'
 
 const customStyles = {
   body: {
-    WebkitTapHighlightColor: theme`colors.purple.500`,
+    // WebkitTapHighlightColor: theme`colors.purple.500`,
     ...tw`antialiased`,
   },
 }

@@ -2,16 +2,20 @@
 import { Button, clsm, TextArea, type TextAreaProps } from '@vyductan/react'
 import { type KeyboardEventHandler, useState } from 'react'
 
-import { chatGptAction } from './_actions'
-import { type ChatGptMessages } from './types'
+import { type ChatGptMessages } from '../chatgpt/types'
+import { translateByChatGptAction } from './actions'
 
 export default function TranslatePage() {
   const [currentInput, setCurrentInput] = useState('')
   const [messages, setMessages] = useState<ChatGptMessages>([])
 
   const handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (event) => {
+    if (event.key === 'Enter' && event.metaKey) {
+      void handleSubmitMessage('english')
+      return
+    }
     if (event.key === 'Enter') {
-      void handleSubmitMessage()
+      void handleSubmitMessage('vietnamese')
       return
     }
   }
@@ -20,21 +24,23 @@ export default function TranslatePage() {
     const input = e.currentTarget.value
     setCurrentInput(input)
   }
-  const handleSubmitMessage = async () => {
+  const handleSubmitMessage = async (desLanguage: string) => {
     setCurrentInput('')
     try {
       if (currentInput) {
-        const mergedMessage: ChatGptMessages = [
+        const currentInputFormated = `"${currentInput}"`
+        setMessages((messages) => [
           ...messages,
           {
             role: 'user',
-            content: currentInput,
+            content: currentInputFormated,
           },
-        ]
-        setMessages(mergedMessage)
-        const response = await chatGptAction(mergedMessage)
-        if (response.length > 0)
-          setMessages((messages) => [...messages, ...response])
+        ])
+        const response = await translateByChatGptAction(
+          currentInputFormated,
+          desLanguage
+        )
+        setMessages((messages) => [...messages, ...response])
       }
     } catch (error) {
       console.log('Error', error)
@@ -76,9 +82,17 @@ export default function TranslatePage() {
             size='xl'
             type='submit'
             variant='primary'
-            onClick={() => void handleSubmitMessage()}
+            onClick={() => void handleSubmitMessage('vietnamese')}
           >
-            <span className='icon-[heroicons--paper-airplane-solid]' />
+            <span className='icon-[circle-flags--vn]' />
+          </Button>
+          <Button
+            size='xl'
+            variant='primary'
+            type='submit'
+            onClick={() => void handleSubmitMessage('english')}
+          >
+            <span className='icon-[circle-flags--us]' />
           </Button>
         </div>
       </div>

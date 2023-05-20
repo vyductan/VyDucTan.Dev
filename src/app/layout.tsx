@@ -1,4 +1,5 @@
-import 'antd/dist/reset.css'
+// import 'antd/dist/reset.css'
+
 import '../styles/globals.css'
 
 import { getCssText } from 'stitches.config'

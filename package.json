@@ -55,7 +55,8 @@
     "superjson": "^1.12.3",
     "tailwind-merge": "^1.12.0",
     "typewriter-effect": "^2.19.0",
-    "zod": "^3.21.4"
+    "zod": "^3.21.4",
+    "zustand": "^4.3.8"
   },
   "devDependencies": {
     "@babel/plugin-syntax-typescript": "^7.21.4",
@@ -89,11 +90,5 @@
     "tailwindcss": "^3.3.2",
     "twin.macro": "^3.3.1",
     "typescript": "5.0.4"
-  },
-  "babelMacros": {
-    "twin": {
-      "preset": "stitches",
-      "stitchesConfig": "stitches.config.ts"
-    }
   }
 }

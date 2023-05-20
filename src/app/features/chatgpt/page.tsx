@@ -2,20 +2,16 @@
 import { Button, clsm, TextArea, type TextAreaProps } from '@vyductan/react'
 import { type KeyboardEventHandler, useState } from 'react'
 
-import { type ChatGptMessages } from '../types'
-import { translateByChatGptAction } from './_actions'
+import { chatGptAction } from './actions'
+import { type ChatGptMessages } from './types'
 
-export default function TranslatePage() {
+export default function ChatGPTPage() {
   const [currentInput, setCurrentInput] = useState('')
   const [messages, setMessages] = useState<ChatGptMessages>([])
 
   const handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (event) => {
-    if (event.key === 'Enter' && event.metaKey) {
-      void handleSubmitMessage('english')
-      return
-    }
     if (event.key === 'Enter') {
-      void handleSubmitMessage('vietnamese')
+      void handleSubmitMessage()
       return
     }
   }
@@ -24,31 +20,29 @@ export default function TranslatePage() {
     const input = e.currentTarget.value
     setCurrentInput(input)
   }
-  const handleSubmitMessage = async (desLanguage: string) => {
+  const handleSubmitMessage = async () => {
     setCurrentInput('')
     try {
       if (currentInput) {
-        const currentInputFormated = `"${currentInput}"`
-        setMessages((messages) => [
+        const mergedMessage: ChatGptMessages = [
           ...messages,
           {
             role: 'user',
-            content: currentInputFormated,
+            content: currentInput,
           },
-        ])
-        const response = await translateByChatGptAction(
-          currentInputFormated,
-          desLanguage
-        )
-        setMessages((messages) => [...messages, ...response])
+        ]
+        setMessages(mergedMessage)
+        const response = await chatGptAction(mergedMessage)
+        if (response.length > 0)
+          setMessages((messages) => [...messages, ...response])
       }
     } catch (error) {
       console.log('Error', error)
     }
   }
   return (
-    <div className='flex h-full justify-center'>
-      <div className='relative m-6 flex w-full max-w-screen-lg flex-col justify-end rounded-base border'>
+    <div className='flex h-[calc(100vh-(64px+24px+64px+48px))] justify-center'>
+      <div className='relative flex w-full max-w-screen-lg flex-col justify-end rounded-base border'>
         <div className='flex flex-col gap-2 overflow-auto p-6 text-xl'>
           {messages.map(({ content, role }, idx) => (
             <div
@@ -82,17 +76,9 @@ export default function TranslatePage() {
             size='xl'
             type='submit'
             variant='primary'
-            onClick={() => void handleSubmitMessage('vietnamese')}
+            onClick={() => void handleSubmitMessage()}
           >
-            <span className='icon-[circle-flags--vn]' />
-          </Button>
-          <Button
-            size='xl'
-            variant='primary'
-            type='submit'
-            onClick={() => void handleSubmitMessage('english')}
-          >
-            <span className='icon-[circle-flags--us]' />
+            <span className='icon-[heroicons--paper-airplane-solid]' />
           </Button>
         </div>
       </div>

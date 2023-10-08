@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 function SvgVideoCameraOutlinedIcon(props: React.SVGProps<SVGSVGElement>) {
   return (

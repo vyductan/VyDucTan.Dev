@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 function SvgLoveThemedIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -13,9 +13,21 @@ function SvgLoveThemedIcon(props: React.SVGProps<SVGSVGElement>) {
       {...props}
     >
       <defs>
-        <linearGradient id="love-themed-icon_svg__a" x1="50%" x2="50%" y1="0%" y2="100%">
-          <stop offset="0%" stopColor="#FF6680" />
-          <stop offset="100%" stopColor="#E61739" />
+        <linearGradient
+          id="love-themed-icon_svg__a"
+          x1="50%"
+          x2="50%"
+          y1="0%"
+          y2="100%"
+        >
+          <stop
+            offset="0%"
+            stopColor="#FF6680"
+          />
+          <stop
+            offset="100%"
+            stopColor="#E61739"
+          />
         </linearGradient>
         <filter
           id="love-themed-icon_svg__c"
@@ -25,8 +37,16 @@ function SvgLoveThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           y="-9.4%"
           filterUnits="objectBoundingBox"
         >
-          <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation={1} />
-          <feOffset dy={-1} in="shadowBlurInner1" result="shadowOffsetInner1" />
+          <feGaussianBlur
+            in="SourceAlpha"
+            result="shadowBlurInner1"
+            stdDeviation={1}
+          />
+          <feOffset
+            dy={-1}
+            in="shadowBlurInner1"
+            result="shadowOffsetInner1"
+          />
           <feComposite
             in="shadowOffsetInner1"
             in2="SourceAlpha"
@@ -40,11 +60,21 @@ function SvgLoveThemedIcon(props: React.SVGProps<SVGSVGElement>) {
             values="0 0 0 0 0.710144928 0 0 0 0 0 0 0 0 0 0.117780134 0 0 0 0.349786932 0"
           />
         </filter>
-        <path id="love-themed-icon_svg__b" d="M8 0a8 8 0 100 16A8 8 0 008 0z" />
+        <path
+          id="love-themed-icon_svg__b"
+          d="M8 0a8 8 0 100 16A8 8 0 008 0z"
+        />
       </defs>
       <g fill="none">
-        <use fill="url(#love-themed-icon_svg__a)" xlinkHref="#love-themed-icon_svg__b" />
-        <use fill="#000" filter="url(#love-themed-icon_svg__c)" xlinkHref="#love-themed-icon_svg__b" />
+        <use
+          fill="url(#love-themed-icon_svg__a)"
+          xlinkHref="#love-themed-icon_svg__b"
+        />
+        <use
+          fill="#000"
+          filter="url(#love-themed-icon_svg__c)"
+          xlinkHref="#love-themed-icon_svg__b"
+        />
         <path
           fill="#fff"
           d="M10.473 4C8.275 4 8 5.824 8 5.824S7.726 4 5.528 4c-2.114 0-2.73 2.222-2.472 3.41C3.736 10.55 8 12.75 8 12.75s4.265-2.2 4.945-5.34c.257-1.188-.36-3.41-2.472-3.41"

@@ -14,19 +14,11 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "noUncheckedIndexedAccess": true,
-    "baseUrl": ".",
-    "paths": {
-      "~/*": ["./src/*"]
-    },
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    "noUncheckedIndexedAccess": true
   },
   "include": [
     ".eslintrc.cjs",
+    ".prettierrc.cjs",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",

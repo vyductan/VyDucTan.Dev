@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 function SvgAngryThemedIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -13,21 +13,69 @@ function SvgAngryThemedIcon(props: React.SVGProps<SVGSVGElement>) {
       {...props}
     >
       <defs>
-        <linearGradient id="angry-themed-icon_svg__a" x1="50%" x2="50%" y1="0%" y2="67.194%">
-          <stop offset="0%" stopColor="#E04300" />
-          <stop offset="100%" stopColor="#FFA320" />
+        <linearGradient
+          id="angry-themed-icon_svg__a"
+          x1="50%"
+          x2="50%"
+          y1="0%"
+          y2="67.194%"
+        >
+          <stop
+            offset="0%"
+            stopColor="#E04300"
+          />
+          <stop
+            offset="100%"
+            stopColor="#FFA320"
+          />
         </linearGradient>
-        <linearGradient id="angry-themed-icon_svg__f" x1="50%" x2="50%" y1="13.511%" y2="100%">
-          <stop offset="0%" stopColor="#3D0D00" />
-          <stop offset="100%" stopColor="#661C04" />
+        <linearGradient
+          id="angry-themed-icon_svg__f"
+          x1="50%"
+          x2="50%"
+          y1="13.511%"
+          y2="100%"
+        >
+          <stop
+            offset="0%"
+            stopColor="#3D0D00"
+          />
+          <stop
+            offset="100%"
+            stopColor="#661C04"
+          />
         </linearGradient>
-        <linearGradient id="angry-themed-icon_svg__g" x1="50%" x2="50%" y1="0%" y2="100%">
-          <stop offset="0%" stopColor="#191A33" />
-          <stop offset="87.162%" stopColor="#3B426A" />
+        <linearGradient
+          id="angry-themed-icon_svg__g"
+          x1="50%"
+          x2="50%"
+          y1="0%"
+          y2="100%"
+        >
+          <stop
+            offset="0%"
+            stopColor="#191A33"
+          />
+          <stop
+            offset="87.162%"
+            stopColor="#3B426A"
+          />
         </linearGradient>
-        <linearGradient id="angry-themed-icon_svg__l" x1="82.871%" x2="82.871%" y1="109.337%" y2="0%">
-          <stop offset="0%" stopColor="#9A2F00" />
-          <stop offset="100%" stopColor="#D44800" />
+        <linearGradient
+          id="angry-themed-icon_svg__l"
+          x1="82.871%"
+          x2="82.871%"
+          y1="109.337%"
+          y2="0%"
+        >
+          <stop
+            offset="0%"
+            stopColor="#9A2F00"
+          />
+          <stop
+            offset="100%"
+            stopColor="#D44800"
+          />
         </linearGradient>
         <filter
           id="angry-themed-icon_svg__c"
@@ -37,8 +85,16 @@ function SvgAngryThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           y="-9.4%"
           filterUnits="objectBoundingBox"
         >
-          <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation={1} />
-          <feOffset dy={-1} in="shadowBlurInner1" result="shadowOffsetInner1" />
+          <feGaussianBlur
+            in="SourceAlpha"
+            result="shadowBlurInner1"
+            stdDeviation={1}
+          />
+          <feOffset
+            dy={-1}
+            in="shadowBlurInner1"
+            result="shadowOffsetInner1"
+          />
           <feComposite
             in="shadowOffsetInner1"
             in2="SourceAlpha"
@@ -60,9 +116,20 @@ function SvgAngryThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           y="-66.7%"
           filterUnits="objectBoundingBox"
         >
-          <feOffset dy={1} in="SourceAlpha" result="shadowOffsetOuter1" />
-          <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation={0.5} />
-          <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 1 0 0 0 0 0.509680707 0 0 0 0 0 0 0 0 0.371206975 0" />
+          <feOffset
+            dy={1}
+            in="SourceAlpha"
+            result="shadowOffsetOuter1"
+          />
+          <feGaussianBlur
+            in="shadowOffsetOuter1"
+            result="shadowBlurOuter1"
+            stdDeviation={0.5}
+          />
+          <feColorMatrix
+            in="shadowBlurOuter1"
+            values="0 0 0 0 1 0 0 0 0 0.509680707 0 0 0 0 0 0 0 0 0.371206975 0"
+          />
         </filter>
         <filter
           id="angry-themed-icon_svg__i"
@@ -72,8 +139,15 @@ function SvgAngryThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           y="-19.2%"
           filterUnits="objectBoundingBox"
         >
-          <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation={0.5} />
-          <feOffset in="shadowBlurInner1" result="shadowOffsetInner1" />
+          <feGaussianBlur
+            in="SourceAlpha"
+            result="shadowBlurInner1"
+            stdDeviation={0.5}
+          />
+          <feOffset
+            in="shadowBlurInner1"
+            result="shadowOffsetInner1"
+          />
           <feComposite
             in="shadowOffsetInner1"
             in2="SourceAlpha"
@@ -95,14 +169,25 @@ function SvgAngryThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           y="-16.4%"
           filterUnits="objectBoundingBox"
         >
-          <feOffset dy={0.6} in="SourceAlpha" result="shadowOffsetOuter1" />
-          <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation={0.05} />
+          <feOffset
+            dy={0.6}
+            in="SourceAlpha"
+            result="shadowOffsetOuter1"
+          />
+          <feGaussianBlur
+            in="shadowOffsetOuter1"
+            result="shadowBlurOuter1"
+            stdDeviation={0.05}
+          />
           <feColorMatrix
             in="shadowBlurOuter1"
             values="0 0 0 0 0.565874787 0 0 0 0 0.151271555 0 0 0 0 0 0 0 0 0.150240385 0"
           />
         </filter>
-        <path id="angry-themed-icon_svg__b" d="M16 8A8 8 0 110 8a8 8 0 0116 0" />
+        <path
+          id="angry-themed-icon_svg__b"
+          d="M16 8A8 8 0 110 8a8 8 0 0116 0"
+        />
         <path
           id="angry-themed-icon_svg__e"
           d="M5.2 13.551c0 .528 1.253.444 2.8.444 1.546 0 2.8.084 2.8-.444 0-.636-1.254-1.051-2.8-1.051-1.547 0-2.8.415-2.8 1.051"
@@ -117,18 +202,46 @@ function SvgAngryThemedIcon(props: React.SVGProps<SVGSVGElement>) {
         />
       </defs>
       <g fill="none">
-        <use fill="url(#angry-themed-icon_svg__a)" xlinkHref="#angry-themed-icon_svg__b" />
-        <use fill="#000" filter="url(#angry-themed-icon_svg__c)" xlinkHref="#angry-themed-icon_svg__b" />
-        <use fill="#000" filter="url(#angry-themed-icon_svg__d)" xlinkHref="#angry-themed-icon_svg__e" />
-        <use fill="url(#angry-themed-icon_svg__f)" xlinkHref="#angry-themed-icon_svg__e" />
-        <use fill="url(#angry-themed-icon_svg__g)" xlinkHref="#angry-themed-icon_svg__h" />
-        <use fill="#000" filter="url(#angry-themed-icon_svg__i)" xlinkHref="#angry-themed-icon_svg__h" />
+        <use
+          fill="url(#angry-themed-icon_svg__a)"
+          xlinkHref="#angry-themed-icon_svg__b"
+        />
+        <use
+          fill="#000"
+          filter="url(#angry-themed-icon_svg__c)"
+          xlinkHref="#angry-themed-icon_svg__b"
+        />
+        <use
+          fill="#000"
+          filter="url(#angry-themed-icon_svg__d)"
+          xlinkHref="#angry-themed-icon_svg__e"
+        />
+        <use
+          fill="url(#angry-themed-icon_svg__f)"
+          xlinkHref="#angry-themed-icon_svg__e"
+        />
+        <use
+          fill="url(#angry-themed-icon_svg__g)"
+          xlinkHref="#angry-themed-icon_svg__h"
+        />
+        <use
+          fill="#000"
+          filter="url(#angry-themed-icon_svg__i)"
+          xlinkHref="#angry-themed-icon_svg__h"
+        />
         <path
           fill="#4F4F67"
           d="M4.968 9.333a.329.329 0 01.007.071c0 .201-.176.366-.394.366-.217 0-.393-.165-.393-.366 0-.083.03-.16.08-.221.224.053.459.104.7.15zm5.926.437c-.211 0-.383-.153-.393-.348.259-.038.516-.085.766-.136a.333.333 0 01.02.119c0 .2-.175.365-.393.365z"
         />
-        <use fill="#000" filter="url(#angry-themed-icon_svg__j)" xlinkHref="#angry-themed-icon_svg__k" />
-        <use fill="url(#angry-themed-icon_svg__l)" xlinkHref="#angry-themed-icon_svg__k" />
+        <use
+          fill="#000"
+          filter="url(#angry-themed-icon_svg__j)"
+          xlinkHref="#angry-themed-icon_svg__k"
+        />
+        <use
+          fill="url(#angry-themed-icon_svg__l)"
+          xlinkHref="#angry-themed-icon_svg__k"
+        />
       </g>
     </svg>
   );

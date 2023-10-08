@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 function SvgHahaThemedIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -13,17 +13,53 @@ function SvgHahaThemedIcon(props: React.SVGProps<SVGSVGElement>) {
       {...props}
     >
       <defs>
-        <linearGradient id="haha-themed-icon_svg__a" x1="50%" x2="50%" y1="10.25%" y2="100%">
-          <stop offset="0%" stopColor="#FEEA70" />
-          <stop offset="100%" stopColor="#F69B30" />
+        <linearGradient
+          id="haha-themed-icon_svg__a"
+          x1="50%"
+          x2="50%"
+          y1="10.25%"
+          y2="100%"
+        >
+          <stop
+            offset="0%"
+            stopColor="#FEEA70"
+          />
+          <stop
+            offset="100%"
+            stopColor="#F69B30"
+          />
         </linearGradient>
-        <linearGradient id="haha-themed-icon_svg__d" x1="50%" x2="50%" y1="0%" y2="100%">
-          <stop offset="0%" stopColor="#472315" />
-          <stop offset="100%" stopColor="#8B3A0E" />
+        <linearGradient
+          id="haha-themed-icon_svg__d"
+          x1="50%"
+          x2="50%"
+          y1="0%"
+          y2="100%"
+        >
+          <stop
+            offset="0%"
+            stopColor="#472315"
+          />
+          <stop
+            offset="100%"
+            stopColor="#8B3A0E"
+          />
         </linearGradient>
-        <linearGradient id="haha-themed-icon_svg__e" x1="50%" x2="50%" y1="0%" y2="81.902%">
-          <stop offset="0%" stopColor="#FC607C" />
-          <stop offset="100%" stopColor="#D91F3A" />
+        <linearGradient
+          id="haha-themed-icon_svg__e"
+          x1="50%"
+          x2="50%"
+          y1="0%"
+          y2="81.902%"
+        >
+          <stop
+            offset="0%"
+            stopColor="#FC607C"
+          />
+          <stop
+            offset="100%"
+            stopColor="#D91F3A"
+          />
         </linearGradient>
         <filter
           id="haha-themed-icon_svg__c"
@@ -33,8 +69,16 @@ function SvgHahaThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           y="-9.4%"
           filterUnits="objectBoundingBox"
         >
-          <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation={1} />
-          <feOffset dy={-1} in="shadowBlurInner1" result="shadowOffsetInner1" />
+          <feGaussianBlur
+            in="SourceAlpha"
+            result="shadowBlurInner1"
+            stdDeviation={1}
+          />
+          <feOffset
+            dy={-1}
+            in="shadowBlurInner1"
+            result="shadowOffsetInner1"
+          />
           <feComposite
             in="shadowOffsetInner1"
             in2="SourceAlpha"
@@ -48,11 +92,21 @@ function SvgHahaThemedIcon(props: React.SVGProps<SVGSVGElement>) {
             values="0 0 0 0 0.921365489 0 0 0 0 0.460682745 0 0 0 0 0 0 0 0 0.35 0"
           />
         </filter>
-        <path id="haha-themed-icon_svg__b" d="M16 8A8 8 0 110 8a8 8 0 0116 0" />
+        <path
+          id="haha-themed-icon_svg__b"
+          d="M16 8A8 8 0 110 8a8 8 0 0116 0"
+        />
       </defs>
       <g fill="none">
-        <use fill="url(#haha-themed-icon_svg__a)" xlinkHref="#haha-themed-icon_svg__b" />
-        <use fill="#000" filter="url(#haha-themed-icon_svg__c)" xlinkHref="#haha-themed-icon_svg__b" />
+        <use
+          fill="url(#haha-themed-icon_svg__a)"
+          xlinkHref="#haha-themed-icon_svg__b"
+        />
+        <use
+          fill="#000"
+          filter="url(#haha-themed-icon_svg__c)"
+          xlinkHref="#haha-themed-icon_svg__b"
+        />
         <path
           fill="url(#haha-themed-icon_svg__d)"
           d="M3 8.008C3 10.023 4.006 14 8 14c3.993 0 5-3.977 5-5.992C13 7.849 11.39 7 8 7c-3.39 0-5 .849-5 1.008"

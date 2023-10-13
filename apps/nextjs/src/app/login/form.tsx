@@ -1,7 +1,8 @@
 import { useSearchParams } from "next/navigation";
-import { Icon } from "@vyductan/react";
-import { Button } from "@vyductan/react/antd";
 import { signIn } from "next-auth/react";
+
+import { Button } from "@vyductan/components";
+import { Icon } from "@vyductan/icons";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
@@ -14,13 +15,13 @@ export const LoginForm = () => {
       {/* )} */}
 
       <Button
-        size="large"
+        size="lg"
         onClick={() => {
           signIn("google");
         }}
-        prefix={<Icon className="icon-[logos--google-icon]" />}
+        prefix={<Icon icon="logos:google-icon" />}
       >
-        Sign in with Google
+        Sign in with Google X
       </Button>
     </div>
   );

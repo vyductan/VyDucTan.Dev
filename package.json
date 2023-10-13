@@ -1,28 +1,44 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "vyductan-apps",
   "private": true,
-  "engines": {
-    "node": ">=v18.17.0"
-  },
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "@vyductan/*",
+    "@vyductan/tooling/*"
+  ],
   "scripts": {
-    "dev": "turbo dev --parallel",
     "build": "turbo build",
     "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo clean",
-    "db:generate": "turbo db:generate",
-    "db:push": "turbo db:push db:generate",
-    "db:studio": "pnpm -F db dev",
+    "db:push": "turbo -F db push",
+    "db:studio": "turbo -F db studio",
+    "dev": "turbo dev --parallel",
     "format": "prettier --write \"**/*.{js,cjs,mjs,ts,tsx,md,json}\" --ignore-path .gitignore",
     "lint": "turbo lint && manypkg check",
     "lint:fix": "turbo lint:fix && manypkg fix",
     "type-check": "turbo type-check"
   },
+  "prettier": "@vyductan/prettier-config",
+  "eslintConfig": {
+    "extends": [
+      "@vyductan/eslint-config/base",
+      "@vyductan/eslint-config/react",
+      "@vyductan/eslint-config/nextjs",
+      "@vyductan/eslint-config/tailwind"
+    ],
+    "root": true
+  },
   "dependencies": {
-    "@ianvs/prettier-plugin-sort-imports": "^4.1.0",
     "@manypkg/cli": "^0.21.0",
-    "prettier": "^3.0.1",
-    "prettier-plugin-tailwindcss": "^0.4.1",
+    "@vyductan/eslint-config": "*",
+    "@vyductan/prettier-config": "*",
     "turbo": "^1.10.12",
     "typescript": "^5.1.6"
+  },
+  "packageManager": "bun@1.0.4",
+  "engines": {
+    "node": ">=v18.18.0"
   }
 }

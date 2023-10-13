@@ -5,8 +5,6 @@ import "@vyductan/auth/env.mjs";
 import bundleAnalyzer from "@next/bundle-analyzer";
 import withPlugins from "next-compose-plugins";
 
-// import withTwin from './withTwin.mjs'
-
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
@@ -15,7 +13,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 const config = {
   reactStrictMode: true,
   /** Enables hot reloading for local packages without a build step */
-  transpilePackages: ["@vyductan/ui"],
+  transpilePackages: ["@vyductan/components", "@vyductan/ui"],
   /** We already do linting and typechecking as separate tasks in CI */
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },

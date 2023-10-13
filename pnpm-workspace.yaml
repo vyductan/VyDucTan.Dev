@@ -1,7 +1,0 @@
-packages:
-  - apps/vyductan
-  - packages/ui
-  - packages/db
-  - packages/auth
-  - packages/server-action
-  - packages/config/*

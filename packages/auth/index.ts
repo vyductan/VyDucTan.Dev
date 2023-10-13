@@ -1,16 +1,15 @@
 import Google from "@auth/core/providers/google";
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import type { DefaultSession } from "@auth/core/types";
-import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth";
-
-import { prisma } from "@vyductan/db";
+import { db } from "@vyductan/db";
 
 import { env } from "./env.mjs";
 
 export type { Session } from "next-auth";
 
 // Update this whenever adding new providers so that the client can
-export const providers = ["discord"] as const;
+export const providers = ["google"] as const;
 export type OAuthProviders = (typeof providers)[number];
 
 declare module "next-auth" {
@@ -24,9 +23,9 @@ declare module "next-auth" {
 export const {
   handlers: { GET, POST },
   auth,
-  CSRF_experimental,
+  // CSRF_experimental,
 } = NextAuth({
-  adapter: PrismaAdapter(prisma),
+  adapter: DrizzleAdapter(db),
   providers: [
     Google({
       clientId: env.GOOGLE_CLIENT_ID,

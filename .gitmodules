@@ -1,3 +1,6 @@
-[submodule "@vyductan2"]
+[submodule "src/@vyductan"]
+	path = @vyductan
+	url = https://github.com/vyductan/vyductan-react.git
+[submodule "@vyductan"]
 	path = @vyductan
 	url = https://github.com/vyductan/vyductan-react.git

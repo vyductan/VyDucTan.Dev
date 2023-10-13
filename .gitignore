@@ -25,6 +25,7 @@ lerna-debug.log*
 *.pem
 
 # Local files
+.env
 *.local
 
 # next.js

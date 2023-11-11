@@ -34,7 +34,7 @@
     "@manypkg/cli": "^0.21.0",
     "@vyductan/eslint-config": "*",
     "@vyductan/prettier-config": "*",
-    "turbo": "^1.10.12",
+    "turbo": "latest",
     "typescript": "^5.1.6"
   },
   "packageManager": "bun@1.0.4",

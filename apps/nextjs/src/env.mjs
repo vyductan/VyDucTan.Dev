@@ -2,29 +2,38 @@ import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
 export const env = createEnv({
+  shared: {
+    VERCEL_URL: z
+      .string()
+      .optional()
+      .transform((v) => (v ? `https://${v}` : undefined)),
+    PORT: z.coerce.number().default(3000),
+  },
   /**
    * Specify your server-side environment variables schema here. This way you can ensure the app
    * isn't built with invalid env vars.
    */
   server: {
-    NODE_ENV: z.enum(["development", "test", "production"]),
-    DATABASE_URL: z.string().url(),
+    // NODE_ENV: z.enum(["development", "test", "production"]),
 
-    NEXTAUTH_SECRET:
-      process.env.NODE_ENV === "production"
-        ? z.string().min(1)
-        : z.string().min(1).optional(),
-    NEXTAUTH_URL: z.preprocess(
-      // This makes Vercel deployments not fail if you don't set NEXTAUTH_URL
-      // Since NextAuth.js automatically uses the VERCEL_URL if present.
-      (str) => process.env.VERCEL_URL ?? str,
-      // VERCEL_URL doesn't include `https` so it cant be validated as a URL
-      process.env.VERCEL ? z.string().min(1) : z.string().url(),
-    ),
+    // NEXTAUTH_SECRET:
+    //   process.env.NODE_ENV === "production"
+    //     ? z.string().min(1)
+    //     : z.string().min(1).optional(),
+    // NEXTAUTH_URL: z.preprocess(
+    //   // This makes Vercel deployments not fail if you don't set NEXTAUTH_URL
+    //   // Since NextAuth.js automatically uses the VERCEL_URL if present.
+    //   (str) => process.env.VERCEL_URL ?? str,
+    //   // VERCEL_URL doesn't include `https` so it cant be validated as a URL
+    //   process.env.VERCEL ? z.string().min(1) : z.string().url(),
+    // ),
     // Add `.min(1) on ID and SECRET if you want to make sure they're not empty
-    GOOGLE_CLIENT_ID: z.string(),
-    GOOGLE_CLIENT_SECRET: z.string(),
-    GOOGLE_REFRESH_TOKEN: z.string(),
+    // GOOGLE_CLIENT_ID: z.string(),
+    // GOOGLE_CLIENT_SECRET: z.string(),
+    // GOOGLE_REFRESH_TOKEN: z.string(),
+
+    // Database
+    DATABASE_URL: z.string().url(),
 
     // OpenAI
     OPENAI_API_KEY: z.string(),
@@ -47,17 +56,26 @@ export const env = createEnv({
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
-    NODE_ENV: process.env.NODE_ENV,
-    DATABASE_URL: process.env.DATABASE_URL,
-    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
-    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+    // NODE_ENV: process.env.NODE_ENV,
+    // NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+    // NEXTAUTH_URL: process.env.NEXTAUTH_URL,
 
-    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
-    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
-    GOOGLE_REFRESH_TOKEN: process.env.GOOGLE_REFRESH_TOKEN,
+    // GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+    // GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+    // GOOGLE_REFRESH_TOKEN: process.env.GOOGLE_REFRESH_TOKEN,
+
+    VERCEL_URL: process.env.VERCEL_URL,
+
+    PORT: process.env.PORT,
+
+    DATABASE_URL: process.env.DATABASE_URL,
 
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
 
     NOTION_TOKEN: process.env.NOTION_TOKEN,
   },
+  skipValidation:
+    !!process.env.CI ||
+    !!process.env.SKIP_ENV_VALIDATION ||
+    process.env.npm_lifecycle_event === "lint",
 });

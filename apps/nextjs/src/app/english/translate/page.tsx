@@ -1,102 +1,72 @@
 "use client";
 
-import { useState, type KeyboardEventHandler } from "react";
-import { Button, clsm, TextArea, type TextAreaProps } from "@vyductan/react";
+import { useState } from "react";
 
-import { type ChatGptMessages } from "../chatgpt/types";
-import { translateByChatGptAction } from "./actions";
+import { Tabs } from "@vyductan/components";
 
-export default function TranslatePage() {
-  const [currentInput, setCurrentInput] = useState("");
-  const [messages, setMessages] = useState<ChatGptMessages>([]);
+import { Chat } from "~/app/chat/components/Chat";
+import { useAppStore } from "~/app/store";
 
-  const handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (event) => {
-    if (event.key === "Enter" && event.metaKey) {
-      void handleSubmitMessage("english");
-      return;
-    }
-    if (event.key === "Enter") {
-      void handleSubmitMessage("vietnamese");
-      return;
-    }
-  };
+enum Mode {
+  to_vietnamese = "to_vietnamese",
+  to_english = "to_english",
+  polishing = "polishing",
+}
+const TranslatePage = () => {
+  const { headerHeight } = useAppStore();
+  const [mode, setMode] = useState<Mode>(Mode.to_vietnamese);
 
-  const handleInputUserMessageChange: TextAreaProps["onChange"] = (e) => {
-    const input = e.currentTarget.value;
-    setCurrentInput(input);
-  };
-  const handleSubmitMessage = async (desLanguage: string) => {
-    setCurrentInput("");
-    try {
-      if (currentInput) {
-        const currentInputFormated = `"${currentInput}"`;
-        setMessages((messages) => [
-          ...messages,
-          {
-            role: "user",
-            content: currentInputFormated,
-          },
-        ]);
-        const response = await translateByChatGptAction(
-          currentInputFormated,
-          desLanguage,
-        );
-        setMessages((messages) => [...messages, ...response]);
-      }
-    } catch (error) {
-      console.log("Error", error);
-    }
-  };
   return (
-    <div className="flex h-full justify-center">
-      <div className="rounded-base relative m-6 flex w-full max-w-screen-lg flex-col justify-end border">
-        <div className="flex flex-col gap-2 overflow-auto p-6 text-xl">
-          {messages.map(({ content, role }, idx) => (
-            <div
-              key={idx}
-              className={clsm(
-                "rounded-base flex max-w-2/3 p-2",
-                role === "user" && "bg-primary-600 ml-auto text-white",
-                role === "assistant" && "mr-auto bg-gray-100",
-              )}
-            >
-              {role === "user" ? (
-                <>{content}</>
-              ) : role === "assistant" ? (
-                <>{content}</>
-              ) : null}
-            </div>
-          ))}
-        </div>
-
-        <div className="flex items-center gap-4 border-t p-6">
-          <TextArea
-            autoSize={{ maxRows: 10 }}
-            size="xl"
-            className="w-full"
-            placeholder="Send a message..."
-            value={currentInput}
-            onChange={handleInputUserMessageChange}
-            onKeyDown={handleKeyDown}
-          />
-          <Button
-            size="xl"
-            type="submit"
-            appearance="primary"
-            onClick={() => void handleSubmitMessage("vietnamese")}
-          >
-            <span className="icon-[circle-flags--vn]" />
-          </Button>
-          <Button
-            size="xl"
-            appearance="primary"
-            type="submit"
-            onClick={() => void handleSubmitMessage("english")}
-          >
-            <span className="icon-[circle-flags--us]" />
-          </Button>
-        </div>
+    <div
+      className="flex w-full justify-center"
+      style={{
+        height: `calc(100vh - (${headerHeight * 2}px))`,
+      }}
+    >
+      <div className="flex w-full max-w-screen-xl gap-6 px-6">
+        <Chat
+          initialMessages={[
+            {
+              id: "",
+              role: "system",
+              content:
+                mode === Mode.to_vietnamese
+                  ? "You will be provided with a sentence in any language, and your task is to translate it into Vietnamese."
+                  : mode === Mode.to_english
+                  ? "You will be provided with a sentence in any language, and your task is to translate it into English."
+                  : mode === Mode.polishing
+                  ? "You will be provided with a sentence in any language, and your task is to adjust it correctly and explain it in Vietnamese."
+                  : "",
+            },
+          ]}
+          title={
+            <Tabs
+              defaultActiveKey={Mode.to_vietnamese}
+              items={[
+                {
+                  key: Mode.to_vietnamese,
+                  label: "English → Vietnamese",
+                  children: null,
+                },
+                {
+                  key: Mode.to_english,
+                  label: "Vietnamese → English",
+                  children: null,
+                },
+                {
+                  key: Mode.polishing,
+                  label: "Polishing",
+                  children: null,
+                },
+              ]}
+              onActiveKeyChange={(activeKey) => {
+                setMode(activeKey as Mode);
+              }}
+            />
+          }
+        />
       </div>
     </div>
   );
-}
+};
+export default TranslatePage;

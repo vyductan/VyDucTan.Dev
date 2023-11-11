@@ -2,21 +2,22 @@
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vyductan/db",
   "version": "0.1.0",
+  "license": "MIT",
   "main": "./index.ts",
   "types": "./index.ts",
-  "license": "MIT",
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
     "push": "drizzle-kit push:pg",
     "studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "drizzle-orm": "^0.28.6",
-    "@vercel/postgres": "^0.5.0"
+    "@vercel/postgres": "^0.5.1",
+    "drizzle-orm": "^0.29.0",
+    "nanoid": "^5.0.3"
   },
   "devDependencies": {
     "dotenv-cli": "^7.3.0",
-    "pg": "^8.11.3",
-    "drizzle-kit": "^0.19.13"
+    "drizzle-kit": "^0.20.1",
+    "pg": "^8.11.3"
   }
 }

@@ -19,9 +19,9 @@ export const LoginForm = () => {
         onClick={() => {
           signIn("google");
         }}
-        prefix={<Icon icon="logos:google-icon" />}
+        prefix={<Icon name="logos:google-icon" />}
       >
-        Sign in with Google X
+        Sign in with Google
       </Button>
     </div>
   );

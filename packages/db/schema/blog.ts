@@ -4,7 +4,7 @@ import { nanoid } from "nanoid";
 
 import { users } from "./_nextauth";
 
-export const projects = pgTable("project", {
+export const blogs = pgTable("project", {
   id: text("id").default(nanoid()).notNull().primaryKey(),
   name: text("name").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),

@@ -12,10 +12,26 @@ const withBundleAnalyzer = bundleAnalyzer({
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
+  experimental: {
+    // TODO: add necessary packages
+    optimizePackageImports: ["@vyductan/components"],
+  },
   /** Enables hot reloading for local packages without a build step */
-  transpilePackages: ["@vyductan/components", "@vyductan/ui"],
+  transpilePackages: [
+    "@vyductan/components",
+    "@vyductan/tailwind",
+    "@vyductan/ui",
+  ],
   /** We already do linting and typechecking as separate tasks in CI */
   eslint: { ignoreDuringBuilds: true },
+  rewrites: async () => {
+    return [
+      {
+        source: "/api/cambridge/search/amp",
+        destination: "https://dictionary.cambridge.org/vi/autocomplete/amp",
+      },
+    ];
+  },
   typescript: { ignoreBuildErrors: true },
   // images: {
   //   domains: ['platform-lookaside.fbsbx.com', 'firebasestorage.googleapis.com'],

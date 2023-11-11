@@ -1,7 +1,8 @@
 import Google from "@auth/core/providers/google";
-import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import type { DefaultSession } from "@auth/core/types";
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import NextAuth from "next-auth";
+
 import { db } from "@vyductan/db";
 
 import { env } from "./env.mjs";
@@ -23,7 +24,8 @@ declare module "next-auth" {
 export const {
   handlers: { GET, POST },
   auth,
-  // CSRF_experimental,
+  signIn,
+  signOut,
 } = NextAuth({
   adapter: DrizzleAdapter(db),
   providers: [

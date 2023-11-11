@@ -2,9 +2,9 @@
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vyductan/api",
   "version": "0.1.0",
+  "license": "MIT",
   "main": "./index.ts",
   "types": "./index.ts",
-  "license": "MIT",
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
     "lint": "eslint .",
@@ -12,11 +12,11 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@trpc/server": "next",
     "@vyductan/auth": "*",
     "@vyductan/db": "*",
-    "@trpc/client": "^10.40.0",
-    "@trpc/server": "^10.40.0",
-    "superjson": "2.0.0",
+    "@vyductan/typescript-config": "*",
+    "superjson": "2.2.1",
     "zod": "^3.22.4"
   }
 }

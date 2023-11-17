@@ -70,7 +70,7 @@ export const Chat = ({ id, initialMessages, className, title }: ChatProps) => {
         </div>
       </div>
 
-      <div className={clsm("pb-[200px] pt-4 md:pt-10", className)}>
+      <div className={clsm("h-full pb-[200px]", className)}>
         {messages.length ? (
           <>
             <ChatList messages={messages} />

@@ -13,7 +13,7 @@ export const ChatMessage = ({ message }: ChatMessageProps) => {
     <MemoizedReactMarkdown
       className={clsm(
         "prose dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 break-words",
-        "flex w-fit max-w-[calc(100%*2/3)] justify-end rounded-md p-2",
+        "flex w-fit max-w-[calc(100%*5/6)] flex-col justify-end rounded-md p-2",
         message.role === "user" && "ml-auto bg-primary text-white",
         message.role === "assistant" && "mr-auto bg-gray-100 text-black",
         message.role === "system" && "hidden",

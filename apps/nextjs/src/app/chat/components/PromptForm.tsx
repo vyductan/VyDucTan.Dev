@@ -4,7 +4,6 @@ import type { UseChatHelpers } from "ai/react";
 import { Button, Textarea, Tooltip } from "@vyductan/components";
 import { useEnterSubmit } from "@vyductan/hooks";
 import { Icon } from "@vyductan/icons";
-import { clsm } from "@vyductan/utils";
 
 export interface PromptProps
   extends Pick<UseChatHelpers, "input" | "setInput"> {
@@ -38,61 +37,48 @@ export function PromptForm({
         await onSubmit(input);
       }}
       ref={formRef}
+      className="relative"
     >
-      <div
-        className={clsm(
-          "relative flex max-h-60 w-full grow items-center overflow-hidden bg-background px-4",
-          "sm:rounded-md sm:border",
-        )}
-      >
-        <Tooltip content="Clear Chat">
-          <Button
-            type="ghost"
-            size="sm"
-            onClick={(e) => {
-              e.preventDefault();
-            }}
-            icon={
-              <>
-                <Icon icon="ant-design:clear-outlined" />
-                <span className="sr-only">New Chat</span>
-              </>
-            }
-          />
-        </Tooltip>
+      {/* <Tooltip title="Clear Chat"> */}
+      {/*   <Button */}
+      {/*     type="ghost" */}
+      {/*     size="sm" */}
+      {/*     onClick={(e) => { */}
+      {/*       e.preventDefault(); */}
+      {/*     }} */}
+      {/*     icon={ */}
+      {/*       <> */}
+      {/*         <Icon icon="ant-design:clear-outlined" /> */}
+      {/*         <span className="sr-only">Clear Chat</span> */}
+      {/*       </> */}
+      {/*     } */}
+      {/*   /> */}
+      {/* </Tooltip> */}
 
-        <Textarea
-          ref={inputRef}
-          autoSize
-          borderless
-          className={clsm(
-            "min-h-[60px] w-full resize-none border-0 bg-transparent px-4 py-[1.4rem]",
-            "sm:text-sm",
-          )}
-          placeholder="Send a message."
-          rows={1}
-          spellCheck={false}
-          tabIndex={0}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={onKeyDown}
+      <Textarea
+        ref={inputRef}
+        className="pr-14"
+        autoSize
+        maxRows={8}
+        size="xl"
+        placeholder="Send a message."
+        spellCheck={false}
+        tabIndex={0}
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        onKeyDown={onKeyDown}
+      />
+
+      <Tooltip title="Send message">
+        <Button
+          type="primary"
+          className="absolute bottom-5 right-4"
+          disabled={isLoading || input === ""}
+          htmlType="submit"
+          size="sm"
+          icon={<Icon icon="lucide:send" srOnly="Send message" />}
         />
-
-        <Tooltip content="Send message">
-          <Button
-            type="primary"
-            size="sm"
-            htmlType="submit"
-            disabled={isLoading || input === ""}
-            icon={
-              <>
-                <Icon icon="lucide:send" />
-                <span className="sr-only">Send message</span>
-              </>
-            }
-          />
-        </Tooltip>
-      </div>
+      </Tooltip>
     </form>
   );
 }

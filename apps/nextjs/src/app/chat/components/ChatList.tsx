@@ -11,11 +11,9 @@ export const ChatList = ({ messages }: ChatListProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-2 overflow-auto p-6">
+    <div className="flex h-full flex-col gap-4 p-6">
       {messages.map((message, idx) => (
-        <div key={idx}>
-          <ChatMessage message={message} />
-        </div>
+        <ChatMessage key={idx} message={message} />
       ))}
     </div>
   );

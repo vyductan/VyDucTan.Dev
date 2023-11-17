@@ -3,7 +3,6 @@ import type { UseChatHelpers } from "ai/react";
 import { Button, ButtonScrollToBottom } from "@vyductan/components";
 import { Icon } from "@vyductan/icons";
 
-import { FooterText } from "./FooterText";
 import { PromptForm } from "./PromptForm";
 
 export interface ChatPanelProps
@@ -31,10 +30,10 @@ export function ChatPanel({
   messages,
 }: ChatPanelProps) {
   return (
-    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-b from-muted/10 from-10% to-muted/30 to-50%">
+    <div className="bg-vert-light-gradient dark:bg-vert-dark-gradient absolute inset-x-0 bottom-0 pt-10">
       <ButtonScrollToBottom />
-      <div className="mx-auto sm:max-w-2xl">
-        <div className="flex h-12 items-center justify-center">
+      <div className="mx-auto space-y-4 p-4 sm:max-w-2xl">
+        <div className="flex items-center justify-center">
           {isLoading ? (
             <Button
               onClick={() => stop()}
@@ -58,21 +57,18 @@ export function ChatPanel({
             )
           )}
         </div>
-        <div className="space-y-4 border-t p-4 shadow-lg">
-          <PromptForm
-            onSubmit={async (value) => {
-              await append({
-                id,
-                content: value,
-                role: "user",
-              });
-            }}
-            input={input}
-            setInput={setInput}
-            isLoading={isLoading}
-          />
-          <FooterText className="hidden sm:block" />
-        </div>
+        <PromptForm
+          onSubmit={async (value) => {
+            await append({
+              id,
+              content: value,
+              role: "user",
+            });
+          }}
+          input={input}
+          setInput={setInput}
+          isLoading={isLoading}
+        />
       </div>
     </div>
   );

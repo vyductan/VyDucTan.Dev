@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/unbound-method */
+/* @see https://github.com/nextauthjs/next-auth/pull/8932 */
+
 import Google from "@auth/core/providers/google";
 import type { DefaultSession } from "@auth/core/types";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
@@ -8,10 +11,6 @@ import { db } from "@vyductan/db";
 import { env } from "./env.mjs";
 
 export type { Session } from "next-auth";
-
-// Update this whenever adding new providers so that the client can
-export const providers = ["google"] as const;
-export type OAuthProviders = (typeof providers)[number];
 
 declare module "next-auth" {
   interface Session {

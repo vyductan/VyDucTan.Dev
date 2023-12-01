@@ -60,7 +60,11 @@ export const UserNav = ({ user }: UserNavProps) => {
       placement="bottom-end"
     >
       <Button type="ghost" className="relative h-10 w-10 rounded-full">
-        <Avatar src={user.image ?? undefined} alt={user.name ?? undefined} />
+        <Avatar
+          src={user.image ?? undefined}
+          alt={user.name ?? "User avatar"}
+          fallback={user.name?.[0] ?? undefined}
+        />
       </Button>
     </Dropdown>
   );

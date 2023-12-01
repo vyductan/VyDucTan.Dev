@@ -14,26 +14,14 @@ export const env = createEnv({
    * isn't built with invalid env vars.
    */
   server: {
-    // NODE_ENV: z.enum(["development", "test", "production"]),
-
-    // NEXTAUTH_SECRET:
-    //   process.env.NODE_ENV === "production"
-    //     ? z.string().min(1)
-    //     : z.string().min(1).optional(),
-    // NEXTAUTH_URL: z.preprocess(
-    //   // This makes Vercel deployments not fail if you don't set NEXTAUTH_URL
-    //   // Since NextAuth.js automatically uses the VERCEL_URL if present.
-    //   (str) => process.env.VERCEL_URL ?? str,
-    //   // VERCEL_URL doesn't include `https` so it cant be validated as a URL
-    //   process.env.VERCEL ? z.string().min(1) : z.string().url(),
-    // ),
-    // Add `.min(1) on ID and SECRET if you want to make sure they're not empty
-    // GOOGLE_CLIENT_ID: z.string(),
-    // GOOGLE_CLIENT_SECRET: z.string(),
-    // GOOGLE_REFRESH_TOKEN: z.string(),
-
     // Database
-    DATABASE_URL: z.string().url(),
+    // DATABASE_URL: z.string().url(),
+    POSTGRES_URL: z.string().url(),
+    POSTGRES_URL_NON_POOLING: z.string().url(),
+    POSTGRES_USER: z.string(),
+    POSTGRES_HOST: z.string(),
+    POSTGRES_PASSWORD: z.string(),
+    POSTGRES_DATABASE: z.string(),
 
     // OpenAI
     OPENAI_API_KEY: z.string(),
@@ -56,19 +44,17 @@ export const env = createEnv({
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
-    // NODE_ENV: process.env.NODE_ENV,
-    // NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
-    // NEXTAUTH_URL: process.env.NEXTAUTH_URL,
-
-    // GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
-    // GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
-    // GOOGLE_REFRESH_TOKEN: process.env.GOOGLE_REFRESH_TOKEN,
-
     VERCEL_URL: process.env.VERCEL_URL,
 
     PORT: process.env.PORT,
 
-    DATABASE_URL: process.env.DATABASE_URL,
+    // DATABASE_URL: process.env.DATABASE_URL,
+    POSTGRES_URL: process.env.POSTGRES_URL,
+    POSTGRES_URL_NON_POOLING: process.env.POSTGRES_URL_NON_POOLING,
+    POSTGRES_USER: process.env.POSTGRES_USER,
+    POSTGRES_HOST: process.env.POSTGRES_HOST,
+    POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD,
+    POSTGRES_DATABASE: process.env.POSTGRES_DATABASE,
 
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
 

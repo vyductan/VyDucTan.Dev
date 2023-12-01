@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "dotenv-cli": "^7.3.0",
-    "drizzle-kit": "^0.20.1",
+    "drizzle-kit": "^0.20.4",
     "pg": "^8.11.3"
   }
 }

@@ -24,8 +24,10 @@ lerna-debug.log*
 *.sw?
 *.pem
 
-# Local files
+# local env files
 .env
+.env*
+!.env*.example
 *.local
 
 # next.js

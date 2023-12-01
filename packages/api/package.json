@@ -11,12 +11,23 @@
     "lint:fix": "pnpm lint --fix",
     "type-check": "tsc --noEmit"
   },
+  "prettier": "@vyductan/prettier-config",
+  "eslintConfig": {
+    "extends": [
+      "@vyductan/eslint-config/base"
+    ],
+    "root": true
+  },
   "dependencies": {
     "@trpc/server": "next",
     "@vyductan/auth": "*",
     "@vyductan/db": "*",
-    "@vyductan/typescript-config": "*",
     "superjson": "2.2.1",
     "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@vyductan/eslint-config": "*",
+    "@vyductan/prettier-config": "*",
+    "@vyductan/typescript-config": "*"
   }
 }

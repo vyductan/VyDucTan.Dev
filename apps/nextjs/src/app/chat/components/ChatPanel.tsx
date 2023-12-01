@@ -17,17 +17,21 @@ export interface ChatPanelProps
     | "setInput"
   > {
   id?: string;
+  inputFormatter?: (input: string) => string;
+  inputParser?: (input: string) => string;
 }
 
 export function ChatPanel({
   id,
   isLoading,
-  stop,
-  append,
-  reload,
   input,
   setInput,
   messages,
+  inputFormatter,
+  inputParser,
+  stop,
+  append,
+  reload,
 }: ChatPanelProps) {
   return (
     <div className="bg-vert-light-gradient dark:bg-vert-dark-gradient absolute inset-x-0 bottom-0 pt-10">
@@ -61,13 +65,14 @@ export function ChatPanel({
           onSubmit={async (value) => {
             await append({
               id,
-              content: value,
+              content: inputParser?.(value) || value,
               role: "user",
             });
           }}
           input={input}
           setInput={setInput}
           isLoading={isLoading}
+          inputFormatter={inputFormatter}
         />
       </div>
     </div>

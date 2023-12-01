@@ -3,7 +3,6 @@ import "~/styles/globals.css";
 import { headers } from "next/headers";
 import { GeistSans } from "geist/font/sans";
 
-import { Header } from "./_components/Header";
 import { AppProvider } from "./providers";
 
 export default function RootLayout({
@@ -16,10 +15,7 @@ export default function RootLayout({
     // https://www.npmjs.com/package/geist?activeTab=readme#with-tailwind-css
     <html lang="en" suppressHydrationWarning className={GeistSans.className}>
       <body>
-        <AppProvider headers={headers()}>
-          <Header />
-          {children}
-        </AppProvider>
+        <AppProvider headers={headers()}>{children}</AppProvider>
       </body>
     </html>
   );

@@ -1,15 +1,15 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
+import type { ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ReactQueryStreamedHydration } from "@tanstack/react-query-next-experimental";
 import { loggerLink, unstable_httpBatchStreamLink } from "@trpc/client";
-import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
 import superjson from "superjson";
 
-import { Toaster } from "@vyductan/components";
+import { TailwindIndicator, Toaster } from "@vyductan/components";
 
 import { env } from "~/env.mjs";
 import { api } from "~/utils/api";
@@ -68,12 +68,11 @@ export const AppProvider = ({
     <api.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
         <ReactQueryStreamedHydration transformer={superjson}>
-          <SessionProvider>
-            <ThemeProvider>
-              {children}
-              <Toaster />
-            </ThemeProvider>
-          </SessionProvider>
+          <ThemeProvider>
+            {children}
+            <Toaster />
+            <TailwindIndicator />
+          </ThemeProvider>
         </ReactQueryStreamedHydration>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>

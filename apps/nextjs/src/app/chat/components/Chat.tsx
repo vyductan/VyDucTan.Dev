@@ -1,6 +1,7 @@
 "use client";
 
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import type { ReactNode } from "react";
 import { useChat } from "ai/react";
 import type { Message } from "ai/react";
 
@@ -16,9 +17,17 @@ import { ChatScrollAnchor } from "./ChatScrollAnchor";
 export interface ChatProps extends Omit<React.ComponentProps<"div">, "title"> {
   initialMessages?: Message[];
   title?: ReactNode;
-  inputFormatter?: (msg: string) => string;
+  inputFormatter?: (input: string) => string;
+  inputParser?: (input: string) => string;
 }
-export const Chat = ({ id, initialMessages, className, title }: ChatProps) => {
+export const Chat = ({
+  id,
+  initialMessages,
+  className,
+  title,
+  inputFormatter,
+  inputParser,
+}: ChatProps) => {
   const [manualToken, setManualToken] = useLocalStorage<string | null>(
     "ai-token",
     null,
@@ -61,7 +70,7 @@ export const Chat = ({ id, initialMessages, className, title }: ChatProps) => {
     <div className={clsm("relative w-full rounded-md border")}>
       <div className="relative flex justify-center border-b p-4">
         <div>{title}</div>
-        <div className="absolute bottom-0 right-0 top-0 flex w-fit items-center justify-center px-4">
+        <div className="absolute inset-y-0 right-0 flex w-fit items-center justify-center px-4">
           <Button
             type="ghost"
             icon={<Icon icon="uil:setting" />}
@@ -88,6 +97,8 @@ export const Chat = ({ id, initialMessages, className, title }: ChatProps) => {
         messages={messages}
         input={input}
         setInput={setInput}
+        inputFormatter={inputFormatter}
+        inputParser={inputParser}
       />
 
       <Modal

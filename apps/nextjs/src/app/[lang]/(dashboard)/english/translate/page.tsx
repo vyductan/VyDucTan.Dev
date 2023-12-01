@@ -23,7 +23,7 @@ const TranslatePage = () => {
         height: `calc(100vh - (${headerHeight * 2}px))`,
       }}
     >
-      <div className="flex w-full max-w-screen-xl gap-6 px-6">
+      <div className="flex w-full max-w-screen-md gap-6 px-6">
         <Chat
           initialMessages={[
             {
@@ -33,10 +33,11 @@ const TranslatePage = () => {
                 mode === Mode.to_vietnamese
                   ? "You will be provided with a sentence in any language, and your task is to translate it into Vietnamese."
                   : mode === Mode.to_english
-                  ? "You will be provided with a sentence in any language, and your task is to translate it into English."
-                  : mode === Mode.polishing
-                  ? "You will be provided with a sentence in any language, and your task is to adjust it correctly and explain it in Vietnamese."
-                  : "",
+                    ? "You will be provided with a sentence in any language, and your task is to translate it into English."
+                    : mode === Mode.polishing
+                      ? // ? "You will be provided with statements, and your task is to convert them to standard English and explain it in Vietnamese."
+                        "You will be provided with statements, and your task is to convert them to standard English and explain it in Vietnamese."
+                      : "",
             },
           ]}
           title={

@@ -7,15 +7,17 @@ import { Icon } from "@vyductan/icons";
 
 export interface PromptProps
   extends Pick<UseChatHelpers, "input" | "setInput"> {
-  onSubmit: (value: string) => Promise<void>;
   isLoading: boolean;
+  inputFormatter?: (input: string) => string;
+  onSubmit: (value: string) => Promise<void>;
 }
 
 export function PromptForm({
-  onSubmit,
+  isLoading,
+  inputFormatter,
   input,
   setInput,
-  isLoading,
+  onSubmit,
 }: PromptProps) {
   const { formRef, onKeyDown } = useEnterSubmit();
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
@@ -34,7 +36,7 @@ export function PromptForm({
           return;
         }
         setInput("");
-        await onSubmit(input);
+        await onSubmit(inputFormatter?.(input) || input);
       }}
       ref={formRef}
       className="relative"

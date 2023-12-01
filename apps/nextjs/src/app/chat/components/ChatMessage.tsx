@@ -22,9 +22,9 @@ export const ChatMessage = ({ message }: ChatMessageProps) => {
       components={{
         p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
         code: ({ className, children, ...rest }) => {
-          let childrenToRender = children as string;
+          let childrenToRender = children as string | undefined;
 
-          if (childrenToRender.length) {
+          if (childrenToRender?.length) {
             if (children == "▍") {
               return (
                 <span className="mt-1 animate-pulse cursor-default">▍</span>

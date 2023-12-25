@@ -3,21 +3,35 @@
   "name": "@vyductan/db",
   "version": "0.1.0",
   "license": "MIT",
-  "main": "./index.ts",
-  "types": "./index.ts",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
     "push": "drizzle-kit push:pg",
     "studio": "drizzle-kit studio"
   },
+  "prettier": "@vyductan/prettier-config",
+  "eslintConfig": {
+    "extends": [
+      "@vyductan/eslint-config/base",
+      "@vyductan/eslint-config/drizzle"
+    ],
+    "root": true
+  },
   "dependencies": {
     "@vercel/postgres": "^0.5.1",
-    "drizzle-orm": "^0.29.0",
+    "drizzle-orm": "^0.29.2",
+    "drizzle-zod": "^0.5.1",
     "nanoid": "^5.0.3"
   },
   "devDependencies": {
+    "@vyductan/eslint-config": "workspace:*",
+    "@vyductan/prettier-config": "workspace:*",
+    "@vyductan/typescript-config": "workspace:*",
     "dotenv-cli": "^7.3.0",
-    "drizzle-kit": "^0.20.4",
+    "drizzle-kit": "^0.20.8",
     "pg": "^8.11.3"
   }
 }

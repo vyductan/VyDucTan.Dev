@@ -1,21 +1,19 @@
-// Docs: https://orm.drizzle.team/kit-docs/conf
-import dotenv from "dotenv";
+/**
+ * Docs
+ * https://orm.drizzle.team/kit-docs/conf
+ */
 import type { Config } from "drizzle-kit";
 
-// dotenv.config();
-dotenv.config({
-  path: "../../.env",
-});
+import { env } from "./src/env";
 
-// console.log("e", dotenv.config(), process.env);
-if (!process.env.DATABASE_URL) {
-  throw new Error("DATABASE_URL is not set");
-}
 export default {
-  schema: "./schema/*",
+  schema: "./src/**/schema.ts",
   driver: "pg",
-  // out: "./src/@server/db/drizzle",
   dbCredentials: {
-    connectionString: process.env.DATABASE_URL,
+    host: env.POSTGRES_HOST,
+    user: env.POSTGRES_USER,
+    password: env.POSTGRES_PASSWORD,
+    database: env.POSTGRES_DATABASE,
+    ssl: true,
   },
 } satisfies Config;

@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import Link from "next/link";
 
-import { auth } from "@vyductan/auth";
+import { auth } from "@vyductan/api/auth";
 import { Button } from "@vyductan/components";
 
 import { SignoutForm } from "./SignoutForm";

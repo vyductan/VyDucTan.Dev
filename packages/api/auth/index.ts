@@ -1,14 +1,12 @@
-/* eslint-disable @typescript-eslint/unbound-method */
-/* @see https://github.com/nextauthjs/next-auth/pull/8932 */
-
-import Google from "@auth/core/providers/google";
-import type { DefaultSession } from "@auth/core/types";
+import type { DefaultSession } from "next-auth";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import NextAuth from "next-auth";
+import Google from "next-auth/providers/google";
 
-import { db } from "@vyductan/db";
+import { db } from "../src/db";
+import { env } from "./env.js_.js_";
 
-import { env } from "./env.mjs";
+// console.log("XXXXXXXXXXX", process.env, process.browser);
 
 export type { Session } from "next-auth";
 
@@ -27,12 +25,13 @@ export const {
   signOut,
 } = NextAuth({
   adapter: DrizzleAdapter(db),
-  providers: [
-    Google({
-      clientId: env.GOOGLE_CLIENT_ID,
-      clientSecret: env.GOOGLE_CLIENT_SECRET,
-    }),
-  ],
+  providers: [],
+  // providers: [
+  //   Google({
+  //     clientId: env.GOOGLE_CLIENT_ID,
+  //     clientSecret: env.GOOGLE_CLIENT_SECRET,
+  //   }),
+  // ],
   callbacks: {
     session: ({ session, user }) => ({
       ...session,

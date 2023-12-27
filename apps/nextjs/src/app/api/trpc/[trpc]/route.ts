@@ -1,17 +1,19 @@
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 
 import { appRouter, createTRPCContext } from "@vyductan/api";
-import { auth } from "@vyductan/auth";
+import { auth } from "@vyductan/api/auth";
+
+export const runtime = "edge";
 
 /**
  * Configure basic CORS headers
  * You should extend this to match your needs
  */
 function setCorsHeaders(res: Response) {
-  // res.headers.set("Access-Control-Allow-Origin", "*");
-  // res.headers.set("Access-Control-Request-Method", "*");
-  // res.headers.set("Access-Control-Allow-Methods", "OPTIONS, GET, POST");
-  // res.headers.set("Access-Control-Allow-Headers", "*");
+  res.headers.set("Access-Control-Allow-Origin", "*");
+  res.headers.set("Access-Control-Request-Method", "*");
+  res.headers.set("Access-Control-Allow-Methods", "OPTIONS, GET, POST");
+  res.headers.set("Access-Control-Allow-Headers", "*");
 }
 
 export function OPTIONS() {
@@ -27,7 +29,8 @@ const handler = auth(async (req) => {
     endpoint: "/api/trpc",
     router: appRouter,
     req,
-    createContext: () => createTRPCContext({ auth: req.auth, req }),
+    createContext: () =>
+      createTRPCContext({ session: req.auth, headers: req.headers }),
     onError({ error, path }) {
       console.error(`>>> tRPC Error on '${path}'`, error);
     },
@@ -36,14 +39,5 @@ const handler = auth(async (req) => {
   setCorsHeaders(response);
   return response;
 });
-
-// const handler = (request: Request) => {
-//   return fetchRequestHandler({
-//     endpoint: "/api/trpc",
-//     req: request,
-//     router: appRouter,
-//     createContext: createTRPCContext,
-//   });
-// };
 
 export { handler as GET, handler as POST };

@@ -1,23 +1,22 @@
-// import { desc, schema } from "../db";
-import {
-  createTRPCRouter,
-  protectedProcedure,
-  publicProcedure,
-} from "../trpc.ts";
+import { desc, schema } from "../db";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { insertWordDefinitionSchema } from "./types";
 
 export const englishRouter = createTRPCRouter({
   all: publicProcedure.query(({ ctx }) => {
-    // return ctx.db.query.wordDefinitions.findMany({
-    //   orderBy: desc(schema.wordDefinitions.word),
-    //   limit: 10,
-    // });
+    return ctx.db.query.wordDefinitions.findMany({
+      orderBy: desc(schema.wordDefinitions.word),
+      limit: 10,
+    });
     // return axios.get("https://jsonplaceholder.typicode.com/posts");
     // return ctx.db.query.post.findMany({ orderBy: desc(schema.post.id) });
   }),
 
-  create: protectedProcedure.mutation(({ ctx, input }) => {
-    // return ctx.db.insert(schema.wordDefinitions).values(input);
-  }),
+  create: protectedProcedure
+    .input(insertWordDefinitionSchema)
+    .mutation(({ ctx, input }) => {
+      return ctx.db.insert(schema.wordDefinitions).values(input);
+    }),
 
   // byId: publicProcedure
   //   .input(z.object({ id: z.number() }))

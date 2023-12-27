@@ -2,11 +2,19 @@
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vyductan/api",
   "version": "0.1.0",
+  "private": true,
   "license": "MIT",
-  "main": "./index.ts",
-  "types": "./index.ts",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./db": "./src/db.ts",
+    "./auth": "./auth/index.ts",
+    "./types": "./src/types.ts"
+  },
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
+    "db:push": "drizzle-kit push:pg",
+    "db:studio": "drizzle-kit studio",
     "lint": "eslint .",
     "lint:fix": "pnpm lint --fix",
     "type-check": "tsc --noEmit"
@@ -14,20 +22,29 @@
   "prettier": "@vyductan/prettier-config",
   "eslintConfig": {
     "extends": [
-      "@vyductan/eslint-config/base"
+      "@vyductan/eslint-config/base",
+      "@vyductan/eslint-config/drizzle"
     ],
     "root": true
   },
   "dependencies": {
+    "@auth/drizzle-adapter": "^0.3.12",
     "@trpc/server": "next",
-    "@vyductan/auth": "*",
-    "@vyductan/db": "*",
+    "@vercel/postgres": "^0.5.1",
+    "drizzle-orm": "^0.29.2",
+    "drizzle-zod": "^0.5.1",
+    "google-auth-library": "^9.2.0",
+    "nanoid": "^5.0.3",
+    "next-auth": "^5.0.0-beta.3",
     "superjson": "2.2.1",
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@vyductan/eslint-config": "*",
-    "@vyductan/prettier-config": "*",
-    "@vyductan/typescript-config": "*"
+    "@vyductan/eslint-config": "workspace:*",
+    "@vyductan/prettier-config": "workspace:*",
+    "@vyductan/typescript-config": "workspace:*",
+    "dotenv-cli": "^7.3.0",
+    "drizzle-kit": "^0.20.8",
+    "pg": "^8.11.3"
   }
 }

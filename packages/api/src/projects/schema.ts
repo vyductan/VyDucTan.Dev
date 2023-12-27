@@ -1,8 +1,6 @@
 import { relations } from "drizzle-orm";
-import { json, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { json, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { nanoid } from "nanoid";
-
-import { users } from "./_nextauth";
 
 export const projects = pgTable("project", {
   id: text("id").default(nanoid()).notNull().primaryKey(),
@@ -10,13 +8,13 @@ export const projects = pgTable("project", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 
-  userId: text("userId")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
+  // userId: text("userId")
+  //   .notNull()
+  //   .references(() => users.id, { onDelete: "cascade" }),
 });
 
 export const projectsRelations = relations(projects, ({ many }) => ({
-  posts: many(tasks),
+  tasks: many(tasks),
 }));
 
 export const tasks = pgTable("task", {
@@ -28,16 +26,16 @@ export const tasks = pgTable("task", {
   completedAt: timestamp("completed_at"),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 
-  userId: text("userId")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
+  // userId: text("userId")
+  //   .notNull()
+  //   .references(() => users.id, { onDelete: "cascade" }),
 
-  projectId: uuid("project_id").references(() => projects.id, {
+  projectId: text("project_id").references(() => projects.id, {
     onDelete: "cascade",
   }),
 });
 
-export const postsRelations = relations(tasks, ({ one }) => ({
+export const tasksRelations = relations(tasks, ({ one }) => ({
   project: one(projects, {
     fields: [tasks.projectId],
     references: [projects.id],

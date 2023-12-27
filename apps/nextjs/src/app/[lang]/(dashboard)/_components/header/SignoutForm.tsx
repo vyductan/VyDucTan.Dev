@@ -1,6 +1,6 @@
 import React from "react";
 
-import { signOut } from "@vyductan/auth";
+import { signOut } from "@vyductan/api/auth";
 
 export const SignoutForm = () => {
   return (

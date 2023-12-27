@@ -16,13 +16,15 @@ export const cefrLevelEnum = pgEnum("cefrLevel", [
   "c1",
   "c2",
 ]);
-export const masteryEnum = pgEnum("mastery", ["", "1", "2", "3", "4", "5"]);
+export const masteryEnum = pgEnum("mastery", ["1", "2", "3", "4", "5"]);
 
 export const wordDefinitions = pgTable("wordDefinitions", {
   word: text("word_id").notNull(),
   class: wordClassEnum("class"),
+  ipaUk: text("ipa_uk"),
+  ipaUs: text("ipa_us"),
   cefrLevel: cefrLevelEnum("cefrLevel"),
-  english: text("english").array().notNull(),
+  english: text("english").notNull(),
   vietnamese: text("vietnamese").notNull(),
   examples: text("examples").array().notNull(),
   mastery: masteryEnum("mastery"),

@@ -31,7 +31,9 @@ const TranslatePage = () => {
               role: "system",
               content:
                 mode === Mode.to_vietnamese
-                  ? "You will be provided with a sentence in any language, and your task is to translate it into Vietnamese."
+                  ? // ? "You will be provided with a sentence in any language, and your task is to translate it into Vietnamese."
+                    `You will be provided with a sentence in any language. Give me definitions in both English and Vietnamese, IPA, examples of that sentence in both English and Vietnamese.
+                    `
                   : mode === Mode.to_english
                     ? "You will be provided with a sentence in any language, and your task is to translate it into English."
                     : mode === Mode.polishing

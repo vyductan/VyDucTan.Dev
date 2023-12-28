@@ -1,9 +1,9 @@
 // Importing env files here to validate on build
-import "./src/env.mjs";
-import "@vyductan/auth/env.mjs";
+// import "./src/env";
+
+// import "@vyductan/auth";
 
 import bundleAnalyzer from "@next/bundle-analyzer";
-import withPlugins from "next-compose-plugins";
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
@@ -18,7 +18,8 @@ const config = {
     return [
       {
         source: "/api/cambridge/search/amp",
-        destination: "https://dictionary.cambridge.org/vi/autocomplete/amp",
+        destination:
+          "https://viblo.asia/p/alpinejs-neu-react-la-qua-thua-yMnKMjaQZ7P",
       },
     ];
   },
@@ -54,8 +55,5 @@ const config = {
   //   });
   //   return config;
   // },
-  // experimental: {
-  //   serverActions: true,
-  // },
 };
-export default withPlugins([withBundleAnalyzer], config);
+export default withBundleAnalyzer(config);

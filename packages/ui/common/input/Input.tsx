@@ -1,15 +1,16 @@
-import { forwardRef, type InputHTMLAttributes, type Ref } from "react"
+import * as React from "react";
+import { forwardRef, type InputHTMLAttributes, type Ref } from "react";
 
-import clsm from "../_util/clsm"
-import { FormItemChildProps } from "../form"
-import { type ComponentSize } from "../types"
-import { getInputCls, getValidateStatus } from "./utils"
+import clsm from "../_util/clsm";
+import { FormItemChildProps } from "../form";
+import { type ComponentSize } from "../types";
+import { getInputCls, getValidateStatus } from "./utils";
 
 export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size"> &
   FormItemChildProps & {
-    size?: ComponentSize
-    bordered?: boolean
-  }
+    size?: ComponentSize;
+    bordered?: boolean;
+  };
 export const InputInternal = (
   { className, bordered, size, validateStatus, ...rest }: InputProps,
   ref: Ref<HTMLInputElement>,
@@ -25,7 +26,7 @@ export const InputInternal = (
       )}
       {...rest}
     />
-  )
-}
+  );
+};
 
-export default forwardRef(InputInternal)
+export default forwardRef(InputInternal);

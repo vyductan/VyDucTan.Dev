@@ -10,8 +10,5 @@
     "lint": "eslint .",
     "lint:fix": "pnpm lint --fix",
     "type-check": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@vyductan/server-action": "*"
   }
 }

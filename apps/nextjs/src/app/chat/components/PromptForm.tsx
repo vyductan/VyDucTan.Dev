@@ -1,9 +1,9 @@
-import * as React from "react";
 import type { UseChatHelpers } from "ai/react";
+import * as React from "react";
 
-import { Button, Textarea, Tooltip } from "@vyductan/components";
 import { useEnterSubmit } from "@vyductan/hooks";
 import { Icon } from "@vyductan/icons";
+import { Button, Textarea, Tooltip } from "@vyductan/ui";
 
 export interface PromptProps
   extends Pick<UseChatHelpers, "input" | "setInput"> {

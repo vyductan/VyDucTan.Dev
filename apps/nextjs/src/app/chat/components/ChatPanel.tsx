@@ -1,7 +1,7 @@
 import type { UseChatHelpers } from "ai/react";
 
-import { Button, ButtonScrollToBottom } from "@vyductan/components";
 import { Icon } from "@vyductan/icons";
+import { Button, ButtonScrollToBottom } from "@vyductan/ui";
 
 import { PromptForm } from "./PromptForm";
 

@@ -8,8 +8,6 @@ export const englishRouter = createTRPCRouter({
       orderBy: desc(schema.wordDefinitions.word),
       limit: 10,
     });
-    // return axios.get("https://jsonplaceholder.typicode.com/posts");
-    // return ctx.db.query.post.findMany({ orderBy: desc(schema.post.id) });
   }),
 
   create: protectedProcedure

@@ -12,8 +12,5 @@ export type WordMastery = (typeof masteryEnum.enumValues)[number];
 export const insertWordDefinitionSchema = createInsertSchema(wordDefinitions, {
   examples: z.array(z.string()),
 });
-export type AddWordDefinitionParams = z.infer<
-  typeof insertWordDefinitionSchema
->;
 
 export type WordResponse = RouterOutputs["english"]["all"][number];

@@ -3,23 +3,31 @@
 import { useState } from "react";
 
 import type {
-  AddWordDefinitionParams,
   WordCEFRLevel,
   WordClass,
   WordMastery,
 } from "@vyductan/api/types";
-import type { RadioOption } from "@vyductan/components";
+import type { RadioOption } from "@vyductan/ui";
 import { insertWordDefinitionSchema } from "@vyductan/api/types";
-import { AutoForm, Button, Modal, useForm } from "@vyductan/components";
+import { AutoForm, Button, Modal, toast, useForm } from "@vyductan/ui";
 
 import { api } from "~/trpc/react";
 
 export const AddWordForm = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const form = useForm<AddWordDefinitionParams>();
-  const utils = api.useUtils();
+  const form = useForm({
+    schema: insertWordDefinitionSchema,
+    defaultValues: {
+      examples: [""],
+      mastery: "1",
+    },
+    onSubmit: async (values) => {
+      addWord.mutate(values);
+    },
+  });
 
-  const { mutateAsync: addWord } = api.english.create.useMutation({
+  const utils = api.useUtils();
+  const addWord = api.english.create.useMutation({
     onSuccess: async () => {
       // form.reset();
       // setTitle("");
@@ -28,10 +36,11 @@ export const AddWordForm = () => {
       await utils.english.all.invalidate();
     },
     onError: (error) => {
-      console.log("error", error);
+      toast.error(error.message);
       // form.setError(error)
     },
   });
+
   return (
     <Modal
       open={isAddModalOpen}
@@ -49,11 +58,6 @@ export const AddWordForm = () => {
     >
       <AutoForm
         form={form}
-        validationSchema={insertWordDefinitionSchema}
-        defaultValues={{
-          examples: [""],
-          mastery: "1",
-        }}
         fields={[
           {
             type: "text",
@@ -189,9 +193,6 @@ export const AddWordForm = () => {
             ] satisfies RadioOption<WordMastery>[],
           },
         ]}
-        onSubmit={async (values) => {
-          await addWord(values);
-        }}
       />
     </Modal>
   );

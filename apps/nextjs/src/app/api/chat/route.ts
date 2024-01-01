@@ -1,32 +1,50 @@
 // import { kv } from "@vercel/kv";
+import path from "path";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 // import { nanoid } from "nanoid";
-import { Configuration, OpenAIApi } from "openai-edge";
+import OpenAI from "openai";
 
-import { auth } from "@vyductan/auth";
+import { auth } from "@vyductan/api/auth";
 
-import { env } from "~/env.mjs";
+import { env } from "~/env";
 
 export const runtime = "edge";
 
-const configuration = new Configuration({
+// const configuration = new Configuration({
+//   apiKey: env.OPENAI_API_KEY,
+// });
+//
+const openai = new OpenAI({
   apiKey: env.OPENAI_API_KEY,
 });
 
-const openai = new OpenAIApi(configuration);
+const speechFile = path.resolve("./speech.mp3");
 
 export async function POST(req: Request) {
-  const json = await req.json();
-  const { messages, previewToken } = json;
+  // const json = await req.json();
+  // const { messages, previewToken } = json;
   const userId = (await auth())?.user.id;
 
   if (!userId) {
     return new Response("Unauthorized", { status: 401 });
   }
 
-  if (previewToken) {
-    configuration.apiKey = previewToken;
-  }
+  const response = openai.audio.speech.create({
+    model: "tts-1-hd",
+    voice: "alloy",
+    input: "Today is a wonderful day to build something people love!",
+  });
+
+  response.stream_to_file();
+
+  // console.log(speechFile);
+
+  // const buffer = Buffer.from(await mp3.arrayBuffer());
+  // await fs.promises.writeFile(speechFile, buffer);
+
+  // if (previewToken) {
+  //   configuration.apiKey = previewToken;
+  // }
 
   const res = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",

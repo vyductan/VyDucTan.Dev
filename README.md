@@ -37,7 +37,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Turbo
 
-Latest(Dec 20, 2023): https://github.com/t3-oss/create-t3-turbo/commit/4afe8fac41b2bf327edb686c2c45386f27a9e4a8
+Latest(Dec 30, 2023): https://github.com/t3-oss/create-t3-turbo/commit/a7b639fac386157174d7b739d10b3289571a88f9
 
 ```bash
 # upgrade all packages in all workspace

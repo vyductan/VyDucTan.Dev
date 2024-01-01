@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import { DownloadIcon } from "@vyductan/icons";
 
 import { type ResumeData } from "../resumeData";
@@ -10,10 +11,7 @@ const About = ({ data }: AboutProps) => {
   const { name, image, bio, address, phone, email, resumeDownload } = data;
   const profilepic = "/" + image;
   return (
-    <section
-      id="about"
-      className="bg-[#2B2B2B]"
-    >
+    <section id="about" className="bg-[#2B2B2B]">
       <div className="m-auto max-w-[1024px] lg:flex">
         <div className="relative m-auto mb-3 h-[100px] w-[100px] lg:mt-0 lg:h-[150px] lg:w-[150px]">
           <Image
@@ -44,10 +42,7 @@ const About = ({ data }: AboutProps) => {
               </p>
             </div>
             <div>
-              <a
-                href={resumeDownload}
-                className="btn-download"
-              >
+              <a href={resumeDownload} className="btn-download">
                 <DownloadIcon className="text-3xl" />
                 <span>Download Resume</span>
               </a>

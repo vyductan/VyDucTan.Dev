@@ -16,10 +16,7 @@ const Social = ({ social }: SocialProps) => {
       {social.map((network) => {
         return (
           <li key={network.name}>
-            <a
-              href={network.url}
-              aria-label={network.name}
-            >
+            <a href={network.url} aria-label={network.name}>
               {IconMap[network.iconName as keyof typeof IconMap]}
             </a>
           </li>

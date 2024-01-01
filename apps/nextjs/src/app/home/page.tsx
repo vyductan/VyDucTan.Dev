@@ -21,14 +21,8 @@ const HomePage = () => {
     <div>
       <Head>
         <title>VyDucTan.Me</title>
-        <meta
-          name="description"
-          content="vyductan.me"
-        />
-        <link
-          rel="icon"
-          href="/favicon.ico"
-        />
+        <meta name="description" content="vyductan.me" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>

@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { ArrowDown2Icon, MenuIcon } from "@vyductan/icons";
 import { Link } from "react-scroll";
 import TypeWriter from "typewriter-effect";
+
+import { ArrowDown2Icon, MenuIcon } from "@vyductan/icons";
 
 import { type ResumeData } from "../resumeData";
 import Social from "./Social";
@@ -66,12 +67,7 @@ const Header = ({ data }: HeaderProps) => {
         // onClick={() => setNavVisible(!navVisible)}
       >
         <div className="logo">
-          <Image
-            alt="logo"
-            src="/logo.png"
-            width={67}
-            height={40}
-          />
+          <Image alt="logo" src="/logo.png" width={67} height={40} />
         </div>
 
         <button
@@ -166,7 +162,7 @@ const Header = ({ data }: HeaderProps) => {
               }}
             />
           </h1>
-          <h2 className="font-serif m-auto max-w-[90%] text-center text-base text-[#d6d6d6] sm:text-lg md:max-w-[100%] md:text-xl lg:text-2xl">
+          <h2 className="m-auto max-w-[90%] text-center font-serif text-base text-[#d6d6d6] sm:text-lg md:max-w-[100%] md:text-xl lg:text-2xl">
             Based in VietNam.{" "}
             <span className="text-white shadow">{occupation}</span>.{" "}
             {description}.

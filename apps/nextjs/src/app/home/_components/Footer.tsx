@@ -1,5 +1,6 @@
-import { ArrowUp2Icon } from "@vyductan/icons";
 import { Link } from "react-scroll";
+
+import { ArrowUp2Icon } from "@vyductan/icons";
 
 import { type ResumeData } from "../resumeData";
 import Social from "./Social";
@@ -23,18 +24,12 @@ const Footer = ({ data }: FooterProps) => {
             {`© ${new Date().getFullYear()} `}
             Made by{" "}
           </span>
-          <a
-            title="VyDucTan"
-            href={website}
-          >
+          <a title="VyDucTan" href={website}>
             VyDucTan
           </a>
         </div>
 
-        <div
-          id="go-top"
-          className="absolute -top-5 m-auto"
-        >
+        <div id="go-top" className="absolute -top-5 m-auto">
           <Link
             className="icon hover:bg-[#000] hover:text-white"
             to="home"

@@ -1,5 +1,6 @@
-import { clsm, Code, Markdown } from "@vyductan/react";
 import ReactMarkdown from "react-markdown";
+
+import { clsm, Code, Markdown } from "@vyductan/react";
 
 import { type ChatGPTMessage } from "../types";
 
@@ -123,9 +124,9 @@ export const MessageLine = ({ role, content }: MessageLineProps) => {
   return (
     <div
       className={clsm(
-        "rounded-base flex max-w-2/3 flex-col px-4 py-2",
+        "rounded-base max-w-2/3 flex flex-col px-4 py-2",
         "prose prose-sm prose-p:my-1 prose-pre:my-1 prose-ul:my-0",
-        role === "user" && "bg-primary-600 ml-auto text-white",
+        role === "user" && "ml-auto bg-primary-600 text-white",
         role === "assistant" && "mr-auto bg-gray-100",
       )}
     >
@@ -136,7 +137,7 @@ export const MessageLine = ({ role, content }: MessageLineProps) => {
 
 // loading placeholder animation for the chat line
 export const LoadingMessageLine = () => (
-  <div className="rounded-base flex h-md max-w-2/3 animate-pulse items-center bg-gray-100 px-4 py-2">
+  <div className="rounded-base max-w-2/3 flex h-md animate-pulse items-center bg-gray-100 px-4 py-2">
     <div className="h-2 w-full rounded bg-zinc-500"></div>
   </div>
 );

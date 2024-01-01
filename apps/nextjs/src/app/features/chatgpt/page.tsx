@@ -80,11 +80,7 @@ export default function ChatGPTPage() {
       <div className="rounded-base relative flex w-full flex-col justify-end border">
         <div className="flex flex-col gap-2 overflow-auto p-6">
           {messages.map(({ content, role }, index) => (
-            <MessageLine
-              key={index}
-              role={role}
-              content={content}
-            />
+            <MessageLine key={index} role={role} content={content} />
           ))}
 
           {loading && <LoadingMessageLine />}

@@ -1,13 +1,7 @@
-import {
-  createParser,
-  type ParsedEvent,
-  type ReconnectInterval,
-} from "eventsource-parser";
-import {
-  Configuration,
-  OpenAIApi,
-  type CreateChatCompletionResponse,
-} from "openai";
+import type { ParsedEvent, ReconnectInterval } from "eventsource-parser";
+import type { CreateChatCompletionResponse } from "openai";
+import { createParser } from "eventsource-parser";
+import { Configuration, OpenAIApi } from "openai";
 
 import { env } from "~/env.mjs";
 import { type OpenAIStreamPayload } from "./types";

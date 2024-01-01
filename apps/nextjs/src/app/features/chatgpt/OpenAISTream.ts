@@ -1,14 +1,11 @@
-// https://github.com/vercel/examples/blob/main/solutions/ai-chatgpt/utils/OpenAIStream.ts
-// Commits on Mar 7, 2023
-
-import {
-  createParser,
-  type ParsedEvent,
-  type ReconnectInterval,
-} from "eventsource-parser";
+import type { ParsedEvent, ReconnectInterval } from "eventsource-parser";
+import { createParser } from "eventsource-parser";
 
 import { env } from "~/env.mjs";
 import { type OpenAIStreamPayload, type OpenAIStreamResponse } from "./types";
+
+// https://github.com/vercel/examples/blob/main/solutions/ai-chatgpt/utils/OpenAIStream.ts
+// Commits on Mar 7, 2023
 
 export const OpenAIStream = async (payload: OpenAIStreamPayload) => {
   const encoder = new TextEncoder();

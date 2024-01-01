@@ -1,5 +1,6 @@
+import type { ClientStreamChatCompletionConfig } from "openai-ext";
 import { useEffect, useState } from "react";
-import { OpenAIExt, type ClientStreamChatCompletionConfig } from "openai-ext";
+import { OpenAIExt } from "openai-ext";
 
 import { type ChatGPTMessage } from "./types";
 

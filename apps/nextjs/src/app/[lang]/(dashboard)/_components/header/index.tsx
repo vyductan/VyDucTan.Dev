@@ -2,7 +2,7 @@ import { headers } from "next/headers";
 import Link from "next/link";
 
 import { auth } from "@vyductan/api/auth";
-import { Button } from "@vyductan/components";
+import { Button } from "@vyductan/ui";
 
 import { SignoutForm } from "./SignoutForm";
 import { UserNav } from "./UserNav";

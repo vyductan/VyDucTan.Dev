@@ -1,10 +1,10 @@
 "use client";
 
-import type { CreateProjectParams } from "@vyductan/api/types";
 import { useState } from "react";
 
+import type { CreateProjectParams } from "@vyductan/api/types";
 import { insertProjectSchema } from "@vyductan/api/types";
-import { AutoForm, Button, Modal, useForm } from "@vyductan/components";
+import { AutoForm, Button, Modal, useForm } from "@vyductan/ui";
 
 import { api } from "~/trpc/react";
 

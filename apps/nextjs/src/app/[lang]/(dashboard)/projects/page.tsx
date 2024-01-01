@@ -1,16 +1,16 @@
-import { PageContainer } from "@vyductan/components-pro";
+import { PageContainer } from "@vyductan/ui-pro";
 
-import CreateProjectForm from "./components/create.project";
+import CreateProjectForm from "./components/AddProjectForm";
+import { ProjectsTable } from "./components/ProjectsTable";
 
-export default function TodoPage() {
+export default function ProjectsPage() {
   return (
     <PageContainer
       header={{
         extra: <CreateProjectForm />,
       }}
     >
-      <></>
-      {/* <WordTable /> */}
+      <ProjectsTable />
     </PageContainer>
   );
 }

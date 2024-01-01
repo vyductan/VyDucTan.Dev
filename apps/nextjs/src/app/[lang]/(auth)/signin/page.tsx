@@ -1,6 +1,6 @@
-import { signIn } from "@vyductan/auth";
-import { Button } from "@vyductan/components";
+import { signIn } from "@vyductan/api/auth";
 import { Icon } from "@vyductan/icons";
+import { Button } from "@vyductan/ui";
 
 export default function LoginPage({
   searchParams: { callbackUrl },
@@ -10,13 +10,15 @@ export default function LoginPage({
   return (
     <div className="flex min-h-screen items-center justify-center">
       <section>
-        <form
-          action={async () => {
-            "use server";
-            await signIn("google", { redirectTo: callbackUrl });
-          }}
-        >
-          <Button size="lg" icon={<Icon icon="logos:google-icon" />}>
+        <form>
+          <Button
+            size="lg"
+            icon={<Icon icon="logos:google-icon" />}
+            formAction={async () => {
+              "use server";
+              await signIn("google", { redirectTo: callbackUrl });
+            }}
+          >
             Sign in with Google
           </Button>
         </form>

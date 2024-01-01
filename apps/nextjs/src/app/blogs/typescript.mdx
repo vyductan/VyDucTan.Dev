@@ -4,20 +4,19 @@ eslint-plugin-simple-import-sort
 https://google.github.io/styleguide/tsguide.html
 https://google.github.io/styleguide/tsguide.html#arrow-functions-as-properties
 
-
 https://blog.openreplay.com/applying-design-principles-in-react/
 
 https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion#the_autocomplete_attribute_and_login_fields
 
+/\*\*
 
-/**
-* Tiếng việt không dấu
-*/
-function normalizeVietnameseNFD(str: string): string {
+- Tiếng việt không dấu
+  \*/
+  function normalizeVietnameseNFD(str: string): string {
   return str
-    .normalize('NFD')
-    .replace(/[\u0300-\u036F]/g, '')
-    .replace(/đ/g, 'd')
-    .replace(/Đ/g, 'D')
-    .toLowerCase();
-}
+  .normalize('NFD')
+  .replace(/[\u0300-\u036F]/g, '')
+  .replace(/đ/g, 'd')
+  .replace(/Đ/g, 'D')
+  .toLowerCase();
+  }

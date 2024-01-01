@@ -2,8 +2,8 @@
 
 import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
-import { Table } from "@vyductan/components";
-import type { ColumnDef } from "@vyductan/components";
+import type { ColumnDef } from "@vyductan/ui";
+import { Table } from "@vyductan/ui";
 
 export type Payment = {
   id: string;

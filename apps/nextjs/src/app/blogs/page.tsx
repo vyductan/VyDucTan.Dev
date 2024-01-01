@@ -1,5 +1,5 @@
-import { Client, isFullPage, isFullPageOrDatabase } from "@notionhq/client";
 import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import { Client, isFullPage, isFullPageOrDatabase } from "@notionhq/client";
 
 import { env } from "~/env.mjs";
 import { BlogsTable } from "./components/Table";

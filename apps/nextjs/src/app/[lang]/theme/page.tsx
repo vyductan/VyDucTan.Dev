@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { generate } from "@ant-design/colors";
 
-import { CodeBlock, ExternalLink, Input } from "@vyductan/components";
+import { CodeBlock, ExternalLink, Input } from "@vyductan/ui";
 import { hexToHsl } from "@vyductan/utils";
 
 export default function ThemePage() {

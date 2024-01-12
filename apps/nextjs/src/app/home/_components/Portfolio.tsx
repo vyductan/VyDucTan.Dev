@@ -1,8 +1,8 @@
 import Image from "next/image";
 
-import { LinkIcon } from "@vyductan/icons";
+import { Icon } from "@vyductan/icons";
 
-import { type ResumeData } from "../resumeData";
+import type { ResumeData } from "../resumeData";
 
 type PortfolioProps = {
   data: ResumeData["portfolio"];
@@ -21,7 +21,7 @@ const Portfolio = ({ data }: PortfolioProps) => {
             height={800}
           />
           <div className="portfolio-item-meta meta">
-            <LinkIcon />
+            <Icon icon="uil:link" />
             <h5 className="meta-title">{projects.title}</h5>
             <p>{projects.category}</p>
           </div>

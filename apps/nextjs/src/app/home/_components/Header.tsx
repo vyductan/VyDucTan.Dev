@@ -5,9 +5,9 @@ import Image from "next/image";
 import { Link } from "react-scroll";
 import TypeWriter from "typewriter-effect";
 
-import { ArrowDown2Icon, MenuIcon } from "@vyductan/icons";
+import { Icon } from "@vyductan/icons";
 
-import { type ResumeData } from "../resumeData";
+import type { ResumeData } from "../resumeData";
 import Social from "./Social";
 
 type HeaderProps = {
@@ -75,7 +75,7 @@ const Header = ({ data }: HeaderProps) => {
           onClick={() => setNavVisible(!navVisible)}
           aria-label="Menu"
         >
-          <MenuIcon />
+          <Icon icon="mingcute:menu-line" />
         </button>
 
         <ul className={`${!navVisible ? "hidden" : ""}`}>
@@ -150,8 +150,8 @@ const Header = ({ data }: HeaderProps) => {
         </ul>
       </nav>
 
-      <div className="flex flex-grow items-center justify-center">
-        <div className="rounded bg-gray-900 bg-opacity-40 p-10 md:p-20">
+      <div className="flex grow items-center justify-center">
+        <div className="rounded bg-gray-900/40 p-10 md:p-20">
           <h1 className="text-center text-[40px] font-bold leading-normal text-white sm:text-[65px] md:text-[80px] lg:text-[100px]">
             <TypeWriter
               options={{
@@ -180,7 +180,10 @@ const Header = ({ data }: HeaderProps) => {
           to="about"
           smooth={true}
         >
-          <ArrowDown2Icon className="text-4xl md:text-5xl" />
+          <Icon
+            icon="icon-park-outline:down"
+            className="text-4xl md:text-5xl"
+          />
         </Link>
       </div>
     </header>

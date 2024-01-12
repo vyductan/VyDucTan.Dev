@@ -1,11 +1,11 @@
-import { FacebookIcon, GithubIcon, LinkedinIcon } from "@vyductan/icons";
+import { Icon } from "@vyductan/icons";
 
-import { type ResumeData } from "../resumeData";
+import type { ResumeData } from "../resumeData";
 
 const IconMap = {
-  facebook: <FacebookIcon />,
-  linkedin: <LinkedinIcon />,
-  github: <GithubIcon />,
+  facebook: <Icon icon="entypo-social:facebook" />,
+  linkedin: <Icon icon="fa-brands:linkedin" />,
+  github: <Icon icon="jam:github" />,
 };
 type SocialProps = {
   social: ResumeData["main"]["social"];

@@ -1,8 +1,8 @@
 import { Link } from "react-scroll";
 
-import { ArrowUp2Icon } from "@vyductan/icons";
+import { Icon } from "@vyductan/icons";
 
-import { type ResumeData } from "../resumeData";
+import type { ResumeData } from "../resumeData";
 import Social from "./Social";
 
 type FooterProps = {
@@ -36,7 +36,7 @@ const Footer = ({ data }: FooterProps) => {
             smooth={true}
             title="Back to Top"
           >
-            <ArrowUp2Icon />
+            <Icon icon="radix-icons:pin-top" />
           </Link>
         </div>
       </div>

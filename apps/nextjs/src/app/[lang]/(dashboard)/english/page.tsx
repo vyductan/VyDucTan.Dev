@@ -1,15 +1,10 @@
 import { PageContainer } from "@vyductan/ui-pro";
 
-import { AddWordForm } from "./components/AddWordForm";
 import { WordTable } from "./components/WordTable";
 
 export default function EnglishPage() {
   return (
-    <PageContainer
-      header={{
-        extra: <AddWordForm />,
-      }}
-    >
+    <PageContainer>
       <div className="container mt-12 flex flex-col items-center justify-center gap-4 px-4 py-8">
         <WordTable />
         <audio controls>

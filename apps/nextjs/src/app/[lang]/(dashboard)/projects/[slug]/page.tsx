@@ -2,11 +2,12 @@
 
 import { useParams } from "next/navigation";
 
+import { Button } from "@vyductan/ui";
 import { PageContainer } from "@vyductan/ui-pro";
 
 import { api } from "~/trpc/react";
-import { CreateTaskForm } from "./components/CreateTaskForm";
 import { TasksGantt } from "./components/TasksGantt";
+import { TasksModalForm } from "./components/TasksModalForm";
 import { TasksTable } from "./components/TasksTable";
 
 export default function ProjectDetailPage() {
@@ -15,14 +16,21 @@ export default function ProjectDetailPage() {
   const [project] = api.projects.bySlug.useSuspenseQuery({ slug });
 
   if (!project) return <div>Project not found</div>;
+
   return (
     <PageContainer
       header={{
-        extra: <CreateTaskForm projectId={project.id} />,
+        extra: (
+          <TasksModalForm
+            projectId={project.id}
+            title="Add a new Task"
+            trigger={<Button variant="primary">Add</Button>}
+          />
+        ),
       }}
     >
-      <TasksTable dataSource={project.tasks} />
-      <TasksGantt />
+      <TasksTable projectId={project.id} dataSource={project.tasks} />
+      {/* <TasksGantt /> */}
     </PageContainer>
   );
 }

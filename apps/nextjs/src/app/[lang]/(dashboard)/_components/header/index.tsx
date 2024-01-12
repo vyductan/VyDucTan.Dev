@@ -26,8 +26,8 @@ export const Header = async () => {
 
         <div className="ml-auto">
           {!session ? (
-            <Button type="primary">
-              <Link href={`/signin?callbackUrl=${headers().get("referer")}`}>
+            <Button variant="primary">
+              <Link href={`/signin?callbackUrl=${headers().get("x-url")}`}>
                 Sign In
               </Link>
             </Button>

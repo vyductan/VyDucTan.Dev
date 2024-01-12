@@ -73,7 +73,7 @@ export function PromptForm({
 
       <Tooltip title="Send message">
         <Button
-          type="primary"
+          variant="primary"
           className="absolute bottom-5 right-4"
           disabled={isLoading || input === ""}
           htmlType="submit"

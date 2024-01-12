@@ -1,8 +1,8 @@
-import { OpenAIStream } from "~/app/features/chatgpt/OpenAISTream";
-import {
-  type ChatGPTMessage,
-  type OpenAIStreamPayload,
+import type {
+  ChatGPTMessage,
+  OpenAIStreamPayload,
 } from "~/app/features/chatgpt/types";
+import { OpenAIStream } from "~/app/features/chatgpt/OpenAISTream";
 
 export const runtime = "edge";
 

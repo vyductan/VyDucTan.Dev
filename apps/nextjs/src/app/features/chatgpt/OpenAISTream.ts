@@ -1,8 +1,8 @@
 import type { ParsedEvent, ReconnectInterval } from "eventsource-parser";
 import { createParser } from "eventsource-parser";
 
-import { env } from "~/env.mjs";
-import { type OpenAIStreamPayload, type OpenAIStreamResponse } from "./types";
+import type { OpenAIStreamPayload, OpenAIStreamResponse } from "./types";
+import { env } from "~/env";
 
 // https://github.com/vercel/examples/blob/main/solutions/ai-chatgpt/utils/OpenAIStream.ts
 // Commits on Mar 7, 2023
@@ -41,8 +41,8 @@ export const OpenAIStream = async (payload: OpenAIStreamPayload) => {
           }
           try {
             const json = JSON.parse(data) as OpenAIStreamResponse;
-            const text = json.choices[0]?.delta?.content || "";
-            if (counter < 2 && (text.match(/\n/) || []).length) {
+            const text = json.choices[0]?.delta?.content ?? "";
+            if (counter < 2 && (text.match(/\n/) ?? []).length) {
               // this is a prefix character (i.e., "\n\n"), do nothing
               return;
             }

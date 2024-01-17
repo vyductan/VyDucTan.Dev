@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 
 import { insertTaskSchema } from "@vyductan/api/types";
-import { AutoForm, Loader, Modal, useForm } from "@vyductan/ui";
+import { AutoForm, Modal, Spin, useForm } from "@vyductan/ui";
 
 import { upload } from "~/lib/upload";
 import { api } from "~/trpc/react";

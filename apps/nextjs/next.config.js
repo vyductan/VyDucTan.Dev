@@ -14,28 +14,32 @@ const config = {
   reactStrictMode: true,
   /** We already do linting and typechecking as separate tasks in CI */
   eslint: { ignoreDuringBuilds: true },
-  rewrites: async () => {
-    return [
-      {
-        source: "/api/cambridge/search/amp",
-        destination:
-          "https://viblo.asia/p/alpinejs-neu-react-la-qua-thua-yMnKMjaQZ7P",
-      },
-    ];
-  },
+  // rewrites: async () => {
+  //   return [
+  //     {
+  //       source: "/api/cambridge/search/amp",
+  //       destination:
+  //         "https://viblo.asia/p/alpinejs-neu-react-la-qua-thua-yMnKMjaQZ7P",
+  //     },
+  //   ];
+  // },
   experimental: {
     // TODO: add necessary packages
-    optimizePackageImports: ["@vyductan/components"],
+    optimizePackageImports: ["@vyductan/ui"],
   },
   images: {
-    domains: [],
+    // domains: ["public.blob.vercel-storage.com", "fsiigeunka7hxdh7.public.blob.vercel-storage.com"],
+    remotePatterns: [
+      {
+        // protocol: 'https',
+        hostname: "*.public.blob.vercel-storage.com",
+        // port: '',
+        // pathname: '/account123/**',
+      },
+    ],
   },
   /** Enables hot reloading for local packages without a build step */
-  transpilePackages: [
-    "@vyductan/components",
-    "@vyductan/tailwind",
-    "@vyductan/ui",
-  ],
+  transpilePackages: ["@vyductan/tailwind", "@vyductan/ui", "@vyductan/ui-pro"],
   typescript: { ignoreBuildErrors: true },
   // images: {
   //   domains: ['platform-lookaside.fbsbx.com', 'firebasestorage.googleapis.com'],

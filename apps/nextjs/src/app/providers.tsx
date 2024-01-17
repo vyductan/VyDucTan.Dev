@@ -1,81 +1,31 @@
 "use client";
 
-import { useState } from "react";
 import type { ReactNode } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { ReactQueryStreamedHydration } from "@tanstack/react-query-next-experimental";
-import { loggerLink, unstable_httpBatchStreamLink } from "@trpc/client";
 import { ThemeProvider } from "next-themes";
-import superjson from "superjson";
 
-import { TailwindIndicator, Toaster } from "@vyductan/components";
+import { TailwindIndicator, Toaster } from "@vyductan/ui";
+import { ThemeToggle } from "@vyductan/ui-pro";
 
-import { env } from "~/env.mjs";
-import { api } from "~/utils/api";
+import { TRPCReactProvider } from "~/trpc/react";
 
 // import { AntdProvider } from '~/styles/AntdProvider'
 
-const getBaseUrl = () => {
-  if (typeof window !== "undefined") return ""; // browser should use relative url
-  if (env.VERCEL_URL) return env.VERCEL_URL; // SSR should use vercel url
-
-  return `http://localhost:${env.PORT}`; // dev SSR should use localhost
-};
-
 type AppProviderProps = {
   children: ReactNode;
-  headers?: Headers;
+  headersPromise: Promise<Headers>;
 };
 
-export const AppProvider = ({
-  children,
-  headers: propHeaders,
-}: AppProviderProps) => {
-  const [queryClient] = useState(
-    () =>
-      new QueryClient({
-        defaultOptions: {
-          queries: {
-            staleTime: 5 * 1000,
-          },
-        },
-      }),
-  );
-
-  const [trpcClient] = useState(() =>
-    api.createClient({
-      transformer: superjson,
-      links: [
-        loggerLink({
-          enabled: (opts) =>
-            process.env.NODE_ENV === "development" ||
-            (opts.direction === "down" && opts.result instanceof Error),
-        }),
-        unstable_httpBatchStreamLink({
-          url: `${getBaseUrl()}/api/trpc`,
-          headers() {
-            const headers = new Map(propHeaders);
-            headers.set("x-trpc-source", "nextjs-react");
-            return Object.fromEntries(headers);
-          },
-        }),
-      ],
-    }),
-  );
-
+export const AppProvider = ({ children, headersPromise }: AppProviderProps) => {
   return (
-    <api.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryStreamedHydration transformer={superjson}>
-          <ThemeProvider>
-            {children}
-            <Toaster />
-            <TailwindIndicator />
-          </ThemeProvider>
-        </ReactQueryStreamedHydration>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </api.Provider>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <TRPCReactProvider headersPromise={headersPromise}>
+        {children}
+      </TRPCReactProvider>
+      <div className="absolute bottom-4 right-4">
+        <ThemeToggle />
+      </div>
+      <TailwindIndicator />
+      <Toaster />
+    </ThemeProvider>
   );
 };

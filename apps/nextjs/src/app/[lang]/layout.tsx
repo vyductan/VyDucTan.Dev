@@ -1,4 +1,4 @@
-import { type ReactElement } from "react";
+import type { ReactElement } from "react";
 
 import { I18nProviderClient } from "~/locales/client";
 

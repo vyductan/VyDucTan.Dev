@@ -1,5 +1,5 @@
+import type { AliasToken } from "antd/es/theme/internal";
 import { theme } from "antd";
-import { AliasToken } from "antd/es/theme/internal";
 import defaultColors from "tailwindcss/colors";
 
 const defaultToken = theme.getDesignToken();

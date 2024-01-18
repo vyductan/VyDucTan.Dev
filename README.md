@@ -1,5 +1,7 @@
 ### use T3 - 08/08/2023
 
+Latest(Jan 7, 2024): https://github.com/t3-oss/create-t3-turbo/commit/ccdcb115d3d3f3420078a549394e6eeb6373d598
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -36,8 +38,6 @@ To learn more about Next.js, take a look at the following resources:
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
 ## Turbo
-
-Latest(Dec 30, 2023): https://github.com/t3-oss/create-t3-turbo/commit/a7b639fac386157174d7b739d10b3289571a88f9
 
 ```bash
 # upgrade all packages in all workspace

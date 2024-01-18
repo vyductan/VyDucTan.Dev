@@ -4,9 +4,7 @@ import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 
 import { db } from "../src/db";
-import { env } from "./env.js_.js_";
-
-// console.log("XXXXXXXXXXX", process.env, process.browser);
+import { env } from "./env";
 
 export type { Session } from "next-auth";
 
@@ -25,13 +23,12 @@ export const {
   signOut,
 } = NextAuth({
   adapter: DrizzleAdapter(db),
-  providers: [],
-  // providers: [
-  //   Google({
-  //     clientId: env.GOOGLE_CLIENT_ID,
-  //     clientSecret: env.GOOGLE_CLIENT_SECRET,
-  //   }),
-  // ],
+  providers: [
+    Google({
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+    }),
+  ],
   callbacks: {
     session: ({ session, user }) => ({
       ...session,

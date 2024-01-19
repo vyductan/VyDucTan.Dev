@@ -72,7 +72,7 @@ section .container .detail {
   @apply text-center text-3xl font-bold;
 }
 #resume .info {
-  @apply pb-7 pt-5 text-center font-libre italic text-gray-500;
+  @apply font-libre pb-7 pt-5 text-center italic text-gray-500;
 }
 #resume .date {
   @apply not-italic;
@@ -112,7 +112,7 @@ section .container .detail {
 
 #testimonials {
   @apply text-white;
-  background: #1f1f1f url('/images/testimonials-bg.jpg') no-repeat center center;
+  background: #1f1f1f url("/images/testimonials-bg.jpg") no-repeat center center;
   background-attachment: fixed;
 }
 #testimonials h1 {
@@ -128,7 +128,7 @@ section .container .detail {
   @apply text-center;
 }
 #testimonials p {
-  @apply text-center font-libre text-2xl italic;
+  @apply font-libre text-center text-2xl italic;
 }
 #testimonials cite {
   @apply text-sm not-italic;

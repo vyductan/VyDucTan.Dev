@@ -1,8 +1,6 @@
 import "~/app/globals.css";
 
 import type { Metadata, Viewport } from "next";
-import { cache } from "react";
-import { headers } from "next/headers";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 
@@ -39,14 +37,10 @@ export const viewport: Viewport = {
   ],
 };
 
-const getHeaders = cache(() => Promise.resolve(headers()));
-
 export default function RootLayout({
   children,
-  params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
 }) {
   return (
     // https://github.com/pacocoursey/next-themes/issues/224#issuecomment-1755634035
@@ -59,7 +53,7 @@ export default function RootLayout({
           GeistMono.className,
         )}
       >
-        <AppProvider headersPromise={getHeaders()}>{children}</AppProvider>
+        <AppProvider>{children}</AppProvider>
       </body>
     </html>
   );

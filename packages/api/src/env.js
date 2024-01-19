@@ -6,6 +6,8 @@ dotenv.config({ path: "../../.env" });
 
 export const env = createEnv({
   server: {
+    BLOB_READ_WRITE_TOKEN: z.string().min(1),
+
     POSTGRES_HOST: z.string().min(1),
     POSTGRES_USER: z.string().min(1),
     POSTGRES_PASSWORD: z.string().min(1),
@@ -29,6 +31,8 @@ export const env = createEnv({
   },
   client: {},
   runtimeEnv: {
+    BLOB_READ_WRITE_TOKEN: process.env.BLOB_READ_WRITE_TOKEN,
+
     POSTGRES_HOST: process.env.POSTGRES_HOST,
     POSTGRES_USER: process.env.POSTGRES_USER,
     POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD,

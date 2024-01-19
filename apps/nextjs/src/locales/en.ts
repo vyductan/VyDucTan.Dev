@@ -5,5 +5,9 @@ export default {
       translations: "Translations",
     },
   },
+  no: {
+    data: "No Data",
+  },
+  today: "Today",
   Speak: "Speak",
 } as const;

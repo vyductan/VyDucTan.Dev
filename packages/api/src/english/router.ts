@@ -1,11 +1,13 @@
-import { desc, schema } from "../db";
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { z } from "zod";
+
+import { eq, schema } from "../db";
+import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { insertWordDefinitionSchema } from "./types";
 
 export const englishRouter = createTRPCRouter({
-  all: publicProcedure.query(({ ctx }) => {
+  all: protectedProcedure.query(({ ctx }) => {
     return ctx.db.query.wordDefinitions.findMany({
-      orderBy: desc(schema.wordDefinitions.word),
+      orderBy: schema.wordDefinitions.word,
       limit: 10,
     });
   }),
@@ -16,31 +18,32 @@ export const englishRouter = createTRPCRouter({
       return ctx.db.insert(schema.wordDefinitions).values(input);
     }),
 
-  // byId: publicProcedure
-  //   .input(z.object({ id: z.number() }))
-  //   .query(({ ctx, input }) => {
-  //     // return ctx.db
-  //     //   .select()
-  //     //   .from(schema.post)
-  //     //   .where(eq(schema.post.id, input.id));
-  //
-  //     return ctx.db.query.post.findFirst({
-  //       where: eq(schema.post.id, input.id),
-  //     });
-  //   }),
-  //
-  // create: protectedProcedure
-  //   .input(
-  //     z.object({
-  //       title: z.string().min(1),
-  //       content: z.string().min(1),
-  //     }),
-  //   )
-  //   .mutation(({ ctx, input }) => {
-  //     return ctx.db.insert(schema.post).values(input);
-  //   }),
-  //
-  // delete: protectedProcedure.input(z.number()).mutation(({ ctx, input }) => {
-  //   return ctx.db.delete(schema.post).where(eq(schema.post.id, input));
-  // }),
+  update: protectedProcedure
+    .input(
+      insertWordDefinitionSchema.merge(
+        z.object({
+          id: z.string(),
+        }),
+      ),
+    )
+    .mutation(({ ctx, input }) => {
+      return ctx.db
+        .update(schema.wordDefinitions)
+        .set(input)
+        .where(eq(schema.wordDefinitions.id, input.id));
+    }),
+
+  byId: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .query(({ ctx, input }) => {
+      return ctx.db.query.wordDefinitions.findFirst({
+        where: eq(schema.wordDefinitions.id, input.id),
+      });
+    }),
+
+  delete: protectedProcedure.input(z.string()).mutation(({ ctx, input }) => {
+    return ctx.db
+      .delete(schema.wordDefinitions)
+      .where(eq(schema.wordDefinitions.id, input));
+  }),
 });

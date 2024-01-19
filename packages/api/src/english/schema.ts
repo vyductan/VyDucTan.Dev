@@ -1,4 +1,5 @@
 import { pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { nanoid } from "nanoid";
 
 export const wordClassEnum = pgEnum("wordClass", [
   "",
@@ -19,7 +20,12 @@ export const cefrLevelEnum = pgEnum("cefrLevel", [
 export const masteryEnum = pgEnum("mastery", ["1", "2", "3", "4", "5"]);
 
 export const wordDefinitions = pgTable("wordDefinitions", {
-  word: text("word_id").notNull(),
+  id: text("id")
+    .$defaultFn(() => nanoid())
+    .default("")
+    .notNull()
+    .primaryKey(),
+  word: text("word").notNull(),
   class: wordClassEnum("class"),
   ipaUk: text("ipa_uk"),
   ipaUs: text("ipa_us"),

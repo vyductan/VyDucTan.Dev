@@ -6,7 +6,6 @@ import { Button } from "@vyductan/ui";
 import { PageContainer } from "@vyductan/ui-pro";
 
 import { api } from "~/trpc/react";
-import { TasksGantt } from "./components/TasksGantt";
 import { TasksModalForm } from "./components/TasksModalForm";
 import { TasksTable } from "./components/TasksTable";
 
@@ -30,7 +29,6 @@ export default function ProjectDetailPage() {
       }}
     >
       <TasksTable projectId={project.id} dataSource={project.tasks} />
-      {/* <TasksGantt /> */}
     </PageContainer>
   );
 }

@@ -91,9 +91,6 @@ export const TasksModalForm = ({
       trigger={trigger}
       okLoading={addTask.isPending}
       onOk={form.submit}
-      // onOk={() => {
-      //   console.log(form.getValues());
-      // }}
       onCancel={() => {
         setIsModalOpen(false);
       }}
@@ -101,7 +98,7 @@ export const TasksModalForm = ({
     >
       {!isModalOpen ? null : id && isLoading ? (
         <>
-          <Loader />
+          <Spin />
         </>
       ) : (
         <AutoForm

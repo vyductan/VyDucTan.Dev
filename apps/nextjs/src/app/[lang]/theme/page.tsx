@@ -65,8 +65,10 @@ export default function ThemePage() {
           })
           .join("\n")}
       </CodeBlock>
-      {palette.map((c) => (
-        <div style={{ color: c }}>{c}</div>
+      {palette.map((c, i) => (
+        <div key={i} style={{ color: c }}>
+          {c}
+        </div>
       ))}
       <CodeBlock language="css">
         {darkPalete

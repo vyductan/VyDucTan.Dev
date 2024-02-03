@@ -28,16 +28,16 @@
     "root": true
   },
   "devDependencies": {
-    "@turbo/gen": "^1.11.3",
+    "@turbo/gen": "^1.12.2",
     "@vyductan/prettier-config": "workspace:^",
     "node-gyp-build": "4.8.0",
-    "prettier": "^3.2.3",
-    "turbo": "^1.11.3",
+    "prettier": "^3.2.4",
+    "turbo": "^1.12.2",
     "typescript": "^5.3.3"
   },
-  "packageManager": "pnpm@8.14.0",
+  "packageManager": "pnpm@8.15.0",
   "engines": {
-    "node": ">=v20.10"
+    "node": ">=v20.11"
   },
   "pnpm": {
     "overrides": {

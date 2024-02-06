@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  '@auth/core': 0.20.0
-
 importers:
 
   .:
@@ -532,9 +529,6 @@ importers:
 
   packages/api:
     dependencies:
-      '@auth/core':
-        specifier: 0.20.0
-        version: 0.20.0
       '@auth/drizzle-adapter':
         specifier: ^0.6.2
         version: 0.6.2
@@ -696,11 +690,17 @@ packages:
       throttle-debounce: 5.0.0
     dev: false
 
-  /@auth/core@0.20.0:
-    resolution: {integrity: sha512-04lQH58H5d/9xQ63MOTDTOC7sXWYlr/RhJ97wfFLXzll7nYyCKbkrT3ZMdzdLC5O+qt90sQDK85TAtLlcZ2WBg==}
+  /@auth/core@0.26.2:
+    resolution: {integrity: sha512-BK+NaUDLcX8AMW/O32wxzk+SE9lr/xvjO4PsTgla9ToHHanoPMl+6pYu2/WoNKnZomdHBWOl/00LFfajuulIVA==}
     peerDependencies:
+      '@simplewebauthn/browser': ^9.0.1
+      '@simplewebauthn/server': ^9.0.1
       nodemailer: ^6.8.0
     peerDependenciesMeta:
+      '@simplewebauthn/browser':
+        optional: true
+      '@simplewebauthn/server':
+        optional: true
       nodemailer:
         optional: true
     dependencies:
@@ -716,8 +716,10 @@ packages:
   /@auth/drizzle-adapter@0.6.2:
     resolution: {integrity: sha512-j3GEBgjIzVVoAG3JaH8mfbcQho4diAWlYUGkV7qTWe9jybdNzdj47oBrbdzrvG+seCR/sZCl6BszBVjweGNovg==}
     dependencies:
-      '@auth/core': 0.20.0
+      '@auth/core': 0.26.2
     transitivePeerDependencies:
+      - '@simplewebauthn/browser'
+      - '@simplewebauthn/server'
       - nodemailer
     dev: false
 
@@ -8290,7 +8292,7 @@ packages:
       nodemailer:
         optional: true
     dependencies:
-      '@auth/core': 0.20.0
+      '@auth/core': 0.26.2
       next: 14.1.0(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
       react: 18.2.0
     dev: false

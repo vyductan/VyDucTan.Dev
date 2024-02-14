@@ -7,6 +7,7 @@ export const wordClassEnum = pgEnum("wordClass", [
   "verb",
   "adj",
   "adv",
+  "phrase",
 ]);
 export const cefrLevelEnum = pgEnum("cefrLevel", [
   "",

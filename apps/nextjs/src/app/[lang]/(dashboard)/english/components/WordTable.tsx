@@ -25,7 +25,7 @@ export const WordTable = () => {
         columns={[
           ...columns,
           {
-            render: (_, record) => {
+            render: ({ record }) => {
               return (
                 <>
                   <Button
@@ -81,7 +81,7 @@ const columns: TableColumnDef<WordResponse>[] = [
   {
     dataIndex: "examples",
     title: "Examples",
-    render: (value) => {
+    render: ({ value }) => {
       return (
         <ul className="list-inside list-disc">
           {value.map((x, idx) => (

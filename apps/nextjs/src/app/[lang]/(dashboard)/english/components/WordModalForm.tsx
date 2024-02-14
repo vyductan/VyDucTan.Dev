@@ -7,7 +7,7 @@ import type {
 } from "@vyductan/api/types";
 import type { RadioOption } from "@vyductan/ui";
 import { insertWordDefinitionSchema } from "@vyductan/api/types";
-import { AutoForm, Loader, Modal, toast, useForm } from "@vyductan/ui";
+import { AutoForm, Modal, Spin, toast, useForm } from "@vyductan/ui";
 
 import { api } from "~/trpc/react";
 
@@ -101,7 +101,7 @@ export const WordModalForm = ({
         {/* Should unmount form when hide modal */}
         {!isOpen ? null : id && isPending ? (
           <>
-            <Loader />
+            <Spin />
           </>
         ) : (
           <AutoForm
@@ -137,6 +137,10 @@ export const WordModalForm = ({
                   {
                     value: "adv",
                     label: "Adverb",
+                  },
+                  {
+                    value: "phrase",
+                    label: "Phrase",
                   },
                 ] satisfies RadioOption<WordClass>[],
               },

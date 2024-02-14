@@ -41,7 +41,6 @@
   },
   "globalEnv": [
     "AUTH_SECRET",
-    "AUTH_URL",
     "GOOGLE_CLIENT_ID",
     "POSTGRES_URL",
     "POSTGRES_URL_NON_POOLING",

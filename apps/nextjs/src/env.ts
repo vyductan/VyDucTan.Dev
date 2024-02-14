@@ -7,11 +7,6 @@ export const env = createEnv({
       .enum(["development", "production", "test"])
       .default("development"),
     VERCEL_ENV: z.enum(["development", "preview", "production"]).optional(),
-    VERCEL_URL: z
-      .string()
-      .optional()
-      .transform((v) => (v ? `https://${v}` : undefined)),
-    PORT: z.coerce.number().default(3000),
   },
   /**
    * Specify your server-side environment variables schema here.
@@ -44,25 +39,12 @@ export const env = createEnv({
   },
 
   /**
-   * You can't destruct `process.env` as a regular object in the Next.js edge runtimes (e.g.
-   * middlewares) or client-side so we need to destruct manually.
+   * Destructure all variables from `process.env` to make sure they aren't tree-shaken away.
    */
-  runtimeEnv: {
-    VERCEL_URL: process.env.VERCEL_URL,
-
-    PORT: process.env.PORT,
-
-    // DATABASE_URL: process.env.DATABASE_URL,
-    POSTGRES_URL: process.env.POSTGRES_URL,
-    POSTGRES_URL_NON_POOLING: process.env.POSTGRES_URL_NON_POOLING,
-    POSTGRES_USER: process.env.POSTGRES_USER,
-    POSTGRES_HOST: process.env.POSTGRES_HOST,
-    POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD,
-    POSTGRES_DATABASE: process.env.POSTGRES_DATABASE,
-
-    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
-
-    NOTION_TOKEN: process.env.NOTION_TOKEN,
+  experimental__runtimeEnv: {
+    VERCEL_ENV: process.env.VERCEL_ENV,
+    NODE_ENV: process.env.NODE_ENV,
+    // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   skipValidation:
     !!process.env.CI ||

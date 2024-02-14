@@ -3,10 +3,12 @@ import { z } from "zod";
 
 export const env = createEnv({
   server: {
-    // POSTGRES_HOST: z.string().min(1),
-    // POSTGRES_USER: z.string().min(1),
-    // POSTGRES_PASSWORD: z.string().min(1),
-    // POSTGRES_DATABASE: z.string().min(1),
+    BLOB_READ_WRITE_TOKEN: z.string().min(1),
+
+    POSTGRES_HOST: z.string().min(1),
+    POSTGRES_USER: z.string().min(1),
+    POSTGRES_PASSWORD: z.string().min(1),
+    POSTGRES_DATABASE: z.string().min(1),
 
     GOOGLE_CLIENT_ID: z.string().min(1),
     GOOGLE_CLIENT_SECRET: z.string().min(1),
@@ -26,10 +28,12 @@ export const env = createEnv({
   },
   client: {},
   runtimeEnv: {
-    // POSTGRES_HOST: process.env.POSTGRES_HOST,
-    // POSTGRES_USER: process.env.POSTGRES_USER,
-    // POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD,
-    // POSTGRES_DATABASE: process.env.POSTGRES_DATABASE,
+    BLOB_READ_WRITE_TOKEN: process.env.BLOB_READ_WRITE_TOKEN,
+
+    POSTGRES_HOST: process.env.POSTGRES_HOST,
+    POSTGRES_USER: process.env.POSTGRES_USER,
+    POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD,
+    POSTGRES_DATABASE: process.env.POSTGRES_DATABASE,
 
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,

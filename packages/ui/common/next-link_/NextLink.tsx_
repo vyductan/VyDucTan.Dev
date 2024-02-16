@@ -1,0 +1,7 @@
+import { type ComponentProps } from "react";
+import Link from "next/link";
+
+export type NextLinkProps = ComponentProps<typeof Link>;
+export const NextLink = (props: NextLinkProps) => {
+  return <Link {...props} />;
+};

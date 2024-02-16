@@ -1,17 +1,13 @@
 import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 
 import { authRouter } from "./auth/router";
-// import { contactRouter } from "./contact/router.ts_";
 import { englishRouter } from "./english/router";
-import { imagesRouter } from "./images/router";
 import { projectsRouter } from "./projects/router";
 import { createTRPCRouter } from "./trpc";
 
 export const appRouter = createTRPCRouter({
   auth: authRouter,
-  // contact: contactRouter,
   english: englishRouter,
-  images: imagesRouter,
   projects: projectsRouter,
 });
 

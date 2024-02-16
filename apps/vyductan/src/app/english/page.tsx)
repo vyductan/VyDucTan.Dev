@@ -1,0 +1,34 @@
+import React from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+
+import { Vocabulary } from "@vyductan/db"
+import { useServerAction } from "@vyductan/react/serverAction"
+import { Table, TableColumnsType } from "@vyductan/ui"
+
+import { AddVocabularyModal } from "./components/AddModal"
+
+export function EnglishPage() {
+  const pathname = usePathname()
+  // const { data, loading } = useServerAction(get);
+
+  const columns: TableColumnsType<Vocabulary> = [
+    {
+      dataIndex: "vocabulary",
+      title: "Word/Phrase",
+      render: ({ id, vocabulary }) => (
+        <Link href={`${pathname}/${id}`}>{vocabulary}</Link>
+      ),
+    },
+  ]
+  return (
+    <div>
+      <AddVocabularyModal />
+      <Table
+        columns={columns}
+        dataSource={data}
+        loading={loading}
+      />
+    </div>
+  )
+}

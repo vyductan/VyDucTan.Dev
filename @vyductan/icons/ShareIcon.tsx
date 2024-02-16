@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 function SvgShareIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -15,7 +15,7 @@ function SvgShareIcon(props: React.SVGProps<SVGSVGElement>) {
       <defs>
         <style>
           {
-            '@font-face{font-family:feedback-iconfont;src:url(//at.alicdn.com/t/font_1031158_1uhr8ri0pk5.eot?#iefix) format(&quot;embedded-opentype&quot;),url(//at.alicdn.com/t/font_1031158_1uhr8ri0pk5.woff2) format(&quot;woff2&quot;),url(//at.alicdn.com/t/font_1031158_1uhr8ri0pk5.woff) format(&quot;woff&quot;),url(//at.alicdn.com/t/font_1031158_1uhr8ri0pk5.ttf) format(&quot;truetype&quot;),url(//at.alicdn.com/t/font_1031158_1uhr8ri0pk5.svg#iconfont) format(&quot;svg&quot;)}'
+            "@font-face{font-family:feedback-iconfont;src:url(//at.alicdn.com/t/font_1031158_1uhr8ri0pk5.eot?#iefix) format(&quot;embedded-opentype&quot;),url(//at.alicdn.com/t/font_1031158_1uhr8ri0pk5.woff2) format(&quot;woff2&quot;),url(//at.alicdn.com/t/font_1031158_1uhr8ri0pk5.woff) format(&quot;woff&quot;),url(//at.alicdn.com/t/font_1031158_1uhr8ri0pk5.ttf) format(&quot;truetype&quot;),url(//at.alicdn.com/t/font_1031158_1uhr8ri0pk5.svg#iconfont) format(&quot;svg&quot;)}"
           }
         </style>
       </defs>

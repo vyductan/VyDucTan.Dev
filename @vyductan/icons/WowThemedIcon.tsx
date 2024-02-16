@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 function SvgWowThemedIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -13,21 +13,69 @@ function SvgWowThemedIcon(props: React.SVGProps<SVGSVGElement>) {
       {...props}
     >
       <defs>
-        <linearGradient id="wow-themed-icon_svg__a" x1="50%" x2="50%" y1="10.25%" y2="100%">
-          <stop offset="0%" stopColor="#FEEA70" />
-          <stop offset="100%" stopColor="#F69B30" />
+        <linearGradient
+          id="wow-themed-icon_svg__a"
+          x1="50%"
+          x2="50%"
+          y1="10.25%"
+          y2="100%"
+        >
+          <stop
+            offset="0%"
+            stopColor="#FEEA70"
+          />
+          <stop
+            offset="100%"
+            stopColor="#F69B30"
+          />
         </linearGradient>
-        <linearGradient id="wow-themed-icon_svg__d" x1="50%" x2="50%" y1="0%" y2="100%">
-          <stop offset="0%" stopColor="#472315" />
-          <stop offset="100%" stopColor="#8B3A0E" />
+        <linearGradient
+          id="wow-themed-icon_svg__d"
+          x1="50%"
+          x2="50%"
+          y1="0%"
+          y2="100%"
+        >
+          <stop
+            offset="0%"
+            stopColor="#472315"
+          />
+          <stop
+            offset="100%"
+            stopColor="#8B3A0E"
+          />
         </linearGradient>
-        <linearGradient id="wow-themed-icon_svg__e" x1="50%" x2="50%" y1="0%" y2="100%">
-          <stop offset="0%" stopColor="#191A33" />
-          <stop offset="87.162%" stopColor="#3B426A" />
+        <linearGradient
+          id="wow-themed-icon_svg__e"
+          x1="50%"
+          x2="50%"
+          y1="0%"
+          y2="100%"
+        >
+          <stop
+            offset="0%"
+            stopColor="#191A33"
+          />
+          <stop
+            offset="87.162%"
+            stopColor="#3B426A"
+          />
         </linearGradient>
-        <linearGradient id="wow-themed-icon_svg__j" x1="50%" x2="50%" y1="0%" y2="100%">
-          <stop offset="0%" stopColor="#E78E0D" />
-          <stop offset="100%" stopColor="#CB6000" />
+        <linearGradient
+          id="wow-themed-icon_svg__j"
+          x1="50%"
+          x2="50%"
+          y1="0%"
+          y2="100%"
+        >
+          <stop
+            offset="0%"
+            stopColor="#E78E0D"
+          />
+          <stop
+            offset="100%"
+            stopColor="#CB6000"
+          />
         </linearGradient>
         <filter
           id="wow-themed-icon_svg__c"
@@ -37,8 +85,16 @@ function SvgWowThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           y="-9.4%"
           filterUnits="objectBoundingBox"
         >
-          <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation={1} />
-          <feOffset dy={-1} in="shadowBlurInner1" result="shadowOffsetInner1" />
+          <feGaussianBlur
+            in="SourceAlpha"
+            result="shadowBlurInner1"
+            stdDeviation={1}
+          />
+          <feOffset
+            dy={-1}
+            in="shadowBlurInner1"
+            result="shadowOffsetInner1"
+          />
           <feComposite
             in="shadowOffsetInner1"
             in2="SourceAlpha"
@@ -60,8 +116,15 @@ function SvgWowThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           y="-16.7%"
           filterUnits="objectBoundingBox"
         >
-          <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation={0.5} />
-          <feOffset in="shadowBlurInner1" result="shadowOffsetInner1" />
+          <feGaussianBlur
+            in="SourceAlpha"
+            result="shadowBlurInner1"
+            stdDeviation={0.5}
+          />
+          <feOffset
+            in="shadowBlurInner1"
+            result="shadowOffsetInner1"
+          />
           <feComposite
             in="shadowOffsetInner1"
             in2="SourceAlpha"
@@ -83,14 +146,25 @@ function SvgWowThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           y="-333.3%"
           filterUnits="objectBoundingBox"
         >
-          <feOffset dy={1} in="SourceAlpha" result="shadowOffsetOuter1" />
-          <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation={1.5} />
+          <feOffset
+            dy={1}
+            in="SourceAlpha"
+            result="shadowOffsetOuter1"
+          />
+          <feGaussianBlur
+            in="shadowOffsetOuter1"
+            result="shadowBlurOuter1"
+            stdDeviation={1.5}
+          />
           <feColorMatrix
             in="shadowBlurOuter1"
             values="0 0 0 0 0.803921569 0 0 0 0 0.388235294 0 0 0 0 0.00392156863 0 0 0 0.14567854 0"
           />
         </filter>
-        <path id="wow-themed-icon_svg__b" d="M16 8A8 8 0 110 8a8 8 0 0116 0" />
+        <path
+          id="wow-themed-icon_svg__b"
+          d="M16 8A8 8 0 110 8a8 8 0 0116 0"
+        />
         <path
           id="wow-themed-icon_svg__f"
           d="M3.5 5.5c0-.828.559-1.5 1.25-1.5S6 4.672 6 5.5C6 6.329 5.441 7 4.75 7S3.5 6.329 3.5 5.5zm6.5 0c0-.828.56-1.5 1.25-1.5.691 0 1.25.672 1.25 1.5 0 .829-.559 1.5-1.25 1.5C10.56 7 10 6.329 10 5.5z"
@@ -101,20 +175,41 @@ function SvgWowThemedIcon(props: React.SVGProps<SVGSVGElement>) {
         />
       </defs>
       <g fill="none">
-        <use fill="url(#wow-themed-icon_svg__a)" xlinkHref="#wow-themed-icon_svg__b" />
-        <use fill="#000" filter="url(#wow-themed-icon_svg__c)" xlinkHref="#wow-themed-icon_svg__b" />
+        <use
+          fill="url(#wow-themed-icon_svg__a)"
+          xlinkHref="#wow-themed-icon_svg__b"
+        />
+        <use
+          fill="#000"
+          filter="url(#wow-themed-icon_svg__c)"
+          xlinkHref="#wow-themed-icon_svg__b"
+        />
         <path
           fill="url(#wow-themed-icon_svg__d)"
           d="M5.643 10.888C5.485 12.733 6.369 14 8 14c1.63 0 2.515-1.267 2.357-3.112C10.2 9.042 9.242 8 8 8c-1.242 0-2.2 1.042-2.357 2.888"
         />
-        <use fill="url(#wow-themed-icon_svg__e)" xlinkHref="#wow-themed-icon_svg__f" />
-        <use fill="#000" filter="url(#wow-themed-icon_svg__g)" xlinkHref="#wow-themed-icon_svg__f" />
+        <use
+          fill="url(#wow-themed-icon_svg__e)"
+          xlinkHref="#wow-themed-icon_svg__f"
+        />
+        <use
+          fill="#000"
+          filter="url(#wow-themed-icon_svg__g)"
+          xlinkHref="#wow-themed-icon_svg__f"
+        />
         <path
           fill="#4E506A"
           d="M4.481 4.567c.186.042.29.252.232.469-.057.218-.254.36-.44.318-.186-.042-.29-.252-.232-.47.057-.216.254-.36.44-.317zm6.658.063c.206.047.322.28.258.52-.064.243-.282.4-.489.354-.206-.046-.322-.28-.258-.521.063-.242.282-.4.49-.353z"
         />
-        <use fill="#000" filter="url(#wow-themed-icon_svg__h)" xlinkHref="#wow-themed-icon_svg__i" />
-        <use fill="url(#wow-themed-icon_svg__j)" xlinkHref="#wow-themed-icon_svg__i" />
+        <use
+          fill="#000"
+          filter="url(#wow-themed-icon_svg__h)"
+          xlinkHref="#wow-themed-icon_svg__i"
+        />
+        <use
+          fill="url(#wow-themed-icon_svg__j)"
+          xlinkHref="#wow-themed-icon_svg__i"
+        />
       </g>
     </svg>
   );

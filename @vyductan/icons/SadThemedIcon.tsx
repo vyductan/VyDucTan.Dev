@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 function SvgSadThemedIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -13,29 +13,103 @@ function SvgSadThemedIcon(props: React.SVGProps<SVGSVGElement>) {
       {...props}
     >
       <defs>
-        <linearGradient id="sad-themed-icon_svg__a" x1="50%" x2="50%" y1="10.25%" y2="100%">
-          <stop offset="0%" stopColor="#FEEA70" />
-          <stop offset="100%" stopColor="#F69B30" />
+        <linearGradient
+          id="sad-themed-icon_svg__a"
+          x1="50%"
+          x2="50%"
+          y1="10.25%"
+          y2="100%"
+        >
+          <stop
+            offset="0%"
+            stopColor="#FEEA70"
+          />
+          <stop
+            offset="100%"
+            stopColor="#F69B30"
+          />
         </linearGradient>
-        <linearGradient id="sad-themed-icon_svg__d" x1="50%" x2="50%" y1="0%" y2="100%">
-          <stop offset="0%" stopColor="#472315" />
-          <stop offset="100%" stopColor="#8B3A0E" />
+        <linearGradient
+          id="sad-themed-icon_svg__d"
+          x1="50%"
+          x2="50%"
+          y1="0%"
+          y2="100%"
+        >
+          <stop
+            offset="0%"
+            stopColor="#472315"
+          />
+          <stop
+            offset="100%"
+            stopColor="#8B3A0E"
+          />
         </linearGradient>
-        <linearGradient id="sad-themed-icon_svg__e" x1="50%" x2="50%" y1="0%" y2="100%">
-          <stop offset="0%" stopColor="#191A33" />
-          <stop offset="87.162%" stopColor="#3B426A" />
+        <linearGradient
+          id="sad-themed-icon_svg__e"
+          x1="50%"
+          x2="50%"
+          y1="0%"
+          y2="100%"
+        >
+          <stop
+            offset="0%"
+            stopColor="#191A33"
+          />
+          <stop
+            offset="87.162%"
+            stopColor="#3B426A"
+          />
         </linearGradient>
-        <linearGradient id="sad-themed-icon_svg__h" x1="50%" x2="50%" y1="0%" y2="100%">
-          <stop offset="0%" stopColor="#E78E0D" />
-          <stop offset="100%" stopColor="#CB6000" />
+        <linearGradient
+          id="sad-themed-icon_svg__h"
+          x1="50%"
+          x2="50%"
+          y1="0%"
+          y2="100%"
+        >
+          <stop
+            offset="0%"
+            stopColor="#E78E0D"
+          />
+          <stop
+            offset="100%"
+            stopColor="#CB6000"
+          />
         </linearGradient>
-        <linearGradient id="sad-themed-icon_svg__i" x1="50%" x2="50%" y1="81.899%" y2="17.94%">
-          <stop offset="0%" stopColor="#35CAFC" />
-          <stop offset="100%" stopColor="#007EDB" />
+        <linearGradient
+          id="sad-themed-icon_svg__i"
+          x1="50%"
+          x2="50%"
+          y1="81.899%"
+          y2="17.94%"
+        >
+          <stop
+            offset="0%"
+            stopColor="#35CAFC"
+          />
+          <stop
+            offset="100%"
+            stopColor="#007EDB"
+          />
         </linearGradient>
-        <linearGradient id="sad-themed-icon_svg__j" x1="50%" x2="50%" y1="0%" y2="100%">
-          <stop offset="0%" stopColor="#6AE1FF" stopOpacity={0.287} />
-          <stop offset="100%" stopColor="#A8E3FF" stopOpacity={0.799} />
+        <linearGradient
+          id="sad-themed-icon_svg__j"
+          x1="50%"
+          x2="50%"
+          y1="0%"
+          y2="100%"
+        >
+          <stop
+            offset="0%"
+            stopColor="#6AE1FF"
+            stopOpacity={0.287}
+          />
+          <stop
+            offset="100%"
+            stopColor="#A8E3FF"
+            stopOpacity={0.799}
+          />
         </linearGradient>
         <filter
           id="sad-themed-icon_svg__c"
@@ -45,8 +119,16 @@ function SvgSadThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           y="-9.4%"
           filterUnits="objectBoundingBox"
         >
-          <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation={1} />
-          <feOffset dy={-1} in="shadowBlurInner1" result="shadowOffsetInner1" />
+          <feGaussianBlur
+            in="SourceAlpha"
+            result="shadowBlurInner1"
+            stdDeviation={1}
+          />
+          <feOffset
+            dy={-1}
+            in="shadowBlurInner1"
+            result="shadowOffsetInner1"
+          />
           <feComposite
             in="shadowOffsetInner1"
             in2="SourceAlpha"
@@ -68,8 +150,15 @@ function SvgSadThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           y="-18.8%"
           filterUnits="objectBoundingBox"
         >
-          <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation={0.5} />
-          <feOffset in="shadowBlurInner1" result="shadowOffsetInner1" />
+          <feGaussianBlur
+            in="SourceAlpha"
+            result="shadowBlurInner1"
+            stdDeviation={0.5}
+          />
+          <feOffset
+            in="shadowBlurInner1"
+            result="shadowOffsetInner1"
+          />
           <feComposite
             in="shadowOffsetInner1"
             in2="SourceAlpha"
@@ -83,21 +172,38 @@ function SvgSadThemedIcon(props: React.SVGProps<SVGSVGElement>) {
             values="0 0 0 0 0.0411226772 0 0 0 0 0.0430885485 0 0 0 0 0.0922353316 0 0 0 0.819684222 0"
           />
         </filter>
-        <path id="sad-themed-icon_svg__b" d="M16 8A8 8 0 110 8a8 8 0 0116 0" />
+        <path
+          id="sad-themed-icon_svg__b"
+          d="M16 8A8 8 0 110 8a8 8 0 0116 0"
+        />
         <path
           id="sad-themed-icon_svg__f"
           d="M3.599 8.8c0-.81.509-1.466 1.134-1.466.627 0 1.134.656 1.134 1.466 0 .338-.089.65-.238.898a.492.492 0 01-.301.225c-.14.037-.353.077-.595.077-.243 0-.453-.04-.595-.077a.49.49 0 01-.3-.225 1.741 1.741 0 01-.239-.898zm6.534 0c0-.81.508-1.466 1.133-1.466.627 0 1.134.656 1.134 1.466 0 .338-.089.65-.238.898a.49.49 0 01-.301.225 2.371 2.371 0 01-1.189 0 .49.49 0 01-.301-.225 1.74 1.74 0 01-.238-.898z"
         />
       </defs>
       <g fill="none">
-        <use fill="url(#sad-themed-icon_svg__a)" xlinkHref="#sad-themed-icon_svg__b" />
-        <use fill="#000" filter="url(#sad-themed-icon_svg__c)" xlinkHref="#sad-themed-icon_svg__b" />
+        <use
+          fill="url(#sad-themed-icon_svg__a)"
+          xlinkHref="#sad-themed-icon_svg__b"
+        />
+        <use
+          fill="#000"
+          filter="url(#sad-themed-icon_svg__c)"
+          xlinkHref="#sad-themed-icon_svg__b"
+        />
         <path
           fill="url(#sad-themed-icon_svg__d)"
           d="M5.333 12.765c0 .137.094.235.25.235.351 0 .836-.625 2.417-.625s2.067.625 2.417.625c.156 0 .25-.098.25-.235C10.667 12.368 9.828 11 8 11c-1.828 0-2.667 1.368-2.667 1.765"
         />
-        <use fill="url(#sad-themed-icon_svg__e)" xlinkHref="#sad-themed-icon_svg__f" />
-        <use fill="#000" filter="url(#sad-themed-icon_svg__g)" xlinkHref="#sad-themed-icon_svg__f" />
+        <use
+          fill="url(#sad-themed-icon_svg__e)"
+          xlinkHref="#sad-themed-icon_svg__f"
+        />
+        <use
+          fill="#000"
+          filter="url(#sad-themed-icon_svg__g)"
+          xlinkHref="#sad-themed-icon_svg__f"
+        />
         <path
           fill="#4E506A"
           d="M4.616 7.986c.128.125.136.372.017.551-.12.178-.32.222-.448.096-.128-.125-.135-.372-.017-.55.12-.179.32-.222.448-.097zm6.489 0c.128.125.136.372.018.551-.12.178-.32.222-.45.096-.127-.125-.134-.372-.015-.55.119-.179.319-.222.447-.097z"

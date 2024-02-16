@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 function SvgArrowDown2Icon(props: React.SVGProps<SVGSVGElement>) {
   return (

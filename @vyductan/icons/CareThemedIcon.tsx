@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -13,9 +13,24 @@ function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
       {...props}
     >
       <defs>
-        <radialGradient cx="50.001%" cy="50%" fx="50.001%" fy="50%" r="50%" id="care-themed-icon_svg__c">
-          <stop stopColor="#F08423" stopOpacity={0} offset="0%" />
-          <stop stopColor="#F08423" stopOpacity={0.34} offset="100%" />
+        <radialGradient
+          cx="50.001%"
+          cy="50%"
+          fx="50.001%"
+          fy="50%"
+          r="50%"
+          id="care-themed-icon_svg__c"
+        >
+          <stop
+            stopColor="#F08423"
+            stopOpacity={0}
+            offset="0%"
+          />
+          <stop
+            stopColor="#F08423"
+            stopOpacity={0.34}
+            offset="100%"
+          />
         </radialGradient>
         <radialGradient
           cx="50%"
@@ -26,8 +41,15 @@ function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           gradientTransform="matrix(-1 0 0 -.83877 1 .81)"
           id="care-themed-icon_svg__d"
         >
-          <stop stopColor="#FFE874" offset="0%" />
-          <stop stopColor="#FFE368" stopOpacity={0} offset="100%" />
+          <stop
+            stopColor="#FFE874"
+            offset="0%"
+          />
+          <stop
+            stopColor="#FFE368"
+            stopOpacity={0}
+            offset="100%"
+          />
         </radialGradient>
         <radialGradient
           cx="10.82%"
@@ -38,8 +60,16 @@ function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           gradientTransform="matrix(.91249 .4091 -.31644 .7058 .174 .109)"
           id="care-themed-icon_svg__e"
         >
-          <stop stopColor="#F28A2D" stopOpacity={0.5} offset="0%" />
-          <stop stopColor="#F28A2D" stopOpacity={0} offset="100%" />
+          <stop
+            stopColor="#F28A2D"
+            stopOpacity={0.5}
+            offset="0%"
+          />
+          <stop
+            stopColor="#F28A2D"
+            stopOpacity={0}
+            offset="100%"
+          />
         </radialGradient>
         <radialGradient
           cx="74.131%"
@@ -50,8 +80,16 @@ function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           gradientTransform="rotate(-38.243 1.4 .537) scale(1 .40312)"
           id="care-themed-icon_svg__f"
         >
-          <stop stopColor="#F28A2D" stopOpacity={0.5} offset="0%" />
-          <stop stopColor="#F28A2D" stopOpacity={0} offset="100%" />
+          <stop
+            stopColor="#F28A2D"
+            stopOpacity={0.5}
+            offset="0%"
+          />
+          <stop
+            stopColor="#F28A2D"
+            stopOpacity={0}
+            offset="100%"
+          />
         </radialGradient>
         <radialGradient
           cx="31.849%"
@@ -62,8 +100,16 @@ function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           gradientTransform="matrix(.98371 -.17976 .03575 .19562 0 .16)"
           id="care-themed-icon_svg__g"
         >
-          <stop stopColor="#D45F00" stopOpacity={0.25} offset="0%" />
-          <stop stopColor="#D45F00" stopOpacity={0} offset="100%" />
+          <stop
+            stopColor="#D45F00"
+            stopOpacity={0.25}
+            offset="0%"
+          />
+          <stop
+            stopColor="#D45F00"
+            stopOpacity={0}
+            offset="100%"
+          />
         </radialGradient>
         <radialGradient
           cx="68.023%"
@@ -74,8 +120,16 @@ function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           gradientTransform="matrix(.9787 .20532 -.04083 .19462 .02 -.038)"
           id="care-themed-icon_svg__h"
         >
-          <stop stopColor="#D45F00" stopOpacity={0.25} offset="0%" />
-          <stop stopColor="#D45F00" stopOpacity={0} offset="100%" />
+          <stop
+            stopColor="#D45F00"
+            stopOpacity={0.25}
+            offset="0%"
+          />
+          <stop
+            stopColor="#D45F00"
+            stopOpacity={0}
+            offset="100%"
+          />
         </radialGradient>
         <radialGradient
           cx="50.709%"
@@ -86,8 +140,14 @@ function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           gradientTransform="matrix(0 -.8825 1 0 -.163 1.117)"
           id="care-themed-icon_svg__j"
         >
-          <stop stopColor="#3B446B" offset="0%" />
-          <stop stopColor="#202340" offset="68.84%" />
+          <stop
+            stopColor="#3B446B"
+            offset="0%"
+          />
+          <stop
+            stopColor="#202340"
+            offset="68.84%"
+          />
         </radialGradient>
         <radialGradient
           cx="49.239%"
@@ -98,8 +158,14 @@ function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           gradientTransform="matrix(0 -.8825 1 0 -.177 1.104)"
           id="care-themed-icon_svg__k"
         >
-          <stop stopColor="#3B446B" offset="0%" />
-          <stop stopColor="#202340" offset="68.84%" />
+          <stop
+            stopColor="#3B446B"
+            offset="0%"
+          />
+          <stop
+            stopColor="#202340"
+            offset="68.84%"
+          />
         </radialGradient>
         <radialGradient
           cx="48.317%"
@@ -110,8 +176,14 @@ function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           gradientTransform="matrix(-.09519 -.96847 1.71516 -1.15488 -.204 1.389)"
           id="care-themed-icon_svg__l"
         >
-          <stop stopColor="#E38200" offset="0%" />
-          <stop stopColor="#CD6700" offset="100%" />
+          <stop
+            stopColor="#E38200"
+            offset="0%"
+          />
+          <stop
+            stopColor="#CD6700"
+            offset="100%"
+          />
         </radialGradient>
         <radialGradient
           cx="50%"
@@ -122,8 +194,14 @@ function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           gradientTransform="matrix(.07236 -.9819 2.22613 1.12405 -.2 .454)"
           id="care-themed-icon_svg__m"
         >
-          <stop stopColor="#E38200" offset="0%" />
-          <stop stopColor="#CD6700" offset="100%" />
+          <stop
+            stopColor="#E38200"
+            offset="0%"
+          />
+          <stop
+            stopColor="#CD6700"
+            offset="100%"
+          />
         </radialGradient>
         <radialGradient
           cx="73.646%"
@@ -134,8 +212,16 @@ function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           gradientTransform="matrix(.87148 .34792 -.3234 .93753 .238 -.228)"
           id="care-themed-icon_svg__p"
         >
-          <stop stopColor="#FF7091" stopOpacity={0.7} offset="0%" />
-          <stop stopColor="#FE6D8E" stopOpacity={0} offset="100%" />
+          <stop
+            stopColor="#FF7091"
+            stopOpacity={0.7}
+            offset="0%"
+          />
+          <stop
+            stopColor="#FE6D8E"
+            stopOpacity={0}
+            offset="100%"
+          />
         </radialGradient>
         <radialGradient
           cx="26.749%"
@@ -146,8 +232,16 @@ function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           gradientTransform="matrix(.87148 .34792 -.3234 .93753 .13 -.075)"
           id="care-themed-icon_svg__q"
         >
-          <stop stopColor="#FF7091" stopOpacity={0.7} offset="0%" />
-          <stop stopColor="#FE6D8E" stopOpacity={0} offset="100%" />
+          <stop
+            stopColor="#FF7091"
+            stopOpacity={0.7}
+            offset="0%"
+          />
+          <stop
+            stopColor="#FE6D8E"
+            stopOpacity={0}
+            offset="100%"
+          />
         </radialGradient>
         <radialGradient
           cx="23.798%"
@@ -158,9 +252,21 @@ function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           gradientTransform="matrix(-.18738 .97947 -1.25372 -.27758 .951 .449)"
           id="care-themed-icon_svg__r"
         >
-          <stop stopColor="#9C0600" stopOpacity={0.999} offset="0%" />
-          <stop stopColor="#9C0600" stopOpacity={0.94} offset="26.692%" />
-          <stop stopColor="#9C0600" stopOpacity={0} offset="100%" />
+          <stop
+            stopColor="#9C0600"
+            stopOpacity={0.999}
+            offset="0%"
+          />
+          <stop
+            stopColor="#9C0600"
+            stopOpacity={0.94}
+            offset="26.692%"
+          />
+          <stop
+            stopColor="#9C0600"
+            stopOpacity={0}
+            offset="100%"
+          />
         </radialGradient>
         <radialGradient
           cx="97.063%"
@@ -171,9 +277,21 @@ function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           gradientTransform="matrix(.8002 .50886 -.59365 1.08039 .518 -.538)"
           id="care-themed-icon_svg__s"
         >
-          <stop stopColor="#C71C08" stopOpacity={0.75} offset="0%" />
-          <stop stopColor="#C71C08" stopOpacity={0.704} offset="53.056%" />
-          <stop stopColor="#C71C08" stopOpacity={0} offset="100%" />
+          <stop
+            stopColor="#C71C08"
+            stopOpacity={0.75}
+            offset="0%"
+          />
+          <stop
+            stopColor="#C71C08"
+            stopOpacity={0.704}
+            offset="53.056%"
+          />
+          <stop
+            stopColor="#C71C08"
+            stopOpacity={0}
+            offset="100%"
+          />
         </radialGradient>
         <radialGradient
           cx="4.056%"
@@ -184,9 +302,21 @@ function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           gradientTransform="matrix(.8728 -.3441 .41218 1.20997 -.095 -.037)"
           id="care-themed-icon_svg__t"
         >
-          <stop stopColor="#9C0600" stopOpacity={0.5} offset="0%" />
-          <stop stopColor="#9C0600" stopOpacity={0.473} offset="31.614%" />
-          <stop stopColor="#9C0600" stopOpacity={0} offset="100%" />
+          <stop
+            stopColor="#9C0600"
+            stopOpacity={0.5}
+            offset="0%"
+          />
+          <stop
+            stopColor="#9C0600"
+            stopOpacity={0.473}
+            offset="31.614%"
+          />
+          <stop
+            stopColor="#9C0600"
+            stopOpacity={0}
+            offset="100%"
+          />
         </radialGradient>
         <radialGradient
           cx="74.586%"
@@ -197,10 +327,26 @@ function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           gradientTransform="matrix(.77041 .55955 -.56333 .89765 .605 -.339)"
           id="care-themed-icon_svg__u"
         >
-          <stop stopColor="#9C0600" stopOpacity={0.999} offset="0%" />
-          <stop stopColor="#9C0600" stopOpacity={0.934} offset="45.7%" />
-          <stop stopColor="#9C0600" stopOpacity={0.803} offset="59.211%" />
-          <stop stopColor="#9C0600" stopOpacity={0} offset="100%" />
+          <stop
+            stopColor="#9C0600"
+            stopOpacity={0.999}
+            offset="0%"
+          />
+          <stop
+            stopColor="#9C0600"
+            stopOpacity={0.934}
+            offset="45.7%"
+          />
+          <stop
+            stopColor="#9C0600"
+            stopOpacity={0.803}
+            offset="59.211%"
+          />
+          <stop
+            stopColor="#9C0600"
+            stopOpacity={0}
+            offset="100%"
+          />
         </radialGradient>
         <radialGradient
           cx="50.001%"
@@ -211,8 +357,15 @@ function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           gradientTransform="matrix(-.3809 .91219 -.97139 -.46943 1.176 .279)"
           id="care-themed-icon_svg__v"
         >
-          <stop stopColor="#C71C08" stopOpacity={0} offset="0%" />
-          <stop stopColor="#C71C08" offset="100%" />
+          <stop
+            stopColor="#C71C08"
+            stopOpacity={0}
+            offset="0%"
+          />
+          <stop
+            stopColor="#C71C08"
+            offset="100%"
+          />
         </radialGradient>
         <radialGradient
           cx="2.243%"
@@ -223,8 +376,14 @@ function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           gradientTransform="scale(.78523 1) rotate(36.406 .025 .05)"
           id="care-themed-icon_svg__x"
         >
-          <stop stopColor="#EDA83A" offset="0%" />
-          <stop stopColor="#FFDC5E" offset="100%" />
+          <stop
+            stopColor="#EDA83A"
+            offset="0%"
+          />
+          <stop
+            stopColor="#FFDC5E"
+            offset="100%"
+          />
         </radialGradient>
         <radialGradient
           cx="100%"
@@ -235,20 +394,62 @@ function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           gradientTransform="scale(-.90713 -1) rotate(-45.799 -.217 2.489)"
           id="care-themed-icon_svg__z"
         >
-          <stop stopColor="#F4B248" offset="0%" />
-          <stop stopColor="#FFDD5F" offset="100%" />
+          <stop
+            stopColor="#F4B248"
+            offset="0%"
+          />
+          <stop
+            stopColor="#FFDD5F"
+            offset="100%"
+          />
         </radialGradient>
-        <linearGradient x1="50%" y1="95.035%" x2="50%" y2="7.417%" id="care-themed-icon_svg__a">
-          <stop stopColor="#F28A2D" offset="0%" />
-          <stop stopColor="#FDE86F" offset="100%" />
+        <linearGradient
+          x1="50%"
+          y1="95.035%"
+          x2="50%"
+          y2="7.417%"
+          id="care-themed-icon_svg__a"
+        >
+          <stop
+            stopColor="#F28A2D"
+            offset="0%"
+          />
+          <stop
+            stopColor="#FDE86F"
+            offset="100%"
+          />
         </linearGradient>
-        <linearGradient x1="49.985%" y1="-40.061%" x2="49.985%" y2="111.909%" id="care-themed-icon_svg__i">
-          <stop stopColor="#482314" offset="0%" />
-          <stop stopColor="#9A4111" offset="100%" />
+        <linearGradient
+          x1="49.985%"
+          y1="-40.061%"
+          x2="49.985%"
+          y2="111.909%"
+          id="care-themed-icon_svg__i"
+        >
+          <stop
+            stopColor="#482314"
+            offset="0%"
+          />
+          <stop
+            stopColor="#9A4111"
+            offset="100%"
+          />
         </linearGradient>
-        <linearGradient x1="52.727%" y1="31.334%" x2="28.964%" y2="102.251%" id="care-themed-icon_svg__n">
-          <stop stopColor="#F34462" offset="0%" />
-          <stop stopColor="#CC0820" offset="100%" />
+        <linearGradient
+          x1="52.727%"
+          y1="31.334%"
+          x2="28.964%"
+          y2="102.251%"
+          id="care-themed-icon_svg__n"
+        >
+          <stop
+            stopColor="#F34462"
+            offset="0%"
+          />
+          <stop
+            stopColor="#CC0820"
+            offset="100%"
+          />
         </linearGradient>
         <path
           d="M180 90c0 49.71-40.29 90-90 90S0 139.71 0 90 40.29 0 90 0s90 40.29 90 90z"
@@ -263,16 +464,40 @@ function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           id="care-themed-icon_svg__w"
         />
       </defs>
-      <g fill="none" fillRule="evenodd">
+      <g
+        fill="none"
+        fillRule="evenodd"
+      >
         <g fillRule="nonzero">
           <g transform="translate(.005 -.004)">
-            <use fill="url(#care-themed-icon_svg__a)" xlinkHref="#care-themed-icon_svg__b" />
-            <use fill="url(#care-themed-icon_svg__c)" xlinkHref="#care-themed-icon_svg__b" />
-            <use fill="url(#care-themed-icon_svg__d)" xlinkHref="#care-themed-icon_svg__b" />
-            <use fill="url(#care-themed-icon_svg__e)" xlinkHref="#care-themed-icon_svg__b" />
-            <use fill="url(#care-themed-icon_svg__f)" xlinkHref="#care-themed-icon_svg__b" />
-            <use fill="url(#care-themed-icon_svg__g)" xlinkHref="#care-themed-icon_svg__b" />
-            <use fill="url(#care-themed-icon_svg__h)" xlinkHref="#care-themed-icon_svg__b" />
+            <use
+              fill="url(#care-themed-icon_svg__a)"
+              xlinkHref="#care-themed-icon_svg__b"
+            />
+            <use
+              fill="url(#care-themed-icon_svg__c)"
+              xlinkHref="#care-themed-icon_svg__b"
+            />
+            <use
+              fill="url(#care-themed-icon_svg__d)"
+              xlinkHref="#care-themed-icon_svg__b"
+            />
+            <use
+              fill="url(#care-themed-icon_svg__e)"
+              xlinkHref="#care-themed-icon_svg__b"
+            />
+            <use
+              fill="url(#care-themed-icon_svg__f)"
+              xlinkHref="#care-themed-icon_svg__b"
+            />
+            <use
+              fill="url(#care-themed-icon_svg__g)"
+              xlinkHref="#care-themed-icon_svg__b"
+            />
+            <use
+              fill="url(#care-themed-icon_svg__h)"
+              xlinkHref="#care-themed-icon_svg__b"
+            />
           </g>
           <path
             d="M109.013 66.234c-1.14-3.051-36.872-3.051-38.011 0-1.322 3.558 6.806 8.396 19.012 8.255 12.192.14 20.306-4.71 18.999-8.255z"
@@ -309,17 +534,45 @@ function SvgCareThemedIcon(props: React.SVGProps<SVGSVGElement>) {
           />
         </g>
         <g fillRule="nonzero">
-          <use fill="url(#care-themed-icon_svg__n)" xlinkHref="#care-themed-icon_svg__o" />
-          <use fill="url(#care-themed-icon_svg__p)" xlinkHref="#care-themed-icon_svg__o" />
-          <use fill="url(#care-themed-icon_svg__q)" xlinkHref="#care-themed-icon_svg__o" />
-          <use fill="url(#care-themed-icon_svg__r)" xlinkHref="#care-themed-icon_svg__o" />
-          <use fill="url(#care-themed-icon_svg__s)" xlinkHref="#care-themed-icon_svg__o" />
-          <use fill="url(#care-themed-icon_svg__t)" xlinkHref="#care-themed-icon_svg__o" />
-          <use fill="url(#care-themed-icon_svg__u)" xlinkHref="#care-themed-icon_svg__o" />
-          <use fillOpacity={0.5} fill="url(#care-themed-icon_svg__v)" xlinkHref="#care-themed-icon_svg__o" />
+          <use
+            fill="url(#care-themed-icon_svg__n)"
+            xlinkHref="#care-themed-icon_svg__o"
+          />
+          <use
+            fill="url(#care-themed-icon_svg__p)"
+            xlinkHref="#care-themed-icon_svg__o"
+          />
+          <use
+            fill="url(#care-themed-icon_svg__q)"
+            xlinkHref="#care-themed-icon_svg__o"
+          />
+          <use
+            fill="url(#care-themed-icon_svg__r)"
+            xlinkHref="#care-themed-icon_svg__o"
+          />
+          <use
+            fill="url(#care-themed-icon_svg__s)"
+            xlinkHref="#care-themed-icon_svg__o"
+          />
+          <use
+            fill="url(#care-themed-icon_svg__t)"
+            xlinkHref="#care-themed-icon_svg__o"
+          />
+          <use
+            fill="url(#care-themed-icon_svg__u)"
+            xlinkHref="#care-themed-icon_svg__o"
+          />
+          <use
+            fillOpacity={0.5}
+            fill="url(#care-themed-icon_svg__v)"
+            xlinkHref="#care-themed-icon_svg__o"
+          />
         </g>
         <g transform="translate(-.637 -.004)">
-          <mask id="care-themed-icon_svg__y" fill="#fff">
+          <mask
+            id="care-themed-icon_svg__y"
+            fill="#fff"
+          >
             <use xlinkHref="#care-themed-icon_svg__w" />
           </mask>
           <path

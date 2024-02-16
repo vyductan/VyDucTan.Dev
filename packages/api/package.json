@@ -1,32 +1,55 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "@vyductan/api",
   "version": "0.1.0",
-  "main": "./index.ts",
-  "types": "./index.ts",
+  "private": true,
   "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./db": "./src/db.ts",
+    "./auth": "./auth/index.ts",
+    "./types": "./src/types.ts",
+    "./auth/env": "./auth/env.ts"
+  },
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
+    "db:push": "pnpm with-env drizzle-kit push:pg",
+    "db:studio": "pnpm with-env drizzle-kit studio",
     "lint": "eslint .",
     "lint:fix": "pnpm lint --fix",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "with-env": "dotenv -e ../../.env --"
+  },
+  "prettier": "@vyductan/prettier-config",
+  "eslintConfig": {
+    "extends": [
+      "@vyductan/eslint-config/base",
+      "@vyductan/eslint-config/drizzle"
+    ],
+    "root": true
   },
   "dependencies": {
-    "@vyductan/auth": "^0.1.0",
-    "@vyductan/db": "^0.1.0",
-    "@trpc/client": "^10.34.0",
-    "@trpc/server": "^10.34.0",
-    "superjson": "1.13.1",
-    "zod": "^3.21.4"
+    "@auth/drizzle-adapter": "^0.6.3",
+    "@trpc/server": "11.0.0-next-beta.264",
+    "@vercel/blob": "^0.20.0",
+    "@vercel/postgres": "^0.7.2",
+    "@vyductan/utils": "workspace:*",
+    "drizzle-orm": "^0.29.3",
+    "drizzle-zod": "^0.5.1",
+    "google-auth-library": "^9.4.2",
+    "nanoid": "^5.0.5",
+    "next-auth": "^5.0.0-beta.9",
+    "postgres-range": "^1.1.3",
+    "superjson": "2.2.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@vyductan/eslint-config": "^0.2.0",
-    "eslint": "^8.45.0",
-    "typescript": "^5.1.6"
-  },
-  "eslintConfig": {
-    "root": true,
-    "extends": [
-      "@vyductan/eslint-config/base"
-    ]
+    "@vyductan/eslint-config": "workspace:*",
+    "@vyductan/prettier-config": "workspace:*",
+    "@vyductan/typescript-config": "workspace:*",
+    "dotenv-cli": "^7.3.0",
+    "drizzle-kit": "^0.20.14",
+    "pg": "^8.11.3"
   }
 }

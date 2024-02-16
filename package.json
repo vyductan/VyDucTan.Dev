@@ -1,28 +1,45 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "vyductan-apps",
   "private": true,
   "engines": {
     "node": ">=v18.17.0"
   },
   "scripts": {
-    "dev": "turbo dev --parallel",
     "build": "turbo build",
     "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo clean",
-    "db:generate": "turbo db:generate",
-    "db:push": "turbo db:push db:generate",
-    "db:studio": "pnpm -F db dev",
-    "format": "prettier --write \"**/*.{js,cjs,mjs,ts,tsx,md,json}\" --ignore-path .gitignore",
-    "lint": "turbo lint && manypkg check",
-    "lint:fix": "turbo lint:fix && manypkg fix",
+    "db:push": "pnpm -F api db:push",
+    "db:studio": "pnpm -F api db:studio",
+    "dev": "turbo dev --parallel",
+    "format": "turbo format --continue -- --cache --cache-location node_modules/.cache/.prettiercache",
+    "format:fix": "turbo format --continue -- --write --cache --cache-location node_modules/.cache/.prettiercache",
+    "postinstall": "pnpm lint:ws",
+    "lint": "turbo lint --continue -- --cache --cache-location node_modules/.cache/.eslintcache",
+    "lint:fix": "turbo lint --continue -- --fix --cache --cache-location node_modules/.cache/.eslintcache",
+    "lint:ws": "pnpm dlx sherif@latest",
     "type-check": "turbo type-check"
   },
-  "dependencies": {
-    "@ianvs/prettier-plugin-sort-imports": "^4.1.0",
-    "@manypkg/cli": "^0.21.0",
-    "prettier": "^3.0.1",
-    "prettier-plugin-tailwindcss": "^0.4.1",
-    "turbo": "^1.10.12",
-    "typescript": "^5.1.6"
+  "prettier": "@vyductan/prettier-config",
+  "eslintConfig": {
+    "extends": [
+      "@vyductan/eslint-config/base",
+      "@vyductan/eslint-config/react",
+      "@vyductan/eslint-config/nextjs",
+      "@vyductan/eslint-config/tailwind"
+    ],
+    "root": true
+  },
+  "devDependencies": {
+    "@turbo/gen": "^1.12.4",
+    "@vyductan/prettier-config": "workspace:^",
+    "node-gyp-build": "4.8.0",
+    "prettier": "^3.2.5",
+    "turbo": "^1.12.4",
+    "typescript": "^5.3.3"
+  },
+  "packageManager": "pnpm@8.15.1",
+  "engines": {
+    "node": ">=v20.11"
   }
 }

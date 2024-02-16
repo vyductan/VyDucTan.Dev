@@ -1,4 +1,9 @@
 {
-  "extends": "../../tsconfig.json",
-  "include": ["src", "*.ts"]
+  "$schema": "https://json.schemastore.org/tsconfig.json",
+  "extends": "@vyductan/typescript-config/base.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
+  },
+  "include": ["src", "*.ts"],
+  "exclude": ["node_modules"],
 }

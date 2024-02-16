@@ -1,0 +1,10 @@
+```
+export const enumToOptions = <T extends Record<string, string>>(
+  enumeration: T
+): { label: string; value: T[keyof T] }[] => {
+  return Object.keys(enumeration).map(key => ({
+    label: enumeration[key as keyof T],
+    value: enumeration[key as keyof T],
+  }));
+};
+```

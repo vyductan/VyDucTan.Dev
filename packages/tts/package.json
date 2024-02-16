@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@vyductan/tts",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules",
+    "db:push": "drizzle-kit push:pg",
+    "db:studio": "drizzle-kit studio",
+    "lint": "eslint .",
+    "lint:fix": "pnpm lint --fix",
+    "type-check": "tsc --noEmit"
+  },
+  "prettier": "@vyductan/prettier-config",
+  "eslintConfig": {
+    "extends": [
+      "@vyductan/eslint-config/base"
+    ],
+    "root": true
+  },
+  "dependencies": {
+    "@tauri-apps/plugin-http": "2.0.0-alpha.6",
+    "@vyductan/icons": "workspace:*",
+    "@vyductan/utils": "workspace:*",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/uuid": "^9.0.7",
+    "@vyductan/eslint-config": "workspace:*",
+    "@vyductan/prettier-config": "workspace:*",
+    "@vyductan/typescript-config": "workspace:*"
+  }
+}

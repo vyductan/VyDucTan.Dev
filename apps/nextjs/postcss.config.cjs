@@ -1,1 +1,1 @@
-module.exports = require("../../@vyductan/theme/postcss.cjs");
+module.exports = require("@vyductan/tailwind-config/postcss.cjs");

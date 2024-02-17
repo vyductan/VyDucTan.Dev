@@ -1,4 +1,0 @@
-{
-  "buildCommand": "bash ./vercel-submodule-workaround.sh && pnpm install --no-frozen-lockfile",
-  "outputDirectory": "./apps/nextjs/.next"
-}

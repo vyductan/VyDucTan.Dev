@@ -1,0 +1,3 @@
+{
+  "buildCommand": "bash ./vercel-submodule-workaround.sh && pnpm install --no-frozen-lockfile"
+}

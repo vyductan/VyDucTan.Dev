@@ -1,12 +1,6 @@
-<<<<<<<< HEAD:apps/nextjs/src/app/home/_components/Social.tsx
 import { Icon } from "@vyductan/icons";
 
 import type { ResumeData } from "../resumeData";
-========
-import { FacebookIcon, GithubIcon, LinkedinIcon } from "@vyductan/icons";
->>>>>>>> main:apps/vyductan/src/app/home/_components/Social.tsx
-
-import { type ResumeData } from "../resumeData";
 
 const IconMap = {
   facebook: <Icon icon="entypo-social:facebook" />,
@@ -22,10 +16,7 @@ const Social = ({ social }: SocialProps) => {
       {social.map((network) => {
         return (
           <li key={network.name}>
-            <a
-              href={network.url}
-              aria-label={network.name}
-            >
+            <a href={network.url} aria-label={network.name}>
               {IconMap[network.iconName as keyof typeof IconMap]}
             </a>
           </li>

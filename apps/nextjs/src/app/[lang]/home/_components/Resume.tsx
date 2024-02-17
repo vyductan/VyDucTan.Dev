@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:apps/nextjs/src/app/home/_components/Resume.tsx
 import type { ResumeData } from "../resumeData";
-========
-import { type ResumeData } from "../resumeData";
->>>>>>>> main:apps/vyductan/src/app/home/_components/Resume.tsx
 
 type ResumeProps = {
   data: ResumeData["resume"];
@@ -52,20 +48,14 @@ const Resume = ({ data }: ResumeProps) => {
       <li key={skills.name}>
         <em>{skills.name}</em>
         <div className="bar-container">
-          <span
-            style={{ width: skills.level }}
-            className={className}
-          ></span>
+          <span style={{ width: skills.level }} className={className}></span>
         </div>
       </li>
     );
   });
 
   return (
-    <section
-      id="resume"
-      className="divide-y"
-    >
+    <section id="resume" className="divide-y">
       <div className="resume-row">
         <h1>
           <span>Education</span>

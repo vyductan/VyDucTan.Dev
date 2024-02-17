@@ -1,27 +1,42 @@
 "use client";
 
-import { sendMailSchema } from "@vyductan/api";
-import { MailOutlined } from "@vyductan/icons";
-import { AutoForm, Button } from "@vyductan/ui";
+import { useState } from "react";
 
-// import { MailIcon } from "@vyductan/icons";
+import { sendMailAction } from "@vyductan/api/contact";
+import { sendMailSchema } from "@vyductan/api/types";
+import { MailOutlined } from "@vyductan/icons";
+import { AutoForm, Button, useForm } from "@vyductan/ui";
 
 import type { ResumeData } from "../resumeData";
-import { api } from "~/trpc/react";
-
-// import About from './About'
 
 type ContactProps = {
   data: ResumeData["main"];
 };
 const Contact = ({ data }: ContactProps) => {
-  if (!data) return <></>;
+  const [isPending, setIsPending] = useState(false);
   const { name, address, phone, email, contactMessage } = data;
 
-  const { mutate: sendEmail, isPending } = api.contact.send.useMutation();
+  const form = useForm({
+    schema: sendMailSchema,
+    onSubmit: (values) => {
+      setIsPending(true);
+      sendMailAction(values)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          setIsPending(false);
+        });
+    },
+  });
+
+  if (!data) return <></>;
 
   return (
-    <section id="contact" className="text-white">
+    <section id="contact">
       <div className="container">
         <h1>
           <span className="lg:hidden">Get In Touch.</span>
@@ -31,10 +46,7 @@ const Contact = ({ data }: ContactProps) => {
         <div className="detail">
           <p>{contactMessage}</p>
           <AutoForm
-            validationSchema={sendMailSchema}
-            onSubmit={(values) => {
-              sendEmail(values);
-            }}
+            form={form}
             fields={[
               {
                 type: "text",
@@ -61,7 +73,7 @@ const Contact = ({ data }: ContactProps) => {
           />
           <div className="flex justify-center">
             <Button
-              htmlType="submit"
+              type="submit"
               className="submit"
               disabled={isPending}
               aria-label="Submit"

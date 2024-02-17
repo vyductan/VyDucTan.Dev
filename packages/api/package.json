@@ -30,9 +30,9 @@
     "root": true
   },
   "dependencies": {
-    "@auth/drizzle-adapter": "^0.6.3",
+    "@auth/drizzle-adapter": "^0.7.0",
     "@trpc/server": "11.0.0-next-beta.264",
-    "@vercel/blob": "^0.20.0",
+    "@vercel/blob": "^0.22.0",
     "@vercel/postgres": "^0.7.2",
     "@vyductan/utils": "workspace:*",
     "drizzle-orm": "^0.29.3",

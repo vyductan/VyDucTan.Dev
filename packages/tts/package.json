@@ -24,7 +24,6 @@
     "root": true
   },
   "dependencies": {
-    "@tauri-apps/plugin-http": "2.0.0-alpha.6",
     "@vyductan/icons": "workspace:*",
     "@vyductan/utils": "workspace:*",
     "uuid": "^9.0.1"

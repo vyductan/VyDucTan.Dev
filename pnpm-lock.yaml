@@ -584,9 +584,6 @@ importers:
 
   packages/tts:
     dependencies:
-      '@tauri-apps/plugin-http':
-        specifier: 2.0.0-alpha.6
-        version: 2.0.0-alpha.6
       '@vyductan/icons':
         specifier: workspace:*
         version: link:../../@vyductan/icons
@@ -3243,17 +3240,6 @@ packages:
 
   /@tanstack/virtual-core@3.0.0:
     resolution: {integrity: sha512-SYXOBTjJb05rXa2vl55TTwO40A6wKu0R5i1qQwhJYNDIqaIGF7D0HsLw+pJAyi2OvntlEIVusx3xtbbgSUi6zg==}
-    dev: false
-
-  /@tauri-apps/api@2.0.0-alpha.13:
-    resolution: {integrity: sha512-sGgCkFahF3OZAHoGN5Ozt9WK7wJlbVZSgWpPQKNag4nSOX1+Py6VDRTEWriiJHDiV+gg31CWHnNXRy6TFoZmdA==}
-    engines: {node: '>= 18', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
-    dev: false
-
-  /@tauri-apps/plugin-http@2.0.0-alpha.6:
-    resolution: {integrity: sha512-d23Xem40/ox+UWaiCzfi+IeV/yMI57oHmy6bXaDwRqfC4KuHjZx22k9xnNV17tLGFWjcmgpuViWPiCuxFdy+Ow==}
-    dependencies:
-      '@tauri-apps/api': 2.0.0-alpha.13
     dev: false
 
   /@tootallnate/quickjs-emscripten@0.23.0:

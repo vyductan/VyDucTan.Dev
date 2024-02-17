@@ -69,18 +69,23 @@ const Contact = ({ data }: ContactProps) => {
                 label: "Message",
                 rows: 15,
               },
+              {
+                type: "custom",
+                render: () => (
+                  <div className="flex justify-center">
+                    <Button
+                      type="submit"
+                      className="submit"
+                      disabled={isPending}
+                      aria-label="Submit"
+                    >
+                      {isPending ? "Sending" : "Submit"}
+                    </Button>
+                  </div>
+                ),
+              },
             ]}
           />
-          <div className="flex justify-center">
-            <Button
-              type="submit"
-              className="submit"
-              disabled={isPending}
-              aria-label="Submit"
-            >
-              {isPending ? "Sending" : "Submit"}
-            </Button>
-          </div>
         </div>
 
         <aside>

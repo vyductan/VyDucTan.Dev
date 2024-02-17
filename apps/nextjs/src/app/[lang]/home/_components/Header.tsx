@@ -79,7 +79,7 @@ const Header = ({ data }: HeaderProps) => {
         </button>
 
         <ul className={`${!navVisible ? "hidden" : ""}`}>
-          <li className="current">
+          <li>
             <Link
               className="uppercase"
               activeClass="active"

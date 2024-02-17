@@ -1,15 +1,8 @@
-<<<<<<<< HEAD:apps/nextjs/src/app/home/_components/Footer.tsx
 import { Link } from "react-scroll";
 
 import { Icon } from "@vyductan/icons";
 
 import type { ResumeData } from "../resumeData";
-========
-import { ArrowUp2Icon } from "@vyductan/icons";
-import { Link } from "react-scroll";
-
-import { type ResumeData } from "../resumeData";
->>>>>>>> main:apps/vyductan/src/app/home/_components/Footer.tsx
 import Social from "./Social";
 
 type FooterProps = {
@@ -31,20 +24,14 @@ const Footer = ({ data }: FooterProps) => {
             {`© ${new Date().getFullYear()} `}
             Made by{" "}
           </span>
-          <a
-            title="VyDucTan"
-            href={website}
-          >
+          <a title="VyDucTan" href={website}>
             VyDucTan
           </a>
         </div>
 
-        <div
-          id="go-top"
-          className="absolute -top-5 m-auto"
-        >
+        <div id="go-top" className="absolute -top-5 m-auto">
           <Link
-            className="icon hover:bg-[#000] hover:text-white"
+            className="hover:bg-[#000] hover:text-white"
             to="home"
             smooth={true}
             title="Back to Top"

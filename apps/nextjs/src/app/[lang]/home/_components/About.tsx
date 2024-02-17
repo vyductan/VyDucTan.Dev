@@ -1,11 +1,8 @@
 import Image from "next/image";
-<<<<<<<< HEAD:apps/nextjs/src/app/home/_components/About.tsx
 
-========
->>>>>>>> main:apps/vyductan/src/app/home/_components/About.tsx
-import { DownloadIcon } from "@vyductan/icons";
+import { Icon } from "@vyductan/icons";
 
-import { type ResumeData } from "../resumeData";
+import type { ResumeData } from "../resumeData";
 
 type AboutProps = {
   data: ResumeData["main"];
@@ -14,16 +11,9 @@ const About = ({ data }: AboutProps) => {
   const { name, image, bio, address, phone, email, resumeDownload } = data;
   const profilepic = "/" + image;
   return (
-<<<<<<<< HEAD:apps/nextjs/src/app/home/_components/About.tsx
     <section id="about" className="bg-[#2B2B2B]">
-========
-    <section
-      id="about"
-      className="bg-[#2B2B2B]"
-    >
->>>>>>>> main:apps/vyductan/src/app/home/_components/About.tsx
       <div className="m-auto max-w-[1024px] lg:flex">
-        <div className="relative m-auto mb-3 h-[100px] w-[100px] lg:mt-0 lg:h-[150px] lg:w-[150px]">
+        <div className="relative m-auto mb-3 size-[100px] lg:mt-0 lg:size-[150px]">
           <Image
             className="rounded-full object-cover"
             src={profilepic}
@@ -52,11 +42,8 @@ const About = ({ data }: AboutProps) => {
               </p>
             </div>
             <div>
-              <a
-                href={resumeDownload}
-                className="btn-download"
-              >
-                <DownloadIcon className="text-3xl" />
+              <a href={resumeDownload} className="btn-download">
+                <Icon icon="mingcute:download-2-fill" className="text-3xl" />
                 <span>Download Resume</span>
               </a>
             </div>

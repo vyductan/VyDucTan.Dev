@@ -1,14 +1,8 @@
 import Image from "next/image";
-<<<<<<<< HEAD:apps/nextjs/src/app/home/_components/Portfolio.tsx
 
 import { Icon } from "@vyductan/icons";
 
 import type { ResumeData } from "../resumeData";
-========
-import { LinkIcon } from "@vyductan/icons";
->>>>>>>> main:apps/vyductan/src/app/home/_components/Portfolio.tsx
-
-import { type ResumeData } from "../resumeData";
 
 type PortfolioProps = {
   data: ResumeData["portfolio"];
@@ -18,14 +12,8 @@ const Portfolio = ({ data }: PortfolioProps) => {
   const projects = data.projects.map(function (projects) {
     const projectImage = "/images/portfolio/" + projects.image;
     return (
-      <div
-        key={projects.title}
-        className="image-effect-zoom-with-meta"
-      >
-        <a
-          href={projects.url}
-          title={projects.title}
-        >
+      <div key={projects.title} className="image-effect-zoom-with-meta">
+        <a href={projects.url} title={projects.title}>
           <Image
             alt={projects.title}
             src={projectImage}

@@ -10,7 +10,8 @@
     "./db": "./src/db.ts",
     "./auth": "./auth/index.ts",
     "./types": "./src/types.ts",
-    "./auth/env": "./auth/env.ts"
+    "./auth/env": "./auth/env.ts",
+    "./contact": "./src/contact/action.ts"
   },
   "scripts": {
     "clean": "rm -rf .turbo node_modules",

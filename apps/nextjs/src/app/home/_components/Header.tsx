@@ -78,7 +78,7 @@ const Header = ({ data }: HeaderProps) => {
           <Icon icon="mingcute:menu-line" />
         </button>
 
-        <ul className={`${!navVisible ? "hidden" : ""}`}>
+        <ul className={`${!navVisible ? "hidden md:flex" : ""}`}>
           <li>
             <Link
               className="uppercase"
@@ -123,19 +123,6 @@ const Header = ({ data }: HeaderProps) => {
               Works
             </Link>
           </li>
-          {/*
-          <li>
-            <Link
-              className="uppercase"
-              activeClass="active"
-              to="testimonials"
-              smooth={true}
-              spy={true}
-            >
-              Testimonials
-            </Link>
-          </li>
-          */}
           <li>
             <Link
               className="uppercase"

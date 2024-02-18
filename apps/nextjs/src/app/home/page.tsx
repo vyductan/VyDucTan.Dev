@@ -1,41 +1,34 @@
-// "use client";
-import Head from "next/head";
+import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 
-import About from "./_components/About";
-import Contact from "./_components/Contact";
-import Footer from "./_components/Footer";
-import Header from "./_components/Header";
-import Portfolio from "./_components/Portfolio";
-import Resume from "./_components/Resume";
+import { FloatButtonBackToTop } from "@vyductan/ui";
+
 import { resumeData } from "./resumeData";
 
-// const Header = dynamic(() => import("../components/Header"));
-// const About = dynamic(() => import("../components/About"));
-// const Resume = dynamic(() => import("../components/Resume"));
-// const Portfolio = dynamic(() => import("../components/Portfolio"));
-// const Contact = dynamic(() => import("../components/Contact"));
-// const Footer = dynamic(() => import("../components/Footer"));
+const Header = dynamic(() => import("./_components/Header"));
+const About = dynamic(() => import("./_components/About"));
+const Resume = dynamic(() => import("./_components/Resume"));
+const Portfolio = dynamic(() => import("./_components/Portfolio"));
+const Contact = dynamic(() => import("./_components/Contact"));
+const Footer = dynamic(() => import("./_components/Footer"));
 
-const HomePage = () => {
+export const metadata: Metadata = {
+  title: "VyDucTan.Dev",
+  description: "vyductan.dev",
+};
+
+export default function HomePage() {
   return (
     <div>
-      <Head>
-        <title>VyDucTan.Me</title>
-        <meta name="description" content="vyductan.me" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <main>
-        {/*<Header data={resumeData.main} />
+        <Header data={resumeData.main} />
         <About data={resumeData.main} />
         <Resume data={resumeData.resume} />
         <Portfolio data={resumeData.portfolio} />
-        <Testimonials data={resumeData.testimonials} />
-        <Footer data={resumeData.main} />*/}
+        <Footer data={resumeData.main} />
         <Contact data={resumeData.main} />
       </main>
+      <FloatButtonBackToTop tooltip="Back to Top" />
     </div>
   );
-};
-
-export default HomePage;
+}

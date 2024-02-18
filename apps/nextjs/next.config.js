@@ -6,7 +6,7 @@ const jiti = _jiti(fileURLToPath(import.meta.url));
 
 // Import env files to validate at build time. Use jiti so we can load .ts files in here.
 jiti("./src/env");
-jiti("@vyductan/api/auth/env");
+jiti("@vyductan/api/env");
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",

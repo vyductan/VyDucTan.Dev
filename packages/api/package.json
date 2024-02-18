@@ -7,10 +7,10 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./db": "./src/db.ts",
-    "./auth": "./auth/index.ts",
     "./types": "./src/types.ts",
-    "./auth/env": "./auth/env.ts",
+    "./env": "./src/env.ts",
+    "./auth": "./src/auth/index.ts",
+    "./db": "./src/db.ts",
     "./contact": "./src/contact/action.ts"
   },
   "scripts": {

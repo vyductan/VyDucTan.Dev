@@ -36,7 +36,7 @@ export function PromptForm({
           return;
         }
         setInput("");
-        await onSubmit(inputFormatter?.(input) || input);
+        await onSubmit(inputFormatter?.(input) ?? input);
       }}
       ref={formRef}
       className="relative"
@@ -76,7 +76,7 @@ export function PromptForm({
           variant="primary"
           className="absolute bottom-5 right-4"
           disabled={isLoading || input === ""}
-          htmlType="submit"
+          type="submit"
           size="sm"
           icon={<Icon icon="lucide:send" srOnly="Send message" />}
         />

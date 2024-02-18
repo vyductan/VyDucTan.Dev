@@ -34,7 +34,7 @@ export function ChatPanel({
   reload,
 }: ChatPanelProps) {
   return (
-    <div className="bg-vert-light-gradient dark:bg-vert-dark-gradient absolute inset-x-0 bottom-0 pt-10">
+    <div className="absolute inset-x-0 bottom-0 pt-10">
       <ButtonScrollToBottom />
       <div className="mx-auto space-y-4 p-4 sm:max-w-2xl">
         <div className="flex items-center justify-center">
@@ -65,7 +65,7 @@ export function ChatPanel({
           onSubmit={async (value) => {
             await append({
               id,
-              content: inputParser?.(value) || value,
+              content: inputParser?.(value) ?? value,
               role: "user",
             });
           }}

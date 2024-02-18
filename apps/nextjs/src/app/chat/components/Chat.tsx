@@ -7,7 +7,8 @@ import { useChat } from "ai/react";
 
 import { useLocalStorage } from "@vyductan/hooks";
 import { Icon } from "@vyductan/icons";
-import { Button, clsm, Input, Modal, toast } from "@vyductan/ui";
+import { Button, Input, Modal, toast } from "@vyductan/ui";
+import { clsm } from "@vyductan/utils";
 
 import { ChatList } from "./ChatList";
 import { ChatPanel } from "./ChatPanel";
@@ -52,9 +53,7 @@ export const Chat = ({
     },
     onResponse(response) {
       if (response.status === 401) {
-        toast.error({
-          title: response.statusText,
-        });
+        toast.error(response.statusText);
       }
     },
   });
@@ -63,6 +62,7 @@ export const Chat = ({
     if (initialMessages) {
       setMessages(initialMessages);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialMessages]);
 
   return (
@@ -71,7 +71,7 @@ export const Chat = ({
         <div>{title}</div>
         <div className="absolute inset-y-0 right-0 flex w-fit items-center justify-center px-4">
           <Button
-            type="ghost"
+            variant="ghost"
             icon={<Icon icon="uil:setting" />}
             onClick={() => setManualTokenIsOpen(true)}
           />

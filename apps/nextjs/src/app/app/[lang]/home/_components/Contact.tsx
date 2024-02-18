@@ -5,7 +5,7 @@ import { useState } from "react";
 import { sendMailAction } from "@vyductan/api/contact";
 import { sendMailSchema } from "@vyductan/api/types";
 import { MailOutlined } from "@vyductan/icons";
-import { AutoForm, Button, useForm } from "@vyductan/ui";
+import { AutoForm, Button, toast, useForm } from "@vyductan/ui";
 
 import type { ResumeData } from "../resumeData";
 
@@ -21,11 +21,11 @@ const Contact = ({ data }: ContactProps) => {
     onSubmit: (values) => {
       setIsPending(true);
       sendMailAction(values)
-        .then((res) => {
-          console.log(res);
+        .then(() => {
+          toast.success("Successfully sent your message.");
         })
         .catch((error) => {
-          console.log(error);
+          toast.error((error as Error).message);
         })
         .finally(() => {
           setIsPending(false);

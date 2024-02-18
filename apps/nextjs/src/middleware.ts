@@ -9,7 +9,6 @@ const I18nMiddleware = createI18nMiddleware({
   defaultLocale: "en",
   urlMappingStrategy: "rewriteDefault",
 });
-
 export async function middleware(req: NextRequest) {
   const nextUrl = req.nextUrl;
 

@@ -87,7 +87,7 @@ const columns: TableColumnDef<WordResponse>[] = [
           {value.map((x, idx) => (
             <li key={idx} className="relative flex">
               <SpeakerIcon
-                className="absolute left-0 top-[3px] h-3.5 w-3.5"
+                className="absolute left-0 top-[3px] size-3.5"
                 text={x}
               />
               <span className="indent-5">{x}</span>

@@ -30,23 +30,6 @@ export const {
     }),
   ],
   callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
-      const isLoggedIn = !!auth?.user;
-      const paths = ["/english"];
-      const isProtected = paths.some((path) => nextUrl.pathname.includes(path));
-
-      if (isProtected && !isLoggedIn) {
-        const redirectUrl = new URL("/signin", nextUrl.origin);
-        redirectUrl.searchParams.append("callbackUrl", nextUrl.href);
-        return Response.redirect(redirectUrl);
-      }
-
-      if (nextUrl.pathname.includes("/signin") && isLoggedIn) {
-        const redirectUrl = new URL("/", nextUrl.origin);
-        return Response.redirect(redirectUrl);
-      }
-      return true;
-    },
     session: (opts) => {
       if (!("user" in opts)) throw "unreachable with session strategy";
 

@@ -43,7 +43,6 @@ export const projectsRouter = createTRPCRouter({
   addTask: protectedProcedure
     .input(insertTaskSchema)
     .mutation(({ ctx, input }) => {
-      console.log("iiiiii", input);
       return ctx.db.insert(schema.tasks).values(input);
     }),
 });

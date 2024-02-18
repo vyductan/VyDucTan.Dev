@@ -4,7 +4,7 @@ import { OAuth2Client } from "google-auth-library";
 import nodemailer from "nodemailer";
 
 import type { SendMailParams } from "./types";
-import { env } from "../env";
+import { env } from "../../env";
 
 const ADMIN_EMAIL_ADDRESS = "vdt5snet@gmail.com";
 

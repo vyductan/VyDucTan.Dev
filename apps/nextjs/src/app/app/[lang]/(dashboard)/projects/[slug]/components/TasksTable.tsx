@@ -12,9 +12,9 @@ type TasksTableProps = {
 };
 export const TasksTable = ({ projectId, dataSource }: TasksTableProps) => {
   const actionColumn: TableColumnDef<ProjectTasksResponse> = {
-    render: (_, { id }) => (
+    render: ({ record }) => (
       <TasksModalForm
-        id={id}
+        id={record.id}
         projectId={projectId}
         title="Edit Task"
         trigger={<Button>Edit</Button>}

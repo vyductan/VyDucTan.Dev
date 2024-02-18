@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import type { CreateProjectParams } from "@vyductan/api/types";
 import { insertProjectSchema } from "@vyductan/api/types";
-import { AutoForm, Loader, Modal, useForm } from "@vyductan/ui";
+import { AutoForm, Modal, Spin, toast, useForm } from "@vyductan/ui";
 
 import { api } from "~/trpc/react";
 
@@ -30,7 +30,7 @@ const ProjectModalForm = ({ id, isOpen, onCancel, onOpenChange }: Props) => {
       await utils.projects.all.invalidate();
     },
     onError: (error) => {
-      console.log("error", error);
+      toast(error.message);
       // form.setError(error)
     },
   });
@@ -42,7 +42,7 @@ const ProjectModalForm = ({ id, isOpen, onCancel, onOpenChange }: Props) => {
       await utils.projects.all.invalidate();
     },
     onError: (error) => {
-      console.log("error", error);
+      toast(error.message);
       // form.setError(error)
     },
   });
@@ -80,7 +80,7 @@ const ProjectModalForm = ({ id, isOpen, onCancel, onOpenChange }: Props) => {
     >
       {!isOpen ? null : id && isPending ? (
         <>
-          <Loader />
+          <Spin />
         </>
       ) : (
         <AutoForm

@@ -36,6 +36,21 @@ export const projectsRouter = createTRPCRouter({
       return ctx.db.insert(schema.projects).values(input);
     }),
 
+  update: protectedProcedure
+    .input(
+      insertProjectSchema.merge(
+        z.object({
+          id: z.string(),
+        }),
+      ),
+    )
+    .mutation(({ ctx, input }) => {
+      return ctx.db
+        .update(schema.projects)
+        .set(input)
+        .where(eq(schema.projects.id, input.id));
+    }),
+
   delete: protectedProcedure.input(z.string()).mutation(({ ctx, input }) => {
     return ctx.db.delete(schema.projects).where(eq(schema.projects.id, input));
   }),

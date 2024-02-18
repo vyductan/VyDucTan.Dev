@@ -92,11 +92,9 @@ export const WordModalForm = ({
         className="w-screen-md"
         onOk={form?.submit}
         onCancel={() => {
-          // setO(!o);
           onCancel();
-          // resetFields();
-          // form.reset()
         }}
+        onOpenChange={onOpenChange}
       >
         {/* Should unmount form when hide modal */}
         {!isOpen ? null : id && isPending ? (

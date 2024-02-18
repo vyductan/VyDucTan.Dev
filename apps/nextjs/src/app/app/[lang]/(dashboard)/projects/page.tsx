@@ -42,7 +42,7 @@ export default function ProjectsPage() {
       <ProjectsTable
         dataSource={projects}
         actionColumn={{
-          render: (_, record) => {
+          render: ({ record }) => {
             return (
               <>
                 <Button

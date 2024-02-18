@@ -59,7 +59,7 @@ export const UserNav = ({ user }: UserNavProps) => {
       asChild
       placement="bottom-end"
     >
-      <Button type="ghost" className="relative h-10 w-10 rounded-full">
+      <Button variant="ghost" className="relative size-10 rounded-full">
         <Avatar
           src={user.image ?? undefined}
           alt={user.name ?? "User avatar"}

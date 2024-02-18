@@ -18,7 +18,7 @@ const columns: TableColumnDef<ProjectResponse>[] = [
   {
     dataIndex: "name",
     title: "Name",
-    render: (value, record) => {
+    render: ({ record, value }) => {
       return <Link href={`projects/${record.slug}`}>{value}</Link>;
     },
   },

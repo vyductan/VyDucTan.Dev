@@ -24,7 +24,7 @@ export const TasksModalForm = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const utils = api.useUtils();
-  const { data, isLoading } = api.projects.taskById.useQuery(
+  const { data, isLoading } = api.tasks.byId.useQuery(
     {
       id: id!,
     },
@@ -33,7 +33,7 @@ export const TasksModalForm = ({
       enabled: !!id && isModalOpen,
     },
   );
-  const addTask = api.projects.addTask.useMutation({
+  const addTask = api.tasks.create.useMutation({
     onSuccess: async () => {
       // form.reset();
       // setTitle("");
@@ -46,7 +46,7 @@ export const TasksModalForm = ({
       // form.setError(error)
     },
   });
-  const updateTask = api.projects.updateTask.useMutation({
+  const updateTask = api.tasks.update.useMutation({
     onSuccess: async () => {
       // form.reset();
       // setTitle("");
@@ -112,7 +112,7 @@ export const TasksModalForm = ({
             },
             {
               type: "date-range",
-              name: "estimated_duration",
+              name: "estimatedDuration",
               label: "Due Date",
             },
             {

@@ -13,6 +13,8 @@ export const todoStatusEnum = pgEnum("todo_status", [
   "archived",
 ]);
 
+export const taskTypeEnum = pgEnum("task_type", ["", "bug", "feat", "doc"]);
+
 export const tasks = pgTable("task", {
   id: text("id")
     .$defaultFn(() => nanoid())
@@ -22,10 +24,12 @@ export const tasks = pgTable("task", {
   name: text("name").notNull(),
   status: todoStatusEnum("status").default("").notNull(),
   estimatedStart: timestamp("estimated_start"),
-  estimatedEnd: timestamp("estimated_start"),
+  estimatedEnd: timestamp("estimated_end"),
   description: text("description"),
   content: json("content"),
   completedAt: timestamp("completed_at"),
+  type: taskTypeEnum("type").default("").notNull(),
+
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 

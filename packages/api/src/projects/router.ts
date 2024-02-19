@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { desc, eq, schema } from "../db";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { insertProjectSchema, insertTaskSchema } from "./types";
+import { insertProjectSchema } from "./types";
 
 export const projectsRouter = createTRPCRouter({
   all: protectedProcedure.query(({ ctx }) => {
@@ -54,10 +54,4 @@ export const projectsRouter = createTRPCRouter({
   delete: protectedProcedure.input(z.string()).mutation(({ ctx, input }) => {
     return ctx.db.delete(schema.projects).where(eq(schema.projects.id, input));
   }),
-
-  addTask: protectedProcedure
-    .input(insertTaskSchema)
-    .mutation(({ ctx, input }) => {
-      return ctx.db.insert(schema.tasks).values(input);
-    }),
 });

@@ -12,7 +12,7 @@ const Portfolio = ({ data }: PortfolioProps) => {
   const projects = data.projects.map(function (projects) {
     const projectImage = "/images/portfolio/" + projects.image;
     return (
-      <div key={projects.title} className="image-effect-zoom-with-meta">
+      <div key={projects.title} className="">
         <a href={projects.url} title={projects.title}>
           <Image
             alt={projects.title}
@@ -20,9 +20,9 @@ const Portfolio = ({ data }: PortfolioProps) => {
             width={1280}
             height={800}
           />
-          <div className="portfolio-item-meta meta">
+          <div className="">
             <Icon icon="uil:link" />
-            <h5 className="meta-title">{projects.title}</h5>
+            <h5 className="">{projects.title}</h5>
             <p>{projects.category}</p>
           </div>
         </a>

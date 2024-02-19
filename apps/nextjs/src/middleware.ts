@@ -13,17 +13,6 @@ export async function middleware(req: NextRequest) {
   const nextUrl = req.nextUrl;
 
   /**
-   * I18n auto set lang path
-   */
-  const i18nResponse = I18nMiddleware(req);
-  // To get current url in server side
-  i18nResponse.headers.set("x-url", req.url);
-  // Temporary redirect (no need add local when NextResponse.(redirect|rewrite))
-  if (i18nResponse.status === 307) {
-    return i18nResponse;
-  }
-
-  /**
    * Rewrite URL
    */
   // Get hostname of request (e.g. demo.vercel.pub, demo.localhost:3000)
@@ -49,6 +38,18 @@ export async function middleware(req: NextRequest) {
 
   // rewrites for app pages
   if (hostname == `app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) {
+    /**
+     * I18n auto set lang path
+     * only for app.* domain
+     */
+    const i18nResponse = I18nMiddleware(req);
+    // To get current url in server side
+    i18nResponse.headers.set("x-url", req.url);
+    // Temporary redirect (no need add local when NextResponse.(redirect|rewrite))
+    if (i18nResponse.status === 307) {
+      return i18nResponse;
+    }
+
     const session = await auth();
     if (!session && !path.includes("/signin")) {
       const redirectUrl = new URL("/signin", req.url);
@@ -64,7 +65,7 @@ export async function middleware(req: NextRequest) {
 
   // rewrite root application to `/home` folder
   if (
-    hostname === "localhost:3000" ||
+    hostname === "localhost:8080" ||
     hostname === process.env.NEXT_PUBLIC_ROOT_DOMAIN
   ) {
     return NextResponse.rewrite(

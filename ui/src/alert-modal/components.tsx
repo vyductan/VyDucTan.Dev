@@ -106,9 +106,6 @@ const AlertDialogAction = React.forwardRef<
     asChild?: boolean;
     isControlled?: boolean;
   }
-  // React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action> & {
-  //   loading?: boolean;
-  // }
 >(({ asChild, isControlled, ...props }, ref) =>
   asChild ?? isControlled ? (
     <Button variant="primary" {...props} />

@@ -158,7 +158,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={loading ?? disabled}
         {...props}
       >
-        {(loading ?? icon) && (
+        {(!!loading || icon) && (
           <span className={clsm(children && "mr-2")}>
             <Slot className="size-5">{loading ? <LoadingIcon /> : icon}</Slot>
           </span>

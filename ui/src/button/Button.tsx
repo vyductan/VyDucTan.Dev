@@ -7,7 +7,7 @@ import { cva } from "class-variance-authority";
 
 import { clsm } from "@vyductan/utils";
 
-import { Spin } from "../spin";
+import { LoadingIcon } from "./LoadingIcon";
 
 const buttonVariants = cva(
   [
@@ -112,9 +112,12 @@ const buttonVariants = cva(
   },
 );
 
+type ButtonVariants = VariantProps<typeof buttonVariants>;
+
 export interface ButtonProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "color">,
-    VariantProps<typeof buttonVariants> {
+    Omit<ButtonVariants, "color"> {
+  color?: NonNullable<ButtonVariants["color"]>;
   asChild?: boolean;
   href?: string;
   loading?: boolean;
@@ -155,8 +158,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={loading ?? disabled}
         {...props}
       >
-        {icon && <span className={clsm(children && "mr-2")}>{icon}</span>}
-        {loading ? <Spin>{children}</Spin> : children}
+        {(loading ?? icon) && (
+          <span className={clsm(children && "mr-2")}>
+            <Slot className="size-5">{loading ? <LoadingIcon /> : icon}</Slot>
+          </span>
+        )}
+        {children}
       </Comp>
     );
   },

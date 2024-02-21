@@ -11,16 +11,8 @@ import {
   AlertDialogTrigger,
 } from "./components";
 
-type AlertModalProps = ModalProps & {
-  className?: string;
-  children?: React.ReactNode;
-  description?: React.ReactNode;
-  okText?: string;
-  okLoading?: boolean;
-  title?: React.ReactNode;
-  trigger?: React.ReactNode;
-  onOk?: React.MouseEventHandler<HTMLButtonElement>;
-  onCancel?: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+type AlertModalProps = Omit<ModalProps, "onOk"> & {
+  onConfirm?: () => void;
 };
 
 export const AlertModal = ({
@@ -30,7 +22,7 @@ export const AlertModal = ({
   okLoading,
   title,
   trigger,
-  onOk,
+  onConfirm,
   onCancel,
   onOpenChange,
   ...rest
@@ -55,8 +47,13 @@ export const AlertModal = ({
         </AlertDialogHeader>
 
         <AlertDialogFooter>
-          <AlertDialogCancel onClick={onCancel}>Cancel</AlertDialogCancel>
-          <AlertDialogAction loading={okLoading} onClick={onOk}>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction
+            isControlled={rest.open !== undefined}
+            loading={okLoading}
+            onClick={onConfirm}
+            onKeyDown={(e) => e.key === "Enter" && onConfirm?.()}
+          >
             {okText ?? "Confirm"}
           </AlertDialogAction>
         </AlertDialogFooter>

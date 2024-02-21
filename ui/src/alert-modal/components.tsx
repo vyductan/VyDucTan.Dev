@@ -5,8 +5,8 @@ import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 
 import { clsm } from "@vyductan/utils";
 
-import { buttonVariants } from "../button";
-import { Spin } from "../spin";
+import type { ButtonProps } from "../button";
+import { Button, buttonVariants } from "../button";
 
 const AlertDialog = AlertDialogPrimitive.Root;
 
@@ -102,19 +102,20 @@ AlertDialogDescription.displayName =
 
 const AlertDialogAction = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Action>,
-  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action> & {
-    loading?: boolean;
+  ButtonProps & {
+    asChild?: boolean;
+    isControlled?: boolean;
   }
->(({ className, children, disabled, loading, ...props }, ref) => (
-  <AlertDialogPrimitive.Action
-    ref={ref}
-    className={clsm(buttonVariants({ variant: "primary" }), className)}
-    disabled={disabled ?? loading}
-    {...props}
-  >
-    {loading ? <Spin>{children}</Spin> : children}
-  </AlertDialogPrimitive.Action>
-));
+  // React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action> & {
+  //   loading?: boolean;
+  // }
+>(({ asChild, isControlled, ...props }, ref) =>
+  asChild ?? isControlled ? (
+    <Button variant="primary" {...props} />
+  ) : (
+    <AlertDialogPrimitive.Action ref={ref} asChild {...props} />
+  ),
+);
 AlertDialogAction.displayName = AlertDialogPrimitive.Action.displayName;
 
 const AlertDialogCancel = React.forwardRef<

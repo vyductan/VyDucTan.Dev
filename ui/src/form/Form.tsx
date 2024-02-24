@@ -53,7 +53,13 @@ type FormProps<
   TFieldValues extends FieldValues,
   TContext,
   TTransformedValues extends FieldValues = TFieldValues,
-> = {
+> = Omit<
+  React.DetailedHTMLProps<
+    React.FormHTMLAttributes<HTMLFormElement>,
+    HTMLFormElement
+  >,
+  "children"
+> & {
   form: FormInstance<TFieldValues, TContext, TTransformedValues>;
   children:
     | ReactNode
@@ -68,6 +74,7 @@ const Form = <
 >({
   form,
   children,
+  ...restProps
 }: FormProps<TFieldValues, TContext, TTransformedValues>) => {
   //   {
   //   form: formInstanceExternal,
@@ -120,6 +127,7 @@ const Form = <
       <form
         // onSubmit={onSubmit ? formInstance.handleSubmit(onSubmit) : undefined}
         onSubmit={form.submit}
+        {...restProps}
       >
         {typeof children === "function" ? children(form) : children}
       </form>

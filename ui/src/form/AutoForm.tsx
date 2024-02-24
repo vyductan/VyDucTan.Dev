@@ -4,8 +4,9 @@ import type { Control, FieldValues, Path } from "react-hook-form";
 import React from "react";
 
 import { DeleteOutlined } from "@vyductan/icons";
-import { clsm } from "@vyductan/utils";
+import { clsm } from "@vyductan/ui";
 
+import type { FormProps } from "./Form";
 import type { FieldsSchema, FieldType, InputUnion } from "./types";
 import type { FormInstance } from "./useForm";
 import { AutoComplete } from "../autocomplete";
@@ -28,7 +29,7 @@ type AutoFormProps<
   TContext = unknown,
   TTransformedValues extends FieldValues = TFieldValues,
   TFieldType extends FieldType = FieldType,
-> = {
+> = Omit<FormProps<TFieldValues, TContext, TTransformedValues>, "children"> & {
   form: FormInstance<TFieldValues, TContext, TTransformedValues>;
   fields: FieldsSchema<TFieldValues, TFieldType>[];
 };
@@ -40,6 +41,7 @@ const AutoForm = <
 >({
   form,
   fields,
+  ...restProps
 }: AutoFormProps<TFieldValues, TContext, TTransformedValues, TFieldType>) => {
   const { control } = form;
 
@@ -144,7 +146,11 @@ const AutoForm = <
       })();
       return <React.Fragment key={index}>{component}</React.Fragment>;
     });
-  return <Form form={form}>{render(fields)}</Form>;
+  return (
+    <Form form={form} {...restProps}>
+      {render(fields)}
+    </Form>
+  );
 };
 
 const renderInput = (props: InputUnion) => {

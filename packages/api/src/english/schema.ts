@@ -33,7 +33,8 @@ export const wordDefinitions = pgTable("wordDefinitions", {
   cefrLevel: cefrLevelEnum("cefrLevel"),
   english: text("english").notNull(),
   vietnamese: text("vietnamese").notNull(),
+  relatedWords: text("related_words"),
   examples: text("examples").array().notNull(),
   mastery: masteryEnum("mastery"),
-  lastLearnedAt: timestamp("last_learned_at"),
+  lastLearnedAt: timestamp("last_learned_at").defaultNow(),
 });

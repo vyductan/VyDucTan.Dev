@@ -7,7 +7,7 @@ import type {
 } from "@vyductan/api/types";
 import type { RadioOption } from "@vyductan/ui";
 import { insertWordDefinitionSchema } from "@vyductan/api/types";
-import { AutoForm, Modal, Spin, toast, useForm } from "@vyductan/ui";
+import { AutoForm, message, Modal, Spin, useForm } from "@vyductan/ui";
 
 import { api } from "~/trpc/react";
 
@@ -42,7 +42,7 @@ export const WordModalForm = ({
       await utils.english.all.invalidate();
     },
     onError: (error) => {
-      toast.error(error.message);
+      message.error(error.message);
       // form.setError(error)
     },
   });
@@ -55,7 +55,7 @@ export const WordModalForm = ({
       await utils.english.all.invalidate();
     },
     onError: (error) => {
-      toast.error(error.message);
+      message.error(error.message);
       // form.setError(error)
     },
   });
@@ -200,6 +200,12 @@ export const WordModalForm = ({
                 name: "vietnamese",
                 label: "Vietnamese",
                 placeholder: "Meaning of the word in Vietnamese",
+              },
+              {
+                type: "text",
+                name: "relatedWords",
+                label: "Related Words",
+                placeholder: "Related words with the word",
               },
               {
                 type: "list",

@@ -5,7 +5,7 @@ import { useState } from "react";
 import type { WordResponse } from "@vyductan/api/types";
 import type { TableColumnDef } from "@vyductan/ui";
 import { SpeakerIcon } from "@vyductan/tts";
-import { AlertModal, Button, Table } from "@vyductan/ui";
+import { AlertModal, Button, message, Table } from "@vyductan/ui";
 
 import { api } from "~/trpc/react";
 import { WordModalForm } from "./WordModalForm";
@@ -14,6 +14,20 @@ export const WordTable = () => {
   const [words] = api.english.all.useSuspenseQuery();
   const [currentRow, setCurrentRow] = useState<WordResponse>();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const utils = api.useUtils();
+  const deleteWord = api.english.delete.useMutation({
+    onSuccess: async () => {
+      message.success("Deleted");
+      setCurrentRow(undefined);
+      setIsDeleteModalOpen(false);
+      await utils.english.all.invalidate();
+    },
+    onError: (error) => {
+      message.error(error.message);
+    },
+  });
 
   return (
     <>
@@ -36,11 +50,14 @@ export const WordTable = () => {
                   >
                     Edit
                   </Button>
-                  <AlertModal
-                    title="Confirm delete"
-                    description="Are you sure you want to delete this word?"
-                    trigger={<Button>Delete</Button>}
-                  />
+                  <Button
+                    onClick={() => {
+                      setCurrentRow(record);
+                      setIsDeleteModalOpen(true);
+                    }}
+                  >
+                    Delete
+                  </Button>
                 </>
               );
             },
@@ -56,6 +73,16 @@ export const WordTable = () => {
           setIsModalOpen(false);
         }}
         onOpenChange={setIsModalOpen}
+      />
+      <AlertModal
+        open={isDeleteModalOpen}
+        onOpenChange={setIsDeleteModalOpen}
+        title="Confirm delete"
+        description="Are you sure you want to delete this word?"
+        okLoading={deleteWord.isPending}
+        onConfirm={() => {
+          currentRow && deleteWord.mutate(currentRow?.id);
+        }}
       />
     </>
   );

@@ -1,3 +1,4 @@
+import { subDays } from "date-fns";
 import { z } from "zod";
 
 import { eq, schema } from "../db";
@@ -20,7 +21,7 @@ export const englishRouter = createTRPCRouter({
 
   update: protectedProcedure
     .input(
-      insertWordDefinitionSchema.merge(
+      insertWordDefinitionSchema.partial().merge(
         z.object({
           id: z.string(),
         }),
@@ -37,7 +38,7 @@ export const englishRouter = createTRPCRouter({
     .input(z.object({ id: z.string() }))
     .query(({ ctx, input }) => {
       return ctx.db.query.wordDefinitions.findFirst({
-        where: eq(schema.wordDefinitions.id, input.id),
+        where: (table, { eq }) => eq(table.id, input.id),
       });
     }),
 
@@ -46,4 +47,39 @@ export const englishRouter = createTRPCRouter({
       .delete(schema.wordDefinitions)
       .where(eq(schema.wordDefinitions.id, input));
   }),
+
+  getWordToLearn: protectedProcedure.query(({ ctx }) => {
+    return ctx.db.query.wordDefinitions.findFirst({
+      where: (t, { and, lt, ne, or, isNull }) =>
+        and(
+          ne(t.mastery, "5"),
+          or(
+            isNull(t.lastLearnedAt),
+            lt(t.lastLearnedAt, subDays(new Date(), 3)),
+          ),
+        ),
+    });
+  }),
+  mastery: protectedProcedure
+    .input(
+      insertWordDefinitionSchema
+        .pick({
+          mastery: true,
+        })
+        .partial()
+        .merge(
+          z.object({
+            id: z.string(),
+          }),
+        ),
+    )
+    .mutation(({ ctx, input }) => {
+      return ctx.db
+        .update(schema.wordDefinitions)
+        .set({
+          ...input,
+          lastLearnedAt: new Date(),
+        })
+        .where(eq(schema.wordDefinitions.id, input.id));
+    }),
 });

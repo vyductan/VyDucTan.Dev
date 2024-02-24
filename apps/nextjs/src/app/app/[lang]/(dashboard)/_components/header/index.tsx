@@ -8,7 +8,7 @@ import { SignoutForm } from "./SignoutForm";
 import { UserNav } from "./UserNav";
 
 export const HEADER_HEIGHT = 80;
-export const Header = async () => {
+export const DashboardHeader = async () => {
   const session = await auth();
 
   return (
@@ -26,7 +26,7 @@ export const Header = async () => {
 
         <div className="ml-auto">
           {!session ? (
-            <Button variant="primary">
+            <Button primary>
               <Link href={`/signin?callbackUrl=${headers().get("x-url")}`}>
                 Sign In
               </Link>

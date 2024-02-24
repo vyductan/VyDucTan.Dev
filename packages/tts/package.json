@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@vyductan/icons": "workspace:*",
-    "@vyductan/utils": "workspace:*",
+    "@vyductan/ui": "workspace:*",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

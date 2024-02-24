@@ -259,6 +259,9 @@ importers:
       sonner:
         specifier: ^1.4.1
         version: 1.4.1(react-dom@18.2.0)(react@18.2.0)
+      tailwind-merge:
+        specifier: ^2.2.1
+        version: 2.2.1
       zod:
         specifier: ^3.22.4
         version: 3.22.4
@@ -312,15 +315,9 @@ importers:
 
   '@vyductan/utils':
     dependencies:
-      clsx:
-        specifier: ^2.1.0
-        version: 2.1.0
       slugify:
         specifier: ^1.6.6
         version: 1.6.6
-      tailwind-merge:
-        specifier: ^2.2.1
-        version: 2.2.1
 
   apps/nextjs:
     dependencies:
@@ -605,9 +602,9 @@ importers:
       '@vyductan/icons':
         specifier: workspace:*
         version: link:../../@vyductan/icons
-      '@vyductan/utils':
+      '@vyductan/ui':
         specifier: workspace:*
-        version: link:../../@vyductan/utils
+        version: link:../../@vyductan/ui
       uuid:
         specifier: ^9.0.1
         version: 9.0.1

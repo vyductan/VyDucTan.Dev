@@ -1,13 +1,19 @@
-import "~/app/globals.css";
-
 import type { Metadata, Viewport } from "next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 
-import { clsm } from "@vyductan/utils";
+import {
+  clsm,
+  TailwindIndicator,
+  ThemeProvider,
+  ThemeToggle,
+  Toaster,
+} from "@vyductan/ui";
 
 import { env } from "~/env";
-import { AppProvider } from "./providers";
+import { TRPCReactProvider } from "~/trpc/react";
+
+import "~/app/globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -53,7 +59,15 @@ export default function RootLayout({
           GeistMono.className,
         )}
       >
-        <AppProvider>{children}</AppProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <TRPCReactProvider>{children}</TRPCReactProvider>
+          {/* <AppProvider>{children}</AppProvider> */}
+          <div className="fixed bottom-4 right-4">
+            <ThemeToggle />
+          </div>
+          <Toaster />
+          <TailwindIndicator />
+        </ThemeProvider>
       </body>
     </html>
   );

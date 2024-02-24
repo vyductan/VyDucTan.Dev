@@ -1,13 +1,8 @@
-import type { TRPCErrorResponse } from "@trpc/server/rpc";
 import { cache } from "react";
 import { headers } from "next/headers";
-import { createTRPCClient, loggerLink, TRPCClientError } from "@trpc/client";
-import { callProcedure } from "@trpc/server";
-import { observable } from "@trpc/server/observable";
-import SuperJSON from "superjson";
 
 import { createCaller, createTRPCContext } from "@vyductan/api";
-import { auth } from "@vyductan/auth";
+import { auth } from "@vyductan/api/auth";
 
 /**
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when

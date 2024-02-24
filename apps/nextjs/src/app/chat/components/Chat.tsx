@@ -7,8 +7,7 @@ import { useChat } from "ai/react";
 
 import { useLocalStorage } from "@vyductan/hooks";
 import { Icon } from "@vyductan/icons";
-import { Button, Input, Modal, toast } from "@vyductan/ui";
-import { clsm } from "@vyductan/utils";
+import { Button, clsm, Input, Modal, toast } from "@vyductan/ui";
 
 import { ChatList } from "./ChatList";
 import { ChatPanel } from "./ChatPanel";

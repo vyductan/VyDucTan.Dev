@@ -5,11 +5,6 @@ export const env = createEnv({
   server: {
     BLOB_READ_WRITE_TOKEN: z.string().min(1),
 
-    POSTGRES_HOST: z.string().min(1),
-    POSTGRES_USER: z.string().min(1),
-    POSTGRES_PASSWORD: z.string().min(1),
-    POSTGRES_DATABASE: z.string().min(1),
-
     GOOGLE_APP_PASSWORD: z.string().min(1),
     GOOGLE_CLIENT_ID: z.string().min(1),
     GOOGLE_CLIENT_SECRET: z.string().min(1),

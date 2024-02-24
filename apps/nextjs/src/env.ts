@@ -16,11 +16,6 @@ export const env = createEnv({
     // Database
     // DATABASE_URL: z.string().url(),
     POSTGRES_URL: z.string().url(),
-    POSTGRES_URL_NON_POOLING: z.string().url(),
-    POSTGRES_USER: z.string(),
-    POSTGRES_HOST: z.string(),
-    POSTGRES_PASSWORD: z.string(),
-    POSTGRES_DATABASE: z.string(),
 
     // OpenAI
     OPENAI_API_KEY: z.string(),

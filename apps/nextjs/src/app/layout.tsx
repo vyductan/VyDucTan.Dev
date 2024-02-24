@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     env.VERCEL_ENV === "production"
       ? "https://vyductan.com"
-      : "http://localhost:3000",
+      : `http://localhost:${process.env.PORT ?? 3000}`,
   ),
   title: "VyDucTan",
   description: "Simple monorepo with shared backend for web & mobile apps",

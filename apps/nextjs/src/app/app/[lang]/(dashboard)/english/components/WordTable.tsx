@@ -14,7 +14,9 @@ import { api } from "~/trpc/react";
 import { WordModalForm } from "./WordModalForm";
 
 export const WordTable = () => {
-  const [words] = api.english.all.useSuspenseQuery();
+  const { data: words } = api.english.all.useQuery(undefined, {
+    initialData: [],
+  });
   const [currentRow, setCurrentRow] = useState<WordResponse>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);

@@ -1,7 +1,6 @@
 import { signIn } from "@vyductan/api/auth";
-import { Button } from "@vyductan/ui";
-
-import { Icon } from "../icons";
+import { Button } from "@vyductan/ui/button";
+import { Icon } from "@vyductan/ui/icons";
 
 export default function LoginPage({
   searchParams: { callbackUrl },

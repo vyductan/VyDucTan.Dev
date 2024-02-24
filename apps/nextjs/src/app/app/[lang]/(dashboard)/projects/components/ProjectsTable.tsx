@@ -3,8 +3,8 @@
 import Link from "next/link";
 
 import type { ProjectResponse } from "@vyductan/api/types";
-import type { TableColumnDef } from "@vyductan/ui";
-import { Table } from "@vyductan/ui";
+import type { TableColumnDef } from "@vyductan/ui/table";
+import { Table } from "@vyductan/ui/table";
 
 type Props = {
   dataSource: ProjectResponse[];

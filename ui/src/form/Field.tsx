@@ -7,7 +7,6 @@ import type {
   ControllerRenderProps,
   FieldPath,
   FieldValues,
-  PathValue,
   UseFormStateReturn,
 } from "react-hook-form";
 import { cloneElement, useId } from "react";
@@ -74,7 +73,6 @@ const Field = <
       }}
     >
       <Controller
-        defaultValue={"" as PathValue<TFieldValues, TName>}
         {...props}
         render={({ field, fieldState, formState }) => (
           <div className={clsm("space-y-2", "mb-6", className)}>

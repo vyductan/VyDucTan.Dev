@@ -1,6 +1,6 @@
 "use client";
 
-import type { Control, FieldValues, Path } from "react-hook-form";
+import type { Control, FieldValues, Path, PathValue } from "react-hook-form";
 import React from "react";
 
 import { clsm } from "@vyductan/ui";
@@ -134,6 +134,11 @@ const AutoForm = <
             label={label}
             description={description}
             className={className}
+            defaultValue={
+              ["text"].includes(field.type)
+                ? ("" as PathValue<TFieldValues, Path<TFieldValues>>)
+                : undefined
+            }
           >
             {({ field: fieldRenderProps }) => {
               return renderInput({

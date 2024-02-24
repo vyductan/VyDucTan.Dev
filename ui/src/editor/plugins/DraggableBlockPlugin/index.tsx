@@ -234,8 +234,9 @@ function setTargetLine(
   const left = TEXT_BOX_HORIZONTAL_PADDING - SPACE;
 
   targetLineElem.style.transform = `translate(${left}px, ${top}px)`;
-  targetLineElem.style.width = `${anchorWidth - (TEXT_BOX_HORIZONTAL_PADDING - SPACE) * 2
-    }px`;
+  targetLineElem.style.width = `${
+    anchorWidth - (TEXT_BOX_HORIZONTAL_PADDING - SPACE) * 2
+  }px`;
   targetLineElem.style.opacity = ".4";
 }
 

@@ -56,9 +56,7 @@ function Calendar({
       }}
       components={{
         IconLeft: () => <Icon icon="mingcute:left-fill" className="size-4" />,
-        IconRight: () => (
-          <Icon icon="mingcute:right-fill" className="size-4" />
-        ),
+        IconRight: () => <Icon icon="mingcute:right-fill" className="size-4" />,
       }}
       {...props}
     />

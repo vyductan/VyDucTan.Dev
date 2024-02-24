@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from "react";
 import { forwardRef } from "react";
 
-import { clsm } from "@vyductan/utils";
+import { clsm } from "@vyductan/ui";
 
 import { useField } from "./useField";
 

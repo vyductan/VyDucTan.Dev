@@ -28,6 +28,7 @@ type MenuItem = {
 type Menu = {
   className?: string;
   items: MenuItem[];
+  itemsClassName?: string;
 };
 export type DropdownProps = DropdownMenuTriggerProps & {
   className?: string;
@@ -56,8 +57,8 @@ export const Dropdown = ({
       : placement?.includes("start")
         ? "start"
         : "end";
-  const renderMenu = (menu: MenuItem[]): ReactNode => {
-    return menu.map(
+  const renderMenu = (items: MenuItem[]): ReactNode => {
+    return items.map(
       ({ as, group, href, key, label, icon, shortcut, onSelect }, index) => (
         <Fragment key={key ?? index}>
           {as === "title" ? (
@@ -67,7 +68,11 @@ export const Dropdown = ({
           ) : group ? (
             renderMenu(group)
           ) : (
-            <DropdownMenuItem onSelect={onSelect} asChild={!!href}>
+            <DropdownMenuItem
+              onSelect={onSelect}
+              asChild={!!href}
+              className={menu.itemsClassName}
+            >
               {href ? (
                 <a href={href}>
                   {icon &&

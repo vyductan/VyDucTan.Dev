@@ -6,7 +6,7 @@ import {
   ChevronRightOutlined,
   CircleOutlined,
 } from "@vyductan/icons";
-import { clsm } from "@vyductan/utils";
+import { clsm } from "@vyductan/ui";
 
 const DropdownMenuRoot = DropdownMenuPrimitive.Root;
 

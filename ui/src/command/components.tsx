@@ -5,7 +5,7 @@ import * as React from "react";
 import { Command as CommandPrimitive, useCommandState } from "cmdk";
 
 import { Icon } from "@vyductan/icons";
-import { clsm } from "@vyductan/utils";
+import { clsm } from "@vyductan/ui";
 
 import { Dialog, DialogContent } from "../modal/components";
 

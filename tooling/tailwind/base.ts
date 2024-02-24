@@ -1,11 +1,16 @@
 import type { Config } from "tailwindcss";
-import { fontSize, spacing } from "tailwindcss/defaultTheme";
+import { fontSize } from "tailwindcss/defaultTheme";
 
 export default {
   darkMode: ["class"],
   content: ["src/**/*.{ts,tsx}"],
   theme: {
     extend: {
+      borderRadius: {
+        sm: `calc(var(--radius) - 2px)`,
+        md: `var(--radius)`,
+        lg: `calc(var(--radius) + 2px)`,
+      },
       colors: ({ colors }) => ({
         error: colors.red[300],
         background: "hsl(var(--background))",
@@ -69,13 +74,6 @@ export default {
       },
       width: {
         "screen-md": "1024px",
-      },
-      height: {
-        xs: spacing[6],
-        sm: spacing[8],
-        md: spacing[10],
-        lg: spacing[12],
-        xl: spacing[14],
       },
       /**
        * Colors

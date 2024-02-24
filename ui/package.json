@@ -7,6 +7,7 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
+    "./types": "./src/types.ts",
     "./alert": "./src/alert/index.ts",
     "./alert-modal": "./src/alert-modal/index.ts",
     "./autocomplete": "./src/autocomplete/index.ts",

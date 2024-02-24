@@ -1,5 +1,8 @@
-import type { AvatarProps, DirectionType, TagProps } from "@vyductan/ui";
-import { Avatar, clsm } from "@vyductan/ui";
+import type { AvatarProps } from "@vyductan/ui/avatar";
+import type { TagProps } from "@vyductan/ui/tag";
+import type { Direction } from "@vyductan/ui/types";
+import { clsm } from "@vyductan/ui";
+import { Avatar } from "@vyductan/ui/avatar";
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@vyductan/ui/icons";
 
 type PageHeaderProps = {
@@ -14,10 +17,7 @@ type PageHeaderProps = {
   onBack?: (e?: React.MouseEvent<HTMLElement>) => void;
 };
 
-const getBackIcon = (
-  props: PageHeaderProps,
-  direction: DirectionType = "ltr",
-) => {
+const getBackIcon = (props: PageHeaderProps, direction: Direction = "ltr") => {
   if (props.backIcon !== undefined) {
     return props.backIcon;
   }
@@ -47,10 +47,7 @@ const renderBack = (
   );
 };
 
-const renderTitle = (
-  props: PageHeaderProps,
-  direction: DirectionType = "ltr",
-) => {
+const renderTitle = (props: PageHeaderProps, direction: Direction = "ltr") => {
   const { title, avatar, subTitle, tags, extra, onBack } = props;
   const hasHeading = title ?? subTitle ?? tags ?? extra;
   // If there is nothing, return a null

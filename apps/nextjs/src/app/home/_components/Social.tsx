@@ -1,5 +1,6 @@
+import { Icon } from "@vyductan/ui/icons";
+
 import type { ResumeData } from "../resumeData";
-import { Icon } from "../icons";
 
 const IconMap = {
   facebook: <Icon icon="entypo-social:facebook" />,

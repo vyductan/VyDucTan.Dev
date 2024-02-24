@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { Tabs } from "@vyductan/ui";
+import { Tabs } from "@vyductan/ui/tabs";
 
 import { Chat } from "~/app/chat/components/Chat";
 import { useAppStore } from "~/app/store";

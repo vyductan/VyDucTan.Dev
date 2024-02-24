@@ -1,8 +1,9 @@
 import type { UseChatHelpers } from "ai/react";
 
-import { Button, ButtonScrollToBottom } from "@vyductan/ui";
+import { Button } from "@vyductan/ui/button";
+import { Icon } from "@vyductan/ui/icons";
 
-import { Icon } from "../icons";
+import { ButtonScrollToBottom } from "./ButtonScrollToBottom";
 import { PromptForm } from "./PromptForm";
 
 export interface ChatPanelProps

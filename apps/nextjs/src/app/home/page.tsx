@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 
-import { FloatButtonBackToTop } from "@vyductan/ui";
+import { FloatButtonBackToTop } from "@vyductan/ui/float-button";
 
 import { resumeData } from "./resumeData";
 

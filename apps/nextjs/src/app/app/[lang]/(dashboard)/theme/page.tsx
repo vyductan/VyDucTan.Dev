@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react";
 import { generate } from "@ant-design/colors";
 
-import { CodeBlock, ExternalLink, Input } from "@vyductan/ui";
+import { CodeBlock } from "@vyductan/ui/code-block";
+import { Input } from "@vyductan/ui/input";
+import { ExternalLink } from "@vyductan/ui/link";
 import { hexToHsl } from "@vyductan/utils";
 
 export default function ThemePage() {

@@ -5,8 +5,9 @@ import Image from "next/image";
 import { Link } from "react-scroll";
 import TypeWriter from "typewriter-effect";
 
+import { Icon } from "@vyductan/ui/icons";
+
 import type { ResumeData } from "../resumeData";
-import { Icon } from "../icons";
 import Social from "./Social";
 
 type HeaderProps = {

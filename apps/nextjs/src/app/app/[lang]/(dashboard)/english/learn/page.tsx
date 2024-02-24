@@ -4,8 +4,11 @@ import { Fragment, useEffect, useState } from "react";
 import _ from "lodash";
 
 import type { WordMastery } from "@vyductan/api/types";
-import { AutoForm, Button, message, Spin, useForm } from "@vyductan/ui";
 import { PageContainer } from "@vyductan/ui-pro";
+import { Button } from "@vyductan/ui/button";
+import { AutoForm, useForm } from "@vyductan/ui/form";
+import { Spin } from "@vyductan/ui/spin";
+import { message } from "@vyductan/ui/toast";
 
 import { api } from "~/trpc/react";
 
@@ -89,11 +92,7 @@ export default function EnglishLearnPage() {
                   type: "custom",
                   render: () => (
                     <div className="flex gap-2">
-                      <Button
-                        type="submit"
-                        variant="primary"
-                        className="w-full"
-                      >
+                      <Button primary type="submit" className="w-full">
                         Check
                       </Button>
                       <Button

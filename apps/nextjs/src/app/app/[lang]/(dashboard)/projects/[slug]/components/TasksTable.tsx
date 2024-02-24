@@ -1,8 +1,9 @@
 "use client";
 
 import type { ProjectTasksResponse } from "@vyductan/api/types";
-import type { TableColumnDef } from "@vyductan/ui";
-import { Button, Table } from "@vyductan/ui";
+import type { TableColumnDef } from "@vyductan/ui/table";
+import { Button } from "@vyductan/ui/button";
+import { Table } from "@vyductan/ui/table";
 
 import { TasksModalForm } from "./TasksModalForm";
 

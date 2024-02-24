@@ -1,7 +1,8 @@
 import Image from "next/image";
 
+import { Icon } from "@vyductan/ui/icons";
+
 import type { ResumeData } from "../resumeData";
-import { Icon } from "../icons";
 
 type AboutProps = {
   data: ResumeData["main"];

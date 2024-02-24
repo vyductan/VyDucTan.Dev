@@ -2,7 +2,10 @@ import { useEffect } from "react";
 
 import type { CreateProjectParams } from "@vyductan/api/types";
 import { insertProjectSchema } from "@vyductan/api/types";
-import { AutoForm, message, Modal, Spin, useForm } from "@vyductan/ui";
+import { AutoForm, useForm } from "@vyductan/ui/form";
+import { Modal } from "@vyductan/ui/modal";
+import { Spin } from "@vyductan/ui/spin";
+import { message } from "@vyductan/ui/toast";
 
 import { api } from "~/trpc/react";
 

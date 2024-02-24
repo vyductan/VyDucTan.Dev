@@ -11,8 +11,6 @@
     "clean": "rm -rf .turbo node_modules"
   },
   "dependencies": {
-    "clsx": "^2.1.0",
-    "slugify": "^1.6.6",
-    "tailwind-merge": "^2.2.1"
+    "slugify": "^1.6.6"
   }
 }

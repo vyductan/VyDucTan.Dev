@@ -3,9 +3,12 @@
 import { useState } from "react";
 
 import type { WordResponse } from "@vyductan/api/types";
-import type { TableColumnDef } from "@vyductan/ui";
+import type { TableColumnDef } from "@vyductan/ui/table";
 import { SpeakerIcon } from "@vyductan/tts";
-import { AlertModal, Button, message, Table } from "@vyductan/ui";
+import { AlertModal } from "@vyductan/ui/alert-modal";
+import { Button } from "@vyductan/ui/button";
+import { Table } from "@vyductan/ui/table";
+import { message } from "@vyductan/ui/toast";
 
 import { api } from "~/trpc/react";
 import { WordModalForm } from "./WordModalForm";
@@ -31,7 +34,7 @@ export const WordTable = () => {
 
   return (
     <>
-      <Button variant="primary" onClick={() => setIsModalOpen(true)}>
+      <Button primary onClick={() => setIsModalOpen(true)}>
         Add
       </Button>
 

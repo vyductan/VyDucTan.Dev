@@ -6,8 +6,12 @@ import { useEffect, useState } from "react";
 import { useChat } from "ai/react";
 
 import { useLocalStorage } from "@vyductan/hooks";
-import { Icon } from "@vyductan/icons";
-import { Button, clsm, Input, Modal, toast } from "@vyductan/ui";
+import { clsm } from "@vyductan/ui";
+import { Button } from "@vyductan/ui/button";
+import { Icon } from "@vyductan/ui/icons";
+import { Input } from "@vyductan/ui/input";
+import { Modal } from "@vyductan/ui/modal";
+import { message } from "@vyductan/ui/toast";
 
 import { ChatList } from "./ChatList";
 import { ChatPanel } from "./ChatPanel";
@@ -52,7 +56,7 @@ export const Chat = ({
     },
     onResponse(response) {
       if (response.status === 401) {
-        toast.error(response.statusText);
+        message.error(response.statusText);
       }
     },
   });

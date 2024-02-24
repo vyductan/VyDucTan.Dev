@@ -4,8 +4,10 @@ import { useState } from "react";
 
 import { sendMailAction } from "@vyductan/api/contact";
 import { sendMailSchema } from "@vyductan/api/types";
-import { MailOutlined } from "@vyductan/icons";
-import { AutoForm, Button, message, useForm } from "@vyductan/ui";
+import { Button } from "@vyductan/ui/button";
+import { AutoForm, useForm } from "@vyductan/ui/form";
+import { MailOutlined } from "@vyductan/ui/icons";
+import { message } from "@vyductan/ui/toast";
 
 import type { ResumeData } from "../resumeData";
 

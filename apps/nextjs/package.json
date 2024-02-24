@@ -42,7 +42,6 @@
     "@vercel/kv": "^1.0.1",
     "@vyductan/api": "workspace:*",
     "@vyductan/hooks": "workspace:*",
-    "@vyductan/icons": "workspace:*",
     "@vyductan/tts": "workspace:*",
     "@vyductan/ui": "workspace:*",
     "@vyductan/ui-pro": "workspace:*",

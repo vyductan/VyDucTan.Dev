@@ -1,8 +1,7 @@
 import Image from "next/image";
 
-import { Icon } from "@vyductan/icons";
-
 import type { ResumeData } from "../resumeData";
+import { Icon } from "../icons";
 
 type AboutProps = {
   data: ResumeData["main"];
@@ -27,7 +26,7 @@ const About = ({ data }: AboutProps) => {
           <div className="mt-10 flex flex-wrap">
             <div className="mb-10 mr-10">
               <h2>Contact Details</h2>
-              <p className="address">
+              <p>
                 <span>{name}</span>
                 <br />
                 <span>

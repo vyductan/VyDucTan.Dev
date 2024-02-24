@@ -5,9 +5,12 @@ import type {
   WordClass,
   WordMastery,
 } from "@vyductan/api/types";
-import type { RadioOption } from "@vyductan/ui";
+import type { RadioOption } from "@vyductan/ui/radio";
 import { insertWordDefinitionSchema } from "@vyductan/api/types";
-import { AutoForm, message, Modal, Spin, useForm } from "@vyductan/ui";
+import { AutoForm, useForm } from "@vyductan/ui/form";
+import { Modal } from "@vyductan/ui/modal";
+import { Spin } from "@vyductan/ui/spin";
+import { message } from "@vyductan/ui/toast";
 
 import { api } from "~/trpc/react";
 

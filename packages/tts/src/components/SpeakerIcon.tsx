@@ -3,14 +3,14 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { Icon } from "@vyductan/icons";
-
 import type { LangCode } from "../lang";
 import type { TTSProvider } from "../tts/types";
 import { defaultTTSProvider, doSpeak } from "../tts";
 import { SpeakerMotion } from "./SpeakerMotion";
 
 import "./index.css";
+
+import { Icon } from "@vyductan/ui/icons";
 
 interface ISpeakerIconProps {
   divRef?: React.Ref<HTMLDivElement>;

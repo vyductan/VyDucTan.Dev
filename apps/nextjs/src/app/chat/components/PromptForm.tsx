@@ -2,8 +2,10 @@ import type { UseChatHelpers } from "ai/react";
 import * as React from "react";
 
 import { useEnterSubmit } from "@vyductan/hooks";
-import { Icon } from "@vyductan/icons";
-import { Button, Textarea, Tooltip } from "@vyductan/ui";
+import { Button } from "@vyductan/ui/button";
+import { Icon } from "@vyductan/ui/icons";
+import { Textarea } from "@vyductan/ui/textarea";
+import { Tooltip } from "@vyductan/ui/tooltip";
 
 export interface PromptProps
   extends Pick<UseChatHelpers, "input" | "setInput"> {
@@ -67,13 +69,13 @@ export function PromptForm({
         spellCheck={false}
         tabIndex={0}
         value={input}
-        onChange={(e) => setInput(e.target.value)}
+        onChange={(e) => setInput(e.currentTarget.value)}
         onKeyDown={onKeyDown}
       />
 
       <Tooltip title="Send message">
         <Button
-          variant="primary"
+          primary
           className="absolute bottom-5 right-4"
           disabled={isLoading || input === ""}
           type="submit"

@@ -36,19 +36,6 @@ importers:
         specifier: '*'
         version: link:../tooling/typescript
 
-  '@vyductan/icons':
-    dependencies:
-      '@vyductan/utils':
-        specifier: workspace:*
-        version: link:../utils
-    devDependencies:
-      '@iconify/react':
-        specifier: ^4.1.1
-        version: 4.1.1(react@18.2.0)
-      '@vyductan/typescript-config':
-        specifier: '*'
-        version: link:../tooling/typescript
-
   '@vyductan/tooling/eslint':
     dependencies:
       '@next/eslint-plugin-next':
@@ -160,6 +147,9 @@ importers:
       '@hookform/resolvers':
         specifier: ^3.3.4
         version: 3.3.4(react-hook-form@7.50.1)
+      '@iconify/react':
+        specifier: ^4.1.1
+        version: 4.1.1(react@18.2.0)
       '@lexical/react':
         specifier: ^0.13.1
         version: 0.13.1(lexical@0.13.1)(react-dom@18.2.0)(react@18.2.0)(yjs@13.6.12)
@@ -214,9 +204,6 @@ importers:
       '@vyductan/hooks':
         specifier: '*'
         version: link:../hooks
-      '@vyductan/icons':
-        specifier: workspace:*
-        version: link:../icons
       '@vyductan/utils':
         specifier: '*'
         version: link:../utils
@@ -290,9 +277,6 @@ importers:
       '@vyductan/hooks':
         specifier: workspace:*
         version: link:../hooks
-      '@vyductan/icons':
-        specifier: workspace:*
-        version: link:../icons
       '@vyductan/ui':
         specifier: workspace*
         version: link:../ui
@@ -372,9 +356,6 @@ importers:
       '@vyductan/hooks':
         specifier: workspace:*
         version: link:../../@vyductan/hooks
-      '@vyductan/icons':
-        specifier: workspace:*
-        version: link:../../@vyductan/icons
       '@vyductan/tts':
         specifier: workspace:*
         version: link:../../packages/tts
@@ -599,9 +580,6 @@ importers:
 
   packages/tts:
     dependencies:
-      '@vyductan/icons':
-        specifier: workspace:*
-        version: link:../../@vyductan/icons
       '@vyductan/ui':
         specifier: workspace:*
         version: link:../../@vyductan/ui
@@ -1540,11 +1518,11 @@ packages:
     dependencies:
       '@iconify/types': 2.0.0
       react: 18.2.0
-    dev: true
+    dev: false
 
   /@iconify/types@2.0.0:
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
-    dev: true
+    dev: false
 
   /@internationalized/date@3.5.2:
     resolution: {integrity: sha512-vo1yOMUt2hzp63IutEaTUxROdvQg1qlMRsbCvbay2AK2Gai7wIgCyK5weEX3nHkiLgo4qCXHijFNC/ILhlRpOQ==}
@@ -7065,6 +7043,7 @@ packages:
 
   /js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
+    dev: false
 
   /js-types@1.0.0:
     resolution: {integrity: sha512-bfwqBW9cC/Lp7xcRpug7YrXm0IVw+T9e3g4mCYnv0Pjr3zIzU9PCQElYU9oSGAWzXlbdl9X5SAMPejO9sxkeUw==}
@@ -7276,6 +7255,7 @@ packages:
     hasBin: true
     dependencies:
       js-tokens: 4.0.0
+    dev: false
 
   /lower-case-first@1.0.2:
     resolution: {integrity: sha512-UuxaYakO7XeONbKrZf5FEgkantPf5DUqDayzP5VXZrtRPdH86s4kN47I8B3TW10S4QKiE3ziHNf3kRN//okHjA==}
@@ -9989,6 +9969,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0
+    dev: false
 
   /read-cache@1.0.0:
     resolution: {integrity: sha512-Owdv/Ft7IjOgm/i0xvNDZ1LrRANRfew4b2prF3OWMQLxLfu3bS8FVhCsrSCMK4lR56Y9ya+AThoTpDCTxCmpRA==}

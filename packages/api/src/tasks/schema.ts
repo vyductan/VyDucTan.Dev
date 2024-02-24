@@ -26,7 +26,7 @@ export const tasks = pgTable("task", {
   estimatedStart: timestamp("estimated_start"),
   estimatedEnd: timestamp("estimated_end"),
   description: text("description"),
-  content: json("content"),
+  content: json("content").$type<string>(),
   completedAt: timestamp("completed_at"),
   type: taskTypeEnum("type").default("").notNull(),
 

@@ -4,7 +4,10 @@ import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 
 import { insertTaskSchema } from "@vyductan/api/types";
-import { AutoForm, Modal, Spin, useForm } from "@vyductan/ui";
+import { AutoForm, useForm } from "@vyductan/ui/form";
+import { Modal } from "@vyductan/ui/modal";
+import { Spin } from "@vyductan/ui/spin";
+import { message } from "@vyductan/ui/toast";
 
 import { upload } from "~/lib/upload";
 import { api } from "~/trpc/react";
@@ -42,7 +45,7 @@ export const TasksModalForm = ({
       await utils.projects.bySlug.invalidate();
     },
     onError: (error) => {
-      console.log("error", error);
+      message.error(error.message);
       // form.setError(error)
     },
   });
@@ -54,7 +57,7 @@ export const TasksModalForm = ({
       await utils.projects.all.invalidate();
     },
     onError: (error) => {
-      console.log("error", error);
+      message.error(error.message);
       // form.setError(error)
     },
   });

@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^0.7.0",
-    "@trpc/server": "11.0.0-next-beta.264",
+    "@trpc/server": "11.0.0-next-beta.294",
     "@vercel/blob": "^0.22.1",
     "@vercel/postgres": "^0.7.2",
     "@vyductan/utils": "workspace:*",

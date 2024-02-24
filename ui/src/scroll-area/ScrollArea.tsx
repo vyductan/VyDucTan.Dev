@@ -3,7 +3,7 @@
 import * as React from "react";
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
 
-import { clsm } from "@vyductan/utils";
+import { clsm } from "@vyductan/ui";
 
 import type { ScrollBarProps } from "./ScrollBar";
 import { ScrollBar } from "./ScrollBar";

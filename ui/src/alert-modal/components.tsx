@@ -3,7 +3,7 @@
 import * as React from "react";
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 
-import { clsm } from "@vyductan/utils";
+import { clsm } from "@vyductan/ui";
 
 import type { ButtonProps } from "../button";
 import { Button, buttonVariants } from "../button";
@@ -108,7 +108,7 @@ const AlertDialogAction = React.forwardRef<
   }
 >(({ asChild, isControlled, ...props }, ref) =>
   asChild ?? isControlled ? (
-    <Button variant="primary" {...props} />
+    <Button primary {...props} />
   ) : (
     <AlertDialogPrimitive.Action ref={ref} asChild {...props} />
   ),

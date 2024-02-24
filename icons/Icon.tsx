@@ -3,7 +3,7 @@
 import type { IconProps as IconifyProps } from "@iconify/react";
 import { Icon as Iconify } from "@iconify/react";
 
-import { clsm } from "@vyductan/utils";
+import { clsm } from "@vyductan/ui";
 
 // https://icon-sets.iconify.design/
 export type IconProps = IconifyProps & {

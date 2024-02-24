@@ -1,6 +1,6 @@
 import type { LexicalEditor, LexicalNode, RangeSelection } from "lexical";
 
-import { clsm } from "@vyductan/utils";
+import { clsm } from "@vyductan/ui";
 
 import { getAllLexicalChildren } from "./getAllLexicalChildren";
 import { getNodePlaceholder } from "./getNodePlaceholder";

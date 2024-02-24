@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { Icon } from "@vyductan/icons";
-import { clsm } from "@vyductan/utils";
+import { clsm } from "@vyductan/ui";
 
 import type { ButtonProps } from "../button";
 import { buttonVariants } from "../button";
@@ -82,16 +82,16 @@ const PaginationItem = React.forwardRef<HTMLLIElement, PaginationItemProps>(
           isActive={active}
           size={size}
           shape={shape}
-          // href="#"
-          // href="#asd"
-          // aria-current={active ? "page" : undefined}
-          // className={clsm(
-          //   buttonVariants({
-          //     variant: active ? "default" : "ghost",
-          //     size,
-          //   }),
-          //   className,
-          // )}
+        // href="#"
+        // href="#asd"
+        // aria-current={active ? "page" : undefined}
+        // className={clsm(
+        //   buttonVariants({
+        //     variant: active ? "default" : "ghost",
+        //     size,
+        //   }),
+        //   className,
+        // )}
         >
           {children ?? page}
         </PaginationLink>

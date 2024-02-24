@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 
-import { clsm } from "@vyductan/utils";
+import { clsm } from "@vyductan/ui";
 
 import type { InsertImagePayload } from "./types";
 import { message } from "../../../toast";
@@ -102,18 +102,17 @@ export const Uploader = ({ onUploadSuccess }: UploadProps) => {
               dragActive && "border-2 border-black",
               "bg-white opacity-100 hover:bg-gray-50",
             )}
-            // className={`${
-            //   dragActive ? "border-2 border-black" : ""
-            // }  ${
-            //   data.image
-            //     ? "bg-white/80 opacity-0 hover:opacity-100 hover:backdrop-blur-md"
-            //     :
-            // }`}
+          // className={`${
+          //   dragActive ? "border-2 border-black" : ""
+          // }  ${
+          //   data.image
+          //     ? "bg-white/80 opacity-0 hover:opacity-100 hover:backdrop-blur-md"
+          //     :
+          // }`}
           >
             <svg
-              className={`${
-                dragActive ? "scale-110" : "scale-100"
-              } size-7 text-gray-500 transition-all duration-75 group-hover:scale-110 group-active:scale-95`}
+              className={`${dragActive ? "scale-110" : "scale-100"
+                } size-7 text-gray-500 transition-all duration-75 group-hover:scale-110 group-active:scale-95`}
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"

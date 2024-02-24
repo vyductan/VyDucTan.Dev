@@ -1,23 +1,23 @@
 import type { VariantProps } from "class-variance-authority";
 import { cva } from "class-variance-authority";
 
-import { clsm } from "@vyductan/utils";
+import { clsm } from "@vyductan/ui";
 
 import "./style.css";
 
 const spinVariants = cva("", {
   variants: {
     size: {
-      default: [
+      small: [
         "size-5",
         "before:!bg-[length:4px_4px] after:!bg-[length:6px_6px]",
         "before:m-0.5",
       ],
-      lg: [
-        "size-8",
-        "before:!bg-[length:6px_6px] after:!bg-[length:12px_12px]",
+      default: [
+        "size-7",
+        "before:!bg-[length:5px_5px] after:!bg-[length:8px_8px]",
       ],
-      xl: [
+      lg: [
         "size-12",
         "before:!bg-[length:8px_8px] after:!bg-[length:12px_12px]",
       ],

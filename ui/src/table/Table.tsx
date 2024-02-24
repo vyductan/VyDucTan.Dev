@@ -15,7 +15,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import { clsm } from "@vyductan/utils";
+import { clsm } from "@vyductan/ui";
 
 import type { PaginationProps } from "../pagination";
 import type { TableColumnDef } from "./types";
@@ -102,8 +102,8 @@ const TableInner = <TRecord extends Record<string, unknown>>(
         style={{
           ...(scroll?.x
             ? {
-                width: table.getCenterTotalSize(),
-              }
+              width: table.getCenterTotalSize(),
+            }
             : {}),
         }}
         {...props}
@@ -118,18 +118,18 @@ const TableInner = <TRecord extends Record<string, unknown>>(
                     colSpan={header.colSpan}
                     {...(header.column.columnDef.size
                       ? {
-                          style: {
-                            width: header.getSize(),
-                          },
-                        }
+                        style: {
+                          width: header.getSize(),
+                        },
+                      }
                       : {})}
                   >
                     {header.isPlaceholder
                       ? null
                       : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
                   </TableHead>
                 );
               })}
@@ -149,10 +149,10 @@ const TableInner = <TRecord extends Record<string, unknown>>(
                     key={cell.id}
                     {...(cell.column.columnDef.size
                       ? {
-                          style: {
-                            width: cell.column.getSize(),
-                          },
-                        }
+                        style: {
+                          width: cell.column.getSize(),
+                        },
+                      }
                       : {})}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}

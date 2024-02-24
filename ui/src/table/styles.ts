@@ -1,4 +1,4 @@
-import { clsm } from "@vyductan/utils";
+import { clsm } from "@vyductan/ui";
 
 export const tableStyles = {
   row: {

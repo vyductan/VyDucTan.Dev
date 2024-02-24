@@ -3,7 +3,7 @@
 import * as React from "react";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 
-import { clsm } from "@vyductan/utils";
+import { clsm } from "@vyductan/ui";
 
 type PopoverRootProps = PopoverPrimitive.PopoverProps;
 const PopoverRoot = PopoverPrimitive.Root;

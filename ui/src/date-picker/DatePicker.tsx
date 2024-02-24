@@ -5,7 +5,7 @@ import * as React from "react";
 import { format } from "date-fns";
 
 import { Icon } from "@vyductan/icons";
-import { clsm } from "@vyductan/utils";
+import { clsm } from "@vyductan/ui";
 
 import { Button } from "../button";
 import { Calendar } from "../calendar";

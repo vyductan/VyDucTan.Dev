@@ -1,7 +1,7 @@
 import type { DragEvent as ReactDragEvent } from "react";
 import { memo, useCallback } from "react";
 
-import { clsm } from "@vyductan/utils";
+import { clsm } from "@vyductan/ui";
 
 import { useDraggableStore } from "../../stores/useDraggableStore";
 

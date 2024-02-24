@@ -4,7 +4,7 @@ import type { AvatarImageProps } from "@radix-ui/react-avatar";
 import type { ReactNode } from "react";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 
-import { clsm } from "@vyductan/utils";
+import { clsm } from "@vyductan/ui";
 
 export type AvatarProps = AvatarImageProps & {
   fallback?: ReactNode;

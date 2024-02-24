@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 
-import { clsm } from "@vyductan/utils";
+import { clsm } from "@vyductan/ui";
 
 import { tableStyles } from "./styles";
 

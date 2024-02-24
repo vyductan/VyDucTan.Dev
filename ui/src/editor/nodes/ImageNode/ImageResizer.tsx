@@ -3,7 +3,7 @@ import * as React from "react";
 import { useRef } from "react";
 
 import { Icon } from "@vyductan/icons";
-import { clsm } from "@vyductan/utils";
+import { clsm } from "@vyductan/ui";
 
 import { Tooltip } from "../../..";
 

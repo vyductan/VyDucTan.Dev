@@ -6,12 +6,12 @@ import { clsm } from "@vyductan/utils";
 
 export const inputStatusVariants = cva(
   [
-    "w-full",
-    "bg-transparent",
+    "w-full px-3 py-[9px]",
+    "flex rounded-md border border-input ring-offset-background",
     "text-sm",
-    "placeholder:text-placeholder",
     "focus-within:outline-none",
     "disabled:cursor-not-allowed disabled:opacity-50",
+    // "file:border-0 file:bg-transparent file:text-sm file:font-medium",
   ],
   {
     variants: {
@@ -21,9 +21,8 @@ export const inputStatusVariants = cva(
       },
       status: {
         default: [
-          "border-primary-600",
-          "hover:border-primary-400",
-          "focus-within:border-primary-600 focus-visible:ring-primary-200",
+          "hover:border-primary-500",
+          "focus-within:!border-primary-600 focus-within:ring-primary-100",
         ],
       },
     },
@@ -46,13 +45,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <span
         className={clsm(
           inputStatusVariants({ borderless, status }),
-          "w-full px-3 py-[9px]",
-          "bg-transparent",
-          "text-sm",
-          "flex rounded-md border border-input ring-offset-background",
-          // "file:border-0 file:bg-transparent file:text-sm file:font-medium",
-          "focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
-          "disabled:cursor-not-allowed disabled:opacity-50",
           "cursor-text",
           className,
         )}
@@ -65,8 +57,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           id={_id}
           className={clsm(
             "w-full",
-            "border-none outline-none",
+            "bg-transparent",
             "placeholder:text-muted-foreground",
+            "border-none outline-none",
           )}
           ref={ref}
           onChange={(e) => {

@@ -3,6 +3,15 @@
 @tailwind utilities;
 
 @layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer base {
   :root {
     --primary-100: 206 100% 95%;
     --primary-200: 207 100% 86%;
@@ -97,14 +106,5 @@
     --border-error-hover: theme(colors.red.500);
 
     --text-description: 0 0% 100% / 45%;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }

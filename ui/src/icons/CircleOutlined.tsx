@@ -1,4 +1,5 @@
-import IconWrapper, { IconWrapperProps } from "./Wrapper";
+import type { IconWrapperProps } from "./Wrapper";
+import IconWrapper from "./Wrapper";
 
 // lucide
 export const CircleOutlined = (props: Omit<IconWrapperProps, "children">) => {
@@ -16,9 +17,9 @@ export const CircleOutlined = (props: Omit<IconWrapperProps, "children">) => {
           cy="12"
           r="10"
           fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         />
       </svg>
     </IconWrapper>

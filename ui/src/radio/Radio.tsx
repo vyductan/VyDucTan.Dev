@@ -3,9 +3,9 @@
 import * as React from "react";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 
-import { CircleFilled } from "@vyductan/icons";
 import { clsm } from "@vyductan/ui";
 
+import { CircleFilled } from "../icons";
 import { Label } from "../label";
 
 type RadioOption<TValue extends string = string> = {

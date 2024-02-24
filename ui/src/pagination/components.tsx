@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import { Icon } from "@vyductan/icons";
 import { clsm } from "@vyductan/ui";
 
 import type { ButtonProps } from "../button";
 import { buttonVariants } from "../button";
+import { Icon } from "../icons";
 
 const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
   <nav

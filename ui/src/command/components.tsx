@@ -4,9 +4,9 @@ import type { DialogProps } from "@radix-ui/react-dialog";
 import * as React from "react";
 import { Command as CommandPrimitive, useCommandState } from "cmdk";
 
-import { Icon } from "@vyductan/icons";
 import { clsm } from "@vyductan/ui";
 
+import { Icon } from "../icons";
 import { Dialog, DialogContent } from "../modal/components";
 
 type CommandRootProps = React.ComponentPropsWithoutRef<typeof CommandPrimitive>;

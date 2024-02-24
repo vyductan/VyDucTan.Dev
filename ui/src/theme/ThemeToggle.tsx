@@ -3,8 +3,10 @@
 import * as React from "react";
 import { useTheme } from "next-themes";
 
-import { Icon } from "@vyductan/icons";
-import { Button, Dropdown } from "@vyductan/ui";
+import { Button } from "@vyductan/ui/button";
+import { Dropdown } from "@vyductan/ui/dropdown";
+
+import { Icon } from "../icons";
 
 function ThemeToggle() {
   const { setTheme } = useTheme();

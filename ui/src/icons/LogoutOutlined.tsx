@@ -1,9 +1,10 @@
-import IconWrapper, { IconWrapperProps } from "./Wrapper";
+import type { IconWrapperProps } from "./Wrapper";
+import IconWrapper from "./Wrapper";
 
 // lucide
-export const CheckOutlined = (props: Omit<IconWrapperProps, "children">) => {
+export const LogoutOutlined = (props: Omit<IconWrapperProps, "children">) => {
   return (
-    <IconWrapper aria-label="check" {...props}>
+    <IconWrapper aria-label="log-out" {...props}>
       <svg
         width="1em"
         height="1em"
@@ -17,7 +18,7 @@ export const CheckOutlined = (props: Omit<IconWrapperProps, "children">) => {
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="2"
-          d="M20 6L9 17l-5-5"
+          d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4m7 14l5-5l-5-5m5 5H9"
         />
       </svg>
     </IconWrapper>

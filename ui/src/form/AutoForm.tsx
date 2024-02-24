@@ -3,7 +3,6 @@
 import type { Control, FieldValues, Path } from "react-hook-form";
 import React from "react";
 
-import { DeleteOutlined } from "@vyductan/icons";
 import { clsm } from "@vyductan/ui";
 
 import type { FormProps } from "./Form";
@@ -13,6 +12,7 @@ import { AutoComplete } from "../autocomplete";
 import { Button } from "../button";
 import { DatePicker } from "../date-picker";
 import Editor from "../editor";
+import { DeleteOutlined } from "../icons";
 import { Input, InputPassword } from "../input";
 import { RadioGroup } from "../radio";
 import { Tag } from "../tag";

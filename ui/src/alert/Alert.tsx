@@ -1,7 +1,8 @@
 import type { HTMLAttributes, ReactNode } from "react";
 
-import { WarningFilled } from "@vyductan/icons";
 import { clsm } from "@vyductan/ui";
+
+import { WarningFilled } from "../icons";
 
 type AlertProps = HTMLAttributes<HTMLDivElement> & {
   children: ReactNode;

@@ -4,11 +4,11 @@ import type { SelectSingleEventHandler } from "react-day-picker";
 import * as React from "react";
 import { format } from "date-fns";
 
-import { Icon } from "@vyductan/icons";
 import { clsm } from "@vyductan/ui";
 
 import { Button } from "../button";
 import { Calendar } from "../calendar";
+import { Icon } from "../icons";
 import { Popover } from "../popover";
 
 type DateRange = {

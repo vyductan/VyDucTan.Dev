@@ -15,7 +15,7 @@ const IconWrapper = ({
   ...props
 }: IconWrapperProps) => {
   return cloneElement(children, {
-    className: clsm("h-6 w-6", className),
+    className: clsm("size-6", className),
     "aria-hidden": "true",
     role: "img",
     ...props,

@@ -1,7 +1,6 @@
 import type { AvatarProps, DirectionType, TagProps } from "@vyductan/ui";
-import { ArrowLeftOutlined, ArrowRightOutlined } from "@vyductan/icons";
-import { Avatar } from "@vyductan/ui";
-import { clsm } from "@vyductan/ui";
+import { Avatar, clsm } from "@vyductan/ui";
+import { ArrowLeftOutlined, ArrowRightOutlined } from "@vyductan/ui/icons";
 
 type PageHeaderProps = {
   title?: React.ReactNode;

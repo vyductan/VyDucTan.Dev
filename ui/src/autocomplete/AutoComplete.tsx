@@ -2,12 +2,11 @@
 
 import * as React from "react";
 
-import { Icon } from "@vyductan/icons";
-
 import type { CommandProps } from "../command";
 import type { Option } from "../select/types";
 import { Button } from "../button";
 import { Command } from "../command";
+import { Icon } from "../icons";
 import { Popover } from "../popover";
 
 export type AutoCompleteProps<T extends string = string> = Pick<

@@ -5,7 +5,8 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./tailwind-indicator": "./src/tailwind-indicator/index.ts"
   },
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
@@ -21,7 +22,6 @@
   },
   "dependencies": {
     "@vyductan/hooks": "workspace:*",
-    "@vyductan/icons": "workspace:*",
     "@vyductan/ui": "workspace*",
     "@vyductan/utils": "workspace*"
   },

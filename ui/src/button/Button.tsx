@@ -5,8 +5,7 @@ import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
 
-import { clsm } from "@vyductan/ui";
-
+import { clsm } from "..";
 import { LoadingIcon } from "./LoadingIcon";
 
 const buttonVariants = cva(
@@ -135,6 +134,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       color,
       disabled,
       loading,
+      primary,
       size,
       shape,
       variant,
@@ -150,7 +150,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={clsm(
           buttonVariants({
             color,
-            variant,
+            variant: primary ? "primary" : variant,
             size,
             shape,
             className,

@@ -4,10 +4,9 @@ import React, { memo, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
 import useMergedState from "rc-util/lib/hooks/useMergedState";
 
-import { CloseOutlined } from "@vyductan/icons";
-
 import type { FloatButtonProps } from "./FloatButton";
 import type { FloatButtonRef } from "./types";
+import { CloseOutlined } from "../icons";
 import { FloatButtonGroupProvider } from "./context";
 import { FloatButton } from "./FloatButton";
 

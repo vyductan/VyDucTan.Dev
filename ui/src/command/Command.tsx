@@ -1,8 +1,8 @@
-import { Icon } from "@vyductan/icons";
 import { clsm } from "@vyductan/ui";
 
 import type { Option } from "../select/types";
 import type { CommandRootProps } from "./components";
+import { Icon } from "../icons";
 import {
   CommandEmpty,
   CommandGroup,

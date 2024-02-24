@@ -1,8 +1,9 @@
 import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 
-import { Icon } from "@vyductan/icons";
 import { clsm } from "@vyductan/ui";
+
+import { Icon } from "../icons";
 
 type DialogProps = DialogPrimitive.DialogProps;
 const Dialog = DialogPrimitive.Root;

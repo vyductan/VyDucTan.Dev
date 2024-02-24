@@ -16,9 +16,9 @@ import {
 } from "lexical";
 import { createPortal } from "react-dom";
 
-import { Icon } from "@vyductan/icons";
 import { clsm } from "@vyductan/ui";
 
+import { Icon } from "../../../icons";
 import { isHTMLElement } from "../../utils/guard";
 import { Point } from "../../utils/point";
 import { Rect } from "../../utils/rect";

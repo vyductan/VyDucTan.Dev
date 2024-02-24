@@ -1,12 +1,9 @@
 import * as React from "react";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 
-import {
-  CheckOutlined,
-  ChevronRightOutlined,
-  CircleOutlined,
-} from "@vyductan/icons";
 import { clsm } from "@vyductan/ui";
+
+import { CheckOutlined, ChevronRightOutlined, CircleOutlined } from "../icons";
 
 const DropdownMenuRoot = DropdownMenuPrimitive.Root;
 

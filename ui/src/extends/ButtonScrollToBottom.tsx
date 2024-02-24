@@ -3,11 +3,11 @@
 import * as React from "react";
 
 import { useAtBottom } from "@vyductan/hooks";
-import { ArrowDownFilled } from "@vyductan/icons";
 import { clsm } from "@vyductan/ui";
 
 import type { ButtonProps } from "../button";
 import { Button } from "../button";
+import { ArrowDownFilled } from "../icons";
 
 export const ButtonScrollToBottom = ({ className, ...props }: ButtonProps) => {
   const isAtBottom = useAtBottom();

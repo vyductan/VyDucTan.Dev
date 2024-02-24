@@ -3,10 +3,10 @@
 import * as React from "react";
 import { DayPicker } from "react-day-picker";
 
-import { Icon } from "@vyductan/icons";
 import { clsm } from "@vyductan/ui";
 
 import { buttonVariants } from "../button";
+import { Icon } from "../icons";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 

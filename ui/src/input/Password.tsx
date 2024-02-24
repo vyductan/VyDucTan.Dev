@@ -1,8 +1,7 @@
 import React from "react";
 
-import { Icon } from "@vyductan/icons";
-
 import type { InputProps } from "./Input";
+import { Icon } from "../icons";
 import { Input } from "./Input";
 
 export type InputPasswordProps = Omit<InputProps, "type">;

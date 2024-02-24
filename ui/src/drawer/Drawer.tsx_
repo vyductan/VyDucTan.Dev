@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react"
 import { Button } from "antd"
 
 import { useResponsive } from "@vyductan/hooks"
-import { CloseOutlined } from "@vyductan/icons"
+import { CloseOutlined } from @vyductan/ui/icons
 
 type DrawerProps = {
   open: boolean

@@ -14,9 +14,8 @@ import {
   $isRangeSelection,
 } from "lexical";
 
-import { Icon } from "@vyductan/icons";
-
 import type { useModal } from "../../../modal";
+import { Icon } from "../../../icons";
 import { InsertImage } from "../ImagesPlugin/InsertImage";
 import { ComponentPickerOption } from "./types";
 

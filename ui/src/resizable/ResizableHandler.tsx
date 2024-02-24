@@ -1,7 +1,8 @@
 import * as ResizablePrimitive from "react-resizable-panels";
 
-import { Icon } from "@vyductan/icons";
 import { clsm } from "@vyductan/ui";
+
+import { Icon } from "../icons";
 
 export const ResizableHandler = ({
   withHandle,

@@ -2,8 +2,9 @@ import * as React from "react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { cva } from "class-variance-authority";
 
-import { Icon } from "@vyductan/icons";
 import { clsm } from "@vyductan/ui";
+
+import { Icon } from "../icons";
 
 type NavigationMenuRootProps = React.ComponentPropsWithoutRef<
   typeof NavigationMenuPrimitive.Root

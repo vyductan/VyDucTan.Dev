@@ -12,7 +12,7 @@ export type IconProps = IconifyProps & {
 export const Icon = ({ className, srOnly, ...props }: IconProps) => {
   return (
     <>
-      <Iconify className={clsm("h-5 w-5", className)} {...props} />
+      <Iconify className={clsm("size-5", className)} {...props} />
       {srOnly && <span className="sr-only">{srOnly}</span>}
     </>
   );

@@ -2,10 +2,9 @@ import type { LexicalEditor } from "lexical";
 import * as React from "react";
 import { useRef } from "react";
 
-import { Icon } from "@vyductan/icons";
-import { clsm } from "@vyductan/ui";
-
-import { Tooltip } from "../../..";
+import { clsm } from "../../..";
+import { Icon } from "../../../icons";
+import { Tooltip } from "../../../tooltip";
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);

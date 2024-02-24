@@ -3,8 +3,9 @@
 import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
 
-import { Icon } from "@vyductan/icons";
 import { clsm } from "@vyductan/ui";
+
+import { Icon } from "../icons";
 
 type SelectRootProps = SelectPrimitive.SelectProps;
 const SelectRoot = SelectPrimitive.Root;

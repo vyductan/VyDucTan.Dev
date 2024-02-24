@@ -2,10 +2,9 @@ import React from "react";
 import { useMergedState } from "rc-util";
 import KeyCode from "rc-util/lib/KeyCode";
 
-import { Icon } from "@vyductan/icons";
-
 import type { PaginationItemProps } from "./components";
 import type { PaginationLocale } from "./types";
+import { Icon } from "../icons";
 import {
   PaginationContent,
   // PaginationEllipsis,

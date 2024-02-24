@@ -6,9 +6,9 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import { useCopyToClipboard } from "@vyductan/hooks";
-import { Icon } from "@vyductan/icons";
 
 import { Button } from "../button";
+import { Icon } from "../icons";
 
 export const programmingLanguages = {
   javascript: ".js",

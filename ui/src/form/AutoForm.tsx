@@ -12,7 +12,7 @@ import { AutoComplete } from "../autocomplete";
 import { Button } from "../button";
 import { DatePicker } from "../date-picker";
 import Editor from "../editor";
-import { DeleteOutlined } from "../icons";
+import { DeleteIcon } from "../icons/DeleteIcon";
 import { Input, InputPassword } from "../input";
 import { RadioGroup } from "../radio";
 import { Tag } from "../tag";
@@ -88,7 +88,7 @@ const AutoForm = <
                         <Tag className="rounded-md">
                           {itemTitle ?? "Item"} #{index}
                         </Tag>
-                        <DeleteOutlined
+                        <DeleteIcon
                           className="cursor-pointer"
                           onClick={() => remove(index)}
                         />

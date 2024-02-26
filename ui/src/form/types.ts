@@ -1,4 +1,4 @@
-import type { FieldValues } from "react-hook-form";
+import type { FieldValues, SubmitHandler } from "react-hook-form";
 
 import type { AutoCompleteProps } from "../autocomplete";
 import type {
@@ -112,13 +112,13 @@ type FieldListType = "list";
 type FieldObjectType = "object";
 type FieldInputType = InputUnion["type"];
 type FieldGroupType = "group";
-export type FieldType =
+type FieldType =
   | FieldInputType
   | FieldListType
   | FieldObjectType
   | FieldGroupType
   | "custom";
-export type FieldsSchema<
+type FieldsSchema<
   TFieldValues,
   // TFieldValues extends FieldValues = FieldValues,
   // TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
@@ -229,3 +229,5 @@ export type FieldsSchema<
 export type ResetAction<TFieldValues> = (
   formValues: TFieldValues,
 ) => TFieldValues;
+
+export type { FieldsSchema, FieldType, SubmitHandler };

@@ -6,6 +6,7 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
 
 import { clsm } from "..";
+import Wave from "../_util/wave";
 import { LoadingIcon } from "./LoadingIcon";
 
 const buttonVariants = cva(
@@ -141,27 +142,32 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const Comp = asChild ? Slot : "button";
     return (
-      <Comp
-        ref={ref}
-        className={clsm(
-          buttonVariants({
-            color,
-            variant: primary ? "primary" : variant,
-            size,
-            shape,
-            className,
-          }),
-        )}
-        disabled={loading ?? disabled}
-        {...props}
-      >
-        {(!!loading || icon) && (
-          <span className={clsm(children && "mr-2")}>
-            <Slot className="size-5">{loading ? <LoadingIcon /> : icon}</Slot>
-          </span>
-        )}
-        {children}
-      </Comp>
+      <Wave>
+        <Comp
+          ref={ref}
+          className={clsm(
+            "relative",
+            buttonVariants({
+              color,
+              danger,
+              primary: !primary && !!variant ? null : !primary ? true : primary,
+              size,
+              shape: icon && !children ? shape ?? "icon" : shape,
+              variant,
+              className,
+            }),
+          )}
+          disabled={loading ?? disabled}
+          {...props}
+        >
+          {(!!loading || icon) && (
+            <span className={clsm(children && "mr-2")}>
+              <Slot className="size-5">{loading ? <LoadingIcon /> : icon}</Slot>
+            </span>
+          )}
+          {children}
+        </Comp>
+      </Wave>
     );
   },
 );

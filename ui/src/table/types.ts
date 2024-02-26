@@ -1,6 +1,12 @@
-import type { Column, Row } from "@tanstack/react-table";
+import type { Column, Row, RowData } from "@tanstack/react-table";
 import type { ReactNode } from "react";
 
+declare module "@tanstack/react-table" {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  interface ColumnMeta<TData extends RowData, TValue> {
+    className?: string;
+  }
+}
 /**
  * TRecord[K] inherit from https://stackoverflow.com/a/56837244
  */

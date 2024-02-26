@@ -69,7 +69,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
-    "@iconify/react": "^4.1.1",
     "@lexical/react": "^0.13.1",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-avatar": "^1.0.4",
@@ -106,6 +105,7 @@
     "zustand": "^4.5.1"
   },
   "devDependencies": {
+    "@iconify/react": "^4.1.1",
     "@types/react-dom": "^18.2.19",
     "@types/react-syntax-highlighter": "^15.5.11",
     "@vyductan/eslint-config": "*",

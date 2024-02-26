@@ -20,10 +20,16 @@ export const transformColumnDefs = <TRecord extends Record<string, unknown>>(
           enableResizing,
           minWidth,
           fixed,
+
+          // meta props
+          className,
+
           ...restProps
         },
         index,
       ) => {
+        const meta = { className };
+
         const columnDefMerged: ColumnDef<TRecord> &
           ExtraTableColumnDef<TRecord> = {
           ...(typeof dataIndex === "string"
@@ -47,6 +53,7 @@ export const transformColumnDefs = <TRecord extends Record<string, unknown>>(
           enableResizing,
           minSize: minWidth,
           fixed,
+          meta,
           ...restProps,
         };
         columnDefMerged.cell = ({ column, row, getValue }) => (

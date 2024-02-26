@@ -154,6 +154,7 @@ const TableInner = <TRecord extends Record<string, unknown>>(
                           },
                         }
                       : {})}
+                    className={cell.column.columnDef.meta?.className}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>

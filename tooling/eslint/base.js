@@ -63,6 +63,12 @@ const config = {
      */
     "canonical/no-barrel-import": "error",
 
+    /*
+     * Nextjs
+     * that rules allowed by Nextjs
+     */
+    "@typescript-eslint/unbound-method": "off",
+
     /**
      * @tim-w-james (override)
      */

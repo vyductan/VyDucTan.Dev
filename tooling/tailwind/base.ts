@@ -6,22 +6,14 @@ export default {
   content: ["src/**/*.{ts,tsx}"],
   theme: {
     extend: {
-      borderRadius: {
-        sm: `calc(var(--radius) - 2px)`,
-        md: `var(--radius)`,
-        lg: `calc(var(--radius) + 2px)`,
-      },
-      colors: ({ colors }) => ({
-        error: colors.red[300],
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        border: "hsl(var(--border))",
+      colors: {
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         link: "hsl(var(--link))",
+        foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary-600))",
-          hover: "hsl(var(--primary-500))",
+          hover: "hsl(var(--primary-hover))",
           foreground: "hsl(var(--primary-foreground))",
           100: "hsl(var(--primary-100))",
           200: "hsl(var(--primary-200))",
@@ -33,6 +25,10 @@ export default {
           800: "hsl(var(--primary-800))",
           900: "hsl(var(--primary-900))",
           950: "hsl(var(--primary-950))",
+        },
+        background: {
+          DEFAULT: "hsl(var(--background))",
+          hover: "hsl(var(--background-hover))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -50,8 +46,17 @@ export default {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
+        error: {
+          DEFAULT: "hsl(var(--error))",
+          active: "hsl(var(--error-active))",
+          hover: "hsl(var(--error-hover))",
+        },
         warning: {
           DEFAULT: "hsl(var(--warning))",
+        },
+        border: {
+          DEFAULT: "var(--border)",
+          hover: "var(--border-hover)",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
@@ -61,7 +66,7 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-      }),
+      },
       // textColor: ({ theme }) => ({
       //   // color: THEME_TOKEN.colorText,
       //   // foreground: theme("colors.gray.800"),
@@ -86,7 +91,6 @@ export default {
         warning: "hsl(var(--warning-bg))",
       },
       borderColor: {
-        "error-hover": "hsl(var(--border-error-hover))",
         warning: "hsl(var(--warning-border))",
       },
     },

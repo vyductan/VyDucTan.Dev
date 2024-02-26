@@ -13,19 +13,33 @@
 
 @layer base {
   :root {
-    --primary-100: 206 100% 95%;
-    --primary-200: 207 100% 86%;
-    --primary-300: 209 100% 78%;
-    --primary-400: 211 100% 71%;
-    --primary-500: 213 100% 63%;
-    --primary-600: 215 100% 54%;
-    --primary-700: 217 92% 44%;
-    --primary-800: 219 100% 35%;
-    --primary-900: 221 100% 27%;
-    --primary-950: 223 100% 20%;
+    --primary-100: 202 100% 95%;
+    --primary-200: 204 100% 82%;
+    --primary-300: 206 100% 74%;
+    --primary-400: 208 100% 66%;
+    --primary-500: 210 100% 58%;
+    --primary-600: 212 100% 48%;
+    --primary-700: 214 100% 40%;
+    --primary-800: 216 100% 33%;
+    --primary-900: 218 100% 25%;
+    --primary-1000: 220 100% 17%;
+    --primary-hover: var(--primary-700);
+
+    /* --red-100: 0,100%,97%; */
+    /* --red-200: 0,100%,96%; */
+    /* --red-300: 0,100%,95%; */
+    /* --red-400: 0,90%,92%; */
+    /* --red-500: 0,82%,85%; */
+    /* --red-600: 359,90%,71%; */
+    /* --red-700: 358,75%,59%; */
+    /* --red-800: 358,70%,52%; */
+    /* --red-900: 358,66%,48%; */
+    /* --red-1000: 355,49%,15%; */
 
     --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    --background-hover: 0 0% 95%;
+
+    --foreground: 0 0% 9%;
 
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
@@ -45,6 +59,11 @@
     --accent: 0 0% 96.1%;
     --accent-foreground: 0 0% 9%;
 
+    --error: 358 70% 52%;
+    --error-bg: 358 70% 52%;
+    --error-active: 358 73% 28%;
+    --error-hover: 358 66% 48%;
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
@@ -52,9 +71,11 @@
     --warning-bg: 50 100% 95%;
     --warning-border: 46 100% 78%;
 
-    --border: 0 0% 85%; /* 89.8% */
+    --border: hsla(0 0% 0% / 0.08);
+    --border-hover: hsla(0 0% 0% / 0.12);
+
     --ring: 0 0% 3.9%;
-    --radius: 0.5rem;
+    --radius: 0.375rem;
     --placeholder: var(--muted-foreground);
 
     --link: 14 79% 62%;
@@ -64,18 +85,21 @@
   }
 
   .dark {
-    --primary-100: 220 100% 5%;
-    --primary-200: 206 87% 85%;
-    --primary-300: 209 87% 76%;
-    --primary-400: 211 85% 67%;
-    --primary-500: 213 77% 56%;
-    --primary-600: 215 84% 46%;
-    --primary-700: 215 84% 35%;
-    --primary-800: 215 84% 25%;
-    --primary-900: 215 83% 16%;
-    --primary-950: 217 93% 11%;
+    --primary-100: 216 100% 5%;
+    --primary-200: 204 90% 80%;
+    --primary-300: 206 89% 72%;
+    --primary-400: 208 86% 63%;
+    --primary-500: 210 79% 52%;
+    --primary-600: 212 100% 41%;
+    --primary-700: 212 100% 31%;
+    --primary-800: 212 100% 21%;
+    --primary-900: 212 100% 14%;
+    --primary-950: 214 100% 10%;
+    --primary-hover: var(--primary-500);
 
-    --background: 0 0% 3.9%;
+    --background: 0 0% 4%;
+    --background-hover: 0 0% 12%;
+
     --foreground: 0 0% 98%;
 
     --card: 0 0% 3.9%;
@@ -95,15 +119,19 @@
     --accent: 0 0% 14.9%;
     --accent-foreground: 0 0% 98%;
 
+    --error: 358 69% 52%;
+    --error-active: 5 100% 82%;
+    --error-hover: 358 100% 69%;
+
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
+    --border: hsla(0 0% 100% / 0.14);
+    --border-hover: hsla(0 0% 100% / 0.17);
+
     /* --border: 0 0% 89.8%; */
-    --border: 240 3.7% 15.9%;
     --input: 0 0% 14.9%;
     --ring: 0 0% 83.1%;
-
-    --border-error-hover: theme(colors.red.500);
 
     --text-description: 0 0% 100% / 45%;
   }

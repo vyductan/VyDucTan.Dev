@@ -1,6 +1,7 @@
 import React from "react";
 import { useMergedState } from "rc-util";
 import KeyCode from "rc-util/lib/KeyCode";
+import { warning } from "rc-util/lib/warning";
 
 import type { PaginationItemProps } from "./components";
 import type { PaginationLocale } from "./types";
@@ -93,10 +94,9 @@ export const Pagination = (props: PaginationProps) => {
   const hasOnChange = onChange !== noop;
   const hasCurrent = "current" in props;
 
-  if (
-    process.env.NODE_ENV !== "production" && hasCurrent ? !hasOnChange : false
-  ) {
-    console.warn(
+  if (process.env.NODE_ENV !== "production") {
+    warning(
+      hasCurrent ? !hasOnChange : false,
       "You provided a `current` prop to a Pagination component without an `onChange` handler. This will render a read-only component.",
     );
   }
@@ -263,7 +263,10 @@ export const Pagination = (props: PaginationProps) => {
    * @see https://stackoverflow.com/a/1081114
    */
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
-    if (event.keyCode === KeyCode.UP || event.keyCode === KeyCode.DOWN) {
+    if (
+      event.code === KeyCode.UP.toString() ||
+      event.code === KeyCode.DOWN.toString()
+    ) {
       event.preventDefault();
     }
   }
@@ -278,14 +281,14 @@ export const Pagination = (props: PaginationProps) => {
       setInternalInputVal(value);
     }
 
-    switch ((event as React.KeyboardEvent<HTMLInputElement>).keyCode) {
-      case KeyCode.ENTER:
+    switch ((event as React.KeyboardEvent<HTMLInputElement>).code) {
+      case KeyCode.ENTER.toString():
         handleChange(value);
         break;
-      case KeyCode.UP:
+      case KeyCode.UP.toString():
         handleChange(value - 1);
         break;
-      case KeyCode.DOWN:
+      case KeyCode.DOWN.toString():
         handleChange(value + 1);
         break;
       default:

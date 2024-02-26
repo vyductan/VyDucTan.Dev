@@ -18,58 +18,36 @@ const buttonVariants = cva(
   ],
   {
     variants: {
+      primary: {
+        true: ["border-primary", "hover:border-primary-hover "],
+      },
+      danger: {
+        true: ["text-error", "active:ring-error-active"],
+      },
       color: {
         default: [],
-        danger: [
-          "bg-red-500",
-          "hover:bg-red-500/90",
-          "active:ring-red-200",
-          "dark:bg-red-900",
-          "dark:hover:bg-red-900/90",
-        ],
       },
       variant: {
-        primary: [
+        default: [
           "bg-primary text-white",
-          "hover:bg-primary-hover",
+          "hover:bg-primary-hover hover:text-white",
           "active:ring-primary",
         ],
-        default: [
-          // "text-primary",
-          "border-border",
-          "hover:border-primary-hover hover:text-primary-hover",
+        outline: [
+          "border-border bg-background",
+          "hover:border-border-hover hover:bg-background-hover",
         ],
         dashed: [
           "border border-dashed border-border",
           "hover:border-primary-hover hover:text-primary-hover",
         ],
-        // default: [
-        //   "bg-gray-900 text-gray-50",
-        //   "hover:bg-gray-900/90",
-        //   "dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90",
-        // ],
-
-        // secondary:
-        // "bg-gray-100 text-gray-900 hover:bg-gray-100/80 dark:bg-gray-800 dark:text-gray-50 dark:hover:bg-gray-800/80",
-        ghost: [
-          "border-transparent",
-          "hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-50",
-        ],
-        "ghost-action": ["text-blue-500"],
-        "ghost-danger": [
-          "text-red-500",
-          "hover:bg-red-500/90 hover:text-gray-50",
-          "dark:text-red-600",
-          "dark:hover:bg-red-900/90 dark:hover:text-gray-50",
-        ],
+        ghost: ["border-transparent", "hover:bg-gray-100 hover:text-gray-900"],
         link: "text-gray-900 underline-offset-4 hover:underline dark:text-gray-50",
       },
       size: {
-        xs: "h-xs rounded-xs px-2 py-0",
-        sm: "h-sm rounded-sm px-3 py-1",
-        default: "h-md rounded-md px-4 py-2",
-        lg: "h-lg rounded-sm px-3 py-1 text-md",
-        xl: "h-xl px-4 text-xl",
+        sm: "h-6 rounded-sm px-2 py-0",
+        default: "h-8 rounded-md px-3 py-1",
+        lg: "h-10 rounded-lg px-4 py-2",
       },
       shape: {
         icon: "p-0",
@@ -78,17 +56,40 @@ const buttonVariants = cva(
     },
     compoundVariants: [
       {
-        size: "xs",
-        shape: ["icon", "circle"],
-        className: "w-6",
+        primary: true,
+        danger: true,
+        className: "bg-red-500 text-white",
+      },
+      {
+        primary: true,
+        variant: "outline",
+        className: [
+          "border-primary bg-transparent text-primary",
+          "hover:bg-primary-active hover:border-primary-hover hover:text-primary-hover",
+          "hover:bg-blue-100 dark:hover:bg-blue-300",
+        ],
+      },
+      {
+        danger: true,
+        variant: "outline",
+        className: [
+          "border-error",
+          "hover:border-error-hover  hover:text-error-hover",
+          "hover:bg-red-100 dark:hover:bg-red-300",
+        ],
       },
       {
         size: "sm",
         shape: ["icon", "circle"],
-        className: "w-8",
+        className: "w-6",
       },
       {
         size: "default",
+        shape: ["icon", "circle"],
+        className: "w-8",
+      },
+      {
+        size: "lg",
         shape: ["icon", "circle"],
         className: "w-10",
       },
@@ -96,11 +97,6 @@ const buttonVariants = cva(
         size: "lg",
         shape: ["icon", "circle"],
         className: "w-12",
-      },
-      {
-        size: "xl",
-        shape: ["icon", "circle"],
-        className: "w-14",
       },
     ],
     defaultVariants: {
@@ -120,7 +116,6 @@ export interface ButtonProps
   href?: string;
   loading?: boolean;
   icon?: React.ReactNode;
-  primary?: boolean;
   color?: NonNullable<ButtonVariants["color"]>;
   variant?: Exclude<ButtonVariants["variant"], "primary">;
 }
@@ -132,6 +127,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       className,
       color,
+      danger,
       disabled,
       loading,
       primary,

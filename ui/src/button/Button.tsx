@@ -59,7 +59,10 @@ const buttonVariants = cva(
       {
         primary: true,
         danger: true,
-        className: "bg-red-500 text-white",
+        className: [
+          "border-error bg-error",
+          "hover:border-error-hover hover:bg-error-hover",
+        ],
       },
       {
         primary: true,

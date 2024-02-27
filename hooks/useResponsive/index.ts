@@ -1,22 +1,30 @@
 import { useEffect, useState } from "react";
+import { theme } from "tailwindcss/defaultConfig";
 
-import {
-  defaultScreensConfig,
-  ResponsiveConfig,
-  Screens,
-} from "../../tooling/tailwind/defaultConfig";
 import isBrowser from "../utils/isBrowser";
 
 type Subscriber = () => void;
 
 const subscribers = new Set<Subscriber>();
 
-// type ResponsiveConfig = Record<string, number>
-type ResponsiveInfo = Record<string, boolean>;
+type Screens = "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
+type ResponsiveInfo = Record<Screens, boolean>;
 
 let info: ResponsiveInfo;
 
-let responsiveConfig = defaultScreensConfig;
+const tailwindScreensConfig = theme?.screens as Record<string, string>;
+
+let responsiveConfig = (() => {
+  const c: Record<string, number> = {};
+  Object.keys(tailwindScreensConfig).map((x) => {
+    c[x] = Number(tailwindScreensConfig[x]!.replace("px", ""));
+  });
+  return {
+    xs: 0,
+    ...c,
+  };
+})() as Record<Screens, number>;
+type ResponsiveConfig = typeof responsiveConfig;
 
 function handleResize() {
   const oldInfo = info;
@@ -51,7 +59,14 @@ export function configResponsive(config: ResponsiveConfig) {
 
 export default function useResponsive() {
   if (isBrowser && !listening) {
-    info = {};
+    info = {
+      xs: false,
+      sm: false,
+      md: false,
+      lg: false,
+      xl: false,
+      "2xl": false,
+    };
     calculate();
     window.addEventListener("resize", handleResize);
     listening = true;

@@ -17,10 +17,12 @@ export const DescriptionsItem = ({
           "text-secondary",
         )}
       >
-        {label}
+        <span>{label}</span>
       </th>
-      <td className={clsm("border-e px-6 py-4", "last:border-none")}>
-        {children ? children : "-"}
+      <td
+        className={clsm("break-all", "border-e px-6 py-4", "last:border-none")}
+      >
+        <span>{children ? children : "-"}</span>
       </td>
     </>
   );

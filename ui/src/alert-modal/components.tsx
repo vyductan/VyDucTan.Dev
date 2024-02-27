@@ -106,13 +106,13 @@ const AlertDialogAction = React.forwardRef<
     asChild?: boolean;
     isControlled?: boolean;
   }
->(({ asChild, isControlled, ...props }, ref) =>
-  asChild ?? isControlled ? (
-    <Button primary {...props} />
+>(({ asChild, isControlled, ...props }, ref) => {
+  return !asChild ?? isControlled ? (
+    <Button danger {...props} />
   ) : (
     <AlertDialogPrimitive.Action ref={ref} asChild {...props} />
-  ),
-);
+  );
+});
 AlertDialogAction.displayName = AlertDialogPrimitive.Action.displayName;
 
 const AlertDialogCancel = React.forwardRef<
@@ -121,7 +121,11 @@ const AlertDialogCancel = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AlertDialogPrimitive.Cancel
     ref={ref}
-    className={clsm(buttonVariants(), "mt-2 sm:mt-0", className)}
+    className={clsm(
+      buttonVariants({ variant: "outline" }),
+      "mt-2 sm:mt-0",
+      className,
+    )}
     {...props}
   />
 ));

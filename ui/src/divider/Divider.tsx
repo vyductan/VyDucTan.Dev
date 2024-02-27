@@ -26,8 +26,10 @@ const Separator = React.forwardRef<
         orientation={orientation}
         className={clsm(
           "my-6",
-          "shrink-0 bg-border",
-          orientation === "horizontal" ? "h-[1px] flex-1" : "h-full w-[1px]",
+          "bg-border",
+          orientation === "horizontal"
+            ? "h-[1px] grow basis-0"
+            : "h-full w-[1px]",
           className,
         )}
         {...props}
@@ -35,7 +37,11 @@ const Separator = React.forwardRef<
     );
     const Comp = children ? "div" : React.Fragment;
     return (
-      <Comp {...(children ? { className: "flex items-center gap-2" } : {})}>
+      <Comp
+        {...(children
+          ? { className: "flex items-center justify-between gap-2" }
+          : {})}
+      >
         {separator}
         {children && <div className="mb-px">{children}</div>}
         {children && separator}

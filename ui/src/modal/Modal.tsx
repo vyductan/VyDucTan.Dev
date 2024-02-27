@@ -20,6 +20,12 @@ type ModalProps = DialogProps & {
   className?: string;
   children?: React.ReactNode;
   description?: React.ReactNode;
+  footer?:
+    | ((params: {
+        originNode: React.ReactNode;
+        extra: { OkBtn: React.FC; CancelBtn: React.FC };
+      }) => React.ReactNode)
+    | React.ReactNode;
   okText?: string;
   okLoading?: boolean;
   title?: React.ReactNode;
@@ -31,6 +37,7 @@ const Modal = ({
   className,
   children,
   description,
+  footer,
   okText,
   okLoading,
   title,
@@ -40,6 +47,26 @@ const Modal = ({
   onOpenChange,
   ...rest
 }: ModalProps) => {
+  const CancelBtn = () => (
+    <DialogClose asChild onClick={onCancel}>
+      <Button variant="outline">Cancel</Button>
+    </DialogClose>
+  );
+  const OkBtn = () => (
+    <Button loading={okLoading} onClick={onOk}>
+      {okText ?? "Ok"}
+    </Button>
+  );
+  const footerToRender = !footer ? (
+    <>
+      {CancelBtn}
+      {OkBtn}
+    </>
+  ) : typeof footer === "function" ? (
+    footer({ originNode: null, extra: { OkBtn, CancelBtn } })
+  ) : (
+    footer
+  );
   return (
     <Dialog
       onOpenChange={(isOpen) => {
@@ -62,14 +89,7 @@ const Modal = ({
           {children}
         </ScrollArea>
 
-        <DialogFooter>
-          <DialogClose asChild onClick={onCancel}>
-            <Button>Cancel</Button>
-          </DialogClose>
-          <Button variant="primary" loading={okLoading} onClick={onOk}>
-            {okText ?? "Ok"}
-          </Button>
-        </DialogFooter>
+        <DialogFooter>{footerToRender}</DialogFooter>
       </DialogContent>
     </Dialog>
   );

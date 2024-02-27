@@ -29,6 +29,7 @@ export default {
         background: {
           DEFAULT: "hsl(var(--background))",
           hover: "hsl(var(--background-hover))",
+          200: "hsl(var(--background-200))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -75,7 +76,6 @@ export default {
 
       fontSize: {
         md: fontSize.base,
-        base: fontSize.sm,
       },
       width: {
         "screen-md": "1024px",

@@ -25,21 +25,15 @@
     --primary-1000: 220 100% 17%;
     --primary-hover: var(--primary-700);
 
-    /* --red-100: 0,100%,97%; */
-    /* --red-200: 0,100%,96%; */
-    /* --red-300: 0,100%,95%; */
-    /* --red-400: 0,90%,92%; */
-    /* --red-500: 0,82%,85%; */
-    /* --red-600: 359,90%,71%; */
-    /* --red-700: 358,75%,59%; */
-    /* --red-800: 358,70%,52%; */
-    /* --red-900: 358,66%,48%; */
-    /* --red-1000: 355,49%,15%; */
+    --accents-500: 0 0% 40%;
 
+    --background-200: 0 0% 98%;
     --background: 0 0% 100%;
     --background-hover: 0 0% 95%;
 
     --foreground: 0 0% 9%;
+
+    --secondary: var(--accents-500);
 
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
@@ -49,9 +43,6 @@
 
     /* --primary-foreground: 0 0% 98%; */
     --primary-foreground: flush-orange-600;
-
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
 
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
@@ -97,10 +88,15 @@
     --primary-950: 214 100% 10%;
     --primary-hover: var(--primary-500);
 
+    --accents-500: 0 0% 53%;
+
+    --background-200: 0 0% 0%;
     --background: 0 0% 4%;
     --background-hover: 0 0% 12%;
 
     --foreground: 0 0% 98%;
+
+    --secondary: var(--accents-500);
 
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
@@ -109,9 +105,6 @@
     --popover-foreground: 0 0% 98%;
 
     --primary-foreground: 0 0% 9%;
-
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
 
     --muted: 0 0% 14.9%;
     --muted-foreground: 0 0% 63.9%;

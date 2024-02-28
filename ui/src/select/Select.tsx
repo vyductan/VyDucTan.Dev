@@ -2,6 +2,7 @@
 
 import React from "react";
 
+import type { ValueType } from "../form";
 import type { InputBaseProps } from "../input/types";
 import type { SelectRootProps } from "./components";
 import type { Option } from "./types";
@@ -15,7 +16,7 @@ import {
 
 export const selectDefaultPlaceholder = "Select an option";
 
-export type SelectProps<T extends string | number = string> = Omit<
+export type SelectProps<T extends ValueType = string> = Omit<
   SelectRootProps,
   "value" | "onValueChange"
 > & {
@@ -35,11 +36,11 @@ export type SelectProps<T extends string | number = string> = Omit<
     label?: React.ReactNode;
   };
   optionsRender?: (options: Option<T>[]) => React.ReactNode;
-} & InputBaseProps & {
-    onChange?: (value: T, option: Option | Array<Option>) => void;
-  };
+} & {
+  onChange?: (value: T, option: Option | Array<Option>) => void;
+};
 
-const SelectInner = <T extends string | number = string>(
+const SelectInner = <T extends ValueType = string>(
   {
     value,
     options,
@@ -54,14 +55,12 @@ const SelectInner = <T extends string | number = string>(
 
   return (
     <SelectRoot
-      value={value}
+      value={value as string}
       open={open}
       onOpenChange={setOpen}
       onValueChange={(value) => {
-        onChange?.(
-          value as T,
-          options.find((x) => x.value === value) as Option,
-        );
+        const x = options.find((x) => String(x.value) === String(value))?.value;
+        onChange?.(x!, options.find((x) => x.value === value) as Option);
       }}
     >
       <SelectTrigger className="w-full">
@@ -69,7 +68,7 @@ const SelectInner = <T extends string | number = string>(
       </SelectTrigger>
       <SelectContent>
         {options.map((o) => (
-          <SelectItem key={o.value} value={o.value as string}>
+          <SelectItem key={String(o.value)} value={o.value as string}>
             {o.label}
           </SelectItem>
         ))}
@@ -77,9 +76,8 @@ const SelectInner = <T extends string | number = string>(
     </SelectRoot>
   );
 };
-export const Select = React.forwardRef(SelectInner) as <
-  T extends string | number,
->(
+
+export const Select = React.forwardRef(SelectInner) as <T extends ValueType>(
   props: SelectProps<T> & {
     ref?: React.ForwardedRef<HTMLUListElement>;
   },

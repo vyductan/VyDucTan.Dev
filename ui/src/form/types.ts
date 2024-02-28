@@ -9,9 +9,12 @@ import type { EditorProps } from "../editor/Editor";
 import type { InputProps } from "../input";
 import type { InputPasswordProps } from "../input/Password";
 import type { RadioGroupProps } from "../radio";
+import type { SelectProps } from "../select";
 import type { TextareaProps } from "../textarea";
 import type { FieldProps } from "./Field";
 import type { FieldArrayProps } from "./FieldArray";
+
+export type ValueType = string | number | boolean;
 
 type AutoFormFieldBaseProps = {
   // title?: ReactNode;
@@ -33,7 +36,7 @@ export type FieldWithType<TType, TFieldProps> = Omit<
 };
 
 // https://procomponents.ant.design/en-US/components/schema#valuetype-lists
-export type InputUnion =
+export type InputUnion<TValue extends ValueType = string> =
   | FieldWithType<"autocomplete", AutoCompleteProps>
   | FieldWithType<"date", Omit<DatePickerSingleProps, "mode">>
   | FieldWithType<"date-range", Omit<DatePickerRangeProps, "mode">>
@@ -43,11 +46,13 @@ export type InputUnion =
   | FieldWithType<"text", InputProps>
   // | FieldWithType<"number", FieldInputProps>
   // | FieldWithType<"select", FieldProps<TFieldValues, TName> & SelectProps>
+  | FieldWithType<"select", SelectProps<TValue>>
   | FieldWithType<"textarea", TextareaProps>;
 
 type AutoFormFieldUnion<
   // TFieldValues,
   TFieldValues extends FieldValues = FieldValues,
+  TValue extends ValueType = ValueType,
   // TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
   // TFieldValues extends Record<string, any> = Record<string, any>,
   // TName extends keyof TFieldValues = keyof TFieldValues,
@@ -75,7 +80,7 @@ type AutoFormFieldUnion<
   //   | FieldWithType<"textarea", FieldProps<TFieldValues> & TextareaProps>
   // )
   Omit<FieldProps<TFieldValues>, "control" | "name"> &
-  InputUnion;
+  InputUnion<TValue>;
 
 // | FieldWithType<"time", FieldInputProps>
 // | FieldWithType<"group", { gridCols?: number; columns: Array<FieldsSchema<TRecord>> }>
@@ -119,8 +124,7 @@ type FieldType =
   | FieldGroupType
   | "custom";
 type FieldsSchema<
-  TFieldValues,
-  // TFieldValues extends FieldValues = FieldValues,
+  TFieldValues extends FieldValues = FieldValues,
   // TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
   TFieldType extends FieldType = FieldType,
 > = {
@@ -165,7 +169,7 @@ type FieldsSchema<
             // fields: FieldsSchema<TFieldValues[key]>[];
             // string[];
           }
-        : AutoFormFieldUnion & {
+        : AutoFormFieldUnion<TFieldValues, TFieldValues[key]> & {
             type: TFieldType;
             name: key;
             // columns?: TFieldValues[key] extends (infer I)[]

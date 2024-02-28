@@ -163,18 +163,20 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           disabled={loading ?? disabled}
           {...props}
         >
-          {asChild
-            ? children
-            : (!!loading || icon) && (
-                <>
-                  <span className={clsm(children && "mr-2")}>
-                    <Slot className="size-5">
-                      {loading ? <LoadingIcon /> : icon}
-                    </Slot>
-                  </span>
-                  {children}
-                </>
+          {asChild ? (
+            children
+          ) : (
+            <>
+              {(!!loading || icon) && (
+                <span className={clsm(children && "mr-2")}>
+                  <Slot className="size-5">
+                    {loading ? <LoadingIcon /> : icon}
+                  </Slot>
+                </span>
               )}
+              {children}
+            </>
+          )}
         </Comp>
       </Wave>
     );

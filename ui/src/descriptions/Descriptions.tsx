@@ -1,21 +1,29 @@
 import { useResponsive } from "@vyductan/hooks";
 
 import type { Screens } from "../theme";
-import type { DescriptionsItemProps } from "./DescriptionsItem";
 import { clsm } from "..";
-import { DescriptionsItem } from "./DescriptionsItem";
 
+export type DescriptionsItem = {
+  label?: React.ReactNode;
+  children?: React.ReactNode;
+};
 type DescriptionProps = {
   title?: React.ReactNode;
-  items: DescriptionsItemProps[];
+  items: DescriptionsItem[];
+
   bordered?: boolean;
   column?: number | Partial<Record<Screens, number>>;
+  layout?: "horizontal" | "vertical";
+  labelClassName?: string;
+  contentClassName?: string;
 };
 export const Descriptions = ({
   title,
   items,
   bordered,
   column,
+  layout = "horizontal",
+  ...props
 }: DescriptionProps) => {
   const x = useResponsive();
   const currentScreen = Object.entries(x)
@@ -35,8 +43,43 @@ export const Descriptions = ({
     }
     return chunkedArray;
   }
-  const rows = chunkArray(items, mergedColumn);
+  function createRows(
+    data: DescriptionsItem[],
+    columns: number,
+  ): React.ReactNode[][] {
+    const rows: React.ReactNode[][] = [];
+    for (let i = 0; i < data.length; i += columns) {
+      const labels = data.slice(i, i + columns).map((item) => item.label);
+      const childrens = data.slice(i, i + columns).map((item) => item.children);
+      rows.push(labels);
+      rows.push(childrens);
+    }
+    return rows;
+  }
 
+  const rows =
+    layout === "horizontal"
+      ? chunkArray(items, mergedColumn)
+      : createRows(items, mergedColumn);
+
+  const labelClassName = clsm("text-secondary", props.labelClassName);
+  const contentClassName = clsm(props.contentClassName);
+  const thClassName = clsm(
+    "text-start text-sm font-normal",
+    "px-6",
+    labelClassName,
+    bordered && "border-e bg-background-200",
+    layout === "horizontal" && "py-4",
+    layout === "vertical" && "pb-1",
+  );
+  const tdClassName = clsm(
+    "break-all",
+    "px-6",
+    bordered && "border-e",
+    layout === "horizontal" && "py-4",
+    layout === "vertical" && "pb-4",
+    contentClassName,
+  );
   return (
     <div>
       <div className="text-lg font-semibold">{title}</div>
@@ -45,14 +88,41 @@ export const Descriptions = ({
           className={clsm("w-full", bordered ? "table-auto" : "table-fixed")}
         >
           <tbody>
-            {rows.map((row, index) => (
+            {rows.map((cols, rowIndex) => (
               <tr
-                key={index}
-                className={clsm("mb-[1px] border-b", "last:border-none")}
+                key={rowIndex}
+                className={clsm(
+                  bordered && "mb-[1px] border-b last:border-none",
+                )}
               >
-                {row.map((col, colIndex) => (
-                  <DescriptionsItem key={colIndex} {...col} />
-                ))}
+                {cols.map((col) =>
+                  // horizontal
+                  typeof col === "object" && "label" in col! ? (
+                    !bordered ? (
+                      <>
+                        <td className="flex gap-1">
+                          <span className={labelClassName}>{col.label}:</span>
+                          <span className={contentClassName}>
+                            {col.children}
+                          </span>
+                        </td>
+                      </>
+                    ) : (
+                      <>
+                        <th className={thClassName}>
+                          <span>{col.label}</span>
+                        </th>
+                        <td className={clsm(tdClassName, "last:border-none")}>
+                          <span>{col.children ? col.children : "-"}</span>
+                        </td>
+                      </>
+                    ) //vertical
+                  ) : rowIndex % 2 === 0 ? (
+                    <th className={thClassName}>{col as React.ReactNode}</th>
+                  ) : (
+                    <td className={tdClassName}>{col as React.ReactNode}</td>
+                  ),
+                )}
               </tr>
             ))}
           </tbody>

@@ -135,15 +135,25 @@ const AutoForm = <
             description={description}
             className={className}
             defaultValue={
-              ["text"].includes(field.type)
+              ["text", "select"].includes(field.type)
                 ? ("" as PathValue<TFieldValues, Path<TFieldValues>>)
                 : undefined
             }
           >
             {({ field: fieldRenderProps }) => {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              const onChange = (...event: any) => {
+                if ("onChange" in rest && typeof rest.onChange === "function") {
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+                  rest.onChange?.(...event);
+                }
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+                fieldRenderProps.onChange(...event);
+              };
               return renderInput({
                 ...rest,
                 ...fieldRenderProps,
+                onChange,
               } as InputUnion);
             }}
           </Field>

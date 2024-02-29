@@ -67,6 +67,7 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        placeholder: "hsl(var(--placeholder))",
       },
       // textColor: ({ theme }) => ({
       //   // color: THEME_TOKEN.colorText,
@@ -84,7 +85,6 @@ export default {
        * Colors
        */
       textColor: {
-        placeholder: "hsl(var(--placeholder))",
         description: "hsl(var(--text-description))",
       },
       backgroundColor: {

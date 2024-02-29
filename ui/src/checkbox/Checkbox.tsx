@@ -4,10 +4,16 @@ import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { clsm } from "..";
 import { Icon } from "../icons";
 
+type CheckboxProps = Omit<
+  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>,
+  "onChange" | "onCheckedChange"
+> & {
+  onChange?: (checked: boolean) => void;
+};
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
->(({ className, ...props }, ref) => (
+  CheckboxProps
+>(({ className, onChange, ...props }, ref) => (
   <CheckboxPrimitive.Root
     ref={ref}
     className={clsm(
@@ -17,6 +23,7 @@ const Checkbox = React.forwardRef<
       "data-[state=checked]:bg-primary data-[state=checked]:text-white",
       className,
     )}
+    onCheckedChange={onChange}
     {...props}
   >
     <CheckboxPrimitive.Indicator

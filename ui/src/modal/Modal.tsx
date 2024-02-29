@@ -59,8 +59,8 @@ const Modal = ({
   );
   const footerToRender = !footer ? (
     <>
-      {CancelBtn}
-      {OkBtn}
+      <CancelBtn />
+      <OkBtn />
     </>
   ) : typeof footer === "function" ? (
     footer({ originNode: null, extra: { OkBtn, CancelBtn } })

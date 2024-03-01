@@ -46,9 +46,9 @@ function List<TRecord extends Record<string, unknown>>({
   // grid,
   dataSource = [],
   // size,
+  loading = false,
   header,
   footer,
-  // loading = false,
   rowKey,
   renderItem,
   // ...rest
@@ -56,7 +56,7 @@ function List<TRecord extends Record<string, unknown>>({
   return (
     <>
       {header && <div>{header}</div>}
-      <Spin>
+      <Spin spinning={loading}>
         {/* {childrenContent} */}
         <ul>
           {dataSource.map((item, index) => (

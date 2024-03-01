@@ -1,5 +1,5 @@
 export type MenuItemDef = {
-  key?: React.Key;
+  key?: string;
   label?: React.ReactNode;
   // Set display title for collapsed item
   title?: React.ReactNode;

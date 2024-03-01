@@ -3,7 +3,6 @@
 import React from "react";
 
 import type { ValueType } from "../form";
-import type { InputBaseProps } from "../input/types";
 import type { SelectRootProps } from "./components";
 import type { Option } from "./types";
 import {
@@ -48,6 +47,8 @@ const SelectInner = <T extends ValueType = string>(
     placeholder,
 
     onChange,
+
+    ...props
   }: SelectProps<T>,
   _: React.ForwardedRef<HTMLInputElement>,
 ) => {
@@ -62,6 +63,7 @@ const SelectInner = <T extends ValueType = string>(
         const x = options.find((x) => String(x.value) === String(value))?.value;
         onChange?.(x!, options.find((x) => x.value === value) as Option);
       }}
+      {...props}
     >
       <SelectTrigger className="w-full">
         <SelectValue placeholder={placeholder} />

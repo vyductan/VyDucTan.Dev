@@ -11,7 +11,9 @@
     "./types": "./src/types.ts",
     "./auth": "./src/auth/index.ts",
     "./db": "./src/db.ts",
-    "./contact": "./src/contact/action.ts"
+    "./contact": "./src/contact/action.ts",
+    "./projects/types": "./src/projects/types.ts",
+    "./tasks/types": "./src/tasks/types.ts"
   },
   "scripts": {
     "clean": "rm -rf .turbo node_modules",

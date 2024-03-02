@@ -23,7 +23,6 @@ export const ComponentPickerMenuItem = ({
         "flex items-center gap-2 rounded-sm p-2",
         isSelected && "bg-gray-200",
       )}
-      // eslint-disable-next-line @typescript-eslint/unbound-method
       ref={option.setRefElement}
       role="option"
       aria-selected={isSelected}

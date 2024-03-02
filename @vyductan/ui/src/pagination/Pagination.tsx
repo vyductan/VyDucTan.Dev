@@ -19,8 +19,8 @@ import {
 import enUS from "./locale/en_US";
 
 export type PaginationProps = {
-  current: number;
-  defaultCurrent?: number;
+  page: number;
+  defaultPage?: number;
   pageSize: number;
   defaultPageSize?: number;
   total: number;
@@ -51,8 +51,8 @@ export type PaginationProps = {
 };
 export const Pagination = (props: PaginationProps) => {
   const {
-    current: currentProp,
-    defaultCurrent = 1,
+    page,
+    defaultPage = 1,
     pageSize: pageSizeProp,
     defaultPageSize = 10,
     total,
@@ -79,8 +79,8 @@ export const Pagination = (props: PaginationProps) => {
   });
 
   const [current, setCurrent] = useMergedState<number>(1, {
-    value: currentProp,
-    defaultValue: defaultCurrent,
+    value: page,
+    defaultValue: defaultPage,
     postState: (c) =>
       Math.max(1, Math.min(c, calculatePage(undefined, pageSize, total))),
   });
@@ -248,7 +248,7 @@ export const Pagination = (props: PaginationProps) => {
     const allPages = calculatePage(undefined, pageSize, total);
     let value: number;
     if (inputValue === "") {
-      value = defaultCurrent;
+      value = defaultPage;
     } else if (Number.isNaN(Number(inputValue))) {
       value = internalInputVal;
     } else if (Number(inputValue) >= allPages) {

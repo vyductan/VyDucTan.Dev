@@ -3,5 +3,6 @@ import { cx } from "class-variance-authority";
 import { twMerge } from "tailwind-merge";
 
 const clsm = (...inputs: CxOptions) => twMerge(cx(inputs));
+console;
 
 export { clsm };

@@ -27,11 +27,13 @@
 
     --accents-500: 0 0% 40%;
 
+    --gray-100: 0 0% 95%;
     --gray-700: 0 0% 56%;
 
     --background-200: 0 0% 98%;
     --background: 0 0% 100%;
     --background-hover: 0 0% 95%;
+    --background-disabled: var(--gray-100);
 
     --foreground: 0 0% 9%;
 
@@ -91,6 +93,9 @@
     --primary-hover: var(--primary-500);
 
     --accents-500: 0 0% 53%;
+
+    --gray-100: 0 0% 10%;
+    --gray-700: 0 0% 56%;
 
     --background-200: 0 0% 0%;
     --background: 0 0% 4%;

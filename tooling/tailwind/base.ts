@@ -29,6 +29,7 @@ export default {
         background: {
           DEFAULT: "hsl(var(--background))",
           hover: "hsl(var(--background-hover))",
+          disabled: "hsl(var(--background-disabled))",
           200: "hsl(var(--background-200))",
         },
         secondary: {

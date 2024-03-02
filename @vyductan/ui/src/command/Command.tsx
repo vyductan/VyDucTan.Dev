@@ -1,5 +1,6 @@
 import { clsm } from "@vyductan/ui";
 
+import type { ValueType } from "../form";
 import type { Option } from "../select/types";
 import type { CommandRootProps } from "./components";
 import { Icon } from "../icons";
@@ -12,7 +13,7 @@ import {
 } from "./components";
 import { defaultEmpty, defaultPlaceholder } from "./config";
 
-export type CommandProps<T> = CommandRootProps & {
+export type CommandProps<T extends ValueType> = CommandRootProps & {
   value?: T;
   options: (Option<T> & {
     onSelect: (currentValue: string) => void;

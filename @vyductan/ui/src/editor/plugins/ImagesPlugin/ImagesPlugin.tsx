@@ -87,7 +87,6 @@ const TRANSPARENT_IMAGE =
   "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
 function onDragStart(event: DragEvent): boolean {
-  // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
   const img = (typeof document !== "undefined" &&
     document.createElement("img")) as unknown as HTMLImageElement;
   img.src = TRANSPARENT_IMAGE;

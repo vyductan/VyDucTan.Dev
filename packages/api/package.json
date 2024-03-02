@@ -21,7 +21,7 @@
     "db:studio": "pnpm with-env drizzle-kit studio",
     "lint": "eslint .",
     "lint:fix": "pnpm lint --fix",
-    "type-check": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "with-env": "dotenv -e ../../.env --"
   },
   "prettier": "@vyductan/prettier-config",

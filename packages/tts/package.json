@@ -14,7 +14,7 @@
     "db:studio": "drizzle-kit studio",
     "lint": "eslint .",
     "lint:fix": "pnpm lint --fix",
-    "type-check": "tsc --noEmit"
+    "typecheck": "tsc --noEmit"
   },
   "prettier": "@vyductan/prettier-config",
   "eslintConfig": {

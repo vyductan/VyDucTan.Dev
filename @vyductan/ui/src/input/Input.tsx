@@ -6,7 +6,7 @@ import { clsm } from "@vyductan/ui";
 
 export const inputStatusVariants = cva(
   [
-    "w-full px-3 py-[9px]",
+    "w-full",
     "flex rounded-md border border-input ring-offset-background",
     "text-sm",
     "focus-within:outline-none",
@@ -19,6 +19,11 @@ export const inputStatusVariants = cva(
         true: ["border-0", "focus-within:outline-none"],
         false: ["border", "rounded-md", "focus-within:ring-2"],
       },
+      size: {
+        sm: "",
+        default: "px-[11px] py-[5px]",
+        lg: "px-[11px] py-[9px]",
+      },
       status: {
         default: [
           "hover:border-primary-500",
@@ -28,6 +33,7 @@ export const inputStatusVariants = cva(
     },
     defaultVariants: {
       borderless: false,
+      size: "default",
       status: "default",
     },
   },
@@ -37,14 +43,17 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> &
     suffix?: React.ReactNode;
   };
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ borderless, className, id, status, suffix, onChange, ...props }, ref) => {
+  (
+    { borderless, className, id, size, status, suffix, onChange, ...props },
+    ref,
+  ) => {
     const useId = React.useId();
     const _id = id ?? useId;
 
     return (
       <span
         className={clsm(
-          inputStatusVariants({ borderless, status }),
+          inputStatusVariants({ borderless, size, status }),
           "cursor-text",
           className,
         )}

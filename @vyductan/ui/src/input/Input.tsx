@@ -38,7 +38,7 @@ export const inputStatusVariants = cva(
     },
   },
 );
-type InputProps = React.InputHTMLAttributes<HTMLInputElement> &
+type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> &
   VariantProps<typeof inputStatusVariants> & {
     suffix?: React.ReactNode;
   };

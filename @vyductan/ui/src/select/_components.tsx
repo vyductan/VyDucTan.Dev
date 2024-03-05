@@ -1,11 +1,10 @@
-"use client";
-
+import type { VariantProps } from "class-variance-authority";
 import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
 
-import { clsm } from "@vyductan/ui";
-
+import { clsm } from "..";
 import { Icon } from "../icons";
+import { inputStatusVariants } from "../input";
 
 type SelectRootProps = SelectPrimitive.SelectProps;
 const SelectRoot = SelectPrimitive.Root;
@@ -14,14 +13,19 @@ const SelectGroup = SelectPrimitive.Group;
 
 const SelectValue = SelectPrimitive.Value;
 
+type SelectTriggerProps = React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Trigger
+> &
+  VariantProps<typeof inputStatusVariants>;
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
+  SelectTriggerProps
+>(({ className, children, borderless, size, status, ...props }, ref) => (
   <SelectPrimitive.Trigger
     ref={ref}
     className={clsm(
-      "flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-placeholder",
+      inputStatusVariants({ borderless, size, status }),
+      "items-center justify-between bg-background placeholder:text-placeholder",
       "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
       "disabled:cursor-not-allowed disabled:bg-background-disabled disabled:text-placeholder [&>span]:line-clamp-1",
       className,

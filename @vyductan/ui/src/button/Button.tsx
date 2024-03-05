@@ -14,7 +14,6 @@ const buttonVariants = cva(
     "inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-white transition-colors",
     "border",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-950 focus-visible:ring-offset-2",
-    "disabled:pointer-events-none disabled:opacity-50",
     "dark:ring-offset-gray-950 dark:focus-visible:ring-gray-300",
   ],
   {
@@ -51,8 +50,13 @@ const buttonVariants = cva(
         lg: "h-10 rounded-lg px-4 py-2",
       },
       shape: {
+        default: "",
         icon: "p-0",
         circle: "rounded-full",
+      },
+      disabled: {
+        true: "pointer-events-none opacity-50",
+        false: "",
       },
     },
     compoundVariants: [
@@ -107,6 +111,7 @@ const buttonVariants = cva(
       variant: "default",
       color: "default",
       size: "default",
+      shape: "default",
     },
   },
 );
@@ -115,7 +120,7 @@ type ButtonVariants = VariantProps<typeof buttonVariants>;
 
 export interface ButtonProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "color">,
-    Omit<ButtonVariants, "color" | "variant"> {
+    Omit<ButtonVariants, "color" | "disabled" | "variant"> {
   asChild?: boolean;
   href?: string;
   loading?: boolean;
@@ -153,6 +158,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             buttonVariants({
               color,
               danger,
+              disabled,
               primary: !primary && !!variant ? null : !primary ? true : primary,
               size,
               shape: icon && !children ? shape ?? "icon" : shape,

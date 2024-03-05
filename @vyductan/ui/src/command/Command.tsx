@@ -2,7 +2,7 @@ import { clsm } from "@vyductan/ui";
 
 import type { ValueType } from "../form";
 import type { Option } from "../select/types";
-import type { CommandRootProps } from "./components";
+import type { CommandRootProps } from "./_components";
 import { Icon } from "../icons";
 import {
   CommandEmpty,
@@ -10,7 +10,7 @@ import {
   CommandInput,
   CommandItem,
   CommandRoot,
-} from "./components";
+} from "./_components";
 import { defaultEmpty, defaultPlaceholder } from "./config";
 
 export type CommandProps<T extends ValueType> = CommandRootProps & {

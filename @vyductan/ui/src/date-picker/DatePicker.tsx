@@ -6,7 +6,9 @@ import { useClickAway } from "ahooks";
 import { format as formatDate, isValid, parse } from "date-fns";
 
 import type { inputStatusVariants } from "../input";
+import { clsm } from "..";
 import { Calendar } from "../calendar";
+import { Icon } from "../icons";
 import { Input } from "../input";
 import { Popover } from "../popover";
 
@@ -32,12 +34,22 @@ export type DatePickerProps = (DatePickerSingleProps | DatePickerRangeProps) &
     format?: string;
   };
 const DatePickerInternal = (
-  { borderless, format = "P", size, status, ...props }: DatePickerProps,
+  {
+    borderless,
+    format = "dd/MM/yyyy",
+    size,
+    status,
+    ...props
+  }: DatePickerProps,
   ref: React.Ref<HTMLInputElement>,
 ) => {
   const [open, setOpen] = React.useState(false);
   const [month, setMonth] = React.useState<Date | undefined>(
-    props.mode === "single" ? props.value : props.value?.start,
+    props.mode === "single"
+      ? props.value
+        ? props.value
+        : undefined
+      : props.value?.start,
   );
   const inputId = React.useId();
 
@@ -103,12 +115,15 @@ const DatePickerInternal = (
     const inputValue = (document.getElementById(inputId) as HTMLInputElement)
       .value;
     if (props.mode === "single") {
-      const formattedValue = isValid(props.value)
-        ? formatDate(props.value!, format)
-        : "";
-      if (inputValue !== formattedValue) {
-        (document.getElementById(inputId) as HTMLInputElement).value =
-          formattedValue;
+      if (isValid(props.value)) {
+        const formattedValue = isValid(props.value)
+          ? formatDate(props.value!, format)
+          : "";
+        if (inputValue !== formattedValue) {
+          (document.getElementById(inputId) as HTMLInputElement).value =
+            formattedValue;
+          setMonth(props.value);
+        }
       }
     }
   }, [props.mode, props.value, inputId, format]);

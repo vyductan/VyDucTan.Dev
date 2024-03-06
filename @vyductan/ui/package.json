@@ -90,6 +90,7 @@
     "@tanstack/react-table": "^8.13.0",
     "@vyductan/hooks": "*",
     "@vyductan/utils": "*",
+    "ahooks": "^3.7.10",
     "class-variance-authority": "^0.7.0",
     "cmdk": "^0.2.0",
     "date-fns": "^3.3.1",

@@ -2,8 +2,9 @@
 
 import type { VariantProps } from "class-variance-authority";
 import * as React from "react";
-import { useClickAway } from "ahooks";
+import { useClickAway, useFocusWithin } from "ahooks";
 import { format as formatDate, isValid, parse } from "date-fns";
+import { useMergedState } from "rc-util";
 
 import type { inputStatusVariants } from "../input";
 import { clsm } from "..";
@@ -12,130 +13,101 @@ import { Icon } from "../icons";
 import { Input } from "../input";
 import { Popover } from "../popover";
 
-type DateRange = {
-  start: Date | undefined;
-  end?: Date | undefined;
-};
-
-export type DatePickerSingleProps = {
-  mode: "single";
+export type DatePickerProps = VariantProps<typeof inputStatusVariants> & {
+  format?: string;
+  defaultValue?: Date;
   value?: Date;
   /** Callback function, can be executed when the selected time is changing */
   onChange?: (date: Date | undefined, dateString: string) => void;
 };
-// TODO: https://react-day-picker.js.org/guides/input-fields?#example-range-selection
-export type DatePickerRangeProps = {
-  mode: "range";
-  value?: DateRange;
-  onChange?: (range: DateRange | undefined) => void;
-};
-export type DatePickerProps = (DatePickerSingleProps | DatePickerRangeProps) &
-  VariantProps<typeof inputStatusVariants> & {
-    format?: string;
-  };
 const DatePickerInternal = (
   {
     borderless,
     format = "dd/MM/yyyy",
     size,
     status,
+    defaultValue,
+    value,
     ...props
   }: DatePickerProps,
   ref: React.Ref<HTMLInputElement>,
 ) => {
   const [open, setOpen] = React.useState(false);
   const [month, setMonth] = React.useState<Date | undefined>(
-    props.mode === "single"
-      ? props.value
-        ? props.value
-        : undefined
-      : props.value?.start,
+    defaultValue !== undefined
+      ? isValid(defaultValue)
+        ? defaultValue
+        : new Date()
+      : isValid(value)
+        ? value
+        : new Date(),
   );
+
   const inputId = React.useId();
 
+  // ====================== Value =======================
+  const preValue =
+    defaultValue !== undefined
+      ? isValid(defaultValue)
+        ? formatDate(defaultValue, format)
+        : ""
+      : isValid(value)
+        ? formatDate(value!, format)
+        : "";
+  const [inputValue, setInputValue] = useMergedState(preValue);
+
+  // set input value if date value change
+  React.useEffect(() => {
+    const x = isValid(value) ? formatDate(value!, format) : "";
+    setInputValue(x);
+    setMonth(value ? value : new Date());
+  }, [value, setInputValue, format]);
+
   const handleChange = (input: string | Date) => {
-    if (props.mode === "single") {
-      if (input === "") {
-        props.onChange?.(undefined, "");
-      } else {
-        let date = input;
-        if (typeof date === "string") {
-          date = parse(date, format, new Date());
-        }
-        if (isValid(date)) {
-          props.onChange?.(date, formatDate(date, format));
-          setMonth(date);
-        }
-      }
+    const inputDate =
+      typeof input === "string" ? parse(input, format, new Date()) : input;
+    if (isValid(inputDate)) {
+      props.onChange?.(inputDate, formatDate(inputDate, format));
+      setInputValue(formatDate(inputDate, format));
+      setMonth(inputDate);
+    } else {
+      setInputValue(preValue);
+      props.onChange?.(undefined, "");
     }
   };
 
-  const picker = (() => {
-    if (props.mode === "single") {
-      const { value, onChange: _, ...rest } = props;
-      return (
-        <Calendar
-          selected={value}
-          onSelect={(_, selectedDate) => {
-            handleChange(selectedDate);
-            setOpen(false);
-          }}
-          month={month}
-          onMonthChange={setMonth}
-          {...rest}
-          mode="single"
-        />
-      );
-    }
-    if (props.mode === "range") {
-      const { value, onChange, ...rest } = props;
-      return (
-        <Calendar
-          initialFocus
-          selected={{
-            from: value?.start,
-            to: value?.end,
-          }}
-          onSelect={(range) => {
-            onChange?.({
-              start: range?.from,
-              end: range?.to,
-            });
-          }}
-          numberOfMonths={2}
-          {...rest}
-          mode="range"
-        />
-      );
-    }
-    return null;
-  })();
+  const picker = (
+    <Calendar
+      mode="single"
+      selected={value}
+      onSelect={(_, selectedDate) => {
+        handleChange(selectedDate);
+        setOpen(false);
+      }}
+      month={month}
+      onMonthChange={setMonth}
+      {...props}
+    />
+  );
 
-  React.useEffect(() => {
-    const inputValue = (document.getElementById(inputId) as HTMLInputElement)
-      .value;
-    if (props.mode === "single") {
-      if (isValid(props.value)) {
-        const formattedValue = isValid(props.value)
-          ? formatDate(props.value!, format)
-          : "";
-        if (inputValue !== formattedValue) {
-          (document.getElementById(inputId) as HTMLInputElement).value =
-            formattedValue;
-          setMonth(props.value);
-        }
-      }
-    }
-  }, [props.mode, props.value, inputId, format]);
+  // handle click outside from input (is focus within)
+  const [isFocused, setIsFocused] = React.useState(false);
+  useFocusWithin(() => document.getElementById(inputId), {
+    onFocus: () => {
+      setIsFocused(true);
+    },
+  });
 
   useClickAway(
     (e) => {
-      if (document.activeElement?.id === inputId) {
+      if (isFocused) {
         // check if choose a day in panel or not
         if (!(e.target && "name" in e.target && e.target.name === "day")) {
-          handleChange(
-            (document.getElementById(inputId) as HTMLInputElement)?.value,
-          );
+          if (inputValue.length === 10) {
+            handleChange(inputValue);
+          } else {
+            setInputValue(preValue);
+          }
         }
       }
     },
@@ -159,38 +131,45 @@ const DatePickerInternal = (
           e.preventDefault();
         }}
       >
-        {props.mode === "single" ? (
-          <Input
-            id={inputId}
-            borderless={borderless}
-            size={size}
-            status={status}
-            className={clsm("items-center", "justify-start text-left")}
-            ref={ref}
-            placeholder="Pick a date"
-            suffix={
-              <Icon
-                icon="mingcute:calendar-2-line"
-                className="ml-auto size-4 opacity-50"
-              />
-            }
-            onClick={() => {
-              if (!open) setOpen(true);
-            }}
-            onKeyUp={(e) => {
-              e.stopPropagation();
-              if (e.key === "Enter" || e.key === "Escape") {
-                handleChange(e.currentTarget.value);
-                setOpen(false);
-              }
-            }}
-            onChange={(e) => {
+        <Input
+          id={inputId}
+          allowClear
+          borderless={borderless}
+          size={size}
+          status={status}
+          className={clsm("items-center", "justify-start text-left")}
+          ref={ref}
+          placeholder="Pick a date"
+          suffix={
+            <Icon
+              icon="mingcute:calendar-2-line"
+              className="ml-auto size-4 opacity-50"
+            />
+          }
+          value={inputValue}
+          onClick={() => {
+            if (!open) setOpen(true);
+          }}
+          onKeyUp={(e) => {
+            e.stopPropagation();
+            if (e.key === "Enter" || e.key === "Escape") {
               if (e.currentTarget.value.length === 10) {
                 handleChange(e.currentTarget.value);
+              } else {
+                setInputValue(preValue);
               }
-            }}
-          />
-        ) : null}
+              setOpen(false);
+            }
+          }}
+          onChange={(e) => {
+            setInputValue(e.currentTarget.value);
+            if (e.currentTarget.value === "") {
+              props.onChange?.(undefined, "");
+            } else if (e.currentTarget.value.length === 10) {
+              handleChange(e.currentTarget.value);
+            }
+          }}
+        />
       </Popover>
     </>
   );

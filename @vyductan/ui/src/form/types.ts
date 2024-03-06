@@ -1,10 +1,7 @@
 import type { FieldValues, SubmitHandler } from "react-hook-form";
 
 import type { AutoCompleteProps } from "../autocomplete";
-import type {
-  DatePickerRangeProps,
-  DatePickerSingleProps,
-} from "../date-picker";
+import type { DatePickerProps, DateRangePickerProps } from "../date-picker";
 import type { EditorProps } from "../editor/Editor";
 import type { InputProps } from "../input";
 import type { InputPasswordProps } from "../input/Password";
@@ -38,8 +35,8 @@ export type FieldWithType<TType, TFieldProps> = Omit<
 // https://procomponents.ant.design/en-US/components/schema#valuetype-lists
 export type InputUnion<TValue extends ValueType = string> =
   | FieldWithType<"autocomplete", AutoCompleteProps>
-  | FieldWithType<"date", Omit<DatePickerSingleProps, "mode">>
-  | FieldWithType<"date-range", Omit<DatePickerRangeProps, "mode">>
+  | FieldWithType<"date", DatePickerProps>
+  | FieldWithType<"date-range", DateRangePickerProps>
   | FieldWithType<"editor", EditorProps>
   | FieldWithType<"radio-group", RadioGroupProps>
   | FieldWithType<"password", InputPasswordProps>

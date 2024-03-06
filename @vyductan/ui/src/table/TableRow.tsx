@@ -11,7 +11,7 @@ export const TableRow = forwardRef<
   <tr
     ref={ref}
     className={clsm(
-      "border-b transition-colors",
+      "transition-colors",
       tableStyles.row.classNames,
       tableStyles.row.hoverByCssClassNames,
       "data-[state=selected]:bg-gray-100 dark:data-[state=selected]:bg-gray-800",

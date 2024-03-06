@@ -13,23 +13,22 @@ export const transformColumnDefs = <TRecord extends Record<string, unknown>>(
     columns.map(
       (
         {
-          dataIndex,
-          title,
           children,
-          render,
+          dataIndex,
           enableResizing,
-          minWidth,
           fixed,
+          title,
+          width,
+          render,
 
           // meta props
+          align,
           className,
 
           ...restProps
         },
         index,
       ) => {
-        const meta = { className };
-
         const columnDefMerged: ColumnDef<TRecord> &
           ExtraTableColumnDef<TRecord> = {
           ...(typeof dataIndex === "string"
@@ -51,9 +50,9 @@ export const transformColumnDefs = <TRecord extends Record<string, unknown>>(
               }
             : {}),
           enableResizing,
-          minSize: minWidth,
           fixed,
-          meta,
+          size: width,
+          meta: { className, align },
           ...restProps,
         };
         columnDefMerged.cell = ({ column, row, getValue }) => (

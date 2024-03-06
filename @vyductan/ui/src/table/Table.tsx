@@ -27,14 +27,18 @@ import { TableHeader } from "./TableHeader";
 import { TableRow } from "./TableRow";
 import { transformColumnDefs } from "./utils";
 
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
-};
-
-type TableProps<TRecord extends Record<string, unknown>> =
+type RecordWithCustomRow<
+  TRecord extends Record<string, unknown> = Record<string, unknown>,
+> =
+  | (TRecord & {
+      _customRow?: undefined;
+      _customRowClassName?: undefined;
+    })
+  | (Partial<TRecord> & {
+      _customRow: string;
+      _customRowClassName: string;
+    });
+type TableProps<TRecord extends RecordWithCustomRow> =
   HTMLAttributes<HTMLTableElement> & {
     columns: TableColumnDef<TRecord>[];
     dataSource: TRecord[];
@@ -46,6 +50,7 @@ type TableProps<TRecord extends Record<string, unknown>> =
       onExpand?: (record: TRecord) => void;
     };
     rowKey?: keyof TRecord;
+    rowClassName?: (record: TRecord, index: number) => string;
     pagination?: PaginationProps;
 
     bordered?: boolean;
@@ -64,6 +69,7 @@ const TableInner = <TRecord extends Record<string, unknown>>(
     columns,
     dataSource,
     pagination,
+    rowClassName,
 
     sticky,
     scroll,
@@ -94,7 +100,7 @@ const TableInner = <TRecord extends Record<string, unknown>>(
         ref={ref}
         className={clsm(
           "w-full caption-bottom text-sm",
-          "border-separate",
+          "border-separate border-spacing-0",
           // bordered &&
           //   "tw-border tw-rounded-xl tw-border-solid tw-border-neutral-40",
           className,
@@ -123,6 +129,12 @@ const TableInner = <TRecord extends Record<string, unknown>>(
                           },
                         }
                       : {})}
+                    className={clsm(
+                      header.column.columnDef.meta?.align === "center" &&
+                        "text-center",
+                      header.column.columnDef.meta?.align === "right" &&
+                        "text-right",
+                    )}
                   >
                     {header.isPlaceholder
                       ? null
@@ -139,28 +151,55 @@ const TableInner = <TRecord extends Record<string, unknown>>(
 
         <TableBody>
           {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-              >
-                {row.getVisibleCells().map((cell) => (
+            table.getRowModel().rows.map((row, index) =>
+              row.original._customRow ? (
+                <TableRow key={row.id}>
                   <TableCell
-                    key={cell.id}
-                    {...(cell.column.columnDef.size
-                      ? {
-                          style: {
-                            width: cell.column.getSize(),
-                          },
-                        }
-                      : {})}
-                    className={cell.column.columnDef.meta?.className}
+                    colSpan={columns.length}
+                    className={clsm(row.original._customRowClassName as string)}
                   >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    {row.original._customRow as React.ReactNode}
                   </TableCell>
-                ))}
-              </TableRow>
-            ))
+                </TableRow>
+              ) : (
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                  className={rowClassName?.(row.original, index)}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell
+                      key={cell.id}
+                      {...(cell.column.columnDef.size
+                        ? {
+                            style: {
+                              width: cell.column.getSize(),
+                            },
+                          }
+                        : {})}
+                      className={clsm(
+                        typeof cell.column.columnDef.meta?.className ===
+                          "string"
+                          ? cell.column.columnDef.meta?.className
+                          : cell.column.columnDef.meta?.className?.(
+                              row.original,
+                              index,
+                            ),
+                        cell.column.columnDef.meta?.align === "center" &&
+                          "text-center",
+                        cell.column.columnDef.meta?.align === "right" &&
+                          "text-right",
+                      )}
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ),
+            )
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
@@ -181,4 +220,4 @@ const Table = forwardRef(TableInner) as <T extends Record<string, unknown>>(
 
 export { Table };
 
-export type { TableProps };
+export type { TableProps, RecordWithCustomRow };

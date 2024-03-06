@@ -1,8 +1,13 @@
 import type { VariantProps } from "class-variance-authority";
 import * as React from "react";
+import { useHover } from "ahooks";
 import { cva } from "class-variance-authority";
+import { useMergedState } from "rc-util";
 
 import { clsm } from "@vyductan/ui";
+
+import { triggerNativeEventFor } from "../_util/event";
+import { Icon } from "../icons";
 
 export const inputStatusVariants = cva(
   [
@@ -40,18 +45,69 @@ export const inputStatusVariants = cva(
 );
 type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> &
   VariantProps<typeof inputStatusVariants> & {
+    /** If allow to remove input content with clear icon */
+    allowClear?: boolean | { clearIcon: React.ReactNode };
     suffix?: React.ReactNode;
   };
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
-    { borderless, className, id, size, status, suffix, onChange, ...props },
+    {
+      allowClear,
+      borderless,
+      className,
+      id: idProp,
+      size,
+      status,
+      suffix,
+      onChange,
+      ...props
+    },
     ref,
   ) => {
-    const useId = React.useId();
-    const _id = id ?? useId;
+    const _id = React.useId();
+    const id = idProp ?? _id;
+
+    const inputRef = React.useRef<HTMLInputElement>(null);
+    const wrapperRef = React.useRef(null);
+
+    // ======================= Ref ========================
+    React.useImperativeHandle(ref, () => {
+      return inputRef.current!;
+    });
+
+    // ====================== Value =======================
+    const [value, setValue] = useMergedState(props.defaultValue, {
+      value: props.value,
+    });
+
+    // ================== Prefix & Suffix ================== //
+    const isHovering = useHover(wrapperRef);
+    const suffixComp = suffix ? (
+      allowClear && isHovering && value ? (
+        <button
+          type="button"
+          className="opacity-30 hover:opacity-50"
+          onClick={() => {
+            triggerNativeEventFor(document.getElementById(id), {
+              event: "input",
+              value: "",
+            });
+          }}
+        >
+          <Icon
+            icon="ant-design:close-circle-filled"
+            type="button"
+            className="pointer-events-none size-4"
+          />
+        </button>
+      ) : (
+        suffix
+      )
+    ) : null;
 
     return (
       <span
+        ref={wrapperRef}
         className={clsm(
           inputStatusVariants({ borderless, size, status }),
           "cursor-text",
@@ -59,24 +115,25 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         )}
         aria-hidden="true"
         onClick={() => {
-          document.getElementById(_id)?.focus();
+          document.getElementById(id)?.focus();
         }}
       >
         <input
-          id={_id}
+          id={id}
           className={clsm(
             "w-full",
             "bg-transparent",
             "placeholder:text-muted-foreground",
             "border-none outline-none",
           )}
-          ref={ref}
+          ref={inputRef}
           onChange={(e) => {
+            setValue(e.currentTarget.value);
             onChange?.(e);
           }}
           {...props}
         />
-        {suffix && <span>{suffix}</span>}
+        {suffixComp && <span className="flex items-center">{suffixComp}</span>}
       </span>
     );
   },

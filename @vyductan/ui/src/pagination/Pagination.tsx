@@ -1,31 +1,27 @@
 import React from "react";
-import { useMergedState } from "rc-util";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import KeyCode from "rc-util/lib/KeyCode";
-import { warning } from "rc-util/lib/warning";
 
 import type { PaginationItemProps } from "./components";
 import type { PaginationLocale } from "./types";
+import { clsm } from "..";
 import { Icon } from "../icons";
 import {
   PaginationContent,
   // PaginationEllipsis,
   PaginationItem,
-  // PaginationLink,
-  // PaginationNext,
-  // PaginationPrevious,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
   PaginationRoot,
   PaginationTotal,
 } from "./components";
 import enUS from "./locale/en_US";
+import { usePagination } from "./usePagination";
 
 export type PaginationProps = {
-  page: number;
-  defaultPage?: number;
-  pageSize: number;
-  defaultPageSize?: number;
+  className?: string;
   total: number;
-  // pageSizeOptions?: string[]
-  onChange?: (page: number, pageSize: number) => void;
 
   disabled?: boolean;
   hideOnSinglePage?: boolean;
@@ -33,11 +29,6 @@ export type PaginationProps = {
   simple?: boolean;
   showLessItems?: boolean;
   showPrevNextJumpers?: boolean;
-  showQuickJumper?:
-    | boolean
-    | {
-        goButton: React.ReactNode;
-      };
   showSizeChanger?: boolean;
   showTitle?: boolean;
   showTotal?: (total: number, range: [number, number]) => React.ReactNode;
@@ -51,12 +42,8 @@ export type PaginationProps = {
 };
 export const Pagination = (props: PaginationProps) => {
   const {
-    page,
-    defaultPage = 1,
-    pageSize: pageSizeProp,
-    defaultPageSize = 10,
+    className,
     total,
-    onChange,
 
     disabled,
     hideOnSinglePage,
@@ -64,7 +51,6 @@ export const Pagination = (props: PaginationProps) => {
     simple,
     showLessItems,
     showPrevNextJumpers = true,
-    showQuickJumper,
     // showSizeChanger: showSizeChangerProp,
     showTitle,
     showTotal,
@@ -73,17 +59,16 @@ export const Pagination = (props: PaginationProps) => {
     itemRender = defaultItemRender,
   } = props;
 
-  const [pageSize, _setPageSize] = useMergedState<number>(10, {
-    value: pageSizeProp,
-    defaultValue: defaultPageSize,
-  });
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const { page: current, pageSize } = usePagination();
 
-  const [current, setCurrent] = useMergedState<number>(1, {
-    value: page,
-    defaultValue: defaultPage,
-    postState: (c) =>
-      Math.max(1, Math.min(c, calculatePage(undefined, pageSize, total))),
-  });
+  const createPageURL = (pageNumber: number | string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", pageNumber.toString());
+    return `${pathname}?${params.toString()}`;
+  };
 
   const [internalInputVal, setInternalInputVal] = React.useState(current);
 

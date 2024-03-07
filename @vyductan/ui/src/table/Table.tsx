@@ -55,6 +55,7 @@ type TableProps<TRecord extends RecordWithCustomRow> =
 
     bordered?: boolean;
     loading?: boolean;
+    /** Set sticky header and scroll bar */
     sticky?: boolean;
     size?: "smal" | "default";
 
@@ -100,7 +101,8 @@ const TableInner = <TRecord extends Record<string, unknown>>(
   });
 
   return (
-    <div className="relative w-full overflow-x-auto">
+    <>
+      {/* <div className="relative w-full overflow-x-auto"> */}
       {/* {loading && <Loader backdrop className="tw-z-10" />} */}
       <table
         ref={ref}
@@ -111,15 +113,26 @@ const TableInner = <TRecord extends Record<string, unknown>>(
           //   "tw-border tw-rounded-xl tw-border-solid tw-border-neutral-40",
           className,
         )}
-        style={{
-          ...(scroll?.x
-            ? {
-                width: table.getCenterTotalSize(),
-              }
-            : {}),
-        }}
+        // style={{
+        //   ...(scroll?.x
+        //     ? {
+        //         width: table.getCenterTotalSize(),
+        //       }
+        //     : {}),
+        // }}
         {...props}
       >
+        {columns.some((column) => column.size) && (
+          <colgroup>
+            {columns.map((col, index) => (
+              <col
+                key={index}
+                {...(col.size ? { style: { width: col.size } } : {})}
+              />
+            ))}
+          </colgroup>
+        )}
+
         <TableHeader className={clsm("", sticky ? "sticky top-0" : "")}>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
@@ -127,8 +140,9 @@ const TableInner = <TRecord extends Record<string, unknown>>(
                 return (
                   <TableHead
                     key={header.id}
-                    colSpan={header.colSpan}
-                    {...(header.column.columnDef.size
+                    scope="col"
+                    // colSpan={header.colSpan}
+                    {...(scroll && header.column.columnDef.size
                       ? {
                           style: {
                             width: header.getSize(),
@@ -176,7 +190,7 @@ const TableInner = <TRecord extends Record<string, unknown>>(
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       key={cell.id}
-                      {...(cell.column.columnDef.size
+                      {...(scroll && cell.column.columnDef.size
                         ? {
                             style: {
                               width: cell.column.getSize(),
@@ -216,7 +230,8 @@ const TableInner = <TRecord extends Record<string, unknown>>(
         </TableBody>
       </table>
       {pagination && <Pagination {...pagination} />}
-    </div>
+      {/* </div> */}
+    </>
   );
 };
 

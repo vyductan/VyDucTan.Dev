@@ -7,7 +7,7 @@
  */
 import type { ExpandedState } from "@tanstack/react-table";
 import type { ForwardedRef, HTMLAttributes, ReactNode } from "react";
-import { forwardRef, useState } from "react";
+import React, { forwardRef, useState } from "react";
 import {
   flexRender,
   getCoreRowModel,
@@ -66,7 +66,7 @@ type TableProps<TRecord extends RecordWithCustomRow> =
 const TableInner = <TRecord extends Record<string, unknown>>(
   {
     className,
-    columns,
+    columns: columnsProp,
     dataSource,
     pagination,
     rowClassName,
@@ -77,11 +77,17 @@ const TableInner = <TRecord extends Record<string, unknown>>(
   }: TableProps<TRecord>,
   ref: ForwardedRef<HTMLTableElement>,
 ) => {
+  const data = React.useMemo(() => dataSource, [dataSource]);
+  const columns = React.useMemo(
+    () => transformColumnDefs(columnsProp),
+    [columnsProp],
+  );
+
   const [expanded, setExpanded] = useState<ExpandedState>({});
 
   const table = useReactTable({
-    data: dataSource,
-    columns: transformColumnDefs(columns),
+    data,
+    columns,
     columnResizeMode: "onChange",
     state: {
       expanded,

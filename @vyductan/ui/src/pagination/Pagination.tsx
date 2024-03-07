@@ -91,16 +91,6 @@ export const Pagination = (props: PaginationProps) => {
     setInternalInputVal(current);
   }, [current]);
 
-  const hasOnChange = onChange !== noop;
-  const hasCurrent = "current" in props;
-
-  if (process.env.NODE_ENV !== "production") {
-    warning(
-      hasCurrent ? !hasOnChange : false,
-      "You provided a `current` prop to a Pagination component without an `onChange` handler. This will render a read-only component.",
-    );
-  }
-
   const jumpPrevPage = Math.max(1, current - (showLessItems ? 3 : 5));
   const jumpNextPage = Math.min(
     calculatePage(undefined, pageSize, total),
@@ -125,8 +115,7 @@ export const Pagination = (props: PaginationProps) => {
         setInternalInputVal(newPage);
       }
 
-      setCurrent(newPage);
-      onChange?.(newPage, pageSize);
+      router.push(createPageURL(newPage));
 
       return newPage;
     }
@@ -138,14 +127,6 @@ export const Pagination = (props: PaginationProps) => {
   const hasNext = current < calculatePage(undefined, pageSize, total);
   // const showSizeChanger =
   //   showSizeChangerProp ?? total > totalBoundaryShowSizeChanger;
-
-  function prevHandle() {
-    if (hasPrev) handleChange(current - 1);
-  }
-
-  function nextHandle() {
-    if (hasNext) handleChange(current + 1);
-  }
 
   function jumpPrevHandle() {
     handleChange(jumpPrevPage);
@@ -172,36 +153,12 @@ export const Pagination = (props: PaginationProps) => {
     }
   }
 
-  function runIfEnterPrev(event: React.KeyboardEvent<HTMLLIElement>) {
-    runIfEnter(event, prevHandle);
-  }
-
-  function runIfEnterNext(event: React.KeyboardEvent<HTMLLIElement>) {
-    runIfEnter(event, nextHandle);
-  }
-
   function runIfEnterJumpPrev(event: React.KeyboardEvent<HTMLLIElement>) {
     runIfEnter(event, jumpPrevHandle);
   }
 
   function runIfEnterJumpNext(event: React.KeyboardEvent<HTMLLIElement>) {
     runIfEnter(event, jumpNextHandle);
-  }
-
-  function renderPrev(prevPage: number) {
-    const prevButton = itemRender?.(
-      prevPage,
-      "prev",
-      <Icon
-        icon="mingcute:left-fill"
-        className="size-4"
-        aria-label="Go to previous page"
-      />,
-      // getItemIcon(prevIcon, 'prev page'),
-    );
-    return React.isValidElement<HTMLButtonElement>(prevButton)
-      ? React.cloneElement(prevButton, { disabled: !hasPrev })
-      : prevButton;
   }
 
   let jumpPrev: React.ReactElement<PaginationItemProps> = <></>;
@@ -229,154 +186,8 @@ export const Pagination = (props: PaginationProps) => {
   if (hideOnSinglePage && total <= pageSize) {
     return null;
   }
-
-  const goButton =
-    typeof showQuickJumper === "boolean"
-      ? showQuickJumper
-      : showQuickJumper?.goButton;
-
-  // ================== Simple ==================
-  let _gotoButton = goButton;
-  let simplePager: React.ReactNode = null;
-
-  function getValidValue(
-    e:
-      | React.KeyboardEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLInputElement>,
-  ): number {
-    const inputValue = e.currentTarget.value;
-    const allPages = calculatePage(undefined, pageSize, total);
-    let value: number;
-    if (inputValue === "") {
-      value = defaultPage;
-    } else if (Number.isNaN(Number(inputValue))) {
-      value = internalInputVal;
-    } else if (Number(inputValue) >= allPages) {
-      value = allPages;
-    } else {
-      value = Number(inputValue);
-    }
-    return value;
-  }
-  /**
-   * prevent "up arrow" key reseting cursor position within textbox
-   * @see https://stackoverflow.com/a/1081114
-   */
-  function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
-    if (
-      event.code === KeyCode.UP.toString() ||
-      event.code === KeyCode.DOWN.toString()
-    ) {
-      event.preventDefault();
-    }
-  }
-
-  function handleKeyUp(
-    event:
-      | React.KeyboardEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLInputElement>,
-  ) {
-    const value = getValidValue(event);
-    if (value !== internalInputVal) {
-      setInternalInputVal(value);
-    }
-
-    switch ((event as React.KeyboardEvent<HTMLInputElement>).code) {
-      case KeyCode.ENTER.toString():
-        handleChange(value);
-        break;
-      case KeyCode.UP.toString():
-        handleChange(value - 1);
-        break;
-      case KeyCode.DOWN.toString():
-        handleChange(value + 1);
-        break;
-      default:
-        break;
-    }
-  }
-
-  function handleBlur(event: React.FocusEvent<HTMLInputElement, Element>) {
-    handleChange(getValidValue(event));
-  }
-
-  if (simple) {
-    // ====== Simple quick jump ======
-    if (goButton) {
-      if (typeof goButton === "boolean") {
-        _gotoButton = (
-          <button
-            type="button"
-            onClick={() => {
-              handleChange(internalInputVal);
-            }}
-            onKeyUp={(e) => {
-              if (e.code === KeyCode.ENTER.toString()) {
-                handleChange(internalInputVal);
-              }
-            }}
-          >
-            Go to
-          </button>
-        );
-      } else {
-        _gotoButton = (
-          <span
-            onClick={() => {
-              handleChange(internalInputVal);
-            }}
-            onKeyUp={(e) => {
-              if (e.code === KeyCode.ENTER.toString()) {
-                handleChange(internalInputVal);
-              }
-            }}
-            role="button"
-            tabIndex={0}
-          >
-            {goButton}
-          </span>
-        );
-      }
-
-      _gotoButton = (
-        <li title={showTitle ? `Jump to ${current}/${allPages}` : undefined}>
-          {_gotoButton}
-        </li>
-      );
-    }
-
-    simplePager = (
-      <li title={showTitle ? `${current}/${allPages}` : undefined}>
-        <input
-          type="text"
-          value={internalInputVal}
-          disabled={disabled}
-          onKeyDown={handleKeyDown}
-          onKeyUp={handleKeyUp}
-          onChange={handleKeyUp}
-          onBlur={handleBlur}
-          size={3}
-        />
-        <span>/</span>
-        {allPages}
-      </li>
-    );
-  }
-
   // ====================== Normal ======================
   const pagerList: React.ReactElement<PaginationItemProps>[] = [];
-
-  const pagerProps: Omit<PaginationItemProps, "ref"> = {
-    onClick: (page) => {
-      if (page) {
-        handleChange(page);
-      }
-    },
-    onKeyUp: runIfEnter,
-    // showTitle,
-    // itemRender,
-    page: -1,
-  };
 
   const prevPage = current - 1 > 0 ? current - 1 : 0;
   const nextPage = current + 1 < allPages ? current + 1 : allPages;
@@ -385,24 +196,22 @@ export const Pagination = (props: PaginationProps) => {
     if (!allPages) {
       pagerList.push(
         <PaginationItem
-          {...pagerProps}
           ref={null}
           key="noPager"
-          page={1}
           // className={`${prefixCls}-item-disabled`}
-        />,
+        >
+          <PaginationLink href={createPageURL(1)}>1</PaginationLink>
+        </PaginationItem>,
       );
     }
 
     for (let i = 1; i <= allPages; i += 1) {
       pagerList.push(
-        <PaginationItem
-          {...pagerProps}
-          ref={null}
-          key={i}
-          page={i}
-          active={current === i}
-        />,
+        <PaginationItem ref={null} key={i}>
+          <PaginationLink href={createPageURL(i)} isActive={current === i}>
+            {i}
+          </PaginationLink>
+        </PaginationItem>,
       );
     }
   } else {
@@ -472,13 +281,11 @@ export const Pagination = (props: PaginationProps) => {
 
     for (let i = left; i <= right; i += 1) {
       pagerList.push(
-        <PaginationItem
-          {...pagerProps}
-          ref={null}
-          key={i}
-          page={i}
-          active={current === i}
-        />,
+        <PaginationItem ref={null} key={i}>
+          <PaginationLink href={createPageURL(i)} isActive={current === i}>
+            {i}
+          </PaginationLink>
+        </PaginationItem>,
       );
     }
 
@@ -506,115 +313,67 @@ export const Pagination = (props: PaginationProps) => {
     }
 
     if (left !== 1) {
-      pagerList.unshift(<PaginationItem {...pagerProps} key={1} page={1} />);
+      pagerList.unshift(
+        <PaginationItem key={1}>
+          <PaginationLink href={createPageURL(1)}>1</PaginationLink>
+        </PaginationItem>,
+      );
     }
     if (right !== allPages) {
       pagerList.push(
-        <PaginationItem {...pagerProps} key={allPages} page={allPages} />,
+        <PaginationItem key={allPages}>
+          <PaginationLink href={createPageURL(allPages)}>
+            {allPages}
+          </PaginationLink>
+        </PaginationItem>,
       );
     }
   }
 
-  let prev = renderPrev(prevPage);
-  if (prev) {
-    const prevDisabled = !hasPrev || !allPages;
-    prev = (
-      <PaginationItem
-        title={showTitle ? locale.prev_page : undefined}
-        onClick={prevHandle}
-        tabIndex={prevDisabled ? undefined : 0}
-        onKeyDown={runIfEnterPrev}
-        // className={classNames(`${prefixCls}-prev`, {
-        //   [`${prefixCls}-disabled`]: prevDisabled,
-        // })}
-        aria-disabled={prevDisabled}
+  const prevDisabled = !hasPrev || !allPages;
+  const prev = (
+    <PaginationItem
+      aria-disabled={prevDisabled}
+      className={prevDisabled ? "cursor-not-allowed" : ""}
+    >
+      <PaginationPrevious
+        href={createPageURL(prevPage)}
         shape="icon"
-      >
-        {prev}
-      </PaginationItem>
-    );
-  }
+        disabled={prevDisabled}
+      />
+    </PaginationItem>
+  );
 
   /*
    * Next Button
    */
-  function renderNext(nextPage: number) {
-    const nextButton = itemRender?.(
-      nextPage,
-      "next",
-      <Icon
-        icon="mingcute:right-fill"
-        className="size-4"
-        aria-label="Go to next page"
-      />,
-    );
-    return React.isValidElement<HTMLButtonElement>(nextButton)
-      ? React.cloneElement(nextButton, { disabled: !hasNext })
-      : nextButton;
+  let nextDisabled: boolean;
+  if (simple) {
+    nextDisabled = !hasNext;
+  } else {
+    nextDisabled = !hasNext || !allPages;
   }
-  let next = renderNext(nextPage);
-  if (next) {
-    let nextDisabled: boolean, nextTabIndex: number | undefined;
-
-    if (simple) {
-      nextDisabled = !hasNext;
-      nextTabIndex = hasPrev ? 0 : undefined;
-    } else {
-      nextDisabled = !hasNext || !allPages;
-      nextTabIndex = nextDisabled ? undefined : 0;
-    }
-
-    next = (
-      <PaginationItem
-        title={showTitle ? locale.next_page : undefined}
-        page={current - 1}
-        onClick={nextHandle}
-        tabIndex={nextTabIndex}
-        onKeyDown={runIfEnterNext}
-        disabled={nextDisabled}
-        aria-disabled={nextDisabled}
+  const next = (
+    <PaginationItem aria-disabled={nextDisabled}>
+      <PaginationNext
+        href={createPageURL(nextPage)}
         shape="icon"
-      >
-        {next}
-      </PaginationItem>
-    );
-  }
+        disabled={nextDisabled}
+      />
+    </PaginationItem>
+  );
 
   return (
-    <PaginationRoot>
+    <PaginationRoot className={clsm(className)}>
       <PaginationContent>
         {totalText}
         {prev}
-        {simple ? simplePager : pagerList}
+        {pagerList}
         {next}
-        {/* <PaginationItem onClick={prevHandle}> */}
-        {/*   <PaginationPrevious href="#" /> */}
-        {/* </PaginationItem> */}
-        {/* <PaginationItem> */}
-        {/*   <PaginationLink href="#">1</PaginationLink> */}
-        {/* </PaginationItem> */}
-        {/* <PaginationItem> */}
-        {/*   <PaginationLink href="#" isActive> */}
-        {/*     2 */}
-        {/*   </PaginationLink> */}
-        {/* </PaginationItem> */}
-        {/* <PaginationItem> */}
-        {/*   <PaginationLink href="#">3</PaginationLink> */}
-        {/* </PaginationItem> */}
-        {/* <PaginationItem> */}
-        {/*   <PaginationEllipsis /> */}
-        {/* </PaginationItem> */}
-        {/* <PaginationItem onClick={nextHandle}> */}
-        {/*   <PaginationNext href="#" /> */}
-        {/* </PaginationItem> */}
       </PaginationContent>
     </PaginationRoot>
   );
 };
-
-function noop() {
-  //
-}
 
 const defaultItemRender: PaginationProps["itemRender"] = (
   _page,

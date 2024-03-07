@@ -1,4 +1,5 @@
 import * as React from "react";
+import Link from "next/link";
 
 import { clsm } from "@vyductan/ui";
 
@@ -28,74 +29,12 @@ const PaginationContent = React.forwardRef<
 ));
 PaginationContent.displayName = "PaginationContent";
 
-type PaginationItemProps = {
-  page?: number;
-  onClick: (page?: number) => void;
-  onKeyUp?: (
-    e: React.KeyboardEvent<HTMLLIElement>,
-    onClick: PaginationItemProps["onClick"],
-    page: PaginationItemProps["page"],
-  ) => void;
+type PaginationItemProps = React.ComponentProps<"li">;
 
-  active?: boolean;
-  disabled?: boolean;
-  showTitle?: boolean;
-} & Omit<React.ComponentProps<"li">, "onClick" | "onKeyUp"> &
-  Pick<ButtonProps, "size" | "shape">;
 const PaginationItem = React.forwardRef<HTMLLIElement, PaginationItemProps>(
-  (
-    {
-      page,
-      onClick,
-      onKeyUp,
-      className,
-      disabled,
-      showTitle,
-      active,
-      children,
-
-      shape,
-      size,
-      ...props
-    },
-    ref,
-  ) => {
-    const handleClick = () => {
-      onClick?.(page);
-    };
-    const handleKeyPress = (e: React.KeyboardEvent<HTMLLIElement>) => {
-      onKeyUp?.(e, onClick, page);
-    };
+  ({ className, ...props }, ref) => {
     return (
-      <li
-        ref={ref}
-        className={clsm("cursor-pointer select-none", className)}
-        tabIndex={disabled ? undefined : 0}
-        title={showTitle ? String(page) : undefined}
-        onClick={handleClick}
-        onKeyUp={handleKeyPress}
-        role="presentation"
-        {...props}
-      >
-        <PaginationLink
-          rel="nofollow"
-          isActive={active}
-          size={size}
-          shape={shape}
-          // href="#"
-          // href="#asd"
-          // aria-current={active ? "page" : undefined}
-          // className={clsm(
-          //   buttonVariants({
-          //     variant: active ? "default" : "ghost",
-          //     size,
-          //   }),
-          //   className,
-          // )}
-        >
-          {children ?? page}
-        </PaginationLink>
-      </li>
+      <li ref={ref} className={clsm("select-none", className)} {...props} />
     );
   },
 );
@@ -103,31 +42,33 @@ PaginationItem.displayName = "PaginationItem";
 
 type PaginationLinkProps = {
   isActive?: boolean;
-} & Pick<ButtonProps, "size" | "shape"> &
-  React.ComponentProps<"a">;
+} & Pick<ButtonProps, "disabled" | "size" | "shape"> &
+  React.ComponentProps<typeof Link>;
 
 const PaginationLink = ({
   className,
+  disabled,
   isActive,
-  size = "default",
-  shape,
+  size,
+  shape = "icon",
   children,
   ...props
 }: PaginationLinkProps) => (
-  <a
+  <Link
     aria-current={isActive ? "page" : undefined}
     className={clsm(
       buttonVariants({
-        variant: isActive ? "default" : "ghost",
+        variant: isActive ? "outline" : "ghost",
         size,
         shape,
+        disabled,
       }),
       className,
     )}
     {...props}
   >
     {children}
-  </a>
+  </Link>
 );
 PaginationLink.displayName = "PaginationLink";
 
@@ -137,12 +78,10 @@ const PaginationPrevious = ({
 }: React.ComponentProps<typeof PaginationLink>) => (
   <PaginationLink
     aria-label="Go to previous page"
-    size="default"
-    className={clsm("gap-1 pl-2.5", className)}
+    className={clsm(className)}
     {...props}
   >
     <Icon icon="mingcute:left-fill" className="size-4" />
-    <span>Previous</span>
   </PaginationLink>
 );
 PaginationPrevious.displayName = "PaginationPrevious";
@@ -153,11 +92,9 @@ const PaginationNext = ({
 }: React.ComponentProps<typeof PaginationLink>) => (
   <PaginationLink
     aria-label="Go to next page"
-    size="default"
-    className={clsm("gap-1 pr-2.5", className)}
+    className={clsm(className)}
     {...props}
   >
-    <span>Next</span>
     <Icon icon="mingcute:right-fill" className="size-4" />
   </PaginationLink>
 );

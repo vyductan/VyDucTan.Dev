@@ -2,8 +2,9 @@ import type { Column, Row, RowData } from "@tanstack/react-table";
 import type { ReactNode } from "react";
 
 type Meta<TRecord> = {
-  className?: string | ((record: TRecord, index: number) => string);
   align?: "left" | "right" | "center";
+  className?: string | ((record: TRecord, index: number) => string);
+  fixed?: "left" | "right";
 };
 declare module "@tanstack/react-table" {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-interface
@@ -21,7 +22,6 @@ type BaseTableColumnDef<TRecord> = {
   enableResizing?: boolean;
 } & Meta<TRecord>;
 export type ExtraTableColumnDef<TRecord> = {
-  fixed?: "left" | "right";
   children?: TableColumnDef<TRecord>[];
 };
 

@@ -6,20 +6,27 @@
  *
  */
 import type { ExpandedState } from "@tanstack/react-table";
-import type { ForwardedRef, HTMLAttributes, ReactNode } from "react";
-import React, { forwardRef, useState } from "react";
+import type {
+  CSSProperties,
+  ForwardedRef,
+  HTMLAttributes,
+  ReactNode,
+} from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import {
   flexRender,
   getCoreRowModel,
   getExpandedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { useScroll, useSize } from "ahooks";
 
 import { clsm } from "@vyductan/ui";
 
 import type { PaginationProps } from "../pagination";
 import type { TableColumnDef } from "./types";
 import { Pagination } from "../pagination";
+import { getCommonPinningClassName, getCommonPinningStyles } from "./styles";
 import { TableBody } from "./TableBody";
 import { TableCell } from "./TableCell";
 import { TableHead } from "./TableHead";
@@ -58,9 +65,9 @@ type TableProps<TRecord extends RecordWithCustomRow> =
     /** Set sticky header and scroll bar */
     sticky?: boolean;
     size?: "smal" | "default";
-
+    /** Whether the table can be scrollable */
     scroll?: {
-      x: boolean;
+      x: number;
     };
   };
 
@@ -86,10 +93,30 @@ const TableInner = <TRecord extends Record<string, unknown>>(
 
   const [expanded, setExpanded] = useState<ExpandedState>({});
 
+  const defaultPinnings = {
+    left: columnsProp
+      .map((x, index) => ({
+        key: x.dataIndex?.toString() ?? index.toString(),
+        fixed: x.fixed,
+      }))
+      .filter((x) => x.fixed === "left")
+      .map((x) => x.key),
+    right: columnsProp
+      .map((x, index) => ({
+        key: x.dataIndex?.toString() ?? index.toString(),
+        fixed: x.fixed,
+      }))
+      .filter((x) => x.fixed === "right")
+      .map((x) => x.key),
+  };
+
   const table = useReactTable({
     data,
     columns,
     columnResizeMode: "onChange",
+    initialState: {
+      columnPinning: defaultPinnings,
+    },
     state: {
       expanded,
     },
@@ -100,137 +127,164 @@ const TableInner = <TRecord extends Record<string, unknown>>(
     getExpandedRowModel: getExpandedRowModel(),
   });
 
+  // ---- Table styles ----//
+  let tableStyles: CSSProperties = {};
+  if (scroll?.x) {
+    tableStyles = {
+      width: scroll.x,
+      tableLayout: "fixed",
+      minWidth: "100%",
+    };
+  }
+
+  // ---- to show or disable box-shadow ----//
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const wrapperSize = useSize(wrapperRef);
+  const wrapperWidth = wrapperSize?.width ?? scroll?.x ?? 0;
+  const wrapperScroll = useScroll(wrapperRef);
+  const wrapperScrollLeft = wrapperScroll?.left ?? 0;
+  const wrapperScrollRight =
+    (scroll?.x ?? 0) - (wrapperWidth + wrapperScrollLeft);
+
   return (
     <>
-      {/* <div className="relative w-full overflow-x-auto"> */}
-      {/* {loading && <Loader backdrop className="tw-z-10" />} */}
-      <table
-        ref={ref}
-        className={clsm(
-          "w-full caption-bottom text-sm",
-          "border-separate border-spacing-0",
-          // bordered &&
-          //   "tw-border tw-rounded-xl tw-border-solid tw-border-neutral-40",
-          className,
-        )}
-        // style={{
-        //   ...(scroll?.x
-        //     ? {
-        //         width: table.getCenterTotalSize(),
-        //       }
-        //     : {}),
-        // }}
-        {...props}
-      >
-        {columns.some((column) => column.size) && (
-          <colgroup>
-            {columns.map((col, index) => (
-              <col
-                key={index}
-                {...(col.size ? { style: { width: col.size } } : {})}
-              />
-            ))}
-          </colgroup>
-        )}
+      <div className="relative">
+        <div ref={wrapperRef} className="overflow-x-auto overflow-y-hidden">
+          {/* {loading && <Loader backdrop className="tw-z-10" />} */}
+          <table
+            ref={ref}
+            className={clsm(
+              !scroll?.x && "w-full",
+              "caption-bottom text-sm",
+              "border-separate border-spacing-0",
+              // bordered &&
+              //   "tw-border tw-rounded-xl tw-border-solid tw-border-neutral-40",
+              className,
+            )}
+            style={tableStyles}
+            {...props}
+          >
+            {columns.some((column) => column.size) && (
+              <colgroup>
+                {columns.map((col, index) => (
+                  <col
+                    key={index}
+                    {...(col.size ? { style: { width: col.size } } : {})}
+                  />
+                ))}
+              </colgroup>
+            )}
 
-        <TableHeader className={clsm("", sticky ? "sticky top-0" : "")}>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <TableHead
-                    key={header.id}
-                    scope="col"
-                    // colSpan={header.colSpan}
-                    {...(scroll && header.column.columnDef.size
-                      ? {
-                          style: {
-                            width: header.getSize(),
-                          },
-                        }
-                      : {})}
-                    className={clsm(
-                      header.column.columnDef.meta?.align === "center" &&
-                        "text-center",
-                      header.column.columnDef.meta?.align === "right" &&
-                        "text-right",
-                    )}
-                  >
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
+            <TableHeader className={clsm("", sticky ? "sticky top-0" : "")}>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead
+                        key={header.id}
+                        scope="col"
+                        colSpan={header.colSpan}
+                        style={getCommonPinningStyles(header.column)}
+                        className={clsm(
+                          // align
+                          header.column.columnDef.meta?.align === "center" &&
+                            "text-center",
+                          header.column.columnDef.meta?.align === "right" &&
+                            "text-right",
+                          // pinning
+                          scroll?.x &&
+                            getCommonPinningClassName(
+                              header.column,
+                              {
+                                scrollLeft: wrapperScrollLeft,
+                                scrollRight: wrapperScrollRight,
+                              },
+                              true,
+                            ),
                         )}
-                  </TableHead>
-                );
-              })}
-            </TableRow>
-          ))}
-        </TableHeader>
+                      >
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext(),
+                            )}
+                      </TableHead>
+                    );
+                  })}
+                </TableRow>
+              ))}
+            </TableHeader>
 
-        <TableBody>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row, index) =>
-              row.original._customRow ? (
-                <TableRow key={row.id}>
+            <TableBody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row, index) =>
+                  row.original._customRow ? (
+                    <TableRow key={row.id}>
+                      <TableCell
+                        colSpan={columns.length}
+                        className={clsm(
+                          row.original._customRowClassName as string,
+                        )}
+                      >
+                        {row.original._customRow as React.ReactNode}
+                      </TableCell>
+                    </TableRow>
+                  ) : (
+                    <TableRow
+                      key={row.id}
+                      data-state={row.getIsSelected() && "selected"}
+                      className={rowClassName?.(row.original, index)}
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell
+                          key={cell.id}
+                          style={getCommonPinningStyles(cell.column)}
+                          className={clsm(
+                            typeof cell.column.columnDef.meta?.className ===
+                              "string"
+                              ? cell.column.columnDef.meta?.className
+                              : cell.column.columnDef.meta?.className?.(
+                                  row.original,
+                                  index,
+                                ),
+                            // align
+                            cell.column.columnDef.meta?.align === "center" &&
+                              "text-center",
+                            cell.column.columnDef.meta?.align === "right" &&
+                              "text-right",
+                            // pinning
+                            scroll?.x &&
+                              getCommonPinningClassName(cell.column, {
+                                scrollLeft: wrapperScrollLeft,
+                                scrollRight: wrapperScrollRight,
+                              }),
+                          )}
+                        >
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext(),
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ),
+                )
+              ) : (
+                <TableRow>
                   <TableCell
                     colSpan={columns.length}
-                    className={clsm(row.original._customRowClassName as string)}
+                    className="h-24 text-center"
                   >
-                    {row.original._customRow as React.ReactNode}
+                    No results.
                   </TableCell>
                 </TableRow>
-              ) : (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                  className={rowClassName?.(row.original, index)}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell
-                      key={cell.id}
-                      {...(scroll && cell.column.columnDef.size
-                        ? {
-                            style: {
-                              width: cell.column.getSize(),
-                            },
-                          }
-                        : {})}
-                      className={clsm(
-                        typeof cell.column.columnDef.meta?.className ===
-                          "string"
-                          ? cell.column.columnDef.meta?.className
-                          : cell.column.columnDef.meta?.className?.(
-                              row.original,
-                              index,
-                            ),
-                        cell.column.columnDef.meta?.align === "center" &&
-                          "text-center",
-                        cell.column.columnDef.meta?.align === "right" &&
-                          "text-right",
-                      )}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ),
-            )
-          ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </table>
-      {pagination && <Pagination {...pagination} />}
-      {/* </div> */}
+              )}
+            </TableBody>
+          </table>
+        </div>
+        {pagination && <Pagination className="my-4" {...pagination} />}
+      </div>
     </>
   );
 };

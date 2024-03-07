@@ -50,9 +50,8 @@ export const transformColumnDefs = <TRecord extends Record<string, unknown>>(
               }
             : {}),
           enableResizing,
-          fixed,
           size: width,
-          meta: { className, align },
+          meta: { align, className, fixed },
           ...restProps,
         };
         columnDefMerged.cell = ({ column, row, getValue }) => (

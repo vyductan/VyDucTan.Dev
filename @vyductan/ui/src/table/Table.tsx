@@ -63,7 +63,13 @@ type TableProps<TRecord extends RecordWithCustomRow> =
     bordered?: boolean;
     loading?: boolean;
     /** Set sticky header and scroll bar */
-    sticky?: boolean;
+    sticky?:
+      | boolean
+      | {
+          offsetHeader?: number;
+          offsetScroll?: number;
+          getContainer?: () => HTMLElement;
+        };
     size?: "smal" | "default";
     /** Whether the table can be scrollable */
     scroll?: {
@@ -127,6 +133,7 @@ const TableInner = <TRecord extends Record<string, unknown>>(
     getExpandedRowModel: getExpandedRowModel(),
   });
 
+  // ---- scroll X ----//
   // ---- Table styles ----//
   let tableStyles: CSSProperties = {};
   if (scroll?.x) {
@@ -149,7 +156,10 @@ const TableInner = <TRecord extends Record<string, unknown>>(
   return (
     <>
       <div className="relative">
-        <div ref={wrapperRef} className="overflow-x-auto overflow-y-hidden">
+        <div
+          ref={wrapperRef}
+          className={clsm(scroll?.x && "overflow-x-auto overflow-y-hidden")}
+        >
           {/* {loading && <Loader backdrop className="tw-z-10" />} */}
           <table
             ref={ref}
@@ -175,7 +185,16 @@ const TableInner = <TRecord extends Record<string, unknown>>(
               </colgroup>
             )}
 
-            <TableHeader className={clsm("", sticky ? "sticky top-0" : "")}>
+            <TableHeader
+              style={{
+                position: sticky ? "sticky" : undefined,
+                top: sticky
+                  ? typeof sticky === "boolean"
+                    ? 0
+                    : sticky.offsetHeader
+                  : undefined,
+              }}
+            >
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {

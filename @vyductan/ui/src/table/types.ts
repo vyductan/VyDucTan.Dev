@@ -1,10 +1,21 @@
-import type { Column, Row, RowData } from "@tanstack/react-table";
+import type {
+  BuiltInSortingFn,
+  Column,
+  Row,
+  RowData,
+} from "@tanstack/react-table";
 import type { ReactNode } from "react";
 
 type Meta<TRecord> = {
   align?: "left" | "right" | "center";
   className?: string | ((record: TRecord, index: number) => string);
   fixed?: "left" | "right";
+  /** Sort function for local sort, see Array.sort's compareFunction. If it is server-side sorting, set to true, but if you want to support multi-column sorting, you can set it to { multiple: number }
+   * boolean
+   * function
+   * Build-in sorting function: 'alphanumeric', 'alphanumericCaseSensitive', 'text', 'textCaseSensitive', 'datetime', 'basic'.
+   * */
+  sorter?: boolean | BuiltInSortingFn | ((a: TRecord, b: TRecord) => number);
 };
 declare module "@tanstack/react-table" {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-interface

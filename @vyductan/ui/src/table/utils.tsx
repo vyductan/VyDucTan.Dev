@@ -16,7 +16,6 @@ export const transformColumnDefs = <TRecord extends Record<string, unknown>>(
           children,
           dataIndex,
           enableResizing,
-          fixed,
           title,
           width,
           render,
@@ -24,6 +23,8 @@ export const transformColumnDefs = <TRecord extends Record<string, unknown>>(
           // meta props
           align,
           className,
+          fixed,
+          sorter,
 
           ...restProps
         },
@@ -53,6 +54,18 @@ export const transformColumnDefs = <TRecord extends Record<string, unknown>>(
           enableResizing,
           size: width,
           meta: { align, className, fixed },
+          // sorting
+          ...(sorter
+            ? {
+                enableSorting: true,
+                sortingFn:
+                  typeof sorter === "boolean"
+                    ? "auto"
+                    : typeof sorter === "string"
+                      ? sorter
+                      : (rowA, rowB) => sorter(rowA.original, rowB.original),
+              }
+            : { enableSorting: false }),
           ...restProps,
         };
         columnDefMerged.cell = ({ column, row, getValue }) => (

@@ -1,6 +1,6 @@
 "use client";
 
-import type { ExpandedState } from "@tanstack/react-table";
+import type { ExpandedState, SortingState } from "@tanstack/react-table";
 import type {
   CSSProperties,
   ForwardedRef,
@@ -12,6 +12,7 @@ import {
   flexRender,
   getCoreRowModel,
   getExpandedRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { useScroll, useSize } from "ahooks";
@@ -21,7 +22,10 @@ import { useMergedState } from "rc-util";
 import type { PaginationProps } from "../pagination";
 import type { RowSelection, TableColumnDef } from "./types";
 import { clsm } from "..";
+import { useTranslation } from "../../../../apps/nextjs/src/locales/client";
+import { Icon } from "../icons";
 import { Pagination } from "../pagination";
+import { Tooltip } from "../tooltip";
 import { getCommonPinningClassName, getCommonPinningStyles } from "./styles";
 import { TableBody } from "./TableBody";
 import { TableCell } from "./TableCell";
@@ -82,21 +86,23 @@ const TableInner = <TRecord extends Record<string, unknown>>(
     pagination,
     rowKey = "id",
     rowClassName,
-    rowSelection,
+    rowSelection: rowSelectionProp,
     sticky,
     scroll,
     ...props
   }: TableProps<TRecord>,
   ref: ForwardedRef<HTMLTableElement>,
 ) => {
+  const { t } = useTranslation();
+
   const data = React.useMemo(() => dataSource, [dataSource]);
   const columns = React.useMemo(
     () =>
       transformColumnDefs(columnsProp, {
         rowKey,
-        rowSelection,
+        rowSelection: rowSelectionProp,
       }),
-    [columnsProp, rowKey, rowSelection],
+    [columnsProp, rowKey, rowSelectionProp],
   );
 
   const [expanded, setExpanded] = useState<ExpandedState>({});
@@ -118,27 +124,27 @@ const TableInner = <TRecord extends Record<string, unknown>>(
       .map((x) => x.key),
   };
 
-  const [rowSelectionTst, setRowSelection] = useMergedState(
+  const [rowSelection, setRowSelection] = useMergedState(
     {},
     {
       value: (() => {
         const rowSelectionTst: Record<string, boolean> = {};
-        rowSelection?.selectedRowKeys?.forEach((x) => {
+        rowSelectionProp?.selectedRowKeys?.forEach((x) => {
           const index = dataSource.findIndex((d) => d[rowKey] === x);
           if (index > -1) rowSelectionTst[index] = true;
         });
         return rowSelectionTst;
       })(),
       onChange: (value) => {
-        if (rowSelection) {
+        if (rowSelectionProp) {
           const selectedRowKeys = Object.keys(value).map(
             (k) => dataSource[parseInt(k)]![rowKey],
           );
-          rowSelection.onChange?.(
+          rowSelectionProp.onChange?.(
             _.union(
               // ignore already selected in other pages
               _.filter(
-                rowSelection.selectedRowKeys ?? [],
+                rowSelectionProp.selectedRowKeys ?? [],
                 (n) => !dataSource.map((x) => x[rowKey]).includes(n),
               ),
               selectedRowKeys,
@@ -148,6 +154,8 @@ const TableInner = <TRecord extends Record<string, unknown>>(
       },
     },
   );
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+
   const table = useReactTable({
     data,
     columns,
@@ -157,7 +165,8 @@ const TableInner = <TRecord extends Record<string, unknown>>(
     },
     state: {
       expanded,
-      rowSelection: rowSelectionTst,
+      rowSelection,
+      sorting,
     },
     getCoreRowModel: getCoreRowModel(),
     // expandable
@@ -167,6 +176,9 @@ const TableInner = <TRecord extends Record<string, unknown>>(
     // selection
     enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
+    // sorting
+    getSortedRowModel: getSortedRowModel(),
+    onSortingChange: setSorting,
   });
 
   // ---- Table styles ----//
@@ -260,13 +272,54 @@ const TableInner = <TRecord extends Record<string, unknown>>(
                           // selection column
                           header.id === "selection" && "px-0",
                         )}
+                        onClick={header.column.getToggleSortingHandler()}
                       >
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext(),
+                        <Tooltip
+                          title={
+                            header.column.getCanSort()
+                              ? header.column.getNextSortingOrder() === "asc"
+                                ? t("Table.triggerAsc")
+                                : header.column.getNextSortingOrder() === "desc"
+                                  ? t("Table.triggerDesc")
+                                  : t("Table.cancelSort")
+                              : undefined
+                          }
+                        >
+                          <span
+                            className={clsm(
+                              // sorting
+                              header.column.getCanSort() &&
+                                "flex cursor-pointer items-center justify-between",
                             )}
+                          >
+                            {header.isPlaceholder
+                              ? null
+                              : flexRender(
+                                  header.column.columnDef.header,
+                                  header.getContext(),
+                                )}
+                            {header.column.getCanSort() ? (
+                              <div>
+                                <Icon
+                                  icon="ant-design:caret-up-filled"
+                                  className={clsm(
+                                    "size-3",
+                                    header.column.getIsSorted() !== "asc" &&
+                                      "text-gray-400",
+                                  )}
+                                />
+                                <Icon
+                                  icon="ant-design:caret-down-filled"
+                                  className={clsm(
+                                    "-mt-1 size-3",
+                                    header.column.getIsSorted() !== "desc" &&
+                                      "text-gray-400",
+                                  )}
+                                />
+                              </div>
+                            ) : null}
+                          </span>
+                        </Tooltip>
                       </TableHead>
                     );
                   })}

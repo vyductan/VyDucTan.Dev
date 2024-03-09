@@ -33,7 +33,7 @@ export const getCommonPinningClassName = <T>(
     isPinned === "right" && column.getIsFirstColumn("right");
   return clsm(
     isPinned && !isHeader && "bg-background",
-    isPinned ? "sticky z-50" : "relative",
+    isPinned ? "sticky z-10" : "relative",
     isLastLeftPinnedColumn && [
       "after:absolute after:inset-y-0 after:right-0 after:w-[30px] after:translate-x-full",
       scrollLeft !== 0 &&

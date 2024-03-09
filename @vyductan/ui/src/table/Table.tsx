@@ -1,10 +1,5 @@
 "use client";
 
-/*
- *
- * https://ant.design/components/table#components-table-demo-expand
- *
- */
 import type { ExpandedState } from "@tanstack/react-table";
 import type {
   CSSProperties,
@@ -20,11 +15,12 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useScroll, useSize } from "ahooks";
-
-import { clsm } from "@vyductan/ui";
+import _ from "lodash";
+import { useMergedState } from "rc-util";
 
 import type { PaginationProps } from "../pagination";
-import type { TableColumnDef } from "./types";
+import type { RowSelection, TableColumnDef } from "./types";
+import { clsm } from "..";
 import { Pagination } from "../pagination";
 import { getCommonPinningClassName, getCommonPinningStyles } from "./styles";
 import { TableBody } from "./TableBody";
@@ -42,13 +38,14 @@ type RecordWithCustomRow<
       _customRowClassName?: undefined;
     })
   | (Partial<TRecord> & {
-      _customRow: string;
+      _customRow: ReactNode;
       _customRowClassName: string;
     });
 type TableProps<TRecord extends RecordWithCustomRow> =
   HTMLAttributes<HTMLTableElement> & {
     columns: TableColumnDef<TRecord>[];
     dataSource: TRecord[];
+    bordered?: boolean;
     // emptyRender?: EmptyProps;
     expandable?: {
       expandedRowKeys: string[];
@@ -58,9 +55,9 @@ type TableProps<TRecord extends RecordWithCustomRow> =
     };
     rowKey?: keyof TRecord;
     rowClassName?: (record: TRecord, index: number) => string;
+    /** Row selection config */
+    rowSelection?: RowSelection<TRecord>;
     pagination?: PaginationProps;
-
-    bordered?: boolean;
     loading?: boolean;
     /** Set sticky header and scroll bar */
     sticky?:
@@ -81,10 +78,11 @@ const TableInner = <TRecord extends Record<string, unknown>>(
   {
     className,
     columns: columnsProp,
-    dataSource,
+    dataSource = [],
     pagination,
+    rowKey = "id",
     rowClassName,
-
+    rowSelection,
     sticky,
     scroll,
     ...props
@@ -93,8 +91,12 @@ const TableInner = <TRecord extends Record<string, unknown>>(
 ) => {
   const data = React.useMemo(() => dataSource, [dataSource]);
   const columns = React.useMemo(
-    () => transformColumnDefs(columnsProp),
-    [columnsProp],
+    () =>
+      transformColumnDefs(columnsProp, {
+        rowKey,
+        rowSelection,
+      }),
+    [columnsProp, rowKey, rowSelection],
   );
 
   const [expanded, setExpanded] = useState<ExpandedState>({});
@@ -116,6 +118,36 @@ const TableInner = <TRecord extends Record<string, unknown>>(
       .map((x) => x.key),
   };
 
+  const [rowSelectionTst, setRowSelection] = useMergedState(
+    {},
+    {
+      value: (() => {
+        const rowSelectionTst: Record<string, boolean> = {};
+        rowSelection?.selectedRowKeys?.forEach((x) => {
+          const index = dataSource.findIndex((d) => d[rowKey] === x);
+          if (index > -1) rowSelectionTst[index] = true;
+        });
+        return rowSelectionTst;
+      })(),
+      onChange: (value) => {
+        if (rowSelection) {
+          const selectedRowKeys = Object.keys(value).map(
+            (k) => dataSource[parseInt(k)]![rowKey],
+          );
+          rowSelection.onChange?.(
+            _.union(
+              // ignore already selected in other pages
+              _.filter(
+                rowSelection.selectedRowKeys ?? [],
+                (n) => !dataSource.map((x) => x[rowKey]).includes(n),
+              ),
+              selectedRowKeys,
+            ),
+          );
+        }
+      },
+    },
+  );
   const table = useReactTable({
     data,
     columns,
@@ -125,15 +157,18 @@ const TableInner = <TRecord extends Record<string, unknown>>(
     },
     state: {
       expanded,
+      rowSelection: rowSelectionTst,
     },
     getCoreRowModel: getCoreRowModel(),
-
+    // expandable
     getSubRows: (record) => record.children as TRecord[],
     onExpandedChange: setExpanded,
     getExpandedRowModel: getExpandedRowModel(),
+    // selection
+    enableRowSelection: true,
+    onRowSelectionChange: setRowSelection,
   });
 
-  // ---- scroll X ----//
   // ---- Table styles ----//
   let tableStyles: CSSProperties = {};
   if (scroll?.x) {
@@ -144,6 +179,7 @@ const TableInner = <TRecord extends Record<string, unknown>>(
     };
   }
 
+  // ---- scroll X ----//
   // ---- to show or disable box-shadow ----//
   const wrapperRef = useRef<HTMLDivElement>(null);
   const wrapperSize = useSize(wrapperRef);
@@ -193,6 +229,7 @@ const TableInner = <TRecord extends Record<string, unknown>>(
                     ? 0
                     : sticky.offsetHeader
                   : undefined,
+                zIndex: sticky ? 11 : undefined,
               }}
             >
               {table.getHeaderGroups().map((headerGroup) => (
@@ -220,6 +257,8 @@ const TableInner = <TRecord extends Record<string, unknown>>(
                               },
                               true,
                             ),
+                          // selection column
+                          header.id === "selection" && "px-0",
                         )}
                       >
                         {header.isPlaceholder
@@ -255,37 +294,41 @@ const TableInner = <TRecord extends Record<string, unknown>>(
                       data-state={row.getIsSelected() && "selected"}
                       className={rowClassName?.(row.original, index)}
                     >
-                      {row.getVisibleCells().map((cell) => (
-                        <TableCell
-                          key={cell.id}
-                          style={getCommonPinningStyles(cell.column)}
-                          className={clsm(
-                            typeof cell.column.columnDef.meta?.className ===
-                              "string"
-                              ? cell.column.columnDef.meta?.className
-                              : cell.column.columnDef.meta?.className?.(
-                                  row.original,
-                                  index,
-                                ),
-                            // align
-                            cell.column.columnDef.meta?.align === "center" &&
-                              "text-center",
-                            cell.column.columnDef.meta?.align === "right" &&
-                              "text-right",
-                            // pinning
-                            scroll?.x &&
-                              getCommonPinningClassName(cell.column, {
-                                scrollLeft: wrapperScrollLeft,
-                                scrollRight: wrapperScrollRight,
-                              }),
-                          )}
-                        >
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext(),
-                          )}
-                        </TableCell>
-                      ))}
+                      {row.getVisibleCells().map((cell) => {
+                        return (
+                          <TableCell
+                            key={cell.id}
+                            style={getCommonPinningStyles(cell.column)}
+                            className={clsm(
+                              typeof cell.column.columnDef.meta?.className ===
+                                "string"
+                                ? cell.column.columnDef.meta?.className
+                                : cell.column.columnDef.meta?.className?.(
+                                    row.original,
+                                    index,
+                                  ),
+                              // align
+                              cell.column.columnDef.meta?.align === "center" &&
+                                "text-center",
+                              cell.column.columnDef.meta?.align === "right" &&
+                                "text-right",
+                              // pinning
+                              scroll?.x &&
+                                getCommonPinningClassName(cell.column, {
+                                  scrollLeft: wrapperScrollLeft,
+                                  scrollRight: wrapperScrollRight,
+                                }),
+                              // selection column
+                              cell.id.endsWith("selection") && "px-0",
+                            )}
+                          >
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext(),
+                            )}
+                          </TableCell>
+                        );
+                      })}
                     </TableRow>
                   ),
                 )

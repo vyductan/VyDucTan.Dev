@@ -1,13 +1,13 @@
-import type { ColumnDef } from "@tanstack/react-table";
+import type { ColumnDef, Row } from "@tanstack/react-table";
 
+import type { TableProps } from "./Table";
 import type { ExtraTableColumnDef, TableColumnDef } from "./types";
+import { Checkbox } from "../checkbox";
 
 export const transformColumnDefs = <TRecord extends Record<string, unknown>>(
   columns: TableColumnDef<TRecord>[],
+  props?: Pick<TableProps<TRecord>, "rowKey" | "rowSelection">,
   isNotFirstDeepColumn?: boolean,
-  // expandable?: {
-  //   expandedRowKeys: string[];
-  // },
 ) => {
   const columnsDef: (ColumnDef<TRecord> & ExtraTableColumnDef<TRecord>)[] =
     columns.map(
@@ -40,6 +40,7 @@ export const transformColumnDefs = <TRecord extends Record<string, unknown>>(
                 columns: transformColumnDefs(
                   // add fixed to children
                   children.map((x) => ({ ...x, fixed })),
+                  {},
                   index === 0 || false,
                 ),
                 // for use in Gantt
@@ -101,5 +102,78 @@ export const transformColumnDefs = <TRecord extends Record<string, unknown>>(
         return columnDefMerged;
       },
     );
+
+  if (props?.rowSelection) {
+    const selectionColumn = createSelectColumn<TRecord>();
+    columnsDef.unshift(selectionColumn);
+  }
+
   return columnsDef;
 };
+
+function createSelectColumn<T>(): ColumnDef<T> {
+  let lastSelectedId = "";
+
+  return {
+    id: "selection",
+    header: ({ table }) => (
+      <Checkbox
+        id="select-all"
+        checked={table.getIsAllRowsSelected()}
+        indeterminate={table.getIsSomeRowsSelected()}
+        onChange={table.toggleAllRowsSelected}
+        className="flex items-center justify-center"
+      />
+    ),
+    cell: ({ row, table }) => (
+      <Checkbox
+        id={`select-row-${row.id}`}
+        checked={row.getIsSelected()}
+        indeterminate={row.getIsSomeSelected()}
+        className="flex items-center justify-center"
+        onChange={row.getToggleSelectedHandler()}
+        onClick={(e) => {
+          if (e.shiftKey) {
+            const { rows, rowsById } = table.getRowModel();
+            const rowsToToggle = getRowRange(rows, row.id, lastSelectedId);
+            const isLastSelected = rowsById[lastSelectedId]?.getIsSelected();
+            rowsToToggle.forEach((row) => row.toggleSelected(isLastSelected));
+          }
+
+          lastSelectedId = row.id;
+        }}
+      />
+    ),
+    size: 32,
+    meta: {
+      align: "center",
+    },
+  };
+}
+
+function getRowRange<T>(rows: Array<Row<T>>, idA: string, idB: string) {
+  const range: Array<Row<T>> = [];
+  let foundStart = false;
+  let foundEnd = false;
+  // for (let index = 0; index < rows.length; index += 1) {
+  for (const row of rows) {
+    if (row.id === idA || row.id === idB) {
+      if (foundStart) {
+        foundEnd = true;
+      }
+      if (!foundStart) {
+        foundStart = true;
+      }
+    }
+
+    if (foundStart) {
+      range.push(row);
+    }
+
+    if (foundEnd) {
+      break;
+    }
+  }
+
+  return range;
+}

@@ -51,3 +51,13 @@ type RenderContext<TRecord> = {
   row: Row<TRecord>;
   column: Column<TRecord>;
 };
+
+export type RowSelection<TRecord> = {
+  type?: "checkbox" | "radio";
+  /** Hide the selectAll checkbox and custom selection */
+  hideSelectAll?: boolean;
+  /** Controlled selected row keys */
+  selectedRowKeys?: TRecord[keyof TRecord][];
+  /** Callback executed when selected rows change */
+  onChange?: (selectedRowKeys: TRecord[keyof TRecord][]) => void;
+};

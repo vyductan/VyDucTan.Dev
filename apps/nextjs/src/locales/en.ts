@@ -1,3 +1,5 @@
+import { tableLocale_en } from "@vyductan/ui/table";
+
 export default {
   hello: {
     world: "Hello {param}!",
@@ -10,4 +12,5 @@ export default {
   },
   today: "Today",
   Speak: "Speak",
+  ...tableLocale_en,
 } as const;

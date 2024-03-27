@@ -19,12 +19,7 @@ const config = {
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
   /** Enables hot reloading for local packages without a build step */
-  transpilePackages: [
-    "@vyductan/api",
-    "@vyductan/tailwind-config",
-    "@vyductan/ui",
-    "@vyductan/ui-pro",
-  ],
+  transpilePackages: ["@vyductan/api", "@vyductan/ui", "@vyductan/ui-pro"],
   // rewrites: async () => {
   //   return [
   //     {

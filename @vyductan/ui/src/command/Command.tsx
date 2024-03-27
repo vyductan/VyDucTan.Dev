@@ -33,7 +33,7 @@ export type CommandProps<T extends ValueType> = CommandRootProps & {
   optionsRender?: (options: Option<T>[]) => React.ReactNode;
 };
 
-export const Command = <T extends string>({
+export const Command = <T extends ValueType = string>({
   options,
   value,
   empty,
@@ -57,8 +57,8 @@ export const Command = <T extends string>({
             ? optionsRender(options)
             : options.map((item) => (
                 <CommandItem
-                  key={item.value}
-                  value={item.value}
+                  key={item.value.toString()}
+                  value={item.value as string}
                   onSelect={item.onSelect}
                 >
                   {!optionRender ||

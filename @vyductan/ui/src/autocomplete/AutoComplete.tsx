@@ -3,6 +3,7 @@
 import * as React from "react";
 
 import type { CommandProps } from "../command";
+import type { ValueType } from "../form";
 import type { Option } from "../select/types";
 import { Button } from "../button";
 import { Command } from "../command";
@@ -10,7 +11,7 @@ import { Icon } from "../icons";
 import { Popover } from "../popover";
 import { selectDefaultPlaceholder } from "../select";
 
-export type AutoCompleteProps<T extends string = string> = Pick<
+export type AutoCompleteProps<T extends ValueType = string> = Pick<
   CommandProps<T>,
   | "value"
   | "placeholder"
@@ -25,7 +26,7 @@ export type AutoCompleteProps<T extends string = string> = Pick<
   onSearchChange?: (search: string) => void;
 };
 
-const AutoCompleteInner = <T extends string>(
+const AutoCompleteInner = <T extends ValueType = string>(
   {
     value,
     options,
@@ -70,7 +71,7 @@ const AutoCompleteInner = <T extends string>(
       className="p-0"
       style={{ width: buttonRef.current?.offsetWidth }}
       content={
-        <Command<T>
+        <Command
           options={options.map((o) => ({
             ...o,
             onSelect: () => {
@@ -100,7 +101,7 @@ const AutoCompleteInner = <T extends string>(
 };
 
 export const AutoComplete = React.forwardRef(AutoCompleteInner) as <
-  T extends string,
+  T extends ValueType,
 >(
   props: AutoCompleteProps<T> & {
     ref?: React.ForwardedRef<HTMLUListElement>;

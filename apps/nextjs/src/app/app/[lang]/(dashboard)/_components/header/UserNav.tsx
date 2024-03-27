@@ -1,6 +1,7 @@
-"use client";
+// "use client";
 
 import type { Session } from "@vyductan/api/auth";
+import { signOut } from "@vyductan/api/auth";
 import { Avatar } from "@vyductan/ui/avatar";
 import { Button } from "@vyductan/ui/button";
 import { Dropdown } from "@vyductan/ui/dropdown";
@@ -46,15 +47,28 @@ export const UserNav = ({ user }: UserNavProps) => {
           },
           {
             key: "signout",
-            onSelect: (e) => {
-              e.preventDefault();
-              const a = document.getElementById(
-                "signout-form",
-              ) as HTMLFormElement;
-
-              a.submit();
-            },
-            label: "Sign Out",
+            // onSelect: (e) => {
+            //   e.preventDefault();
+            //   const a = document.getElementById(
+            //     "signout-form",
+            //   ) as HTMLFormElement;
+            //
+            //   a.submit();
+            // },
+            // label: "Sign Out",
+            label: (
+              <form>
+                <Button
+                  size="lg"
+                  formAction={async () => {
+                    "use server";
+                    await signOut();
+                  }}
+                >
+                  Sign out
+                </Button>
+              </form>
+            ),
           },
         ],
       }}

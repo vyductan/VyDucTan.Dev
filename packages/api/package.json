@@ -33,7 +33,7 @@
     "root": true
   },
   "dependencies": {
-    "@auth/drizzle-adapter": "^0.7.0",
+    "@auth/drizzle-adapter": "^0.8.0",
     "@trpc/server": "11.0.0-next-beta.294",
     "@vercel/blob": "^0.22.1",
     "@vercel/postgres": "^0.7.2",
@@ -42,8 +42,7 @@
     "drizzle-zod": "^0.5.1",
     "google-auth-library": "^9.4.2",
     "nanoid": "^5.0.6",
-    "next-auth": "^5.0.0-beta.13",
-    "postgres-range": "^1.1.3",
+    "next-auth": "^5.0.0-beta.15",
     "superjson": "2.2.1",
     "zod": "^3.22.4"
   },
@@ -52,7 +51,6 @@
     "@vyductan/prettier-config": "workspace:*",
     "@vyductan/typescript-config": "workspace:*",
     "dotenv-cli": "^7.3.0",
-    "drizzle-kit": "^0.20.14",
-    "pg": "^8.11.3"
+    "drizzle-kit": "^0.20.14"
   }
 }

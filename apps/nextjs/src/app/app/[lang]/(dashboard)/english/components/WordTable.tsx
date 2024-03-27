@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import type { WordResponse } from "@vyductan/api/types";
+import type { RouterOutputs } from "@vyductan/api";
 import type { TableColumnDef } from "@vyductan/ui/table";
 import { SpeakerIcon } from "@vyductan/tts";
 import { AlertModal } from "@vyductan/ui/alert-modal";
@@ -13,11 +13,12 @@ import { message } from "@vyductan/ui/toast";
 import { api } from "~/trpc/react";
 import { WordModalForm } from "./WordModalForm";
 
+type Record = RouterOutputs["english"]["all"][number];
 export const WordTable = () => {
   const { data: words } = api.english.all.useQuery(undefined, {
     initialData: [],
   });
-  const [currentRow, setCurrentRow] = useState<WordResponse>();
+  const [currentRow, setCurrentRow] = useState<Record>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -66,7 +67,7 @@ export const WordTable = () => {
                 </>
               );
             },
-          } satisfies TableColumnDef<WordResponse>,
+          } satisfies TableColumnDef<Record>,
         ]}
         dataSource={words}
       />
@@ -93,7 +94,7 @@ export const WordTable = () => {
   );
 };
 
-const columns: TableColumnDef<WordResponse>[] = [
+const columns: TableColumnDef<Record>[] = [
   {
     dataIndex: "word",
     title: "Word",

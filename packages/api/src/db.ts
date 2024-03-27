@@ -13,3 +13,5 @@ export * from "drizzle-orm";
 
 // connect to vercel postgres
 export const db = drizzle(sql, { schema });
+
+export type Database = typeof db;

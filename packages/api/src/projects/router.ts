@@ -1,16 +1,20 @@
 import { z } from "zod";
 
+import { paginationSchema, searchSchema, withPagination } from "../_util/query";
 import { desc, eq, schema } from "../db";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { insertProjectSchema } from "./types";
 
 export const projectsRouter = createTRPCRouter({
-  all: protectedProcedure.query(({ ctx }) => {
-    return ctx.db.query.projects.findMany({
-      orderBy: desc(schema.projects.createdAt),
-      limit: 10,
-    });
-  }),
+  all: protectedProcedure
+    .input(searchSchema.merge(paginationSchema))
+    .query(({ ctx, input }) => {
+      return ctx.db.query.projects.findMany({
+        orderBy: desc(schema.projects.createdAt),
+        where: (t, h) => h.ilike(t.name, `%${input.query}%`),
+        ...withPagination({ page: input.page, pageSize: input.pageSize }),
+      });
+    }),
 
   byId: protectedProcedure
     .input(z.object({ id: z.string() }))
@@ -24,9 +28,6 @@ export const projectsRouter = createTRPCRouter({
     .query(({ ctx, input }) => {
       return ctx.db.query.projects.findFirst({
         where: eq(schema.projects.slug, input.slug),
-        with: {
-          tasks: true,
-        },
       });
     }),
 

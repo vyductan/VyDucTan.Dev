@@ -10,7 +10,7 @@ import type { FieldsSchema, FieldType, InputUnion } from "./types";
 import type { FormInstance } from "./useForm";
 import { AutoComplete } from "../autocomplete";
 import { Button } from "../button";
-import { DatePicker } from "../date-picker";
+import { DatePicker, DateRangePicker } from "../date-picker";
 import Editor from "../editor";
 import { DeleteIcon } from "../icons/DeleteIcon";
 import { Input, InputPassword } from "../input";
@@ -174,10 +174,10 @@ const renderInput = (props: InputUnion) => {
     return <AutoComplete {...restProps} />;
   }
   if (props.type === "date") {
-    return <DatePicker mode="single" {...props} />;
+    return <DatePicker {...props} />;
   }
   if (props.type === "date-range") {
-    return <DatePicker mode="range" {...props} />;
+    return <DateRangePicker {...props} />;
   }
   if (props.type === "editor") {
     const { onChange, ...rest } = props;

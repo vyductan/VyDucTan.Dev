@@ -1,8 +1,6 @@
 import { forwardRef } from "react";
 
-import { clsm } from "@vyductan/ui";
-
-import { tableStyles } from "./styles";
+import { clsm } from "..";
 
 export const TableRow = forwardRef<
   HTMLTableRowElement,
@@ -11,9 +9,8 @@ export const TableRow = forwardRef<
   <tr
     ref={ref}
     className={clsm(
-      "border-b transition-colors",
-      tableStyles.row.classNames,
-      tableStyles.row.hoverByCssClassNames,
+      "group",
+      "transition-colors",
       "data-[state=selected]:bg-gray-100 dark:data-[state=selected]:bg-gray-800",
       className,
     )}

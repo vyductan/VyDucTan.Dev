@@ -1,9 +1,11 @@
 "use client";
 
+import type { VariantProps } from "class-variance-authority";
 import React from "react";
 
-import type { ValueType } from "../form";
-import type { SelectRootProps } from "./components";
+import type { ValueType } from "../form/types";
+import type { inputStatusVariants } from "../input";
+import type { SelectRootProps } from "./_components";
 import type { Option } from "./types";
 import {
   SelectContent,
@@ -11,33 +13,33 @@ import {
   SelectRoot,
   SelectTrigger,
   SelectValue,
-} from "./components";
+} from "./_components";
 
 export const selectDefaultPlaceholder = "Select an option";
 
 export type SelectProps<T extends ValueType = string> = Omit<
   SelectRootProps,
   "value" | "onValueChange"
-> & {
-  value?: T;
-  options: Option<T>[];
+> &
+  VariantProps<typeof inputStatusVariants> & {
+    value?: T;
+    options: Option<T>[];
 
-  loading?: boolean;
-  empty?: React.ReactNode;
-  placeholder?: string;
+    loading?: boolean;
+    empty?: React.ReactNode;
+    placeholder?: string;
 
-  onSearchChange?: (search: string) => void;
+    onSearchChange?: (search: string) => void;
 
-  groupClassName?: string;
-  optionRender?: (option: Option<T>) => {
-    checked?: boolean;
-    icon?: React.ReactNode;
-    label?: React.ReactNode;
+    groupClassName?: string;
+    optionRender?: (option: Option<T>) => {
+      checked?: boolean;
+      icon?: React.ReactNode;
+      label?: React.ReactNode;
+    };
+    optionsRender?: (options: Option<T>[]) => React.ReactNode;
+    onChange?: (value: T, option: Option | Array<Option>) => void;
   };
-  optionsRender?: (options: Option<T>[]) => React.ReactNode;
-} & {
-  onChange?: (value: T, option: Option | Array<Option>) => void;
-};
 
 const SelectInner = <T extends ValueType = string>(
   {
@@ -47,6 +49,10 @@ const SelectInner = <T extends ValueType = string>(
     placeholder,
 
     onChange,
+
+    borderless,
+    size,
+    status,
 
     ...props
   }: SelectProps<T>,
@@ -65,7 +71,12 @@ const SelectInner = <T extends ValueType = string>(
       }}
       {...props}
     >
-      <SelectTrigger className="w-full">
+      <SelectTrigger
+        className="w-full"
+        borderless={borderless}
+        size={size}
+        status={status}
+      >
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>

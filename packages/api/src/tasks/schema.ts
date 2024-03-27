@@ -5,7 +5,7 @@ import { nanoid } from "nanoid";
 import { projects } from "../projects/schema";
 
 export const todoStatusEnum = pgEnum("todo_status", [
-  "",
+  "todo",
   "not_started",
   "in_progress",
   "in_review",
@@ -13,7 +13,13 @@ export const todoStatusEnum = pgEnum("todo_status", [
   "archived",
 ]);
 
-export const taskTypeEnum = pgEnum("task_type", ["", "bug", "feat", "doc"]);
+export const taskTypeEnum = pgEnum("task_type", [
+  "",
+  "bug",
+  "feat",
+  "docs",
+  "module",
+]);
 
 export const tasks = pgTable("task", {
   id: text("id")
@@ -22,7 +28,7 @@ export const tasks = pgTable("task", {
     .notNull()
     .primaryKey(),
   name: text("name").notNull(),
-  status: todoStatusEnum("status").default("").notNull(),
+  status: todoStatusEnum("status").default("todo").notNull(),
   estimatedStart: timestamp("estimated_start"),
   estimatedEnd: timestamp("estimated_end"),
   description: text("description"),
@@ -46,10 +52,12 @@ export const tasksRelations = relations(tasks, ({ one, many }) => ({
   project: one(projects, {
     fields: [tasks.projectId],
     references: [projects.id],
+    relationName: "project",
   }),
   parrent: one(tasks, {
     fields: [tasks.parentId],
     references: [tasks.id],
+    relationName: "parent",
   }),
-  children: many(tasks),
+  children: many(tasks, { relationName: "parent" }),
 }));

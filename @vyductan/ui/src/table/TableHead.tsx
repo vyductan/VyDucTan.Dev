@@ -9,7 +9,10 @@ export const TableHead = React.forwardRef<
   <th
     ref={ref}
     className={clsm(
-      "h-12 px-4 text-left align-middle font-medium text-gray-500 dark:text-gray-400 [&:has([role=checkbox])]:pr-0",
+      "p-3 text-left",
+      "break-words font-medium text-foreground",
+      "first:rounded-tl-md last:rounded-tr-md",
+
       className,
     )}
     {...props}

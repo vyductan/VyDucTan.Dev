@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useDebounceFn } from "ahooks";
 
 import { Input } from ".";
 import { Icon } from "../icons";
@@ -13,15 +14,21 @@ export const Search = ({ placeholder }: SearchProps) => {
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const handleSearch = (term: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (term) {
-      params.set("query", term);
-    } else {
-      params.delete("query");
-    }
-    replace(`${pathname}?${params.toString()}`);
-  };
+  const { run: handleSearch } = useDebounceFn(
+    (term: string) => {
+      const params = new URLSearchParams(searchParams);
+      params.set("page", "1");
+      if (term) {
+        params.set("query", term);
+      } else {
+        params.delete("query");
+      }
+      replace(`${pathname}?${params.toString()}`);
+    },
+    {
+      wait: 300,
+    },
+  );
 
   return (
     <Input

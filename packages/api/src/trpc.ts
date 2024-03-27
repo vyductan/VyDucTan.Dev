@@ -31,12 +31,19 @@ export const createTRPCContext = async (opts: {
   session: Session | null;
 }) => {
   const session = opts.session ?? (await auth());
-  // const source = opts.headers.get("x-trpc-source") ?? "unknown";
+  const s = {
+    user: {
+      id: "user-id-1234",
+      email: "vdt5snet@gmail.com",
+    },
+    expires: "1234567",
+  };
+  const source = opts.headers.get("x-trpc-source") ?? "unknown";
 
-  // console.log(">>> tRPC Request from", source, "by", session?.user);
+  console.log(">>> tRPC Request from", source, "by", session?.user);
 
   return {
-    session,
+    session: s,
     db,
   };
 };

@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "..";
 
 export const TableCell = forwardRef<
   HTMLTableCellElement,
@@ -9,7 +9,10 @@ export const TableCell = forwardRef<
   <td
     ref={ref}
     className={clsm(
-      "p-4 align-middle [&:has([role=checkbox])]:pr-0",
+      "p-3",
+      "border-b",
+      "break-words",
+      "group-hover:bg-background-hover",
       className,
     )}
     {...props}

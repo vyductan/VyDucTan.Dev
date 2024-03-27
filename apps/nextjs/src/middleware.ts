@@ -1,4 +1,3 @@
-import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { createI18nMiddleware } from "next-international/middleware";
 
@@ -9,7 +8,7 @@ const I18nMiddleware = createI18nMiddleware({
   defaultLocale: "en",
   urlMappingStrategy: "rewriteDefault",
 });
-export async function middleware(req: NextRequest) {
+export default auth((req) => {
   const nextUrl = req.nextUrl;
 
   /**
@@ -53,14 +52,14 @@ export async function middleware(req: NextRequest) {
       return i18nResponse;
     }
 
-    const session = await auth();
-    if (!session && !path.includes("/signin")) {
-      const redirectUrl = new URL("/signin", req.url);
-      redirectUrl.searchParams.append("callbackUrl", nextUrl.href);
-      return NextResponse.redirect(redirectUrl);
-    } else if (session && path.includes("/signin")) {
-      return NextResponse.redirect(new URL("/", req.url));
-    }
+    // const session = req.auth;
+    // if (!session && !path.includes("/signin")) {
+    //   const redirectUrl = new URL("/signin", req.url);
+    //   redirectUrl.searchParams.append("callbackUrl", nextUrl.href);
+    //   return NextResponse.redirect(redirectUrl);
+    // } else if (session && path.includes("/signin")) {
+    //   return NextResponse.redirect(new URL("/", req.url));
+    // }
     return NextResponse.rewrite(
       new URL(`/app${path === "/" ? "" : path}`, req.url),
     );
@@ -78,7 +77,7 @@ export async function middleware(req: NextRequest) {
 
   // rewrite everything else to `/[domain]/[slug] dynamic route
   return NextResponse.rewrite(new URL(`/${hostname}${path}`, req.url));
-}
+});
 
 export const config = {
   /*

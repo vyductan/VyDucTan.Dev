@@ -26,6 +26,18 @@ export default {
           900: "hsl(var(--primary-900))",
           950: "hsl(var(--primary-950))",
         },
+        "ds-gray": {
+          100: "hsl(var(--ds-gray-100))",
+          200: "hsl(var(--ds-gray-200))",
+          300: "hsl(var(--ds-gray-300))",
+          400: "hsl(var(--ds-gray-400))",
+          500: "hsl(var(--ds-gray-500))",
+          600: "hsl(var(--ds-gray-600))",
+          700: "hsl(var(--ds-gray-700))",
+          800: "hsl(var(--ds-gray-800))",
+          900: "hsl(var(--ds-gray-900))",
+          1000: "hsl(var(--ds-gray-1000))",
+        },
         background: {
           DEFAULT: "hsl(var(--background))",
           hover: "hsl(var(--background-hover))",

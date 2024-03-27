@@ -1,110 +1,177 @@
 "use client";
 
-import type { SelectSingleEventHandler } from "react-day-picker";
+import type { VariantProps } from "class-variance-authority";
 import * as React from "react";
-import { format } from "date-fns";
+import { useClickAway, useFocusWithin } from "ahooks";
+import { format as formatDate, isValid, parse } from "date-fns";
+import { useMergedState } from "rc-util";
 
-import { clsm } from "@vyductan/ui";
-
-import { Button } from "../button";
+import type { inputStatusVariants } from "../input";
+import { clsm } from "..";
 import { Calendar } from "../calendar";
 import { Icon } from "../icons";
+import { Input } from "../input";
 import { Popover } from "../popover";
 
-type DateRange = {
-  start: Date | undefined;
-  end?: Date | undefined;
-};
-
-export type DatePickerSingleProps = {
-  mode: "single";
+export type DatePickerProps = VariantProps<typeof inputStatusVariants> & {
+  format?: string;
+  defaultValue?: Date;
   value?: Date;
-  onChange?: SelectSingleEventHandler;
+  /** Callback function, can be executed when the selected time is changing */
+  onChange?: (date: Date | undefined, dateString: string) => void;
 };
-export type DatePickerRangeProps = {
-  mode: "range";
-  value?: DateRange;
-  onChange?: (range: DateRange | undefined) => void;
-};
-export type DatePickerProps = DatePickerSingleProps | DatePickerRangeProps;
 const DatePickerInternal = (
-  props: DatePickerProps,
-  ref: React.Ref<HTMLButtonElement>,
+  {
+    borderless,
+    format = "dd/MM/yyyy",
+    size,
+    status,
+    defaultValue,
+    value,
+    ...props
+  }: DatePickerProps,
+  ref: React.Ref<HTMLInputElement>,
 ) => {
-  const valueToDisplay =
-    props.mode === "range" ? (
-      props.value?.start ? (
-        props.value.end ? (
-          <>
-            {format(props.value.start, "LLL dd, y")} -{" "}
-            {format(props.value.end, "LLL dd, y")}
-          </>
-        ) : (
-          format(props.value.start, "LLL dd, y")
-        )
-      ) : (
-        <span className="text-placeholder">From Date - To Date</span>
-      )
-    ) : props.mode === "single" ? (
-      props.value ? (
-        format(props.value, "PPP")
-      ) : (
-        <span className="text-placeholder">Pick a date</span>
-      )
-    ) : null;
-  const picker = (() => {
-    if (props.mode === "single") {
-      const { value, onChange, ...rest } = props;
-      return (
-        <Calendar initialFocus selected={value} onSelect={onChange} {...rest} />
-      );
+  const [open, setOpen] = React.useState(false);
+  const [month, setMonth] = React.useState<Date | undefined>(
+    defaultValue !== undefined
+      ? isValid(defaultValue)
+        ? defaultValue
+        : new Date()
+      : isValid(value)
+        ? value
+        : new Date(),
+  );
+
+  const inputId = React.useId();
+
+  // ====================== Value =======================
+  const preValue =
+    defaultValue !== undefined
+      ? isValid(defaultValue)
+        ? formatDate(defaultValue, format)
+        : ""
+      : isValid(value)
+        ? formatDate(value!, format)
+        : "";
+  const [inputValue, setInputValue] = useMergedState(preValue);
+
+  // set input value if date value change
+  React.useEffect(() => {
+    const x = isValid(value) ? formatDate(value!, format) : "";
+    setInputValue(x);
+    setMonth(value ? value : new Date());
+  }, [value, setInputValue, format]);
+
+  const handleChange = (input: string | Date) => {
+    const inputDate =
+      typeof input === "string" ? parse(input, format, new Date()) : input;
+    if (isValid(inputDate)) {
+      props.onChange?.(inputDate, formatDate(inputDate, format));
+      setInputValue(formatDate(inputDate, format));
+      setMonth(inputDate);
+    } else {
+      setInputValue(preValue);
+      props.onChange?.(undefined, "");
     }
-    if (props.mode === "range") {
-      const { value, onChange, ...rest } = props;
-      return (
-        <Calendar
-          initialFocus
-          selected={{
-            from: value?.start,
-            to: value?.end,
-          }}
-          onSelect={(range) => {
-            onChange?.({
-              start: range?.from,
-              end: range?.to,
-            });
-          }}
-          numberOfMonths={2}
-          {...rest}
-          mode="range"
-        />
-      );
-    }
-    return null;
-  })();
+  };
+
+  const picker = (
+    <Calendar
+      mode="single"
+      selected={value}
+      onSelect={(_, selectedDate) => {
+        handleChange(selectedDate);
+        setOpen(false);
+      }}
+      month={month}
+      onMonthChange={setMonth}
+      {...props}
+    />
+  );
+
+  // handle click outside from input (is focus within)
+  const [isFocused, setIsFocused] = React.useState(false);
+  useFocusWithin(() => document.getElementById(inputId), {
+    onFocus: () => {
+      setIsFocused(true);
+    },
+  });
+
+  useClickAway(
+    (e) => {
+      if (isFocused) {
+        // check if choose a day in panel or not
+        if (!(e.target && "name" in e.target && e.target.name === "day")) {
+          if (inputValue.length === 10) {
+            handleChange(inputValue);
+          } else {
+            setInputValue(preValue);
+          }
+        }
+      }
+    },
+    () => document.getElementById(inputId),
+  );
 
   return (
-    <Popover
-      className="w-auto p-0"
-      trigger={
-        <Button
-          className={clsm(
-            "flex w-full",
-            "justify-start text-left font-normal",
-            !props.value && "text-muted-foreground",
-          )}
+    <>
+      <Popover
+        open={open}
+        className="w-auto p-0"
+        content={picker}
+        trigger="click"
+        sideOffset={8}
+        onInteractOutside={(e) => {
+          if (e.target && "id" in e.target && e.target.id !== inputId) {
+            setOpen(false);
+          }
+        }}
+        onOpenAutoFocus={(e) => {
+          e.preventDefault();
+        }}
+      >
+        <Input
+          id={inputId}
+          allowClear
+          borderless={borderless}
+          size={size}
+          status={status}
+          className={clsm("items-center", "justify-start text-left")}
           ref={ref}
-        >
-          {valueToDisplay}
-          <Icon
-            icon="mingcute:calendar-2-line"
-            className="ml-auto size-4 opacity-50"
-          />
-        </Button>
-      }
-    >
-      {picker}
-    </Popover>
+          placeholder="Pick a date"
+          suffix={
+            <Icon
+              icon="mingcute:calendar-2-line"
+              className="ml-auto size-4 opacity-50"
+            />
+          }
+          value={inputValue}
+          onClick={() => {
+            if (!open) setOpen(true);
+          }}
+          onKeyUp={(e) => {
+            e.stopPropagation();
+            if (e.key === "Enter" || e.key === "Escape") {
+              if (e.currentTarget.value.length === 10) {
+                handleChange(e.currentTarget.value);
+              } else {
+                setInputValue(preValue);
+              }
+              setOpen(false);
+            }
+          }}
+          onChange={(e) => {
+            setInputValue(e.currentTarget.value);
+            if (e.currentTarget.value === "") {
+              props.onChange?.(undefined, "");
+            } else if (e.currentTarget.value.length === 10) {
+              handleChange(e.currentTarget.value);
+            }
+          }}
+        />
+      </Popover>
+    </>
   );
 };
 

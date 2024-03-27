@@ -8,7 +8,7 @@ import { ThemeProvider, ThemeToggle } from "@vyductan/ui/theme";
 import { env } from "~/env";
 import { TRPCReactProvider } from "~/trpc/react";
 
-import "~/app/globals.css";
+import "../app/globals.css";
 
 import { TailwindIndicator } from "@vyductan/ui-pro/tailwind-indicator";
 import { Toaster } from "@vyductan/ui/toast";
@@ -59,7 +59,6 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <TRPCReactProvider>{children}</TRPCReactProvider>
-          {/* <AppProvider>{children}</AppProvider> */}
           <div className="fixed bottom-4 right-4">
             <ThemeToggle />
           </div>

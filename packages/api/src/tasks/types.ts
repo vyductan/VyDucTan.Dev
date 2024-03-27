@@ -1,6 +1,7 @@
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
+import type { RouterOutputs } from "..";
 import { tasks } from "./schema";
 
 export const insertTaskSchema = createInsertSchema(tasks, {
@@ -12,9 +13,12 @@ export const insertTaskSchema = createInsertSchema(tasks, {
   })
   .merge(
     z.object({
-      estimatedDuration: z.object({
-        start: z.date(),
-        end: z.date(),
-      }),
+      estimatedDuration: z
+        .object({
+          start: z.date(),
+          end: z.date(),
+        })
+        .optional(),
     }),
   );
+export type Task = NonNullable<RouterOutputs["tasks"]["byId"]>;

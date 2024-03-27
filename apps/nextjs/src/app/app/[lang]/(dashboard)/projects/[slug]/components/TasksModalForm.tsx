@@ -1,81 +1,47 @@
-"use client";
+import type { z } from "zod";
+import { useEffect } from "react";
 
-import type { ReactNode } from "react";
-import { useEffect, useState } from "react";
-
+import type { SubmitHandler } from "@vyductan/ui/form";
+import type { ModalProps } from "@vyductan/ui/modal";
 import { insertTaskSchema } from "@vyductan/api/types";
 import { AutoForm, useForm } from "@vyductan/ui/form";
 import { Modal } from "@vyductan/ui/modal";
 import { Spin } from "@vyductan/ui/spin";
-import { message } from "@vyductan/ui/toast";
 
 import { upload } from "~/lib/upload";
 import { api } from "~/trpc/react";
 
-type TasksModalFormProps = {
+type TasksModalFormProps = ModalProps & {
   id?: string;
   projectId: string;
   title: string;
-  trigger: ReactNode;
+  searchingTasks: [];
+  onSubmit: SubmitHandler<z.infer<typeof insertTaskSchema>>;
 };
 export const TasksModalForm = ({
   id,
   projectId,
   title,
-  trigger,
-}: TasksModalFormProps) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  searchingTasks,
+  onSubmit,
 
-  const utils = api.useUtils();
+  ...modalProps
+}: TasksModalFormProps) => {
   const { data, isLoading } = api.tasks.byId.useQuery(
     {
       id: id!,
     },
     {
-      // fix: load all taskById before show edit form
-      enabled: !!id && isModalOpen,
+      enabled: !!id,
     },
   );
-  const addTask = api.tasks.create.useMutation({
-    onSuccess: async () => {
-      // form.reset();
-      // setTitle("");
-      // setContent("");
-      setIsModalOpen(false);
-      await utils.projects.bySlug.invalidate();
-    },
-    onError: (error) => {
-      message.error(error.message);
-      // form.setError(error)
-    },
-  });
-  const updateTask = api.tasks.update.useMutation({
-    onSuccess: async () => {
-      // form.reset();
-      // setTitle("");
-      // setContent("");
-      await utils.projects.all.invalidate();
-    },
-    onError: (error) => {
-      message.error(error.message);
-      // form.setError(error)
-    },
-  });
 
   const form = useForm({
     schema: insertTaskSchema,
     defaultValues: {
       projectId,
     },
-    onSubmit: async (values) => {
-      !id
-        ? addTask.mutate(values)
-        : updateTask.mutate({
-            ...values,
-            id,
-          });
-      await utils.projects.bySlug.invalidate();
-    },
+    onSubmit,
   });
   const { setFieldsValue, resetFields } = form;
   useEffect(() => {
@@ -88,18 +54,12 @@ export const TasksModalForm = ({
 
   return (
     <Modal
-      open={isModalOpen}
       title={title}
       className="w-screen-md"
-      trigger={trigger}
-      okLoading={addTask.isPending}
       onOk={form.submit}
-      onCancel={() => {
-        setIsModalOpen(false);
-      }}
-      onOpenChange={setIsModalOpen}
+      {...modalProps}
     >
-      {!isModalOpen ? null : id && isLoading ? (
+      {!modalProps.open ? null : id && isLoading ? (
         <>
           <Spin />
         </>
@@ -107,6 +67,13 @@ export const TasksModalForm = ({
         <AutoForm
           form={form}
           fields={[
+            {
+              type: "autocomplete",
+              name: "parentId",
+              label: "Parrent",
+              placeholder: "Enter the project name",
+              options: searchingTasks,
+            },
             {
               type: "text",
               name: "name",

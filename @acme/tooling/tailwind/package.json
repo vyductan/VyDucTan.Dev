@@ -1,30 +1,30 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@acme/tts",
+  "name": "@acme/tailwind-config",
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    "./web": "./web.ts",
+    "./globals.css": "./globals.css",
+    "./postcss.cjs": "./postcss.cjs"
   },
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
-    "db:push": "drizzle-kit push:pg",
-    "db:studio": "drizzle-kit studio",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
-    "lint:fix": "pnpm lint --fix",
     "typecheck": "tsc --noEmit"
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
-    "@acme/ui": "workspace:*",
-    "uuid": "^9.0.1"
+    "postcss": "8.4.38",
+    "tailwindcss": "3.4.3",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
-    "@acme/typescript-config": "workspace:*",
-    "@types/uuid": "^9.0.7"
+    "@acme/typescript-config": "workspace:*"
   }
 }

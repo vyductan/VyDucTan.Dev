@@ -1,30 +1,26 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@acme/tts",
+  "name": "@acme/prettier-config",
   "version": "0.1.0",
   "private": true,
-  "license": "MIT",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./index.js"
   },
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
-    "db:push": "drizzle-kit push:pg",
-    "db:studio": "drizzle-kit studio",
-    "lint": "eslint",
-    "lint:fix": "pnpm lint --fix",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
     "typecheck": "tsc --noEmit"
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
-    "@acme/ui": "workspace:*",
-    "uuid": "^9.0.1"
+    "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
+    "prettier": "^3.2.4",
+    "prettier-plugin-packagejson": "^2.5.0",
+    "prettier-plugin-tailwindcss": "^0.5.13"
   },
   "devDependencies": {
-    "@acme/eslint-config": "workspace:*",
-    "@acme/prettier-config": "workspace:*",
     "@acme/typescript-config": "workspace:*",
-    "@types/uuid": "^9.0.7"
+    "typescript": "^5.4.5"
   }
 }

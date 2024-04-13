@@ -1,10 +1,11 @@
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-import type { RouterOutputs } from "..";
-import { tasks } from "./schema";
+import { schema } from "@acme/db";
 
-export const insertTaskSchema = createInsertSchema(tasks, {
+import type { RouterOutputs } from "..";
+
+export const insertTaskSchema = createInsertSchema(schema.tasks, {
   content: z.string(),
 })
   .omit({

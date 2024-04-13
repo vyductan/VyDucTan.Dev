@@ -4,12 +4,12 @@ import { useState } from "react";
 
 import type { RouterOutputs } from "@acme/api";
 import type { TableColumnDef } from "@acme/ui/table";
-import { SpeakerIcon } from "@acme/tts";
 import { AlertModal } from "@acme/ui/alert-modal";
 import { Button } from "@acme/ui/button";
 import { Table } from "@acme/ui/table";
 import { message } from "@acme/ui/toast";
 
+import { SpeakerIcon } from "~/libs/tts";
 import { api } from "~/trpc/react";
 import { WordModalForm } from "./WordModalForm";
 
@@ -87,7 +87,7 @@ export const WordTable = () => {
         description="Are you sure you want to delete this word?"
         okLoading={deleteWord.isPending}
         onConfirm={() => {
-          currentRow && deleteWord.mutate(currentRow?.id);
+          currentRow && deleteWord.mutate(currentRow.id);
         }}
       />
     </>

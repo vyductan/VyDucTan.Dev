@@ -4,9 +4,9 @@ import type {
   WordCEFRLevel,
   WordClass,
   WordMastery,
-} from "@acme/api/types";
+} from "@acme/api/types/english";
 import type { RadioOption } from "@acme/ui/radio";
-import { insertWordDefinitionSchema } from "@acme/api/types";
+import { insertWordDefinitionSchema } from "@acme/api/types/english";
 import { AutoForm, useForm } from "@acme/ui/form";
 import { Modal } from "@acme/ui/modal";
 import { Spin } from "@acme/ui/spin";
@@ -30,7 +30,7 @@ export const WordModalForm = ({
 
   const { data: word, isPending } = api.english.byId.useQuery(
     {
-      id: id!,
+      id: id ?? "",
     },
     {
       enabled: !!id,
@@ -93,7 +93,7 @@ export const WordModalForm = ({
         open={isOpen}
         title={`${!id ? "Add" : "Edit"} Vocabulary`}
         className="w-screen-md"
-        onOk={form?.submit}
+        onOk={form.submit}
         onCancel={() => {
           onCancel();
         }}

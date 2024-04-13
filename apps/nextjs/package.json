@@ -17,6 +17,7 @@
   "prettier": "@acme/prettier-config",
   "dependencies": {
     "@acme/api": "workspace:*",
+    "@acme/auth": "workspace:*",
     "@acme/hooks": "workspace:*",
     "@acme/tts": "workspace:*",
     "@acme/ui": "workspace:*",
@@ -44,7 +45,7 @@
     "geist": "^1.3.0",
     "lodash": "^4.17.21",
     "negotiator": "^0.6.3",
-    "next": "14.2.1",
+    "next": "^14.2.1",
     "next-international": "^1.2.3",
     "next-mdx-remote": "^4.4.1",
     "next-redux-wrapper": "^8.1.0",
@@ -70,7 +71,7 @@
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
     "@acme/tailwind-config": "workspace:*",
-    "@acme/typescript-config": "workspace:*",
+    "@acme/tsconfig": "workspace:*",
     "@types/eslint": "^8.56.9",
     "@types/lodash": "^4.17.0",
     "@types/node": "^20.12.7",
@@ -78,11 +79,10 @@
     "@types/nprogress": "^0.2.3",
     "@types/react": "18.2.77",
     "@types/react-scroll": "^1.8.10",
-    "dotenv-cli": "^7.3.0",
-    "eslint": "9.0.0",
+    "dotenv-cli": "^7.4.1",
+    "eslint": "^9.0.0",
     "jiti": "^1.21.0",
     "postcss-replace": "^2.0.1",
-    "sass": "^1.70.0",
-    "typescript": "5.4.5"
+    "typescript": "^5.4.5"
   }
 }

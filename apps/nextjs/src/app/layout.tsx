@@ -10,7 +10,7 @@ import { TRPCReactProvider } from "~/trpc/react";
 
 import "../app/globals.css";
 
-import { TailwindIndicator } from "@acme/ui-pro/tailwind-indicator";
+import { TailwindIndicator } from "@acme/ui/pro/tailwind-indicator";
 import { Toaster } from "@acme/ui/toast";
 
 export const metadata: Metadata = {

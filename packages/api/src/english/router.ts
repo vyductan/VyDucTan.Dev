@@ -2,7 +2,8 @@ import type { TRPCRouterRecord } from "@trpc/server";
 import { subDays } from "date-fns";
 import { z } from "zod";
 
-import { eq, schema } from "../_db/dbb/db";
+import { eq, schema } from "@acme/db";
+
 import { protectedProcedure } from "../trpc";
 import { insertWordDefinitionSchema } from "./types";
 

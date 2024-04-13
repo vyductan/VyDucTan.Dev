@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 
-import { ConfigProvider } from "@acme/antd/config-provider";
+import { ConfigProvider } from "@acme/ui/antd/config-provider";
 
 import { I18nProviderClient } from "~/locales/client";
 

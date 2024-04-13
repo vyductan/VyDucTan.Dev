@@ -1,6 +1,5 @@
 "use client";
 
-/* eslint-disable @typescript-eslint/require-await */
 import type { LangCode } from "../lang";
 import type { DoSpeakOptions } from "./types";
 import { speak as edgeSpeak } from "./edge-tts";

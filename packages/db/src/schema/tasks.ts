@@ -2,7 +2,7 @@ import { relations } from "drizzle-orm";
 import { json, pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { nanoid } from "nanoid";
 
-import { projects } from "../projects/schema";
+import { projects } from "./projects";
 
 export const todoStatusEnum = pgEnum("todo_status", [
   "todo",

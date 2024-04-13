@@ -2,7 +2,7 @@ import { relations } from "drizzle-orm";
 import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { nanoid } from "nanoid";
 
-import { tasks } from "../tasks/schema";
+import { tasks } from "./tasks";
 
 export const projects = pgTable("project", {
   id: text("id")

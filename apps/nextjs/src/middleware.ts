@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createI18nMiddleware } from "next-international/middleware";
 
-import { auth } from "@acme/api/auth";
+import { auth } from "@acme/auth";
 
 const I18nMiddleware = createI18nMiddleware({
   locales: ["en", "vi"],

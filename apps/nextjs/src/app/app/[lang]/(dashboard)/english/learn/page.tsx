@@ -3,10 +3,10 @@
 import { Fragment, useEffect, useState } from "react";
 import _ from "lodash";
 
-import type { WordMastery } from "@acme/api/types";
-import { PageContainer } from "@acme/ui-pro";
+import { WordMastery } from "@acme/api/types/english";
 import { Button } from "@acme/ui/button";
 import { AutoForm, useForm } from "@acme/ui/form";
+import { PageContainer } from "@acme/ui/pro/page-container";
 import { Spin } from "@acme/ui/spin";
 import { message } from "@acme/ui/toast";
 

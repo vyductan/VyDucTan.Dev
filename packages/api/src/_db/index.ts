@@ -9,7 +9,8 @@ import * as tasks from "../tasks/schema";
 
 export const schema = { ...auth, ...english, ...projects, ...tasks };
 
-export * from "drizzle-orm/expressions";
+export * from "drizzle-orm/sql";
+export { alias } from "drizzle-orm/pg-core";
 
 // connect to vercel postgres
 export const db = drizzle(sql, { schema });

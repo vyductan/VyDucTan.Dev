@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-floating-promises */
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -35,7 +34,7 @@ function getHeadersAndData(data: string) {
     .split("\r\n")
     .forEach((line) => {
       const [key, value] = line.split(":", 2);
-      headers[key!] = value!;
+      if (key && value) headers[key] = value;
     });
   return { headers, data: data.slice(data.indexOf("\r\n\r\n") + 4) };
 }
@@ -200,12 +199,13 @@ function removeIncompatibleCharacters(str: string): string {
   const chars: string[] = Array.from(str);
 
   for (let idx = 0; idx < chars.length; idx++) {
-    const char = chars[idx]!;
-    const code = char.charCodeAt(0);
+    const char = chars[idx];
+    const code = char?.charCodeAt(0);
     if (
-      (code >= 0 && code <= 8) ||
-      (code >= 11 && code <= 12) ||
-      (code >= 14 && code <= 31)
+      code &&
+      ((code >= 0 && code <= 8) ||
+        (code >= 11 && code <= 12) ||
+        (code >= 14 && code <= 31))
     ) {
       chars[idx] = " ";
     }
@@ -297,7 +297,7 @@ export function speak({
 
   const texts = splitTextByByteLength(
     escape(removeIncompatibleCharacters(text)),
-    calcMaxMesgSize(voice ?? languageToDefaultVoice[lang]!, rate, volume),
+    calcMaxMesgSize(voice ?? languageToDefaultVoice[lang] ?? "", rate, volume),
   );
 
   let stopped = false;
@@ -351,7 +351,7 @@ export function speak({
           date,
           mkssml(
             text,
-            voice ?? languageToDefaultVoice[lang ?? "en-US"]!,
+            voice ?? languageToDefaultVoice[lang] ?? "",
             rate,
             volume,
           ),
@@ -397,7 +397,7 @@ export function speak({
             audioBufferSource.start();
             audioBufferSource.onended = () => {
               onFinish?.();
-              audioContext.close();
+              void audioContext.close();
             };
             break;
           }

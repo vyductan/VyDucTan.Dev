@@ -1,4 +1,4 @@
-import { PageContainer } from "@acme/ui-pro";
+import { PageContainer } from "@acme/ui/pro";
 
 import { WordTable } from "./components/WordTable";
 

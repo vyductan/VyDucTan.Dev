@@ -5,11 +5,11 @@ import { useParams } from "next/navigation";
 
 import type { RouterOutputs } from "@acme/api";
 import type { TableColumnDef } from "@acme/ui/table";
-import { PageContainer } from "@acme/ui-pro";
 import { AlertModal } from "@acme/ui/alert-modal";
 import { Button } from "@acme/ui/button";
 import { DeleteIcon, EditIcon } from "@acme/ui/icons";
 import { Search } from "@acme/ui/input";
+import { PageContainer } from "@acme/ui/pro/page-container";
 import { Table } from "@acme/ui/table";
 import { message } from "@acme/ui/toast";
 

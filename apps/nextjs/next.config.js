@@ -16,7 +16,7 @@ const config = {
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
   /** Enables hot reloading for local packages without a build step */
-  transpilePackages: ["@acme/api", "@acme/ui", "@acme/ui-pro"],
+  transpilePackages: ["@acme/api", "@acme/ui"],
   // rewrites: async () => {
   //   return [
   //     {

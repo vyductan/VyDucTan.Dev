@@ -1,8 +1,8 @@
 import type { SVGProps } from "react";
 import React from "react";
 
-import { signIn } from "@vyductan/api/auth";
-import { Button } from "@vyductan/ui/button";
+import { signIn } from "@acme/api/auth";
+import { Button } from "@acme/ui/button";
 
 export default async function LoginPage({
   searchParams: { callbackUrl },

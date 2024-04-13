@@ -1,7 +1,7 @@
 import type { VariantProps } from "class-variance-authority";
 import { cva } from "class-variance-authority";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 import "./style.css";
 

@@ -3,10 +3,10 @@
 import Link from "next/link";
 import axios from "axios";
 
-import { db } from "@vyductan/api/db";
-import { Button } from "@vyductan/ui/button";
-import { DeleteIcon, EditIcon } from "@vyductan/ui/icons";
-import { Table } from "@vyductan/ui/table";
+import { db } from "@acme/api/db";
+import { Button } from "@acme/ui/button";
+import { DeleteIcon, EditIcon } from "@acme/ui/icons";
+import { Table } from "@acme/ui/table";
 
 import { api } from "~/trpc/react";
 

@@ -1,4 +1,4 @@
-import { useResponsive } from "@vyductan/hooks";
+import { useResponsive } from "@acme/hooks";
 
 import type { Screens } from "../theme";
 import { clsm } from "..";

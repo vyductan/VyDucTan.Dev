@@ -3,7 +3,7 @@
 import * as React from "react";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 import { CircleFilled } from "../icons";
 import { Label } from "../label";

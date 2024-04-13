@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 
 import { upload } from "~/lib/upload";
 
-const Editor = dynamic(() => import("@vyductan/ui/editor"), { ssr: false });
+const Editor = dynamic(() => import("@acme/ui/editor"), { ssr: false });
 
 export default function ProjectDetailPage() {
   return (

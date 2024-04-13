@@ -1,6 +1,6 @@
 import * as ResizablePrimitive from "react-resizable-panels";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 export type ResizablePanelGroupProps = React.ComponentProps<
   typeof ResizablePrimitive.PanelGroup

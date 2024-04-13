@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@vyductan/hooks",
+  "name": "@acme/hooks",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -10,17 +10,17 @@
   "scripts": {
     "clean": "rm -rf .turbo node_modules"
   },
-  "prettier": "@vyductan/prettier-config",
+  "prettier": "@acme/prettier-config",
   "eslintConfig": {
     "extends": [
-      "@vyductan/eslint-config/base",
-      "@vyductan/eslint-config/react",
-      "@vyductan/eslint-config/tailwind"
+      "@acme/eslint-config/base",
+      "@acme/eslint-config/react",
+      "@acme/eslint-config/tailwind"
     ],
     "root": true
   },
   "devDependencies": {
-    "@vyductan/eslint-config": "*",
-    "@vyductan/typescript-config": "*"
+    "@acme/eslint-config": "*",
+    "@acme/typescript-config": "*"
   }
 }

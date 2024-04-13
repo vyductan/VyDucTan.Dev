@@ -12,7 +12,7 @@ import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { HeadingNode } from "@lexical/rich-text";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 import type { EditorContextValue } from "./context";
 import { EditorContextProvider } from "./context";

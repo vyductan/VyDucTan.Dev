@@ -2,7 +2,7 @@ import * as React from "react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { cva } from "class-variance-authority";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 import { Icon } from "../icons";
 

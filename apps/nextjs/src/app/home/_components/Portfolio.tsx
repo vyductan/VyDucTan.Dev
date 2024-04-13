@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { Icon } from "@vyductan/ui/icons";
+import { Icon } from "@acme/ui/icons";
 
 import type { ResumeData } from "../resumeData";
 

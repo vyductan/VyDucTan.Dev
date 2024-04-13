@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 type ScrollBarProps = React.ComponentPropsWithoutRef<
   typeof ScrollAreaPrimitive.ScrollAreaScrollbar

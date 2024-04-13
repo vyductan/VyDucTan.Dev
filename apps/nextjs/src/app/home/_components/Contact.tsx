@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 
-import { sendMailAction } from "@vyductan/api/contact";
-import { sendMailSchema } from "@vyductan/api/types";
-import { Button } from "@vyductan/ui/button";
-import { AutoForm, useForm } from "@vyductan/ui/form";
-import { MailOutlined } from "@vyductan/ui/icons";
-import { message } from "@vyductan/ui/toast";
+import { sendMailAction } from "@acme/api/contact";
+import { sendMailSchema } from "@acme/api/types";
+import { Button } from "@acme/ui/button";
+import { AutoForm, useForm } from "@acmeform";
+import { MailOutlined } from "@acmeicons";
+import { message } from "@acme/ui/toast";
 
 import type { ResumeData } from "../resumeData";
 

@@ -3,7 +3,7 @@
 import * as React from "react";
 import { DayPicker } from "react-day-picker";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 import { buttonVariants } from "../button";
 import { Icon } from "../icons";

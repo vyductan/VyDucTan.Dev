@@ -4,7 +4,7 @@ import type { DialogProps } from "@radix-ui/react-dialog";
 import * as React from "react";
 import { Command as CommandPrimitive, useCommandState } from "cmdk";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 import { Icon } from "../icons";
 import { Dialog, DialogContent } from "../modal/components";

@@ -1,7 +1,7 @@
 import { z } from "zod";
 
+import { desc, eq, schema } from "../_db";
 import { paginationSchema, searchSchema, withPagination } from "../_util/query";
-import { desc, eq, schema } from "../db";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { insertProjectSchema } from "./types";
 

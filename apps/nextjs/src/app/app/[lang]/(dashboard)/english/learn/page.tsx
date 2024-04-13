@@ -3,12 +3,12 @@
 import { Fragment, useEffect, useState } from "react";
 import _ from "lodash";
 
-import type { WordMastery } from "@vyductan/api/types";
-import { PageContainer } from "@vyductan/ui-pro";
-import { Button } from "@vyductan/ui/button";
-import { AutoForm, useForm } from "@vyductan/ui/form";
-import { Spin } from "@vyductan/ui/spin";
-import { message } from "@vyductan/ui/toast";
+import type { WordMastery } from "@acme/api/types";
+import { PageContainer } from "@acme/ui-pro";
+import { Button } from "@acme/ui/button";
+import { AutoForm, useForm } from "@acme/ui/form";
+import { Spin } from "@acme/ui/spin";
+import { message } from "@acme/ui/toast";
 
 import { api } from "~/trpc/react";
 

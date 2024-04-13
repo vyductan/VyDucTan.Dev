@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 
-import type { RouterOutputs } from "@vyductan/api";
-import type { TableColumnDef } from "@vyductan/ui/table";
-import { SpeakerIcon } from "@vyductan/tts";
-import { AlertModal } from "@vyductan/ui/alert-modal";
-import { Button } from "@vyductan/ui/button";
-import { Table } from "@vyductan/ui/table";
-import { message } from "@vyductan/ui/toast";
+import type { RouterOutputs } from "@acme/api";
+import type { TableColumnDef } from "@acme/ui/table";
+import { SpeakerIcon } from "@acme/tts";
+import { AlertModal } from "@acme/ui/alert-modal";
+import { Button } from "@acme/ui/button";
+import { Table } from "@acme/ui/table";
+import { message } from "@acme/ui/toast";
 
 import { api } from "~/trpc/react";
 import { WordModalForm } from "./WordModalForm";

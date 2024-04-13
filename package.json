@@ -17,19 +17,19 @@
     "lint:ws": "pnpm dlx sherif@latest",
     "typecheck": "turbo typecheck"
   },
-  "prettier": "@vyductan/prettier-config",
+  "prettier": "@acme/prettier-config",
   "eslintConfig": {
     "extends": [
-      "@vyductan/eslint-config/base",
-      "@vyductan/eslint-config/react",
-      "@vyductan/eslint-config/nextjs",
-      "@vyductan/eslint-config/tailwind"
+      "@acme/eslint-config/base",
+      "@acme/eslint-config/react",
+      "@acme/eslint-config/nextjs",
+      "@acme/eslint-config/tailwind"
     ],
     "root": true
   },
   "devDependencies": {
     "@turbo/gen": "^1.12.4",
-    "@vyductan/prettier-config": "workspace:^",
+    "@acme/prettier-config": "workspace:^",
     "node-gyp-build": "4.8.0",
     "prettier": "^3.2.5",
     "turbo": "^1.12.4",
@@ -37,6 +37,6 @@
   },
   "packageManager": "pnpm@8.15.4",
   "engines": {
-    "node": ">=v20.11"
+    "node": ">=v20.12.0"
   }
 }

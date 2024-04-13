@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 export const TableHeader = forwardRef<
   HTMLTableSectionElement,

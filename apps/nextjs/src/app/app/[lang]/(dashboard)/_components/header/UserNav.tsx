@@ -1,10 +1,10 @@
 // "use client";
 
-import type { Session } from "@vyductan/api/auth";
-import { signOut } from "@vyductan/api/auth";
-import { Avatar } from "@vyductan/ui/avatar";
-import { Button } from "@vyductan/ui/button";
-import { Dropdown } from "@vyductan/ui/dropdown";
+import type { Session } from "@acme/api/auth";
+import { signOut } from "@acme/api/auth";
+import { Avatar } from "@acme/ui/avatar";
+import { Button } from "@acme/ui/button";
+import { Dropdown } from "@acme/ui/dropdown";
 
 type UserNavProps = {
   user: Session["user"];

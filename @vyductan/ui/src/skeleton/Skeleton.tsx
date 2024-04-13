@@ -1,4 +1,4 @@
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 function Skeleton({
   className,

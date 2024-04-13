@@ -1,7 +1,7 @@
 import * as React from "react";
 import Link from "next/link";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 import type { ButtonProps } from "../button";
 import { buttonVariants } from "../button";

@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 
-import type { ProjectResponse } from "@vyductan/api/types";
-import { PageContainer } from "@vyductan/ui-pro";
-import { Button } from "@vyductan/ui/button";
+import type { ProjectResponse } from "@acme/api/types";
+import { PageContainer } from "@acme/ui-pro";
+import { Button } from "@acme/ui/button";
 
 import { api } from "~/trpc/react";
 import ProjectModalForm from "./components/ProjectsForm";

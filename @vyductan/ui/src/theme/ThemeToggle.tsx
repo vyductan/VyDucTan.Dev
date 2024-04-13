@@ -3,8 +3,8 @@
 import * as React from "react";
 import { useTheme } from "next-themes";
 
-import { Button } from "@vyductan/ui/button";
-import { Dropdown } from "@vyductan/ui/dropdown";
+import { Button } from "@acme/ui/button";
+import { Dropdown } from "@acme/ui/dropdown";
 
 import { Icon } from "../icons";
 

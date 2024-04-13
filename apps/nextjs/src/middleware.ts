@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createI18nMiddleware } from "next-international/middleware";
 
-import { auth } from "@vyductan/api/auth";
+import { auth } from "@acme/api/auth";
 
 const I18nMiddleware = createI18nMiddleware({
   locales: ["en", "vi"],
@@ -89,3 +89,13 @@ export const config = {
    */
   matcher: ["/((?!api/|_next/|_static/|_vercel/|[\\w-]+\\.\\w+).*)"],
 };
+
+// // Or like this if you need to do something here.
+// // export default auth((req) => {
+// //   console.log(req.auth) //  { session: { user: { ... } } }
+// // })
+//
+// // Read more: https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
+// export const config = {
+//   matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+// };

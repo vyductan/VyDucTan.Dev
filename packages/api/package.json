@@ -41,7 +41,6 @@
     "@vercel/postgres": "^0.8.0",
     "drizzle-orm": "^0.30.8",
     "drizzle-zod": "^0.5.1",
-    "google-auth-library": "^9.4.2",
     "nanoid": "^5.0.7",
     "next-auth": "^5.0.0-beta.15",
     "superjson": "2.2.1",

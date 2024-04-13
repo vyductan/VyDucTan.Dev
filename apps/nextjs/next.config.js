@@ -1,12 +1,9 @@
 import { fileURLToPath } from "url";
 import bundleAnalyzer from "@next/bundle-analyzer";
-import _jiti from "jiti";
-
-const jiti = _jiti(fileURLToPath(import.meta.url));
+import createJiti from "jiti";
 
 // Import env files to validate at build time. Use jiti so we can load .ts files in here.
-jiti("./src/env");
-jiti("@vyductan/api/env");
+createJiti(fileURLToPath(import.meta.url))("./src/env");
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
@@ -19,7 +16,7 @@ const config = {
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
   /** Enables hot reloading for local packages without a build step */
-  transpilePackages: ["@vyductan/api", "@vyductan/ui", "@vyductan/ui-pro"],
+  transpilePackages: ["@acme/api", "@acme/ui", "@acme/ui-pro"],
   // rewrites: async () => {
   //   return [
   //     {
@@ -31,7 +28,7 @@ const config = {
   // },
   experimental: {
     // TODO: add necessary packages
-    optimizePackageImports: ["@vyductan/ui"],
+    optimizePackageImports: ["@acme/ui"],
   },
   images: {
     // domains: ["public.blob.vercel-storage.com", "fsiigeunka7hxdh7.public.blob.vercel-storage.com"],
@@ -57,7 +54,7 @@ const config = {
   // webpack: (config) => {
   //   config.module.rules.push({
   //     test: /index\.(js|mjs|jsx|ts|tsx)$/,
-  //     include: (mPath) => mPath.includes("@vyductan/react/components"),
+  //     include: (mPath) => mPath.includes("@acme/react/components"),
   //     sideEffects: false,
   //   });
   //   return config;

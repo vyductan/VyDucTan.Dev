@@ -2,9 +2,9 @@ import type { Message } from "ai";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 
-import { clsm } from "@vyductan/ui";
-import { CodeBlock } from "@vyductan/ui/code-block";
-import { MemoizedReactMarkdown } from "@vyductan/ui/markdown";
+import { clsm } from "@acme/ui";
+import { CodeBlock } from "@acme/ui/code-block";
+import { MemoizedReactMarkdown } from "@acme/ui/markdown";
 
 type ChatMessageProps = {
   message: Message;

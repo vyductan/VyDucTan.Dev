@@ -1,12 +1,13 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@vyductan/ui",
+  "name": "@acme/ui",
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
+    "./antd/*": "./src/antd/*/index.ts",
     "./types": "./src/types.ts",
     "./alert": "./src/alert/index.ts",
     "./alert-modal": "./src/alert-modal/index.ts",
@@ -56,17 +57,9 @@
     "clean": "rm -rf .turbo node_modules",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
-  "prettier": "@vyductan/prettier-config",
-  "eslintConfig": {
-    "extends": [
-      "@vyductan/eslint-config/base",
-      "@vyductan/eslint-config/react",
-      "@vyductan/eslint-config/tailwind"
-    ],
-    "root": true
-  },
+  "prettier": "@acme/prettier-config",
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
     "@lexical/react": "^0.13.1",
@@ -88,8 +81,8 @@
     "@radix-ui/react-tabs": "^1.0.4",
     "@radix-ui/react-tooltip": "^1.0.7",
     "@tanstack/react-table": "^8.13.0",
-    "@vyductan/hooks": "*",
-    "@vyductan/utils": "*",
+    "@acme/hooks": "*",
+    "@acme/utils": "*",
     "ahooks": "^3.7.10",
     "class-variance-authority": "^0.7.0",
     "cmdk": "^0.2.0",
@@ -108,12 +101,12 @@
     "zustand": "^4.5.1"
   },
   "devDependencies": {
+    "@acme/eslint-config": "*",
+    "@acme/tailwind-config": "*",
+    "@acme/typescript-config": "*",
     "@iconify/react": "^4.1.1",
     "@types/react-dom": "^18.2.19",
-    "@types/react-syntax-highlighter": "^15.5.11",
-    "@vyductan/eslint-config": "*",
-    "@vyductan/tailwind-config": "*",
-    "@vyductan/typescript-config": "*"
+    "@types/react-syntax-highlighter": "^15.5.11"
   },
   "peerDependencies": {
     "react": "18.2.0",

@@ -1,7 +1,7 @@
-import { AlertModal } from "@vyductan/ui/alert-modal";
-import { Button } from "@vyductan/ui/button";
-import { DeleteIcon } from "@vyductan/ui/icons";
-import { message } from "@vyductan/ui/toast";
+import { AlertModal } from "@acme/ui/alert-modal";
+import { Button } from "@acme/ui/button";
+import { DeleteIcon } from "@acme/ui/icons";
+import { message } from "@acme/ui/toast";
 
 import { api } from "~/trpc/react";
 

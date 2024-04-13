@@ -1,6 +1,6 @@
 import type { HTMLAttributes, ReactNode } from "react";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 import { WarningFilled } from "../icons";
 

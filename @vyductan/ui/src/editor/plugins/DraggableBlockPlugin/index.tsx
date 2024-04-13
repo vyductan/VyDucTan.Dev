@@ -16,7 +16,7 @@ import {
 } from "lexical";
 import { createPortal } from "react-dom";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 import { Icon } from "../../../icons";
 import { isHTMLElement } from "../../utils/guard";

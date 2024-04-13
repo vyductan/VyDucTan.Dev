@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@acme/antd",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./types": "./src/types.ts",
+    "./alert": "./src/alert/index.ts",
+    "./alert-modal": "./src/alert-modal/index.ts",
+    "./autocomplete": "./src/autocomplete/index.ts",
+    "./avatar": "./src/avatar/index.ts",
+    "./badge": "./src/badge/index.ts",
+    "./button": "./src/button/index.ts",
+    "./calendar": "./src/calendar/index.ts",
+    "./card": "./src/card/index.ts",
+    "./code-block": "./src/code-block/index.ts",
+    "./config-provider": "./src/config-provider/index.ts",
+    "./command": "./src/command/index.ts",
+    "./date-picker": "./src/date-picker/index.ts",
+    "./divider": "./src/divider/index.ts",
+    "./drawer": "./src/drawer/index.ts",
+    "./dropdown": "./src/dropdown/index.ts",
+    "./editor": "./src/editor/index.tsx",
+    "./float-button": "./src/float-button/index.ts",
+    "./form": "./src/form/index.ts",
+    "./icons": "./src/icons/index.ts",
+    "./input": "./src/input/index.ts",
+    "./label": "./src/label/index.ts",
+    "./link": "./src/link/index.ts",
+    "./list": "./src/list/index.ts",
+    "./markdown": "./src/markdown/index.ts",
+    "./menu": "./src/menu/index.ts",
+    "./modal": "./src/modal/index.ts",
+    "./nav-menu": "./src/nav-menu/index.ts",
+    "./pagination": "./src/pagination/index.ts",
+    "./popover": "./src/popover/index.ts",
+    "./radio": "./src/radio/index.ts",
+    "./resizable": "./src/resizable/index.ts",
+    "./scroll-area": "./src/scroll-area/index.ts",
+    "./select": "./src/select/index.ts",
+    "./skeleton": "./src/skeleton/index.ts",
+    "./spin": "./src/spin/index.ts",
+    "./switch": "./src/switch/index.ts",
+    "./table": "./src/table/index.ts",
+    "./tabs": "./src/tabs/index.ts",
+    "./tag": "./src/tag/index.ts",
+    "./textarea": "./src/textarea/index.ts",
+    "./theme": "./src/theme/index.ts",
+    "./toast": "./src/toast/index.ts",
+    "./tooltip": "./src/tooltip/index.ts"
+  },
+  "scripts": {
+    "add": "pnpm dlx shadcn-ui add",
+    "clean": "rm -rf .turbo node_modules",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+  },
+  "prettier": "@acme/prettier-config",
+  "eslintConfig": {
+    "extends": [
+      "@acme/eslint-config/base",
+      "@acme/eslint-config/react",
+      "@acme/eslint-config/tailwind"
+    ],
+    "root": true
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
+    "antd": "^5.15.4",
+    "class-variance-authority": "^0.7.0",
+    "date-fns": "^3.3.1",
+    "react-hook-form": "^7.49.3",
+    "tailwind-merge": "^2.2.1",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@acme/eslint-config": "*",
+    "@acme/tailwind-config": "*",
+    "@acme/typescript-config": "*",
+    "@types/react-dom": "^18.2.19"
+  },
+  "peerDependencies": {
+    "react": "18.2.0",
+    "zod": "^3.22.4"
+  }
+}

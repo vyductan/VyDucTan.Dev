@@ -1,7 +1,7 @@
 import type { HTMLAttributes, ReactElement } from "react";
 import { cloneElement } from "react";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 export type IconWrapperProps = Omit<
   HTMLAttributes<SVGSVGElement>,

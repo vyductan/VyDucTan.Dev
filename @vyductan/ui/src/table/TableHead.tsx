@@ -1,6 +1,6 @@
 import React from "react";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 export const TableHead = React.forwardRef<
   HTMLTableCellElement,

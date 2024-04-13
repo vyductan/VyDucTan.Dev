@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import { generate } from "@ant-design/colors";
 
-import { CodeBlock } from "@vyductan/ui/code-block";
-import { Input } from "@vyductan/ui/input";
-import { ExternalLink } from "@vyductan/ui/link";
-import { hexToHsl } from "@vyductan/utils";
+import { CodeBlock } from "@acme/ui/code-block";
+import { Input } from "@acme/ui/input";
+import { ExternalLink } from "@acme/ui/link";
+import { hexToHsl } from "@acme/utils";
 
 export default function ThemePage() {
   const [input, setInput] = useState<{

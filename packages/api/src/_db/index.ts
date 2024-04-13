@@ -2,14 +2,14 @@
 import { sql } from "@vercel/postgres";
 import { drizzle } from "drizzle-orm/vercel-postgres";
 
-import * as auth from "./auth/schema";
-import * as english from "./english/schema";
-import * as projects from "./projects/schema";
-import * as tasks from "./tasks/schema";
+import * as auth from "../auth/schema";
+import * as english from "../english/schema";
+import * as projects from "../projects/schema";
+import * as tasks from "../tasks/schema";
 
 export const schema = { ...auth, ...english, ...projects, ...tasks };
 
-export * from "drizzle-orm";
+export * from "drizzle-orm/expressions";
 
 // connect to vercel postgres
 export const db = drizzle(sql, { schema });

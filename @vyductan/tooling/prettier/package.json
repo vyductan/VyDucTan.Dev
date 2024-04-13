@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@vyductan/prettier-config",
+  "name": "@acme/prettier-config",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -12,7 +12,7 @@
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "typecheck": "tsc --noEmit"
   },
-  "prettier": "@vyductan/prettier-config",
+  "prettier": "@acme/prettier-config",
   "dependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
     "prettier": "^3.2.4",
@@ -20,7 +20,7 @@
     "prettier-plugin-tailwindcss": "^0.5.11"
   },
   "devDependencies": {
-    "@vyductan/typescript-config": "*",
+    "@acme/typescript-config": "workspace:*",
     "typescript": "^5.3.3"
   }
 }

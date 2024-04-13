@@ -1,7 +1,7 @@
 packages:
   - apps/*
   - packages/*
-  - "@vyductan/*"
-  - "@vyductan/tooling/*"
-  - "!@vyductan/tooling"
-  - "!@vyductan/.git"
+  - "@acme/*"
+  - "@acme/tooling/*"
+  - "!@acme/tooling"
+  - "!@acme/.git"

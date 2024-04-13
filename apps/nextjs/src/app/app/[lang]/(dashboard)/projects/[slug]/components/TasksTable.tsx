@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 
-import type { Task } from "@vyductan/api/tasks/types";
-import type { TableColumnDef } from "@vyductan/ui/table";
-import { Button } from "@vyductan/ui/button";
-import { EditIcon } from "@vyductan/ui/icons";
-import { Table } from "@vyductan/ui/table";
+import type { Task } from "@acme/api/tasks/types";
+import type { TableColumnDef } from "@acme/ui/table";
+import { Button } from "@acme/ui/button";
+import { EditIcon } from "@acme/ui/icons";
+import { Table } from "@acme/ui/table";
 
 import { api } from "~/trpc/react";
 import { DeleteTask } from "./DeleteTask";

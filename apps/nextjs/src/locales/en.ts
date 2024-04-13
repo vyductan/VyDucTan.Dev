@@ -1,4 +1,4 @@
-import { tableLocale_en } from "@vyductan/ui/table";
+import { tableLocale_en } from "@acme/ui/table";
 
 export default {
   hello: {

@@ -1,11 +1,12 @@
+import type { TRPCRouterRecord } from "@trpc/server";
 import { subDays } from "date-fns";
 import { z } from "zod";
 
-import { eq, schema } from "../db";
-import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { eq, schema } from "../_db/dbb/db";
+import { protectedProcedure } from "../trpc";
 import { insertWordDefinitionSchema } from "./types";
 
-export const englishRouter = createTRPCRouter({
+export const englishRouter = {
   all: protectedProcedure.query(({ ctx }) => {
     return ctx.db.query.wordDefinitions.findMany({
       orderBy: schema.wordDefinitions.word,
@@ -82,4 +83,4 @@ export const englishRouter = createTRPCRouter({
         })
         .where(eq(schema.wordDefinitions.id, input.id));
     }),
-});
+} satisfies TRPCRouterRecord;

@@ -4,13 +4,13 @@ import type {
   WordCEFRLevel,
   WordClass,
   WordMastery,
-} from "@vyductan/api/types";
-import type { RadioOption } from "@vyductan/ui/radio";
-import { insertWordDefinitionSchema } from "@vyductan/api/types";
-import { AutoForm, useForm } from "@vyductan/ui/form";
-import { Modal } from "@vyductan/ui/modal";
-import { Spin } from "@vyductan/ui/spin";
-import { message } from "@vyductan/ui/toast";
+} from "@acme/api/types";
+import type { RadioOption } from "@acme/ui/radio";
+import { insertWordDefinitionSchema } from "@acme/api/types";
+import { AutoForm, useForm } from "@acme/ui/form";
+import { Modal } from "@acme/ui/modal";
+import { Spin } from "@acme/ui/spin";
+import { message } from "@acme/ui/toast";
 
 import { api } from "~/trpc/react";
 

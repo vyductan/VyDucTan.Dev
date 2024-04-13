@@ -3,7 +3,7 @@
 import type { Control, FieldValues, Path, PathValue } from "react-hook-form";
 import React from "react";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 import type { FormProps } from "./Form";
 import type { FieldsSchema, FieldType, InputUnion } from "./types";

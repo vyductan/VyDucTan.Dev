@@ -1,12 +1,12 @@
 import type { z } from "zod";
 import { useEffect } from "react";
 
-import type { SubmitHandler } from "@vyductan/ui/form";
-import type { ModalProps } from "@vyductan/ui/modal";
-import { insertTaskSchema } from "@vyductan/api/types";
-import { AutoForm, useForm } from "@vyductan/ui/form";
-import { Modal } from "@vyductan/ui/modal";
-import { Spin } from "@vyductan/ui/spin";
+import type { SubmitHandler } from "@acme/ui/form";
+import type { ModalProps } from "@acme/ui/modal";
+import { insertTaskSchema } from "@acme/api/types";
+import { AutoForm, useForm } from "@acme/ui/form";
+import { Modal } from "@acme/ui/modal";
+import { Spin } from "@acme/ui/spin";
 
 import { upload } from "~/lib/upload";
 import { api } from "~/trpc/react";

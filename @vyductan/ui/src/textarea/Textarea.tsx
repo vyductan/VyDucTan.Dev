@@ -4,7 +4,7 @@ import * as React from "react";
 import { cva } from "class-variance-authority";
 import TextareaAutosize from "react-textarea-autosize";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 import { inputStatusVariants } from "../input";
 

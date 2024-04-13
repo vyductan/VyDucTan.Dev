@@ -3,7 +3,7 @@
 import * as React from "react";
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 import type { ButtonProps } from "../button";
 import { Button, buttonVariants } from "../button";

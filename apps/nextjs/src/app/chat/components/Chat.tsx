@@ -5,13 +5,13 @@ import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { useChat } from "ai/react";
 
-import { useLocalStorage } from "@vyductan/hooks";
-import { clsm } from "@vyductan/ui";
-import { Button } from "@vyductan/ui/button";
-import { Icon } from "@vyductan/ui/icons";
-import { Input } from "@vyductan/ui/input";
-import { Modal } from "@vyductan/ui/modal";
-import { message } from "@vyductan/ui/toast";
+import { useLocalStorage } from "@acme/hooks";
+import { clsm } from "@acme/ui";
+import { Button } from "@acme/ui/button";
+import { Icon } from "@acme/ui/icons";
+import { Input } from "@acme/ui/input";
+import { Modal } from "@acme/ui/modal";
+import { message } from "@acme/ui/toast";
 
 import { ChatList } from "./ChatList";
 import { ChatPanel } from "./ChatPanel";

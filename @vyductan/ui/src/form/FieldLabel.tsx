@@ -1,7 +1,7 @@
 import type * as LabelPrimitive from "@radix-ui/react-label";
 import * as React from "react";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 import { Label } from "../label";
 import { useField } from "./useField";

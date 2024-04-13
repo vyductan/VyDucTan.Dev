@@ -3,15 +3,15 @@
 import { Suspense, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
-import type { RouterOutputs } from "@vyductan/api";
-import type { TableColumnDef } from "@vyductan/ui/table";
-import { PageContainer } from "@vyductan/ui-pro";
-import { AlertModal } from "@vyductan/ui/alert-modal";
-import { Button } from "@vyductan/ui/button";
-import { DeleteIcon, EditIcon } from "@vyductan/ui/icons";
-import { Search } from "@vyductan/ui/input";
-import { Table } from "@vyductan/ui/table";
-import { message } from "@vyductan/ui/toast";
+import type { RouterOutputs } from "@acme/api";
+import type { TableColumnDef } from "@acme/ui/table";
+import { PageContainer } from "@acme/ui-pro";
+import { AlertModal } from "@acme/ui/alert-modal";
+import { Button } from "@acme/ui/button";
+import { DeleteIcon, EditIcon } from "@acme/ui/icons";
+import { Search } from "@acme/ui/input";
+import { Table } from "@acme/ui/table";
+import { message } from "@acme/ui/toast";
 
 import { api } from "~/trpc/react";
 import { TasksModalForm } from "./components/TasksModalForm";

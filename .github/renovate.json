@@ -3,7 +3,7 @@
   "extends": ["config:base"],
   "packageRules": [
     {
-      "matchPackagePatterns": ["^@vyductan/"],
+      "matchPackagePatterns": ["^@acme/"],
       "enabled": false
     }
   ],

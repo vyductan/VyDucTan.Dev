@@ -10,7 +10,7 @@ import { SpeakerMotion } from "./SpeakerMotion";
 
 import "./index.css";
 
-import { Icon } from "@vyductan/ui/icons";
+import { Icon } from "@acme/ui/icons";
 
 interface ISpeakerIconProps {
   divRef?: React.Ref<HTMLDivElement>;

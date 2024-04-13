@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 import type { InsertImagePayload } from "./types";
 import { message } from "../../../toast";

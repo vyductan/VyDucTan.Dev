@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@vyductan/ui-pro",
+  "name": "@acme/ui-pro",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -13,22 +13,22 @@
     "format": "prettier --check \"**/*.{mjs,ts,md,json}\"",
     "typecheck": "tsc --noEmit"
   },
-  "prettier": "@vyductan/prettier-config",
+  "prettier": "@acme/prettier-config",
   "eslintConfig": {
     "extends": [
-      "@vyductan/eslint-config/base"
+      "@acme/eslint-config/base"
     ],
     "root": true
   },
   "dependencies": {
-    "@vyductan/hooks": "workspace:*",
-    "@vyductan/ui": "workspace*",
-    "@vyductan/utils": "workspace*"
+    "@acme/hooks": "workspace:*",
+    "@acme/ui": "workspace*",
+    "@acme/utils": "workspace*"
   },
   "devDependencies": {
-    "@vyductan/eslint-config": "workspace*",
-    "@vyductan/tailwind-config": "workspace*",
-    "@vyductan/typescript-config": "workspace*"
+    "@acme/eslint-config": "workspace*",
+    "@acme/tailwind-config": "workspace*",
+    "@acme/typescript-config": "workspace*"
   },
   "peerDependencies": {
     "react": "18.2.0"

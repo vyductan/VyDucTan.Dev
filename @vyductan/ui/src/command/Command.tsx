@@ -1,4 +1,4 @@
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 import type { ValueType } from "../form";
 import type { Option } from "../select/types";

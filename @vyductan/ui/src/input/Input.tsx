@@ -4,7 +4,7 @@ import { useHover } from "ahooks";
 import { cva } from "class-variance-authority";
 import { useMergedState } from "rc-util";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 import { triggerNativeEventFor } from "../_util/event";
 import { Icon } from "../icons";

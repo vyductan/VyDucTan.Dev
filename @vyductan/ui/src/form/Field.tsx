@@ -13,7 +13,7 @@ import { cloneElement, useId } from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { Controller, useFormContext } from "react-hook-form";
 
-import { clsm } from "@vyductan/ui";
+import { clsm } from "@acme/ui";
 
 import { FormFieldContext } from "./context";
 import { FieldDescription } from "./FieldDescription";

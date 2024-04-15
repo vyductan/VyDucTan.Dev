@@ -13,9 +13,9 @@ import { SpeakerIcon } from "~/libs/tts";
 import { api } from "~/trpc/react";
 import { WordModalForm } from "./WordModalForm";
 
-type Record = RouterOutputs["english"]["all"][number];
+type Record = RouterOutputs["words"]["all"][number];
 export const WordTable = () => {
-  const { data: words } = api.english.all.useQuery(undefined, {
+  const { data: words } = api.words.all.useQuery(undefined, {
     initialData: [],
   });
   const [currentRow, setCurrentRow] = useState<Record>();
@@ -23,12 +23,12 @@ export const WordTable = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const utils = api.useUtils();
-  const deleteWord = api.english.delete.useMutation({
+  const deleteWord = api.words.delete.useMutation({
     onSuccess: async () => {
       message.success("Deleted");
       setCurrentRow(undefined);
       setIsDeleteModalOpen(false);
-      await utils.english.all.invalidate();
+      await utils.words.all.invalidate();
     },
     onError: (error) => {
       message.error(error.message);

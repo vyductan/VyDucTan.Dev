@@ -2,6 +2,8 @@ import type { Config } from "drizzle-kit";
 import { createEnv } from "@t3-oss/env-core";
 import * as z from "zod";
 
+import { DB_PREFIX } from "./schema/_table";
+
 const env = createEnv({
   server: {
     // DB_HOST: z.string(),
@@ -28,9 +30,11 @@ const env = createEnv({
 // } satisfies Config;
 
 export default {
-  schema: "./src/**/schema.ts",
+  // schema: "./src/**/schema.ts",
+  schema: "./src/schema",
   driver: "pg",
   dbCredentials: {
     connectionString: env.POSTGRES_URL,
   },
+  tablesFilter: [DB_PREFIX + "*"],
 } satisfies Config;

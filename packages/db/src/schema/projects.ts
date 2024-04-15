@@ -1,7 +1,8 @@
 import { relations } from "drizzle-orm";
-import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { text, timestamp } from "drizzle-orm/pg-core";
 import { nanoid } from "nanoid";
 
+import { pgTable } from "./_table";
 import { tasks } from "./tasks";
 
 export const projects = pgTable("project", {

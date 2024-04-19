@@ -1,7 +1,8 @@
 import { relations } from "drizzle-orm";
-import { json, pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { json, pgEnum, text, timestamp } from "drizzle-orm/pg-core";
 import { nanoid } from "nanoid";
 
+import { pgTable } from "./_table";
 import { projects } from "./projects";
 
 export const todoStatusEnum = pgEnum("todo_status", [

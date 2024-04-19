@@ -17,7 +17,7 @@
     "dev": "tsc --watch",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
-    "push": "pnpm with-env drizzle-kit push:mysql --config src/config.ts",
+    "push": "pnpm with-env drizzle-kit push:pg --config src/config.ts",
     "studio": "pnpm with-env drizzle-kit studio --config src/config.ts",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
     "with-env": "dotenv -e ../../.env --"
@@ -36,6 +36,7 @@
     "dotenv-cli": "^7.4.1",
     "drizzle-kit": "^0.20.14",
     "eslint": "^9.0.0",
+    "pg": "^8.11.5",
     "prettier": "^3.2.5",
     "typescript": "^5.4.5"
   }

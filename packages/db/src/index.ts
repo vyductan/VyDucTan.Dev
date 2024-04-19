@@ -2,11 +2,11 @@ import { sql } from "@vercel/postgres";
 import { drizzle } from "drizzle-orm/vercel-postgres";
 
 import * as auth from "./schema/auth";
-import * as english from "./schema/english";
 import * as projects from "./schema/projects";
 import * as tasks from "./schema/tasks";
+import * as word from "./schema/word";
 
-export const schema = { ...auth, ...english, ...projects, ...tasks };
+export const schema = { ...auth, ...projects, ...tasks, ...word };
 
 export { pgTable as tableCreator } from "./schema/_table";
 

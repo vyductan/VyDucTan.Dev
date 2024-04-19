@@ -5,25 +5,25 @@ import { z } from "zod";
 import { eq, schema } from "@acme/db";
 
 import { protectedProcedure } from "../trpc";
-import { insertWordDefinitionSchema } from "./types";
+import { insertWordSchema } from "./types";
 
-export const englishRouter = {
+export const wordsRouter = {
   all: protectedProcedure.query(({ ctx }) => {
-    return ctx.db.query.wordDefinitions.findMany({
-      orderBy: schema.wordDefinitions.word,
+    return ctx.db.query.words.findMany({
+      orderBy: schema.words.word,
       limit: 10,
     });
   }),
 
   create: protectedProcedure
-    .input(insertWordDefinitionSchema)
+    .input(insertWordSchema)
     .mutation(({ ctx, input }) => {
-      return ctx.db.insert(schema.wordDefinitions).values(input);
+      return ctx.db.insert(schema.words).values(input);
     }),
 
   update: protectedProcedure
     .input(
-      insertWordDefinitionSchema.partial().merge(
+      insertWordSchema.partial().merge(
         z.object({
           id: z.string(),
         }),
@@ -31,27 +31,25 @@ export const englishRouter = {
     )
     .mutation(({ ctx, input }) => {
       return ctx.db
-        .update(schema.wordDefinitions)
+        .update(schema.words)
         .set(input)
-        .where(eq(schema.wordDefinitions.id, input.id));
+        .where(eq(schema.words.id, input.id));
     }),
 
   byId: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(({ ctx, input }) => {
-      return ctx.db.query.wordDefinitions.findFirst({
+      return ctx.db.query.words.findFirst({
         where: (table, { eq }) => eq(table.id, input.id),
       });
     }),
 
   delete: protectedProcedure.input(z.string()).mutation(({ ctx, input }) => {
-    return ctx.db
-      .delete(schema.wordDefinitions)
-      .where(eq(schema.wordDefinitions.id, input));
+    return ctx.db.delete(schema.words).where(eq(schema.words.id, input));
   }),
 
   getWordToLearn: protectedProcedure.query(({ ctx }) => {
-    return ctx.db.query.wordDefinitions.findFirst({
+    return ctx.db.query.words.findFirst({
       where: (t, { and, lt, ne, or, isNull }) =>
         and(
           ne(t.mastery, "5"),
@@ -64,7 +62,7 @@ export const englishRouter = {
   }),
   mastery: protectedProcedure
     .input(
-      insertWordDefinitionSchema
+      insertWordSchema
         .pick({
           mastery: true,
         })
@@ -77,11 +75,11 @@ export const englishRouter = {
     )
     .mutation(({ ctx, input }) => {
       return ctx.db
-        .update(schema.wordDefinitions)
+        .update(schema.words)
         .set({
           ...input,
           lastLearnedAt: new Date(),
         })
-        .where(eq(schema.wordDefinitions.id, input.id));
+        .where(eq(schema.words.id, input.id));
     }),
 } satisfies TRPCRouterRecord;

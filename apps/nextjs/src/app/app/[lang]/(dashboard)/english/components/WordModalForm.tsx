@@ -1,14 +1,14 @@
 import { useEffect } from "react";
+import { Modal } from "antd";
 
 import type {
   WordCEFRLevel,
   WordClass,
   WordMastery,
-} from "@acme/api/types/english";
+} from "@acme/api/types/words";
 import type { RadioOption } from "@acme/ui/radio";
-import { insertWordDefinitionSchema } from "@acme/api/types/english";
-import { AutoForm, useForm } from "@acme/ui/form";
-import { Modal } from "@acme/ui/modal";
+import { insertWordSchema } from "@acme/api/types/words";
+import { AutoForm, useForm } from "@acme/ui/antd/form";
 import { Spin } from "@acme/ui/spin";
 import { message } from "@acme/ui/toast";
 
@@ -18,17 +18,11 @@ type Props = {
   id: string | undefined;
   isOpen: boolean;
   onCancel: () => void;
-  onOpenChange: (open: boolean) => void;
 };
-export const WordModalForm = ({
-  id,
-  isOpen,
-  onCancel,
-  onOpenChange,
-}: Props) => {
+export const WordModalForm = ({ id, isOpen, onCancel }: Props) => {
   const utils = api.useUtils();
 
-  const { data: word, isPending } = api.english.byId.useQuery(
+  const { data: word, isPending } = api.words.byId.useQuery(
     {
       id: id ?? "",
     },
@@ -36,26 +30,26 @@ export const WordModalForm = ({
       enabled: !!id,
     },
   );
-  const addWord = api.english.create.useMutation({
+  const addWord = api.words.create.useMutation({
     onSuccess: async () => {
       // form.reset();
       // setTitle("");
       // setContent("");
       onCancel();
-      await utils.english.all.invalidate();
+      await utils.words.all.invalidate();
     },
     onError: (error) => {
       message.error(error.message);
       // form.setError(error)
     },
   });
-  const updateWord = api.english.update.useMutation({
+  const updateWord = api.words.update.useMutation({
     onSuccess: async () => {
       // form.reset();
       // setTitle("");
       // setContent("");
       onCancel();
-      await utils.english.all.invalidate();
+      await utils.words.all.invalidate();
     },
     onError: (error) => {
       message.error(error.message);
@@ -64,7 +58,7 @@ export const WordModalForm = ({
   });
 
   const form = useForm({
-    schema: insertWordDefinitionSchema,
+    schema: insertWordSchema,
     defaultValues: {
       examples: [""],
       mastery: "1",
@@ -78,6 +72,7 @@ export const WordModalForm = ({
           });
     },
   });
+
   const { setFieldsValue, resetFields } = form;
   useEffect(() => {
     if (word) {
@@ -93,12 +88,53 @@ export const WordModalForm = ({
         open={isOpen}
         title={`${!id ? "Add" : "Edit"} Vocabulary`}
         className="w-screen-md"
-        onOk={form.submit}
+        onOk={() => {
+          form.submit(form.getValues());
+        }}
         onCancel={() => {
           onCancel();
         }}
-        onOpenChange={onOpenChange}
+        // onOpenChange={onOpenChange}
       >
+        {/* <Form form={form}> */}
+        {/*   <FormItem control={form.control} name="word" label="Word Name"> */}
+        {/*     <Input /> */}
+        {/*   </FormItem> */}
+        {/*   <FormItem control={form.control} name="word" label="Word Name"> */}
+        {/*     <Select */}
+        {/*       showSearch */}
+        {/*       options={[ */}
+        {/*         { */}
+        {/*           value: "", */}
+        {/*           label: "None", */}
+        {/*         }, */}
+        {/*         { */}
+        {/*           value: "noun", */}
+        {/*           label: "Noun", */}
+        {/*         }, */}
+        {/*         { */}
+        {/*           value: "verb", */}
+        {/*           label: "Verb", */}
+        {/*         }, */}
+        {/*         { */}
+        {/*           value: "adj", */}
+        {/*           label: "Adjective", */}
+        {/*         }, */}
+        {/*         { */}
+        {/*           value: "adv", */}
+        {/*           label: "Adverb", */}
+        {/*         }, */}
+        {/*         { */}
+        {/*           value: "phrase", */}
+        {/*           label: "Phrase", */}
+        {/*         }, */}
+        {/*       ]} */}
+        {/*     /> */}
+        {/*   </FormItem> */}
+        {/*   <FormItem> */}
+        {/*     <Button type="submit" /> */}
+        {/*   </FormItem> */}
+        {/* </Form> */}
         {/* Should unmount form when hide modal */}
         {!isOpen ? null : id && isPending ? (
           <>
@@ -115,84 +151,6 @@ export const WordModalForm = ({
                 placeholder: "Enter the word name",
               },
               {
-                type: "radio-group",
-                name: "class",
-                label: "Class",
-                options: [
-                  {
-                    value: "",
-                    label: "None",
-                  },
-                  {
-                    value: "noun",
-                    label: "Noun",
-                  },
-                  {
-                    value: "verb",
-                    label: "Verb",
-                  },
-                  {
-                    value: "adj",
-                    label: "Adjective",
-                  },
-                  {
-                    value: "adv",
-                    label: "Adverb",
-                  },
-                  {
-                    value: "phrase",
-                    label: "Phrase",
-                  },
-                ] satisfies RadioOption<WordClass>[],
-              },
-              {
-                type: "text",
-                name: "ipaUk",
-                label: "IPA (UK)",
-                placeholder: "Enter the IPA (UK)",
-              },
-              {
-                type: "text",
-                name: "ipaUs",
-                label: "IPA (US)",
-                placeholder: "Enter the IPA (US)",
-              },
-              {
-                type: "radio-group",
-                name: "cefrLevel",
-                label: "CEFR Level",
-                options: [
-                  {
-                    value: "",
-                    label: "None",
-                  },
-                  {
-                    value: "a1",
-                    label: "A1",
-                  },
-                  {
-                    value: "a2",
-                    label: "A2",
-                  },
-                  {
-                    value: "b1",
-                    label: "B1",
-                  },
-                  {
-                    value: "b2",
-                    label: "B2",
-                  },
-                  {
-                    value: "c1",
-                    label: "C1",
-                  },
-                  {
-                    value: "c2",
-                    label: "C2",
-                  },
-                ] satisfies RadioOption<WordCEFRLevel>[],
-              },
-              {
                 type: "text",
                 name: "english",
                 label: "English",
@@ -203,12 +161,6 @@ export const WordModalForm = ({
                 name: "vietnamese",
                 label: "Vietnamese",
                 placeholder: "Meaning of the word in Vietnamese",
-              },
-              {
-                type: "text",
-                name: "relatedWords",
-                label: "Related Words",
-                placeholder: "Related words with the word",
               },
               {
                 type: "list",
@@ -223,6 +175,102 @@ export const WordModalForm = ({
                     placeholder: "Enter example",
                   },
                 ],
+              },
+              {
+                type: "group",
+                columns: [
+                  {
+                    type: "select",
+                    name: "class",
+                    label: "Class",
+                    options: [
+                      {
+                        value: "",
+                        label: "None",
+                      },
+                      {
+                        value: "noun",
+                        label: "Noun",
+                      },
+                      {
+                        value: "verb",
+                        label: "Verb",
+                      },
+                      {
+                        value: "adj",
+                        label: "Adjective",
+                      },
+                      {
+                        value: "adv",
+                        label: "Adverb",
+                      },
+                      {
+                        value: "phrase",
+                        label: "Phrase",
+                      },
+                    ] satisfies RadioOption<WordClass>[],
+                  },
+                  {
+                    type: "select",
+                    name: "cefrLevel",
+                    label: "CEFR Level",
+                    showSearch: true,
+                    options: [
+                      {
+                        value: "",
+                        label: "None",
+                      },
+                      {
+                        value: "a1",
+                        label: "A1",
+                      },
+                      {
+                        value: "a2",
+                        label: "A2",
+                      },
+                      {
+                        value: "b1",
+                        label: "B1",
+                      },
+                      {
+                        value: "b2",
+                        label: "B2",
+                      },
+                      {
+                        value: "c1",
+                        label: "C1",
+                      },
+                      {
+                        value: "c2",
+                        label: "C2",
+                      },
+                    ] satisfies RadioOption<WordCEFRLevel>[],
+                  },
+                ],
+              },
+              {
+                type: "group",
+                columns: [
+                  {
+                    type: "text",
+                    name: "ipaUk",
+                    label: "IPA (UK)",
+                    placeholder: "Enter the IPA (UK)",
+                  },
+                  {
+                    type: "text",
+                    name: "ipaUs",
+                    label: "IPA (US)",
+                    placeholder: "Enter the IPA (US)",
+                  },
+                ],
+              },
+
+              {
+                type: "text",
+                name: "relatedWords",
+                label: "Related Words",
+                placeholder: "Related words with the word",
               },
               {
                 type: "radio-group",

@@ -6,4 +6,5 @@ import { pgTableCreator } from "drizzle-orm/pg-core";
  *
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
-export const pgTable = pgTableCreator((name) => `vercel_postgres_${name}`);
+export const DB_PREFIX = "@vp_";
+export const pgTable = pgTableCreator((name) => `${DB_PREFIX}${name}`);

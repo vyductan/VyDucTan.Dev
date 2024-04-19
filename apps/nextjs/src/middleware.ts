@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createI18nMiddleware } from "next-international/middleware";
 
-import { auth } from "@acme/api/auth";
+import { auth } from "@acme/auth";
 
 const I18nMiddleware = createI18nMiddleware({
   locales: ["en", "vi"],
@@ -16,14 +16,15 @@ export default auth((req) => {
    */
   // Get hostname of request (e.g. demo.vercel.pub, demo.localhost:3000)
   let hostname = req.headers
-    .get("host")!
-    .replace(
+    .get("host")
+    ?.replace(
       `.localhost:${process.env.PORT ?? 3000}`,
       `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`,
     );
 
   // special case for Vercel preview deployment URLs
   if (
+    hostname &&
     hostname.includes("---") &&
     hostname.endsWith(`.${process.env.NEXT_PUBLIC_VERCEL_DEPLOYMENT_SUFFIX}`)
   ) {

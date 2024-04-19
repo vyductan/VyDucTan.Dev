@@ -12,17 +12,10 @@
     "clean": "rm -rf .turbo node_modules",
     "db:push": "drizzle-kit push:pg",
     "db:studio": "drizzle-kit studio",
-    "lint": "eslint .",
-    "lint:fix": "pnpm lint --fix",
+    "lint": "eslint",
     "typecheck": "tsc --noEmit"
   },
   "prettier": "@acme/prettier-config",
-  "eslintConfig": {
-    "extends": [
-      "@acmeint-config/base"
-    ],
-    "root": true
-  },
   "dependencies": {
     "@acme/ui": "workspace:*",
     "uuid": "^9.0.1"
@@ -30,7 +23,11 @@
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
-    "@acme/typescript-config": "workspace:*",
-    "@types/uuid": "^9.0.7"
+    "@acme/tsconfig": "workspace:*",
+    "@types/uuid": "^9.0.7",
+    "typescript": "^5.4.5"
+  },
+  "peerDependencies": {
+    "react": "18.2.0"
   }
 }

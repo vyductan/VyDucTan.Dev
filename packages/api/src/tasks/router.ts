@@ -1,6 +1,7 @@
 import { z } from "zod";
 
-import { and, eq, ilike, schema } from "../_db";
+import { and, eq, ilike, schema } from "@acme/db";
+
 import { paginationSchema, searchSchema, withPagination } from "../_util/query";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { insertTaskSchema } from "./types";

@@ -4,18 +4,18 @@ import { useState } from "react";
 
 import type { RouterOutputs } from "@acme/api";
 import type { TableColumnDef } from "@acme/ui/table";
-import { SpeakerIcon } from "@acme/tts";
 import { AlertModal } from "@acme/ui/alert-modal";
 import { Button } from "@acme/ui/button";
 import { Table } from "@acme/ui/table";
 import { message } from "@acme/ui/toast";
 
+import { SpeakerIcon } from "~/libs/tts";
 import { api } from "~/trpc/react";
 import { WordModalForm } from "./WordModalForm";
 
-type Record = RouterOutputs["english"]["all"][number];
+type Record = RouterOutputs["words"]["all"][number];
 export const WordTable = () => {
-  const { data: words } = api.english.all.useQuery(undefined, {
+  const { data: words } = api.words.all.useQuery(undefined, {
     initialData: [],
   });
   const [currentRow, setCurrentRow] = useState<Record>();
@@ -23,12 +23,12 @@ export const WordTable = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const utils = api.useUtils();
-  const deleteWord = api.english.delete.useMutation({
+  const deleteWord = api.words.delete.useMutation({
     onSuccess: async () => {
       message.success("Deleted");
       setCurrentRow(undefined);
       setIsDeleteModalOpen(false);
-      await utils.english.all.invalidate();
+      await utils.words.all.invalidate();
     },
     onError: (error) => {
       message.error(error.message);
@@ -87,7 +87,7 @@ export const WordTable = () => {
         description="Are you sure you want to delete this word?"
         okLoading={deleteWord.isPending}
         onConfirm={() => {
-          currentRow && deleteWord.mutate(currentRow?.id);
+          currentRow && deleteWord.mutate(currentRow.id);
         }}
       />
     </>

@@ -3,8 +3,8 @@
 import { useState } from "react";
 
 import type { ProjectResponse } from "@acme/api/types";
-import { PageContainer } from "@acme/ui-pro";
 import { Button } from "@acme/ui/button";
+import { PageContainer } from "@acme/ui/pro";
 
 import { api } from "~/trpc/react";
 import ProjectModalForm from "./components/ProjectsForm";

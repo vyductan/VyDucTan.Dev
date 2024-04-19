@@ -10,48 +10,33 @@
       "types": "./dist/index.d.ts",
       "default": "./src/index.ts"
     },
-    "./env": "./env.ts",
-    "./types": "./src/types.ts",
-    "./auth": {
-      "react-server": "./src/auth/index.rsc.ts",
-      "default": "./src/auth/index.ts"
-    },
-    "./db": "./src/db.ts",
-    "./contact": "./src/contact/action.ts",
-    "./projects/types": "./src/projects/types.ts",
-    "./tasks/types": "./src/tasks/types.ts"
+    "./types/*": "./src/*/types.ts",
+    "./contact": "./src/contact/action.ts"
   },
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf .turbo node_modules",
-    "db:push": "pnpm with-env drizzle-kit push:pg --config src/config.ts",
-    "db:studio": "pnpm with-env drizzle-kit studio --config src/config.ts",
     "dev": "tsc --watch",
     "lint": "eslint",
-    "lint:fix": "pnpm lint --fix",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
     "with-env": "dotenv -e ../../.env --"
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
-    "@auth/drizzle-adapter": "^0.8.0",
-    "@trpc/server": "11.0.0-next.320",
-    "@vercel/blob": "^0.22.1",
-    "@vercel/postgres": "^0.7.2",
+    "@acme/auth": "workspace:*",
+    "@acme/db": "workspace:*",
     "@acme/utils": "workspace:*",
-    "drizzle-orm": "^0.29.4",
+    "@trpc/server": "11.0.0-rc.334",
+    "@vercel/blob": "^0.22.3",
     "drizzle-zod": "^0.5.1",
-    "google-auth-library": "^9.4.2",
-    "nanoid": "^5.0.6",
-    "next-auth": "^5.0.0-beta.15",
+    "nanoid": "^5.0.7",
     "superjson": "2.2.1",
     "zod": "^3.22.4"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
-    "@acme/typescript-config": "workspace:*",
-    "dotenv-cli": "^7.3.0",
+    "@acme/tsconfig": "workspace:*",
     "drizzle-kit": "^0.20.14"
   }
 }

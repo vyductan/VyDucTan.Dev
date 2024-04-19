@@ -1,9 +1,10 @@
 import type { z } from "zod";
 import { createInsertSchema } from "drizzle-zod";
 
-import type { RouterOutputs } from "..";
-import { projects } from "./schema";
+import { schema } from "@acme/db";
 
-export const insertProjectSchema = createInsertSchema(projects);
+import type { RouterOutputs } from "..";
+
+export const insertProjectSchema = createInsertSchema(schema.projects);
 export type CreateProjectParams = z.infer<typeof insertProjectSchema>;
 export type Project = NonNullable<RouterOutputs["projects"]["bySlug"]>;

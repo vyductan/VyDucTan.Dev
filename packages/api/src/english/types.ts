@@ -1,13 +1,15 @@
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-import type { cefrLevelEnum, masteryEnum, wordClassEnum } from "./schema";
-import { wordDefinitions } from "./schema";
+import { schema } from "@acme/db";
 
-export type WordClass = (typeof wordClassEnum.enumValues)[number];
-export type WordCEFRLevel = (typeof cefrLevelEnum.enumValues)[number];
-export type WordMastery = (typeof masteryEnum.enumValues)[number];
+export type WordClass = (typeof schema.wordClassEnum.enumValues)[number];
+export type WordCEFRLevel = (typeof schema.cefrLevelEnum.enumValues)[number];
+export type WordMastery = (typeof schema.masteryEnum.enumValues)[number];
 
-export const insertWordDefinitionSchema = createInsertSchema(wordDefinitions, {
-  examples: z.array(z.string()),
-});
+export const insertWordDefinitionSchema = createInsertSchema(
+  schema.wordDefinitions,
+  {
+    examples: z.array(z.string()),
+  },
+);

@@ -10,8 +10,8 @@ import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
-import type { Session } from "./auth";
-import { db } from "./_db";
+import type { Session } from "@acme/auth";
+import { db } from "@acme/db";
 
 /**
  * 1. CONTEXT
@@ -30,13 +30,13 @@ export const createTRPCContext = (opts: {
   session: Session | null;
 }) => {
   const session = opts.session;
-  const s = {
-    user: {
-      id: "user-id-1234",
-      email: "vdt5snet@gmail.com",
-    },
-    expires: "1234567",
-  };
+  // const s = {
+  //   user: {
+  //     id: "user-id-1234",
+  //     email: "vdt5snet@gmail.com",
+  //   },
+  //   expires: "1234567",
+  // };
   const source = opts.headers.get("x-trpc-source") ?? "unknown";
 
   console.log(">>> tRPC Request from", source, "by", session?.user);

@@ -1,12 +1,12 @@
 import { authRouter } from "./auth/router";
-import { englishRouter } from "./english/router";
 import { projectsRouter } from "./projects/router";
 import { tasksRouter } from "./tasks/router";
 import { createTRPCRouter } from "./trpc";
+import { wordsRouter } from "./words/router";
 
 export const appRouter = createTRPCRouter({
   auth: authRouter,
-  english: englishRouter,
+  words: wordsRouter,
   projects: projectsRouter,
   tasks: tasksRouter,
 });

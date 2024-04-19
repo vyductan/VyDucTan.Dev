@@ -42,7 +42,7 @@ export const createTRPCContext = (opts: {
   console.log(">>> tRPC Request from", source, "by", session?.user);
 
   return {
-    session,
+    session: s,
     db,
   };
 };

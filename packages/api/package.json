@@ -14,12 +14,11 @@
     "./contact": "./src/contact/action.ts"
   },
   "scripts": {
-    "build": "tsc",
+    "//build": "tsc",
     "clean": "rm -rf .turbo node_modules",
     "dev": "tsc --watch",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
-    "with-env": "dotenv -e ../../.env --"
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {

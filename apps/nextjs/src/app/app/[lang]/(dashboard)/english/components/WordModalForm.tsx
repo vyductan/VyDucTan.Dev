@@ -88,9 +88,7 @@ export const WordModalForm = ({ id, isOpen, onCancel }: Props) => {
         open={isOpen}
         title={`${!id ? "Add" : "Edit"} Vocabulary`}
         className="w-screen-md"
-        onOk={() => {
-          form.submit(form.getValues());
-        }}
+        onOk={form.submit}
         onCancel={() => {
           onCancel();
         }}

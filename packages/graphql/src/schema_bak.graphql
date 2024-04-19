@@ -1,0 +1,2883 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+type AccountsSelectItem {
+  userId: String!
+  type: String!
+  provider: String!
+  providerAccountId: String!
+  refresh_token: String
+  access_token: String
+  expires_at: Int
+  token_type: String
+  scope: String
+  id_token: String
+  session_state: String
+}
+type AccountsItem {
+  userId: String!
+  type: String!
+  provider: String!
+  providerAccountId: String!
+  refresh_token: String
+  access_token: String
+  expires_at: Int
+  token_type: String
+  scope: String
+  id_token: String
+  session_state: String
+}
+type SessionsSelectItem {
+  sessionToken: String!
+  userId: String!
+  "Date"
+  expires: String!
+}
+type SessionsItem {
+  sessionToken: String!
+  userId: String!
+  "Date"
+  expires: String!
+}
+type UsersSelectItem {
+  id: String!
+  name: String
+  email: String!
+  "Date"
+  emailVerified: String
+  image: String
+}
+type UsersItem {
+  id: String!
+  name: String
+  email: String!
+  "Date"
+  emailVerified: String
+  image: String
+}
+type VerificationTokensSelectItem {
+  identifier: String!
+  token: String!
+  "Date"
+  expires: String!
+}
+type VerificationTokensItem {
+  identifier: String!
+  token: String!
+  "Date"
+  expires: String!
+}
+type ProjectsSelectItem {
+  id: String!
+  name: String!
+  slug: String!
+  "Date"
+  createdAt: String!
+  "Date"
+  updatedAt: String!
+  tasks(where: ProjectsTasksRelationFilters, orderBy: ProjectsTasksRelationOrder, offset: Int, limit: Int): [ProjectsTasksRelation!]!
+}
+type ProjectsTasksRelation {
+  id: String!
+  name: String!
+  status: String!
+  "Date"
+  estimatedStart: String
+  "Date"
+  estimatedEnd: String
+  description: String
+  "JSON"
+  content: String
+  "Date"
+  completedAt: String
+  type: String!
+  "Date"
+  createdAt: String!
+  "Date"
+  updatedAt: String!
+  parentId: String
+  projectId: String!
+}
+type ProjectsItem {
+  id: String!
+  name: String!
+  slug: String!
+  "Date"
+  createdAt: String!
+  "Date"
+  updatedAt: String!
+}
+type TasksSelectItem {
+  id: String!
+  name: String!
+  status: String!
+  "Date"
+  estimatedStart: String
+  "Date"
+  estimatedEnd: String
+  description: String
+  "JSON"
+  content: String
+  "Date"
+  completedAt: String
+  type: String!
+  "Date"
+  createdAt: String!
+  "Date"
+  updatedAt: String!
+  parentId: String
+  projectId: String!
+  project(where: TasksProjectRelationFilters): TasksProjectRelation
+  parrent(where: TasksParrentRelationFilters): TasksParrentRelation
+  children(where: TasksChildrenRelationFilters, orderBy: TasksChildrenRelationOrder, offset: Int, limit: Int): [TasksChildrenRelation!]!
+}
+type TasksProjectRelation {
+  id: String!
+  name: String!
+  slug: String!
+  "Date"
+  createdAt: String!
+  "Date"
+  updatedAt: String!
+}
+type TasksParrentRelation {
+  id: String!
+  name: String!
+  status: String!
+  "Date"
+  estimatedStart: String
+  "Date"
+  estimatedEnd: String
+  description: String
+  "JSON"
+  content: String
+  "Date"
+  completedAt: String
+  type: String!
+  "Date"
+  createdAt: String!
+  "Date"
+  updatedAt: String!
+  parentId: String
+  projectId: String!
+}
+type TasksChildrenRelation {
+  id: String!
+  name: String!
+  status: String!
+  "Date"
+  estimatedStart: String
+  "Date"
+  estimatedEnd: String
+  description: String
+  "JSON"
+  content: String
+  "Date"
+  completedAt: String
+  type: String!
+  "Date"
+  createdAt: String!
+  "Date"
+  updatedAt: String!
+  parentId: String
+  projectId: String!
+}
+type TasksItem {
+  id: String!
+  name: String!
+  status: String!
+  "Date"
+  estimatedStart: String
+  "Date"
+  estimatedEnd: String
+  description: String
+  "JSON"
+  content: String
+  "Date"
+  completedAt: String
+  type: String!
+  "Date"
+  createdAt: String!
+  "Date"
+  updatedAt: String!
+  parentId: String
+  projectId: String!
+}
+type WordsSelectItem {
+  id: String!
+  word: String!
+  class: String
+  ipaUk: String
+  ipaUs: String
+  cefrLevel: String
+  english: String!
+  vietnamese: String!
+  relatedWords: String
+  "Array<String>"
+  examples: [String!]!
+  mastery: String
+  "Date"
+  lastLearnedAt: String
+}
+type WordsItem {
+  id: String!
+  word: String!
+  class: String
+  ipaUk: String
+  ipaUs: String
+  cefrLevel: String
+  english: String!
+  vietnamese: String!
+  relatedWords: String
+  "Array<String>"
+  examples: [String!]!
+  mastery: String
+  "Date"
+  lastLearnedAt: String
+}
+type Query {
+  accounts(offset: Int, limit: Int, orderBy: AccountsOrderBy, where: AccountsFilters): [AccountsSelectItem!]!
+  accountsSingle(offset: Int, orderBy: AccountsOrderBy, where: AccountsFilters): AccountsSelectItem
+  sessions(offset: Int, limit: Int, orderBy: SessionsOrderBy, where: SessionsFilters): [SessionsSelectItem!]!
+  sessionsSingle(offset: Int, orderBy: SessionsOrderBy, where: SessionsFilters): SessionsSelectItem
+  users(offset: Int, limit: Int, orderBy: UsersOrderBy, where: UsersFilters): [UsersSelectItem!]!
+  usersSingle(offset: Int, orderBy: UsersOrderBy, where: UsersFilters): UsersSelectItem
+  verificationtokens(offset: Int, limit: Int, orderBy: VerificationTokensOrderBy, where: VerificationTokensFilters): [VerificationTokensSelectItem!]!
+  verificationtokensSingle(offset: Int, orderBy: VerificationTokensOrderBy, where: VerificationTokensFilters): VerificationTokensSelectItem
+  projects(offset: Int, limit: Int, orderBy: ProjectsOrderBy, where: ProjectsFilters): [ProjectsSelectItem!]!
+  projectsSingle(offset: Int, orderBy: ProjectsOrderBy, where: ProjectsFilters): ProjectsSelectItem
+  tasks(offset: Int, limit: Int, orderBy: TasksOrderBy, where: TasksFilters): [TasksSelectItem!]!
+  tasksSingle(offset: Int, orderBy: TasksOrderBy, where: TasksFilters): TasksSelectItem
+  words(offset: Int, limit: Int, orderBy: WordsOrderBy, where: WordsFilters): [WordsSelectItem!]!
+  wordsSingle(offset: Int, orderBy: WordsOrderBy, where: WordsFilters): WordsSelectItem
+  hello: String
+}
+type Mutation {
+  insertIntoAccounts(values: [AccountsInsertInput!]!): [AccountsItem!]!
+  insertIntoAccountsSingle(values: AccountsInsertInput!): AccountsItem
+  updateAccounts(set: AccountsUpdateInput!, where: AccountsFilters): [AccountsItem!]!
+  deleteFromAccounts(where: AccountsFilters): [AccountsItem!]!
+  insertIntoSessions(values: [SessionsInsertInput!]!): [SessionsItem!]!
+  insertIntoSessionsSingle(values: SessionsInsertInput!): SessionsItem
+  updateSessions(set: SessionsUpdateInput!, where: SessionsFilters): [SessionsItem!]!
+  deleteFromSessions(where: SessionsFilters): [SessionsItem!]!
+  insertIntoUsers(values: [UsersInsertInput!]!): [UsersItem!]!
+  insertIntoUsersSingle(values: UsersInsertInput!): UsersItem
+  updateUsers(set: UsersUpdateInput!, where: UsersFilters): [UsersItem!]!
+  deleteFromUsers(where: UsersFilters): [UsersItem!]!
+  insertIntoVerificationTokens(values: [VerificationTokensInsertInput!]!): [VerificationTokensItem!]!
+  insertIntoVerificationTokensSingle(values: VerificationTokensInsertInput!): VerificationTokensItem
+  updateVerificationTokens(set: VerificationTokensUpdateInput!, where: VerificationTokensFilters): [VerificationTokensItem!]!
+  deleteFromVerificationTokens(where: VerificationTokensFilters): [VerificationTokensItem!]!
+  insertIntoProjects(values: [ProjectsInsertInput!]!): [ProjectsItem!]!
+  insertIntoProjectsSingle(values: ProjectsInsertInput!): ProjectsItem
+  updateProjects(set: ProjectsUpdateInput!, where: ProjectsFilters): [ProjectsItem!]!
+  deleteFromProjects(where: ProjectsFilters): [ProjectsItem!]!
+  insertIntoTasks(values: [TasksInsertInput!]!): [TasksItem!]!
+  insertIntoTasksSingle(values: TasksInsertInput!): TasksItem
+  updateTasks(set: TasksUpdateInput!, where: TasksFilters): [TasksItem!]!
+  deleteFromTasks(where: TasksFilters): [TasksItem!]!
+  insertIntoWords(values: [WordsInsertInput!]!): [WordsItem!]!
+  insertIntoWordsSingle(values: WordsInsertInput!): WordsItem
+  updateWords(set: WordsUpdateInput!, where: WordsFilters): [WordsItem!]!
+  deleteFromWords(where: WordsFilters): [WordsItem!]!
+}
+"Order by direction"
+enum OrderDirection {
+  "Ascending order"
+  asc
+  "Descending order"
+  desc
+}
+input AccountsInsertInput {
+  userId: String!
+  type: String!
+  provider: String!
+  providerAccountId: String!
+  refresh_token: String
+  access_token: String
+  expires_at: Int
+  token_type: String
+  scope: String
+  id_token: String
+  session_state: String
+}
+input AccountsUpdateInput {
+  userId: String
+  type: String
+  provider: String
+  providerAccountId: String
+  refresh_token: String
+  access_token: String
+  expires_at: Int
+  token_type: String
+  scope: String
+  id_token: String
+  session_state: String
+}
+input AccountsFilters {
+  userId: AccountsUserIdFilters
+  type: AccountsTypeFilters
+  provider: AccountsProviderFilters
+  providerAccountId: AccountsProviderAccountIdFilters
+  refresh_token: AccountsRefresh_tokenFilters
+  access_token: AccountsAccess_tokenFilters
+  expires_at: AccountsExpires_atFilters
+  token_type: AccountsToken_typeFilters
+  scope: AccountsScopeFilters
+  id_token: AccountsId_tokenFilters
+  session_state: AccountsSession_stateFilters
+  OR: [AccountsFiltersOr!]
+}
+input AccountsUserIdFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [AccountsUserIdfiltersOr!]
+}
+input AccountsUserIdfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input AccountsTypeFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [AccountsTypefiltersOr!]
+}
+input AccountsTypefiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input AccountsProviderFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [AccountsProviderfiltersOr!]
+}
+input AccountsProviderfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input AccountsProviderAccountIdFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [AccountsProviderAccountIdfiltersOr!]
+}
+input AccountsProviderAccountIdfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input AccountsRefresh_tokenFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [AccountsRefresh_tokenfiltersOr!]
+}
+input AccountsRefresh_tokenfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input AccountsAccess_tokenFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [AccountsAccess_tokenfiltersOr!]
+}
+input AccountsAccess_tokenfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input AccountsExpires_atFilters {
+  eq: Int
+  ne: Int
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [Int!]
+  "Array<undefined>"
+  notInArray: [Int!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [AccountsExpires_atfiltersOr!]
+}
+input AccountsExpires_atfiltersOr {
+  eq: Int
+  ne: Int
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [Int!]
+  "Array<undefined>"
+  notInArray: [Int!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input AccountsToken_typeFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [AccountsToken_typefiltersOr!]
+}
+input AccountsToken_typefiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input AccountsScopeFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [AccountsScopefiltersOr!]
+}
+input AccountsScopefiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input AccountsId_tokenFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [AccountsId_tokenfiltersOr!]
+}
+input AccountsId_tokenfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input AccountsSession_stateFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [AccountsSession_statefiltersOr!]
+}
+input AccountsSession_statefiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input AccountsFiltersOr {
+  userId: AccountsUserIdFilters
+  type: AccountsTypeFilters
+  provider: AccountsProviderFilters
+  providerAccountId: AccountsProviderAccountIdFilters
+  refresh_token: AccountsRefresh_tokenFilters
+  access_token: AccountsAccess_tokenFilters
+  expires_at: AccountsExpires_atFilters
+  token_type: AccountsToken_typeFilters
+  scope: AccountsScopeFilters
+  id_token: AccountsId_tokenFilters
+  session_state: AccountsSession_stateFilters
+}
+input AccountsOrderBy {
+  userId: InnerOrder
+  type: InnerOrder
+  provider: InnerOrder
+  providerAccountId: InnerOrder
+  refresh_token: InnerOrder
+  access_token: InnerOrder
+  expires_at: InnerOrder
+  token_type: InnerOrder
+  scope: InnerOrder
+  id_token: InnerOrder
+  session_state: InnerOrder
+}
+input InnerOrder {
+  direction: OrderDirection!
+  "Priority of current field"
+  priority: Int!
+}
+input SessionsInsertInput {
+  sessionToken: String!
+  userId: String!
+  "Date"
+  expires: String!
+}
+input SessionsUpdateInput {
+  sessionToken: String
+  userId: String
+  "Date"
+  expires: String
+}
+input SessionsFilters {
+  sessionToken: SessionsSessionTokenFilters
+  userId: SessionsUserIdFilters
+  expires: SessionsExpiresFilters
+  OR: [SessionsFiltersOr!]
+}
+input SessionsSessionTokenFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [SessionsSessionTokenfiltersOr!]
+}
+input SessionsSessionTokenfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input SessionsUserIdFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [SessionsUserIdfiltersOr!]
+}
+input SessionsUserIdfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input SessionsExpiresFilters {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [SessionsExpiresfiltersOr!]
+}
+input SessionsExpiresfiltersOr {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input SessionsFiltersOr {
+  sessionToken: SessionsSessionTokenFilters
+  userId: SessionsUserIdFilters
+  expires: SessionsExpiresFilters
+}
+input SessionsOrderBy {
+  sessionToken: InnerOrder
+  userId: InnerOrder
+  expires: InnerOrder
+}
+input UsersInsertInput {
+  id: String!
+  name: String
+  email: String!
+  "Date"
+  emailVerified: String
+  image: String
+}
+input UsersUpdateInput {
+  id: String
+  name: String
+  email: String
+  "Date"
+  emailVerified: String
+  image: String
+}
+input UsersFilters {
+  id: UsersIdFilters
+  name: UsersNameFilters
+  email: UsersEmailFilters
+  emailVerified: UsersEmailVerifiedFilters
+  image: UsersImageFilters
+  OR: [UsersFiltersOr!]
+}
+input UsersIdFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [UsersIdfiltersOr!]
+}
+input UsersIdfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input UsersNameFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [UsersNamefiltersOr!]
+}
+input UsersNamefiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input UsersEmailFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [UsersEmailfiltersOr!]
+}
+input UsersEmailfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input UsersEmailVerifiedFilters {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [UsersEmailVerifiedfiltersOr!]
+}
+input UsersEmailVerifiedfiltersOr {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input UsersImageFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [UsersImagefiltersOr!]
+}
+input UsersImagefiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input UsersFiltersOr {
+  id: UsersIdFilters
+  name: UsersNameFilters
+  email: UsersEmailFilters
+  emailVerified: UsersEmailVerifiedFilters
+  image: UsersImageFilters
+}
+input UsersOrderBy {
+  id: InnerOrder
+  name: InnerOrder
+  email: InnerOrder
+  emailVerified: InnerOrder
+  image: InnerOrder
+}
+input VerificationTokensInsertInput {
+  identifier: String!
+  token: String!
+  "Date"
+  expires: String!
+}
+input VerificationTokensUpdateInput {
+  identifier: String
+  token: String
+  "Date"
+  expires: String
+}
+input VerificationTokensFilters {
+  identifier: VerificationTokensIdentifierFilters
+  token: VerificationTokensTokenFilters
+  expires: VerificationTokensExpiresFilters
+  OR: [VerificationTokensFiltersOr!]
+}
+input VerificationTokensIdentifierFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [VerificationTokensIdentifierfiltersOr!]
+}
+input VerificationTokensIdentifierfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input VerificationTokensTokenFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [VerificationTokensTokenfiltersOr!]
+}
+input VerificationTokensTokenfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input VerificationTokensExpiresFilters {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [VerificationTokensExpiresfiltersOr!]
+}
+input VerificationTokensExpiresfiltersOr {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input VerificationTokensFiltersOr {
+  identifier: VerificationTokensIdentifierFilters
+  token: VerificationTokensTokenFilters
+  expires: VerificationTokensExpiresFilters
+}
+input VerificationTokensOrderBy {
+  identifier: InnerOrder
+  token: InnerOrder
+  expires: InnerOrder
+}
+input ProjectsInsertInput {
+  id: String
+  name: String!
+  slug: String
+  "Date"
+  createdAt: String
+  "Date"
+  updatedAt: String
+}
+input ProjectsUpdateInput {
+  id: String
+  name: String
+  slug: String
+  "Date"
+  createdAt: String
+  "Date"
+  updatedAt: String
+}
+input ProjectsFilters {
+  id: ProjectsIdFilters
+  name: ProjectsNameFilters
+  slug: ProjectsSlugFilters
+  createdAt: ProjectsCreatedAtFilters
+  updatedAt: ProjectsUpdatedAtFilters
+  OR: [ProjectsFiltersOr!]
+}
+input ProjectsIdFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [ProjectsIdfiltersOr!]
+}
+input ProjectsIdfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input ProjectsNameFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [ProjectsNamefiltersOr!]
+}
+input ProjectsNamefiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input ProjectsSlugFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [ProjectsSlugfiltersOr!]
+}
+input ProjectsSlugfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input ProjectsCreatedAtFilters {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [ProjectsCreatedAtfiltersOr!]
+}
+input ProjectsCreatedAtfiltersOr {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input ProjectsUpdatedAtFilters {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [ProjectsUpdatedAtfiltersOr!]
+}
+input ProjectsUpdatedAtfiltersOr {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input ProjectsFiltersOr {
+  id: ProjectsIdFilters
+  name: ProjectsNameFilters
+  slug: ProjectsSlugFilters
+  createdAt: ProjectsCreatedAtFilters
+  updatedAt: ProjectsUpdatedAtFilters
+}
+input ProjectsOrderBy {
+  id: InnerOrder
+  name: InnerOrder
+  slug: InnerOrder
+  createdAt: InnerOrder
+  updatedAt: InnerOrder
+}
+input TasksInsertInput {
+  id: String
+  name: String!
+  status: String
+  "Date"
+  estimatedStart: String
+  "Date"
+  estimatedEnd: String
+  description: String
+  "JSON"
+  content: String
+  "Date"
+  completedAt: String
+  type: String
+  "Date"
+  createdAt: String
+  "Date"
+  updatedAt: String
+  parentId: String
+  projectId: String
+}
+input TasksUpdateInput {
+  id: String
+  name: String
+  status: String
+  "Date"
+  estimatedStart: String
+  "Date"
+  estimatedEnd: String
+  description: String
+  "JSON"
+  content: String
+  "Date"
+  completedAt: String
+  type: String
+  "Date"
+  createdAt: String
+  "Date"
+  updatedAt: String
+  parentId: String
+  projectId: String
+}
+input TasksFilters {
+  id: TasksIdFilters
+  name: TasksNameFilters
+  status: TasksStatusFilters
+  estimatedStart: TasksEstimatedStartFilters
+  estimatedEnd: TasksEstimatedEndFilters
+  description: TasksDescriptionFilters
+  content: TasksContentFilters
+  completedAt: TasksCompletedAtFilters
+  type: TasksTypeFilters
+  createdAt: TasksCreatedAtFilters
+  updatedAt: TasksUpdatedAtFilters
+  parentId: TasksParentIdFilters
+  projectId: TasksProjectIdFilters
+  OR: [TasksFiltersOr!]
+}
+input TasksIdFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [TasksIdfiltersOr!]
+}
+input TasksIdfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input TasksNameFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [TasksNamefiltersOr!]
+}
+input TasksNamefiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input TasksStatusFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [TasksStatusfiltersOr!]
+}
+input TasksStatusfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input TasksEstimatedStartFilters {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [TasksEstimatedStartfiltersOr!]
+}
+input TasksEstimatedStartfiltersOr {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input TasksEstimatedEndFilters {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [TasksEstimatedEndfiltersOr!]
+}
+input TasksEstimatedEndfiltersOr {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input TasksDescriptionFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [TasksDescriptionfiltersOr!]
+}
+input TasksDescriptionfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input TasksContentFilters {
+  "JSON"
+  eq: String
+  "JSON"
+  ne: String
+  "JSON"
+  lt: String
+  "JSON"
+  lte: String
+  "JSON"
+  gt: String
+  "JSON"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<JSON>"
+  inArray: [String!]
+  "Array<JSON>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [TasksContentfiltersOr!]
+}
+input TasksContentfiltersOr {
+  "JSON"
+  eq: String
+  "JSON"
+  ne: String
+  "JSON"
+  lt: String
+  "JSON"
+  lte: String
+  "JSON"
+  gt: String
+  "JSON"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<JSON>"
+  inArray: [String!]
+  "Array<JSON>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input TasksCompletedAtFilters {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [TasksCompletedAtfiltersOr!]
+}
+input TasksCompletedAtfiltersOr {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input TasksTypeFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [TasksTypefiltersOr!]
+}
+input TasksTypefiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input TasksCreatedAtFilters {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [TasksCreatedAtfiltersOr!]
+}
+input TasksCreatedAtfiltersOr {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input TasksUpdatedAtFilters {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [TasksUpdatedAtfiltersOr!]
+}
+input TasksUpdatedAtfiltersOr {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input TasksParentIdFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [TasksParentIdfiltersOr!]
+}
+input TasksParentIdfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input TasksProjectIdFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [TasksProjectIdfiltersOr!]
+}
+input TasksProjectIdfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input TasksFiltersOr {
+  id: TasksIdFilters
+  name: TasksNameFilters
+  status: TasksStatusFilters
+  estimatedStart: TasksEstimatedStartFilters
+  estimatedEnd: TasksEstimatedEndFilters
+  description: TasksDescriptionFilters
+  content: TasksContentFilters
+  completedAt: TasksCompletedAtFilters
+  type: TasksTypeFilters
+  createdAt: TasksCreatedAtFilters
+  updatedAt: TasksUpdatedAtFilters
+  parentId: TasksParentIdFilters
+  projectId: TasksProjectIdFilters
+}
+input TasksOrderBy {
+  id: InnerOrder
+  name: InnerOrder
+  status: InnerOrder
+  estimatedStart: InnerOrder
+  estimatedEnd: InnerOrder
+  description: InnerOrder
+  content: InnerOrder
+  completedAt: InnerOrder
+  type: InnerOrder
+  createdAt: InnerOrder
+  updatedAt: InnerOrder
+  parentId: InnerOrder
+  projectId: InnerOrder
+}
+input WordsInsertInput {
+  id: String
+  word: String!
+  class: String
+  ipaUk: String
+  ipaUs: String
+  cefrLevel: String
+  english: String!
+  vietnamese: String!
+  relatedWords: String
+  "Array<String>"
+  examples: [String!]!
+  mastery: String
+  "Date"
+  lastLearnedAt: String
+}
+input WordsUpdateInput {
+  id: String
+  word: String
+  class: String
+  ipaUk: String
+  ipaUs: String
+  cefrLevel: String
+  english: String
+  vietnamese: String
+  relatedWords: String
+  "Array<String>"
+  examples: [String!]
+  mastery: String
+  "Date"
+  lastLearnedAt: String
+}
+input WordsFilters {
+  id: WordsIdFilters
+  word: WordsWordFilters
+  class: WordsClassFilters
+  ipaUk: WordsIpaUkFilters
+  ipaUs: WordsIpaUsFilters
+  cefrLevel: WordsCefrLevelFilters
+  english: WordsEnglishFilters
+  vietnamese: WordsVietnameseFilters
+  relatedWords: WordsRelatedWordsFilters
+  examples: WordsExamplesFilters
+  mastery: WordsMasteryFilters
+  lastLearnedAt: WordsLastLearnedAtFilters
+  OR: [WordsFiltersOr!]
+}
+input WordsIdFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [WordsIdfiltersOr!]
+}
+input WordsIdfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input WordsWordFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [WordsWordfiltersOr!]
+}
+input WordsWordfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input WordsClassFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [WordsClassfiltersOr!]
+}
+input WordsClassfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input WordsIpaUkFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [WordsIpaUkfiltersOr!]
+}
+input WordsIpaUkfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input WordsIpaUsFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [WordsIpaUsfiltersOr!]
+}
+input WordsIpaUsfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input WordsCefrLevelFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [WordsCefrLevelfiltersOr!]
+}
+input WordsCefrLevelfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input WordsEnglishFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [WordsEnglishfiltersOr!]
+}
+input WordsEnglishfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input WordsVietnameseFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [WordsVietnamesefiltersOr!]
+}
+input WordsVietnamesefiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input WordsRelatedWordsFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [WordsRelatedWordsfiltersOr!]
+}
+input WordsRelatedWordsfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input WordsExamplesFilters {
+  "Array<String>"
+  eq: [String!]
+  "Array<String>"
+  ne: [String!]
+  "Array<String>"
+  lt: [String!]
+  "Array<String>"
+  lte: [String!]
+  "Array<String>"
+  gt: [String!]
+  "Array<String>"
+  gte: [String!]
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Array<String>>"
+  inArray: [[String!]!]
+  "Array<Array<String>>"
+  notInArray: [[String!]!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [WordsExamplesfiltersOr!]
+}
+input WordsExamplesfiltersOr {
+  "Array<String>"
+  eq: [String!]
+  "Array<String>"
+  ne: [String!]
+  "Array<String>"
+  lt: [String!]
+  "Array<String>"
+  lte: [String!]
+  "Array<String>"
+  gt: [String!]
+  "Array<String>"
+  gte: [String!]
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Array<String>>"
+  inArray: [[String!]!]
+  "Array<Array<String>>"
+  notInArray: [[String!]!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input WordsMasteryFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [WordsMasteryfiltersOr!]
+}
+input WordsMasteryfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<undefined>"
+  inArray: [String!]
+  "Array<undefined>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input WordsLastLearnedAtFilters {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [WordsLastLearnedAtfiltersOr!]
+}
+input WordsLastLearnedAtfiltersOr {
+  "Date"
+  eq: String
+  "Date"
+  ne: String
+  "Date"
+  lt: String
+  "Date"
+  lte: String
+  "Date"
+  gt: String
+  "Date"
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+  "Array<Date>"
+  inArray: [String!]
+  "Array<Date>"
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+input WordsFiltersOr {
+  id: WordsIdFilters
+  word: WordsWordFilters
+  class: WordsClassFilters
+  ipaUk: WordsIpaUkFilters
+  ipaUs: WordsIpaUsFilters
+  cefrLevel: WordsCefrLevelFilters
+  english: WordsEnglishFilters
+  vietnamese: WordsVietnameseFilters
+  relatedWords: WordsRelatedWordsFilters
+  examples: WordsExamplesFilters
+  mastery: WordsMasteryFilters
+  lastLearnedAt: WordsLastLearnedAtFilters
+}
+input WordsOrderBy {
+  id: InnerOrder
+  word: InnerOrder
+  class: InnerOrder
+  ipaUk: InnerOrder
+  ipaUs: InnerOrder
+  cefrLevel: InnerOrder
+  english: InnerOrder
+  vietnamese: InnerOrder
+  relatedWords: InnerOrder
+  examples: InnerOrder
+  mastery: InnerOrder
+  lastLearnedAt: InnerOrder
+}
+input ProjectsTasksRelationFilters {
+  id: TasksIdFilters
+  name: TasksNameFilters
+  status: TasksStatusFilters
+  estimatedStart: TasksEstimatedStartFilters
+  estimatedEnd: TasksEstimatedEndFilters
+  description: TasksDescriptionFilters
+  content: TasksContentFilters
+  completedAt: TasksCompletedAtFilters
+  type: TasksTypeFilters
+  createdAt: TasksCreatedAtFilters
+  updatedAt: TasksUpdatedAtFilters
+  parentId: TasksParentIdFilters
+  projectId: TasksProjectIdFilters
+  OR: [ProjectsTasksRelationFiltersOr!]
+}
+input ProjectsTasksRelationFiltersOr {
+  id: TasksIdFilters
+  name: TasksNameFilters
+  status: TasksStatusFilters
+  estimatedStart: TasksEstimatedStartFilters
+  estimatedEnd: TasksEstimatedEndFilters
+  description: TasksDescriptionFilters
+  content: TasksContentFilters
+  completedAt: TasksCompletedAtFilters
+  type: TasksTypeFilters
+  createdAt: TasksCreatedAtFilters
+  updatedAt: TasksUpdatedAtFilters
+  parentId: TasksParentIdFilters
+  projectId: TasksProjectIdFilters
+}
+input ProjectsTasksRelationOrder {
+  id: InnerOrder
+  name: InnerOrder
+  status: InnerOrder
+  estimatedStart: InnerOrder
+  estimatedEnd: InnerOrder
+  description: InnerOrder
+  content: InnerOrder
+  completedAt: InnerOrder
+  type: InnerOrder
+  createdAt: InnerOrder
+  updatedAt: InnerOrder
+  parentId: InnerOrder
+  projectId: InnerOrder
+}
+input TasksProjectRelationFilters {
+  id: ProjectsIdFilters
+  name: ProjectsNameFilters
+  slug: ProjectsSlugFilters
+  createdAt: ProjectsCreatedAtFilters
+  updatedAt: ProjectsUpdatedAtFilters
+  OR: [TasksProjectRelationFiltersOr!]
+}
+input TasksProjectRelationFiltersOr {
+  id: ProjectsIdFilters
+  name: ProjectsNameFilters
+  slug: ProjectsSlugFilters
+  createdAt: ProjectsCreatedAtFilters
+  updatedAt: ProjectsUpdatedAtFilters
+}
+input TasksParrentRelationFilters {
+  id: TasksIdFilters
+  name: TasksNameFilters
+  status: TasksStatusFilters
+  estimatedStart: TasksEstimatedStartFilters
+  estimatedEnd: TasksEstimatedEndFilters
+  description: TasksDescriptionFilters
+  content: TasksContentFilters
+  completedAt: TasksCompletedAtFilters
+  type: TasksTypeFilters
+  createdAt: TasksCreatedAtFilters
+  updatedAt: TasksUpdatedAtFilters
+  parentId: TasksParentIdFilters
+  projectId: TasksProjectIdFilters
+  OR: [TasksParrentRelationFiltersOr!]
+}
+input TasksParrentRelationFiltersOr {
+  id: TasksIdFilters
+  name: TasksNameFilters
+  status: TasksStatusFilters
+  estimatedStart: TasksEstimatedStartFilters
+  estimatedEnd: TasksEstimatedEndFilters
+  description: TasksDescriptionFilters
+  content: TasksContentFilters
+  completedAt: TasksCompletedAtFilters
+  type: TasksTypeFilters
+  createdAt: TasksCreatedAtFilters
+  updatedAt: TasksUpdatedAtFilters
+  parentId: TasksParentIdFilters
+  projectId: TasksProjectIdFilters
+}
+input TasksChildrenRelationFilters {
+  id: TasksIdFilters
+  name: TasksNameFilters
+  status: TasksStatusFilters
+  estimatedStart: TasksEstimatedStartFilters
+  estimatedEnd: TasksEstimatedEndFilters
+  description: TasksDescriptionFilters
+  content: TasksContentFilters
+  completedAt: TasksCompletedAtFilters
+  type: TasksTypeFilters
+  createdAt: TasksCreatedAtFilters
+  updatedAt: TasksUpdatedAtFilters
+  parentId: TasksParentIdFilters
+  projectId: TasksProjectIdFilters
+  OR: [TasksChildrenRelationFiltersOr!]
+}
+input TasksChildrenRelationFiltersOr {
+  id: TasksIdFilters
+  name: TasksNameFilters
+  status: TasksStatusFilters
+  estimatedStart: TasksEstimatedStartFilters
+  estimatedEnd: TasksEstimatedEndFilters
+  description: TasksDescriptionFilters
+  content: TasksContentFilters
+  completedAt: TasksCompletedAtFilters
+  type: TasksTypeFilters
+  createdAt: TasksCreatedAtFilters
+  updatedAt: TasksUpdatedAtFilters
+  parentId: TasksParentIdFilters
+  projectId: TasksProjectIdFilters
+}
+input TasksChildrenRelationOrder {
+  id: InnerOrder
+  name: InnerOrder
+  status: InnerOrder
+  estimatedStart: InnerOrder
+  estimatedEnd: InnerOrder
+  description: InnerOrder
+  content: InnerOrder
+  completedAt: InnerOrder
+  type: InnerOrder
+  createdAt: InnerOrder
+  updatedAt: InnerOrder
+  parentId: InnerOrder
+  projectId: InnerOrder
+}
+"Exposes a URL that specifies the behavior of this scalar."
+directive @specifiedBy(
+    "The URL that specifies the behavior of this scalar."
+    url: String!
+  ) on SCALAR

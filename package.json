@@ -9,6 +9,7 @@
     "db:push": "pnpm -F db push",
     "db:studio": "pnpm -F db studio",
     "dev": "turbo dev --parallel",
+    "app:dev": "turbo run dev --filter=app",
     "format": "turbo format --continue -- --cache --cache-location node_modules/.cache/.prettiercache",
     "format:fix": "turbo format --continue -- --write --cache --cache-location node_modules/.cache/.prettiercache",
     "postinstall": "pnpm lint:ws",
@@ -18,14 +19,14 @@
     "typecheck": "turbo typecheck"
   },
   "devDependencies": {
-    "@acme/prettier-config": "workspace:^",
+    "@acme/prettier-config": "workspace:*",
     "@turbo/gen": "^1.13.2",
     "node-gyp-build": "4.8.0",
     "prettier": "^3.2.5",
     "turbo": "^1.13.2",
     "typescript": "^5.4.5"
   },
-  "packageManager": "pnpm@8.15.7",
+  "packageManager": "pnpm@9.0.1",
   "engines": {
     "node": ">=v20.12.0"
   }

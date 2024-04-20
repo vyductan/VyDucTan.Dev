@@ -26,3 +26,11 @@ export const WordsQuery = graphql(`
     # }
   }
 `);
+
+export const AddWordMutation = graphql(`
+  mutation UpdateWord($input: WordsInsertInput!) {
+    insertIntoWordsSingle(values: $input) {
+      id
+    }
+  }
+`);

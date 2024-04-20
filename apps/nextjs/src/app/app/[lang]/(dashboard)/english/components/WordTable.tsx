@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import type { RouterOutputs } from "@acme/api";
 import type { TableColumnDef } from "@acme/ui/table";
@@ -11,15 +12,14 @@ import { message } from "@acme/ui/toast";
 
 import { SpeakerIcon } from "~/libs/tts";
 import { api } from "~/trpc/react";
-import { WordModalForm } from "./WordModalForm";
 
 type Record = RouterOutputs["words"]["all"][number];
 export const WordTable = () => {
-  const { data: words } = api.words.all.useQuery(undefined, {
+  const router = useRouter();
+  const { data: words } = api.words.all.useQuery(void 0, {
     initialData: [],
   });
   const [currentRow, setCurrentRow] = useState<Record>();
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const utils = api.useUtils();
@@ -37,7 +37,7 @@ export const WordTable = () => {
 
   return (
     <>
-      <Button primary onClick={() => setIsModalOpen(true)}>
+      <Button primary onClick={() => router.push("/english/new")}>
         Add
       </Button>
 
@@ -50,8 +50,7 @@ export const WordTable = () => {
                 <>
                   <Button
                     onClick={() => {
-                      setCurrentRow(record);
-                      setIsModalOpen(true);
+                      router.push("/english/edit?wordId=" + record.id);
                     }}
                   >
                     Edit
@@ -70,15 +69,6 @@ export const WordTable = () => {
           } satisfies TableColumnDef<Record>,
         ]}
         dataSource={words}
-      />
-      <WordModalForm
-        id={currentRow?.id}
-        isOpen={isModalOpen}
-        onCancel={() => {
-          setCurrentRow(undefined);
-          setIsModalOpen(false);
-        }}
-        onOpenChange={setIsModalOpen}
       />
       <AlertModal
         open={isDeleteModalOpen}

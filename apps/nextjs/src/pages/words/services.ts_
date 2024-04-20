@@ -1,0 +1,11 @@
+import type { VariablesOf } from "gql.tada";
+
+import { AddWordMutation } from "@acme/graphql/models/words";
+
+import { urqlClient } from "~/libs/urql";
+
+export const wordsServices = {
+  update: (input: VariablesOf<typeof AddWordMutation>) => {
+    return urqlClient.mutation(AddWordMutation, input);
+  },
+};

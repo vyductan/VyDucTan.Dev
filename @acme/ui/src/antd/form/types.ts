@@ -127,7 +127,7 @@ export type FieldsSchema<
         name?: never;
         render: () => void;
       }
-    : TFieldType extends "group"
+    : TFieldType extends FieldGroupType
       ? {
           type: TFieldType;
           className?: string;
@@ -137,7 +137,7 @@ export type FieldsSchema<
           >[];
 
           // to fix(list): Property 'name' does not exist on type 'never'
-          name?: never;
+          name?: number;
         }
       : TFieldType extends "list"
         ? Omit<FormListProps, "children"> & {

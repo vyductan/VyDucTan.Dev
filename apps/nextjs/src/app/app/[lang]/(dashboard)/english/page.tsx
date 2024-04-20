@@ -1,12 +1,12 @@
-import { PageContainer } from "@acme/ui/pro/page-container";
+import { createRoute } from "@tanstack/react-router";
+import { z } from "zod";
 
-import { WordTable } from "./components/WordTable";
+import { PageContainer } from "@acme/ui/pro/page-container";
 
 export default function EnglishPage() {
   return (
     <PageContainer>
       <div className="container mt-12 flex flex-col items-center justify-center gap-4 px-4 py-8">
-        <WordTable />
         <audio controls>
           <track kind="captions" />
           <source

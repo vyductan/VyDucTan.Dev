@@ -13,6 +13,8 @@ import "../app/globals.css";
 import { TailwindIndicator } from "@acme/ui/pro/tailwind-indicator";
 import { Toaster } from "@acme/ui/toast";
 
+import { Providers } from "./Providers";
+
 export const metadata: Metadata = {
   metadataBase: new URL(
     env.VERCEL_ENV === "production"
@@ -58,7 +60,10 @@ export default function RootLayout({
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <TRPCReactProvider>{children}</TRPCReactProvider>
+          <TRPCReactProvider>
+            <Providers />
+            {children}
+          </TRPCReactProvider>
           <div className="fixed bottom-4 right-4">
             <ThemeToggle />
           </div>

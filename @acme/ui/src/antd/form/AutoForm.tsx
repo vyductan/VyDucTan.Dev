@@ -1,6 +1,6 @@
 "use client";
 
-import type { Control, FieldValues, Path, PathValue } from "react-hook-form";
+import type { Control, FieldValues, Path } from "react-hook-form";
 import React from "react";
 import { Select } from "antd";
 

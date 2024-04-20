@@ -1,16 +1,12 @@
 import { useEffect } from "react";
 import { Modal } from "antd";
 
-import type {
-  WordCEFRLevel,
-  WordClass,
-  WordMastery,
-} from "@acme/api/types/words";
+import type { WordCEFRLevel, WordClass, WordMastery } from "@acme/api/words";
 import type { RadioOption } from "@acme/ui/radio";
-import { insertWordSchema } from "@acme/api/types/words";
 import { AutoForm, useForm } from "@acme/ui/antd/form";
 import { Spin } from "@acme/ui/spin";
 import { message } from "@acme/ui/toast";
+import { insertWordSchema } from "@acme/validators/words";
 
 import { api } from "~/trpc/react";
 

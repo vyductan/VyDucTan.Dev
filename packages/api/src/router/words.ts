@@ -3,9 +3,9 @@ import { subDays } from "date-fns";
 import { z } from "zod";
 
 import { eq, schema } from "@acme/db";
+import { insertWordSchema } from "@acme/validators/words";
 
 import { protectedProcedure } from "../trpc";
-import { insertWordSchema } from "./types";
 
 export const wordsRouter = {
   all: protectedProcedure.query(({ ctx }) => {

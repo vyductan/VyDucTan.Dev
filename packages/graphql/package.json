@@ -27,18 +27,18 @@
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
-    "drizzle-graphql": "^0.2.5",
-    "gql.tada": "^1.5.2",
+    "drizzle-graphql": "^0.3.4",
+    "gql.tada": "^1.6.2",
     "graphql": "^16.8.1",
     "graphql-config": "^5.0.3"
   },
   "devDependencies": {
-    "@0no-co/graphqlsp": "^1.10.1",
+    "@0no-co/graphqlsp": "^1.12.1",
     "@acme/db": "workspace:*",
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "eslint": "^9.0.0",
+    "eslint": "^9.1.1",
     "grats": "^0.0.25",
     "prettier": "^3.2.5",
     "typescript": "^5.4.5"

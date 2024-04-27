@@ -6,8 +6,8 @@ import {
 
 import { urqlClient } from "~/libs/urql";
 import { RootLayout } from "~/pages/layout";
-import { wordAddRoute } from "~/pages/words/add/page";
-import { wordsRoute } from "~/pages/words/pages";
+import { wordAddRoute } from "~/pages/words/new/page";
+import { wordsRoute } from "~/pages/words/page";
 
 export const rootRoute = createRootRouteWithContext<{
   urqlClient: UrqlClient;

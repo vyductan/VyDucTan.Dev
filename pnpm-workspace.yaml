@@ -1,8 +1,6 @@
 packages:
-  # - apps/*
-  - apps/nextjs
+  - apps/*
   - packages/*
-  - "!packages/graphql"
   - "@acme/*"
   - "@acme/tooling/*"
   - "!@acme/tooling"

@@ -6,12 +6,10 @@ import * as projects from "./schema/projects";
 import * as tasks from "./schema/tasks";
 import * as word from "./schema/word";
 
-export const schema = { ...auth, ...projects, ...tasks, ...word };
-
-export { pgTable as tableCreator } from "./schema/_table";
-
 export * from "drizzle-orm/sql";
 export { alias } from "drizzle-orm/pg-core";
+
+export const schema = { ...auth, ...projects, ...tasks, ...word };
 
 export const db = drizzle(sql, { schema });
 

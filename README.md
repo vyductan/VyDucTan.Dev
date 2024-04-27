@@ -1,8 +1,7 @@
-### use T3 - 08/08/2023
+# Latest
 
-Latest:
-Apr 13, 2024
-https://github.com/t3-oss/create-t3-turbo/commit/5198138b1a1140e6218d17715347627426bea376
+Apr 26, 2024
+https://github.com/t3-oss/create-t3-turbo/commit/1e78494ff8158173baf07a4c5818fb8c7e59a7aa
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

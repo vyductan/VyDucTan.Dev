@@ -1,6 +1,3 @@
-import { createRoute } from "@tanstack/react-router";
-import { z } from "zod";
-
 import { PageContainer } from "@acme/ui/pro/page-container";
 
 export default function EnglishPage() {

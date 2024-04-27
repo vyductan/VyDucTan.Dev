@@ -5,15 +5,18 @@ import { z } from "zod";
 import { eq, schema } from "@acme/db";
 import { insertWordSchema } from "@acme/validators/words";
 
+import { paginationSchema, searchSchema } from "../_util/query";
 import { protectedProcedure } from "../trpc";
 
 export const wordsRouter = {
-  all: protectedProcedure.query(({ ctx }) => {
-    return ctx.db.query.words.findMany({
-      orderBy: schema.words.word,
-      limit: 10,
-    });
-  }),
+  all: protectedProcedure
+    .input(searchSchema.merge(paginationSchema))
+    .query(({ ctx }) => {
+      return ctx.db.query.words.findMany({
+        orderBy: schema.words.word,
+        limit: 10,
+      });
+    }),
 
   create: protectedProcedure
     .input(insertWordSchema)

@@ -7,7 +7,7 @@ import type { RouterInputs } from "@acme/api";
 import { useForm } from "@acme/ui/antd/form";
 
 import { api } from "~/trpc/react";
-import { WordForm } from "../components/WordForm";
+import { WordForm } from "../_components/WordForm";
 
 export default function WordEditPage() {
   const router = useRouter();

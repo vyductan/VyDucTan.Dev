@@ -32,7 +32,7 @@ const Words = () => {
     <>
       <Button
         onClick={async () => {
-          await navigate({ to: "/words/new", search: searchParams });
+          await navigate({ to: "/asd", search: searchParams });
         }}
         className="w-full"
       >

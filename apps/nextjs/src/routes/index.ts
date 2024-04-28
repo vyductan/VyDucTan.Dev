@@ -1,19 +1,14 @@
-import {
-  createRootRouteWithContext,
-  createRouter,
-} from "@tanstack/react-router";
+import { createRouter } from "@tanstack/react-router";
 
-import RootLayout from "~/pages/layout";
-import { wordNewRoute } from "~/pages/words/new/page";
-import { wordsRoute } from "~/pages/words/pages";
+import { EnglishRoute } from "~/app/app/[lang]/(dashboard)/english/routeDef";
+import { WordNewRoute } from "~/app/app/[lang]/(dashboard)/english/words/new/routeDef";
+import { WordsRoute } from "~/app/app/[lang]/(dashboard)/english/words/routeDef";
+import { RootRoute } from "./root";
 
-export const rootRoute = createRootRouteWithContext()({
-  component: RootLayout,
-});
-
-const routeTree = rootRoute.addChildren([
+const routeTree = RootRoute.addChildren([
   // postsRoute.addChildren([postRoute, postsIndexRoute]),
-  wordsRoute.addChildren([wordNewRoute]),
+  EnglishRoute.addChildren([WordsRoute.addChildren([WordNewRoute])]),
+  // englishRoute.addChildren([wordsRoute.addChildren([wordNewRoute])]),
   // wordsRoute.addChildren([wordAddRoute]),
   // indexRoute,
 ]);
@@ -24,10 +19,8 @@ export const router = createRouter({
   // Since we're using React Query, we don't want loader calls to ever be stale
   // This will ensure that the loader is always called when the route is preloaded or visited
   defaultPreloadStaleTime: 0,
-  // context: {
-  //   urqlClient,
-  // },
 });
+
 // Register things for typesafety
 declare module "@tanstack/react-router" {
   interface Register {

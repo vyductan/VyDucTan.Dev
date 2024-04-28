@@ -1,7 +1,7 @@
-import { createRoute, Outlet, useNavigate } from "@tanstack/react-router";
 import { Table } from "antd";
 import { z } from "zod";
 
+import { useNavigate } from "@acme/hooks/next/useNavigate";
 import { Button } from "@acme/ui/antd/button";
 import { genTablePagination } from "@acme/ui/table";
 
@@ -25,7 +25,7 @@ const Words = () => {
     <>
       <Button
         onClick={async () => {
-          await navigate({ to: "/words/new", search: searchParams });
+          await navigate("new");
         }}
       >
         New
@@ -99,11 +99,4 @@ const searchSchema = z.object({
   page: z.number().catch(1),
   pageSize: z.enum(["10", "20", "30", "40", "50"]).catch("10"),
   // sort: z.enum(["newest", "oldest", "price"]).catch("newest"),
-});
-
-export const wordsRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "words",
-  component: Words,
-  validateSearch: searchSchema,
 });

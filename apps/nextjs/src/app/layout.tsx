@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-properties */
 import type { Metadata, Viewport } from "next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
@@ -13,7 +14,6 @@ import { TailwindIndicator } from "@acme/ui/pro/tailwind-indicator";
 import { Toaster } from "@acme/ui/toast";
 
 import { env } from "~/env";
-import { Providers } from "./Providers";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -60,10 +60,7 @@ export default function RootLayout({
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <TRPCReactProvider>
-            <Providers />
-            {children}
-          </TRPCReactProvider>
+          <TRPCReactProvider>{children}</TRPCReactProvider>
           <div className="fixed bottom-4 right-4">
             <ThemeToggle />
           </div>

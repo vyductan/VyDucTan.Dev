@@ -1,3 +1,3 @@
 export default function ExamplePage() {
-  return <div>ExamplePage</div>;
+  return <div>App pages</div>;
 }

@@ -12,13 +12,13 @@ import { message } from "@acme/ui/toast";
 
 import { SpeakerIcon } from "~/libs/tts";
 import { api } from "~/trpc/react";
+import { WordsRoute } from "../routeDef";
 
 type Record = RouterOutputs["words"]["all"][number];
 export const WordTable = () => {
   const router = useRouter();
-  const { data: words } = api.words.all.useQuery(void 0, {
-    initialData: [],
-  });
+  const searchParams = WordsRoute.useSearch();
+  const listQuery = api.words.all.useQuery(searchParams);
   const [currentRow, setCurrentRow] = useState<Record>();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -37,11 +37,8 @@ export const WordTable = () => {
 
   return (
     <>
-      <Button primary onClick={() => router.push("/english/new")}>
-        Add
-      </Button>
-
       <Table
+        loading={listQuery.isLoading}
         columns={[
           ...columns,
           {
@@ -68,7 +65,7 @@ export const WordTable = () => {
             },
           } satisfies TableColumnDef<Record>,
         ]}
-        dataSource={words}
+        dataSource={listQuery.data}
       />
       <AlertModal
         open={isDeleteModalOpen}

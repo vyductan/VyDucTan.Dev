@@ -1,17 +1,16 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { message, Modal } from "antd";
 
 import type { RouterInputs } from "@acme/api";
 import { useForm } from "@acme/ui/antd/form";
 
 import { api } from "~/trpc/react";
-import { WordForm } from "../components/WordForm";
-import { wordsRoute } from "../route";
+import { WordForm } from "../_components/WordForm";
+import { WordNewRoute } from "./routeDef";
 
 export default function WordNewPage() {
-  const router = useRouter();
+  const navigate = WordNewRoute.useNavigate();
   const utils = api.useUtils();
   const addWord = api.words.create.useMutation({
     onSuccess: async () => {
@@ -34,7 +33,9 @@ export default function WordNewPage() {
     <Modal
       open
       onOk={form.submit}
-      onCancel={() => router.push(wordsRoute.path)}
+      onCancel={() =>
+        navigate({ to: "/english/words", search: (prev) => prev })
+      }
     >
       <WordForm form={form} />
     </Modal>

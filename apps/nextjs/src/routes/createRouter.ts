@@ -1,7 +1,7 @@
-"use client";
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
+"use client";
+
 import type {
   AnyContext,
   AnyRoute,
@@ -11,6 +11,7 @@ import type {
   ResolveFullSearchSchema,
   ResolveFullSearchSchemaInput,
   ResolveId,
+  Route,
   RouteConstraints,
   RouteContext,
   RouteOptions,
@@ -18,26 +19,14 @@ import type {
   UseNavigateResult,
 } from "@tanstack/react-router";
 import type { z } from "zod";
-import { useRouter, useSearchParams } from "next/navigation";
+import {
+  useParams as useNextParams,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { createRoute as createTanstackRoute } from "@tanstack/react-router";
 
-type Assign<TLeft, TRight> = keyof TLeft extends never
-  ? TRight
-  : keyof TRight extends never
-    ? TLeft
-    : Omit<TLeft, keyof TRight> & TRight;
-type IsAny<TValue, TYesResult, TNoResult = TValue> = 1 extends 0 & TValue
-  ? TYesResult
-  : TNoResult;
-// type Expand<T> = T extends object
-//   ? T extends infer O
-//     ? O extends Function
-//       ? O
-//       : {
-//           [K in keyof O]: O[K];
-//         }
-//     : never
-//   : T;
+import type { Assign, IsAny } from "./types";
 
 // type TrailingSlashOption = "always" | "never" | "preserve";
 
@@ -122,7 +111,28 @@ export const createRoute = <
     TLoaderDataReturn,
     TLoaderData
   >,
-) => {
+): Route<
+  TParentRoute,
+  TPath,
+  TFullPath,
+  TCustomId,
+  TId,
+  TSearchSchemaInput,
+  TSearchSchema,
+  TSearchSchemaUsed,
+  TFullSearchSchemaInput,
+  TFullSearchSchema,
+  TParams,
+  TAllParams,
+  TRouteContextReturn,
+  TRouteContext,
+  TAllContext,
+  TRouterContext,
+  TLoaderDeps,
+  TLoaderDataReturn,
+  TLoaderData,
+  TChildren
+> => {
   const x = createTanstackRoute<
     TParentRoute,
     TPath,
@@ -184,32 +194,14 @@ export const createRoute = <
     return navigate;
   };
 
+  const useParams = (() => {
+    return useNextParams();
+  }) as typeof x.useParams;
+
   return {
     ...x,
-    useSearch,
     useNavigate,
+    useSearch,
+    useParams,
   };
 };
-
-// : Route<
-//   TParentRoute,
-//   TPath,
-//   TFullPath,
-//   TCustomId,
-//   TId,
-//   TSearchSchemaInput,
-//   TSearchSchema,
-//   TSearchSchemaUsed,
-//   TFullSearchSchemaInput,
-//   TFullSearchSchema,
-//   TParams,
-//   TAllParams,
-//   TRouteContextReturn,
-//   TRouteContext,
-//   TAllContext,
-//   TRouterContext,
-//   TLoaderDeps,
-//   TLoaderDataReturn,
-//   TLoaderData,
-//   TChildren
-// >

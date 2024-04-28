@@ -1,8 +1,11 @@
 import { PageContainer } from "@acme/ui/pro/page-container";
 
+import { Search } from "./_components/Search";
+
 export default function EnglishPage() {
   return (
     <PageContainer>
+      <Search />
       <div className="container mt-12 flex flex-col items-center justify-center gap-4 px-4 py-8">
         <audio controls>
           <track kind="captions" />

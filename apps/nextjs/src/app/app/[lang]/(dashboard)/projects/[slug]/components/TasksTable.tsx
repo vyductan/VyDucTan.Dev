@@ -2,40 +2,23 @@
 
 import Link from "next/link";
 
-import type { Task } from "@acme/api/tasks/types";
+import type { RouterOutputs } from "@acme/api";
 import type { TableColumnDef } from "@acme/ui/table";
 import { Button } from "@acme/ui/button";
 import { EditIcon } from "@acme/ui/icons";
 import { Table } from "@acme/ui/table";
 
-import { api } from "~/trpc/react";
 import { DeleteTask } from "./DeleteTask";
 
-export function TasksTable({
-  projectId,
-  projectSlug,
-  query,
-  currentPage,
-}: {
-  projectId: string;
-  projectSlug: string;
-  query: string;
-  currentPage: number;
-}) {
-  const { data } = api.tasks.all.useQuery(
-    { projectId, query, page: currentPage },
-    {
-      initialData: {
-        data: [],
-        pagination: {
-          total: 0,
-          page: 1,
-          pageSize: 0,
-        },
-      },
-    },
-  );
-  const columns: TableColumnDef<Task>[] = [
+type TaskTableProps = {
+  dataSource: RouterOutputs["tasks"]["all"]["data"];
+  pagination: RouterOutputs["tasks"]["all"]["pagination"];
+};
+
+export function TasksTable({ dataSource }: TaskTableProps) {
+  const columns: TableColumnDef<
+    RouterOutputs["tasks"]["all"]["data"][number]
+  >[] = [
     {
       dataIndex: "name",
       title: "Name",
@@ -46,7 +29,7 @@ export function TasksTable({
         return (
           <>
             <Button primary icon={<EditIcon />} asChild>
-              <Link href={`/${projectSlug}/tasks/${record.id}`} />
+              <Link href={`/${record.project.slug}/tasks/${record.id}`} />
             </Button>
 
             <DeleteTask id={record.id} />
@@ -59,7 +42,7 @@ export function TasksTable({
   return (
     <Table
       columns={columns}
-      dataSource={data.data}
+      dataSource={dataSource}
       pagination={data.pagination}
     />
   );

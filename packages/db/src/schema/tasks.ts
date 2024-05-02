@@ -20,6 +20,7 @@ export const taskTypeEnum = pgEnum("task_type", [
   "feat",
   "docs",
   "module",
+  "refactor",
 ]);
 
 export const tasks = pgTable("task", {
@@ -29,13 +30,13 @@ export const tasks = pgTable("task", {
     .notNull()
     .primaryKey(),
   name: text("name").notNull(),
-  status: todoStatusEnum("status").default("todo").notNull(),
+  status: todoStatusEnum("status").default("todo"),
   estimatedStart: timestamp("estimated_start"),
   estimatedEnd: timestamp("estimated_end"),
   description: text("description"),
   content: json("content").$type<string>(),
   completedAt: timestamp("completed_at"),
-  type: taskTypeEnum("type").default("").notNull(),
+  type: taskTypeEnum("type").default(""),
 
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),

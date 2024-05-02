@@ -10,8 +10,7 @@
       "types": "./dist/index.d.ts",
       "default": "./src/index.ts"
     },
-    "./*": "./src/types/*.ts",
-    "./contact": "./src/contact/action.ts"
+    "./*": "./src/*/index.ts"
   },
   "scripts": {
     "build": "tsc",

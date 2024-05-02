@@ -1,15 +1,15 @@
 import { mergeSchemas } from "@graphql-tools/schema";
-import { buildVanillaSchema } from "drizzle-graphql";
+import { buildSchema } from "drizzle-graphql";
 import { initGraphQLTada } from "gql.tada";
 
-import { db, schema as dbSchema } from "@acme/db";
+import { db } from "@acme/db";
 
 import type { introspection } from "./graphql-env.d.ts";
 import { getSchema } from "./schema";
 
-const { schema: builtSchema } = buildVanillaSchema(db, dbSchema);
+const { schema } = buildSchema(db);
 const mergedSchema = mergeSchemas({
-  schemas: [builtSchema, getSchema()],
+  schemas: [schema, getSchema()],
   // typeDefs: /* GraphQL */ `
   //   type ExtraType {
   //     foo: String

@@ -1,17 +1,17 @@
 import { z } from "zod";
 
 import { eq, ilike, schema } from "@acme/db";
+import { insertProjectSchema } from "@acme/validators/projects";
 
 import { paginationSchema, searchSchema, withPagination } from "../_util/query";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { insertProjectSchema } from "./types";
 
 export const projectsRouter = createTRPCRouter({
   all: protectedProcedure
     .input(searchSchema.merge(paginationSchema))
     .query(({ ctx, input }) => {
       const where = ilike(schema.projects.name, `%${input.query}%`);
-      return withPagination(ctx.db, schema.tasks, input, where);
+      return withPagination(ctx.db, schema.projects, input, where);
 
       // return ctx.db.query.projects.findMany({
       //   orderBy: desc(schema.projects.createdAt),

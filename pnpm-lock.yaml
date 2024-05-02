@@ -816,6 +816,9 @@ importers:
 
   packages/graphql:
     dependencies:
+      '@acme/db':
+        specifier: workspace:*
+        version: link:../db
       drizzle-graphql:
         specifier: ^0.3.5
         version: 0.3.5(drizzle-orm@0.30.9(@neondatabase/serverless@0.9.1)(@types/pg@8.11.5)(@types/react@18.3.1)(@vercel/postgres@0.8.0)(bun-types@1.1.6)(pg@8.11.5)(react@18.3.1))(graphql@16.8.1)
@@ -832,9 +835,6 @@ importers:
       '@0no-co/graphqlsp':
         specifier: ^1.12.1
         version: 1.12.1(typescript@5.4.5)
-      '@acme/db':
-        specifier: workspace:*
-        version: link:../db
       '@acme/eslint-config':
         specifier: workspace:*
         version: link:../../@acme/tooling/eslint

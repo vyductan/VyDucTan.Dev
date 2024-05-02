@@ -1,5 +1,5 @@
 import { authRouter } from "./auth/router";
-import { projectsRouter } from "./projects/router";
+import { projectsRouter } from "./router/projects";
 import { wordsRouter } from "./router/words";
 import { tasksRouter } from "./tasks/router";
 import { createTRPCRouter } from "./trpc";

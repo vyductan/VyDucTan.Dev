@@ -1,5 +1,4 @@
 import { pgEnum, text, timestamp } from "drizzle-orm/pg-core";
-import { nanoid } from "nanoid";
 
 import { pgTable } from "./_table";
 
@@ -24,20 +23,17 @@ export const masteryEnum = pgEnum("mastery", ["1", "2", "3", "4", "5"]);
 
 export const words = pgTable("word", {
   id: text("id")
-    .$defaultFn(() => nanoid())
-    .notNull()
-    .primaryKey(),
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
   word: text("word").notNull(),
-  cambridgeUrl: text("cambridge_url"),
-  cefrLevel: cefrLevelEnum("cefr_level"),
-  pos: wordClassEnum("pos"),
-  gram: text("gram"),
+  class: wordClassEnum("class"),
   ipaUk: text("ipa_uk"),
   ipaUs: text("ipa_us"),
-  definition: text("definition"),
-  translation: text("translation"),
+  cefrLevel: cefrLevelEnum("cefrLevel"),
+  english: text("english").notNull(),
+  vietnamese: text("vietnamese").notNull(),
   relatedWords: text("related_words"),
-  examples: text("examples").array(),
+  examples: text("examples").array().notNull(),
   mastery: masteryEnum("mastery"),
   lastLearnedAt: timestamp("last_learned_at").defaultNow(),
 });

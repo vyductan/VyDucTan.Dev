@@ -26,8 +26,8 @@
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
     "@types/bun": "^1.1.0",
-    "@types/node": "^20.12.7",
-    "dotenv-cli": "^7.4.1",
+    "@types/node": "^20.12.12",
+    "dotenv-cli": "^7.4.2",
     "ts-node": "^10.9.2",
     "tsx": "^4.7.3"
   }

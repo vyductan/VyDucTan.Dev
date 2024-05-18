@@ -25,19 +25,18 @@
     "@acme/db": "workspace:*",
     "@acme/utils": "workspace:*",
     "@acme/validators": "workspace:*",
-    "@trpc/server": "11.0.0-rc.334",
+    "@trpc/server": "11.0.0-rc.364",
     "@vercel/blob": "^0.23.2",
     "cheerio": "1.0.0-rc.12",
     "httpx": "^2.3.2",
-    "nanoid": "^5.0.7",
     "superjson": "2.2.1",
-    "zod": "^3.23.4"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "eslint": "^9.1.1",
+    "eslint": "^9.3.0",
     "prettier": "^3.2.5",
     "typescript": "^5.4.5"
   }

@@ -1,9 +1,10 @@
 import type { Config } from "drizzle-kit";
 
+import { DB_PREFIX } from "./src/schema";
+
 if (!process.env.POSTGRES_URL) {
   throw new Error("Missing POSTGRES_URL");
 }
-const DB_PREFIX = "vp_";
 
 const nonPoolingUrl = process.env.POSTGRES_URL.replace(":6543", ":5432");
 

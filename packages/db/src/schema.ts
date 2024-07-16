@@ -4,13 +4,16 @@ import {
   integer,
   json,
   pgEnum,
-  pgTable,
+  pgTableCreator,
   primaryKey,
   text,
   timestamp,
 } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
+
+export const DB_PREFIX = "vp_";
+const pgTable = pgTableCreator((name) => `${DB_PREFIX}${name}`);
 
 /*
  * Project
@@ -28,6 +31,7 @@ export const Project = pgTable("project", {
 export const ProjectRelations = relations(Project, ({ many }) => ({
   tasks: many(Task, { relationName: "project" }),
 }));
+
 export const CreateProjectSchema = createInsertSchema(Project).omit({
   id: true,
   createdAt: true,
@@ -79,6 +83,29 @@ export const Task = pgTable("task", {
     .default("")
     .notNull(),
 });
+
+export const CreateTaskSchema = createInsertSchema(Task, {
+  content: z.string(),
+})
+  .omit({
+    id: true,
+    createdAt: true,
+    updatedAt: true,
+  })
+  .omit({
+    estimatedStart: true,
+    estimatedEnd: true,
+  })
+  .merge(
+    z.object({
+      estimatedDuration: z
+        .object({
+          start: z.date(),
+          end: z.date(),
+        })
+        .optional(),
+    }),
+  );
 
 export const TaskRelations = relations(Task, ({ one, many }) => ({
   project: one(Project, {

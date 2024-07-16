@@ -131,7 +131,8 @@ function createSelectColumn<T>(): ColumnDef<T> {
     id: "selection",
     header: ({ table }) => (
       <Checkbox
-        id="select-all"
+        // id="select-all"
+        aria-label="Select all"
         checked={table.getIsAllRowsSelected()}
         indeterminate={table.getIsSomeRowsSelected()}
         onChange={table.toggleAllRowsSelected}
@@ -140,7 +141,8 @@ function createSelectColumn<T>(): ColumnDef<T> {
     ),
     cell: ({ row, table }) => (
       <Checkbox
-        id={`select-row-${row.id}`}
+        // id={`select-row-${row.id}`}
+        aria-label="Select row"
         checked={row.getIsSelected()}
         indeterminate={row.getIsSomeSelected()}
         className="flex items-center justify-center"

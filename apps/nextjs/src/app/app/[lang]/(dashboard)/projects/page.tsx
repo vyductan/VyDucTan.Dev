@@ -17,6 +17,9 @@ export default function ProjectsPage() {
   const [currentRow, setCurrentRow] =
     useState<RouterOutputs["projects"]["all"]["data"][number]>();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const listNotionQuery = api.projects.notion_list.useQuery(searchParams);
+
+  console.log("aaaaaa", listNotionQuery.data);
 
   return (
     <PageContainer

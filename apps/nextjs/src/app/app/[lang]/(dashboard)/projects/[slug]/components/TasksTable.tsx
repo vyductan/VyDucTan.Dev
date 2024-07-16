@@ -15,7 +15,7 @@ type TaskTableProps = {
   pagination: RouterOutputs["tasks"]["all"]["pagination"];
 };
 
-export function TasksTable({ dataSource }: TaskTableProps) {
+export function TasksTable({ dataSource, pagination }: TaskTableProps) {
   const columns: TableColumnDef<
     RouterOutputs["tasks"]["all"]["data"][number]
   >[] = [
@@ -40,10 +40,6 @@ export function TasksTable({ dataSource }: TaskTableProps) {
   ];
 
   return (
-    <Table
-      columns={columns}
-      dataSource={dataSource}
-      pagination={data.pagination}
-    />
+    <Table columns={columns} dataSource={dataSource} pagination={pagination} />
   );
 }

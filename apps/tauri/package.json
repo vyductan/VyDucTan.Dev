@@ -19,8 +19,8 @@
     "@acme/api": "workspace:*",
     "@acme/graphql": "workspace:*",
     "@acme/ui": "workspace:*",
-    "@tanstack/react-router": "^1.33.1",
-    "@tanstack/router-devtools": "^1.33.1",
+    "@tanstack/react-router": "^1.45.2",
+    "@tanstack/router-devtools": "^1.45.2",
     "@tauri-apps/api": ">=2.0.0-beta.0",
     "@tauri-apps/plugin-shell": ">=2.0.0-beta.0",
     "gql.tada": "^1.6.3",
@@ -37,12 +37,12 @@
     "@acme/tailwind-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
     "@tauri-apps/cli": ">=2.0.0-beta.0",
-    "@types/react": "^18.3.2",
+    "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.6.0",
     "internal-ip": "^8.0.0",
-    "tailwindcss": "3.4.3",
-    "typescript": "^5.4.5",
+    "tailwindcss": "3.4.5",
+    "typescript": "^5.5.3",
     "vite": "^5.0.0"
   }
 }

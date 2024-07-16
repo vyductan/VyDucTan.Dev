@@ -21,10 +21,10 @@
   "prettier": "@acme/prettier-config",
   "dependencies": {
     "@acme/db": "workspace:*",
-    "@auth/core": "0.31.0",
-    "@auth/drizzle-adapter": "^1.1.0",
+    "@auth/core": "0.34.1",
+    "@auth/drizzle-adapter": "^1.4.1",
     "@t3-oss/env-nextjs": "^0.10.1",
-    "next": "^14.2.3",
+    "next": "^14.2.5",
     "next-auth": "5.0.0-beta.19",
     "react": "catalog:react18",
     "react-dom": "catalog:react18",

@@ -22,10 +22,10 @@
   },
   "devDependencies": {
     "@acme/prettier-config": "workspace:*",
-    "@turbo/gen": "^1.13.3",
-    "node-gyp-build": "4.8.0",
+    "@turbo/gen": "^2.0.6",
+    "node-gyp-build": "4.8.1",
     "prettier": "catalog:",
-    "turbo": "^1.13.3",
+    "turbo": "^2.0.6",
     "typescript": "catalog:"
   },
   "packageManager": "pnpm@9.5.0",

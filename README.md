@@ -2,8 +2,8 @@
 
 ## T3 Turbo <https://github.com/t3-oss/create-t3-turbo>
 
-May 29, 2024
-<https://github.com/t3-oss/create-t3-turbo/commit/c8e51cda81ca7d6927719941a5f9176c9bd06efe>
+Jul 14, 2024
+<https://github.com/t3-oss/create-t3-turbo/commit/c458b6d64f681522bbf6919af5ed862f0e6bfd6c>
 
 ## Multi Platform <https://github.com/vercel/platforms>
 

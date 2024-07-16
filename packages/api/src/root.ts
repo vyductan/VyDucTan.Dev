@@ -1,4 +1,4 @@
-import { authRouter } from "./auth/router";
+import { authRouter } from "./router/auth";
 import { projectRouter } from "./router/project";
 import { taskRouter } from "./router/task";
 import { wordRouter } from "./router/word";

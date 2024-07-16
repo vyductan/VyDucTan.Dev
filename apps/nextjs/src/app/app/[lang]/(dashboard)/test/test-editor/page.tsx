@@ -1,8 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-
-import { upload } from "~/lib/upload";
+import { upload } from "~/libs/upload";
 
 const Editor = dynamic(() => import("@acme/ui/editor"), { ssr: false });
 

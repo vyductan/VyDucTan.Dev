@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 
-import type { CreateProjectParams } from "@acme/api/types";
-import { insertProjectSchema } from "@acme/api/types";
+import type { RouterInputs } from "@acme/api";
 import { AutoForm, useForm } from "@acme/ui/form";
 import { Modal } from "@acme/ui/modal";
 import { Spin } from "@acme/ui/spin";
 import { message } from "@acme/ui/toast";
+import { insertProjectSchema } from "@acme/validators/projects";
 
 import { api } from "~/trpc/react";
 
@@ -17,9 +17,9 @@ type Props = {
 };
 const ProjectModalForm = ({ id, isOpen, onCancel, onOpenChange }: Props) => {
   const utils = api.useUtils();
-  const { data, isPending } = api.english.byId.useQuery(
+  const { data, isPending } = api.projects.byId.useQuery(
     {
-      id: id!,
+      id: id ?? "",
     },
     {
       enabled: !!id,
@@ -50,7 +50,7 @@ const ProjectModalForm = ({ id, isOpen, onCancel, onOpenChange }: Props) => {
     },
   });
 
-  const form = useForm<CreateProjectParams>({
+  const form = useForm<RouterInputs["projects"]["create"]>({
     schema: insertProjectSchema,
     defaultValues: {},
     onSubmit: async (values) => {
@@ -77,7 +77,7 @@ const ProjectModalForm = ({ id, isOpen, onCancel, onOpenChange }: Props) => {
       title={`${!id ? "Add" : "Edit"} Project`}
       className="w-screen-md"
       trigger={<button>XXX</button>}
-      onOk={form?.submit}
+      onOk={form.submit}
       onCancel={onCancel}
       onOpenChange={onOpenChange}
     >

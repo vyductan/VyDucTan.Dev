@@ -5,6 +5,6 @@
     "outDir": "dist",
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
   },
-  "include": ["src", "*.ts"],
+  "include": ["src", "*.ts", "@types"],
   "exclude": ["node_modules"]
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-properties */
 import type { Metadata, Viewport } from "next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
@@ -5,13 +6,14 @@ import { GeistSans } from "geist/font/sans";
 import { clsm } from "@acme/ui";
 import { ThemeProvider, ThemeToggle } from "@acme/ui/theme";
 
-import { env } from "~/env";
 import { TRPCReactProvider } from "~/trpc/react";
 
 import "../app/globals.css";
 
 import { TailwindIndicator } from "@acme/ui/pro/tailwind-indicator";
 import { Toaster } from "@acme/ui/toast";
+
+import { env } from "~/env";
 
 export const metadata: Metadata = {
   metadataBase: new URL(

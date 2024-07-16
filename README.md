@@ -1,8 +1,14 @@
-### use T3 - 08/08/2023
+# Latest
 
-Latest:
-Apr 13, 2024
-https://github.com/t3-oss/create-t3-turbo/commit/5198138b1a1140e6218d17715347627426bea376
+## T3 Turbo <https://github.com/t3-oss/create-t3-turbo>
+
+May 17, 2024
+<https://github.com/t3-oss/create-t3-turbo/commit/38c20cd6212482282e896ae0ae1904679fb11324>
+
+## Multi Platform <https://github.com/vercel/platforms>
+
+Nov 15, 2023
+<https://github.com/vercel/platforms/commit/29e20e790eaf17d4d5051c23a69636dce724c174>
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
@@ -22,11 +28,14 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the
+result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+You can start editing the page by modifying `pages/index.tsx`. The page
+auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.tsx`.
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed
+on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.tsx`.
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 

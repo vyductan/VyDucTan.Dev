@@ -8,6 +8,8 @@ import SuperJSON from "superjson";
 
 import type { AppRouter } from "@acme/api";
 
+import { env } from "~/env";
+
 const createQueryClient = () =>
   new QueryClient({
     defaultOptions: {
@@ -40,7 +42,7 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
       links: [
         loggerLink({
           enabled: (opts) =>
-            process.env.NODE_ENV === "development" ||
+            env.NODE_ENV === "development" ||
             (opts.direction === "down" && opts.result instanceof Error),
         }),
         unstable_httpBatchStreamLink({
@@ -66,7 +68,8 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
 }
 
 const getBaseUrl = () => {
-  if (typeof window !== "undefined") return window.location.origin; // browser should use relative url
-  if (process.env.VERCEL_URL) return process.env.VERCEL_URL; // SSR should use vercel url
-  return `http://localhost:${process.env.PORT ?? 3000}`; // dev SSR should use localhost
+  if (typeof window !== "undefined") return window.location.origin;
+  if (env.VERCEL_URL) return `https://${env.VERCEL_URL}`;
+  // eslint-disable-next-line no-restricted-properties
+  return `http://localhost:${process.env.PORT ?? 3000}`;
 };

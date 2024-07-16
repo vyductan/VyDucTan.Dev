@@ -2,19 +2,20 @@
 
 import { useState } from "react";
 
-import type { ProjectResponse } from "@acme/api/types";
+import type { RouterOutputs } from "@acme/api";
 import { Button } from "@acme/ui/button";
-import { PageContainer } from "@acme/ui/pro";
+import { PageContainer } from "@acme/ui/pro/page-container";
 
 import { api } from "~/trpc/react";
 import ProjectModalForm from "./components/ProjectsForm";
 import { ProjectsTable } from "./components/ProjectsTable";
+import { ProjectsRoute } from "./routeDef";
 
 export default function ProjectsPage() {
-  const { data: projects } = api.projects.all.useQuery(undefined, {
-    initialData: [],
-  });
-  const [currentRow, setCurrentRow] = useState<ProjectResponse>();
+  const searchParams = ProjectsRoute.useSearch();
+  const listQuery = api.projects.all.useQuery(searchParams);
+  const [currentRow, setCurrentRow] =
+    useState<RouterOutputs["projects"]["all"]["data"][number]>();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -29,25 +30,27 @@ export default function ProjectsPage() {
         ),
       }}
     >
-      <ProjectsTable
-        dataSource={projects}
-        actionColumn={{
-          render: ({ record }) => {
-            return (
-              <>
-                <Button
-                  onClick={() => {
-                    setCurrentRow(record);
-                    setIsModalOpen(true);
-                  }}
-                >
-                  Edit
-                </Button>
-              </>
-            );
-          },
-        }}
-      />
+      {listQuery.data && (
+        <ProjectsTable
+          dataSource={listQuery.data.data}
+          actionColumn={{
+            render: ({ record }) => {
+              return (
+                <>
+                  <Button
+                    onClick={() => {
+                      setCurrentRow(record);
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    Edit
+                  </Button>
+                </>
+              );
+            },
+          }}
+        />
+      )}
       <ProjectModalForm
         id={currentRow?.id}
         isOpen={isModalOpen}

@@ -2,7 +2,12 @@ import { z } from "zod";
 
 import { and, eq, ilike, schema } from "@acme/db";
 
-import { paginationSchema, searchSchema, withPagination } from "../_util/query";
+import {
+  countQuery,
+  paginationSchema,
+  searchSchema,
+  withPaginationQuery,
+} from "../_util/query";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { insertTaskSchema } from "./types";
 
@@ -24,7 +29,20 @@ export const tasksRouter = createTRPCRouter({
           : undefined,
         ilike(schema.tasks.name, `%${input.query}%`),
       );
-      return withPagination(ctx.db, schema.tasks, input, where);
+
+      const [data, count] = await Promise.all([
+        ctx.db.query.tasks.findMany({
+          limit: input.pageSize,
+          offset: (input.page - 1) * input.pageSize,
+          where,
+          with: {
+            project: true,
+          },
+        }),
+        countQuery(ctx.db, schema.tasks, where),
+      ]);
+      // return withPagination(ctx.db, schema.tasks, input, where);
+      return withPaginationQuery(data, count, input);
     }),
 
   byId: protectedProcedure

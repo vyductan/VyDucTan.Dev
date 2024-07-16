@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@acme/trpc",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf .turbo node_modules",
+    "dev": "pnpm with-env bun run --watch src/index.ts",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
+    "with-env": "dotenv -e ../../.env --"
+  },
+  "prettier": "@acme/prettier-config",
+  "dependencies": {
+    "@trpc/server": "11.0.0-rc.364",
+    "trpc-bun-adapter": "^1.1.0"
+  },
+  "devDependencies": {
+    "@acme/api": "workspace:*",
+    "@acme/eslint-config": "workspace:*",
+    "@acme/prettier-config": "workspace:*",
+    "@acme/tsconfig": "workspace:*",
+    "@types/bun": "^1.1.0",
+    "eslint": "^9.3.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5"
+  }
+}

@@ -2,11 +2,10 @@
 
 import { useState } from "react";
 
-import { sendMailAction } from "@acme/api/contact";
-import { sendMailSchema } from "@acme/api/types";
+import { sendMailAction, sendMailSchema } from "@acme/api/contact";
 import { Button } from "@acme/ui/button";
-import { AutoForm, useForm } from "@acmeform";
-import { MailOutlined } from "@acmeicons";
+import { AutoForm, useForm } from "@acme/ui/form";
+import { MailOutlined } from "@acme/ui/icons";
 import { message } from "@acme/ui/toast";
 
 import type { ResumeData } from "../resumeData";
@@ -34,8 +33,6 @@ const Contact = ({ data }: ContactProps) => {
         });
     },
   });
-
-  if (!data) return <></>;
 
   return (
     <section id="contact">

@@ -2,7 +2,8 @@ import type { DefaultSession, NextAuthConfig } from "next-auth";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import Google from "next-auth/providers/google";
 
-import { db, tableCreator } from "@acme/db";
+import { db } from "@acme/db/client";
+import { Account, Session, User } from "@acme/db/schema";
 
 import { env } from "../env";
 
@@ -17,7 +18,11 @@ declare module "next-auth" {
 }
 
 export const authConfig = {
-  adapter: DrizzleAdapter(db, tableCreator),
+  adapter: DrizzleAdapter(db, {
+    usersTable: User,
+    accountsTable: Account,
+    sessionsTable: Session,
+  }),
   providers: [
     Google({
       clientId: env.GOOGLE_CLIENT_ID,

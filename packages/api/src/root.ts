@@ -1,14 +1,14 @@
 import { authRouter } from "./auth/router";
-import { projectsRouter } from "./router/projects";
-import { wordsRouter } from "./router/words";
-import { tasksRouter } from "./tasks/router";
+import { projectRouter } from "./router/project";
+import { taskRouter } from "./router/task";
+import { wordRouter } from "./router/word";
 import { createTRPCRouter } from "./trpc";
 
 export const appRouter = createTRPCRouter({
   auth: authRouter,
-  words: wordsRouter,
-  projects: projectsRouter,
-  tasks: tasksRouter,
+  word: wordRouter,
+  project: projectRouter,
+  task: taskRouter,
 });
 
 // export type definition of API

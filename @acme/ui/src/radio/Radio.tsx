@@ -3,9 +3,8 @@
 import * as React from "react";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 
-import { clsm } from "@acme/ui";
-
-import { CircleFilled } from "../icons";
+import { clsm } from "..";
+import { Icon } from "../icons";
 import { Label } from "../label";
 
 type RadioOption<TValue extends string = string> = {
@@ -65,7 +64,10 @@ const Radio = React.forwardRef<
         {...props}
       >
         <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
-          <CircleFilled className="size-2 fill-current text-current" />
+          <Icon
+            icon="icon-[bi--circle-fill]"
+            className="size-2 fill-current text-current"
+          />
         </RadioGroupPrimitive.Indicator>
       </RadioGroupPrimitive.Item>
       <Label htmlFor={id} className="cursor-pointer px-2">

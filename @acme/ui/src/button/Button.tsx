@@ -24,13 +24,11 @@ const buttonVariants = cva(
       action: {
         true: [],
       },
-      danger: {
-        true: ["text-error", "active:ring-error-active"],
-      },
       color: {
         default: [],
-        action: [],
+        accent: [],
         danger: [],
+        success: [],
       },
       variant: {
         default: [
@@ -51,7 +49,7 @@ const buttonVariants = cva(
         link: "text-gray-900 underline-offset-4 hover:underline dark:text-gray-50",
       },
       size: {
-        sm: "h-6 rounded-sm px-2 py-0",
+        sm: "h-6 rounded-sm px-2 py-0 font-normal",
         default: "h-8 rounded-md px-3 py-1",
         lg: "h-10 rounded-lg px-4 py-2",
       },
@@ -66,25 +64,48 @@ const buttonVariants = cva(
       },
     },
     compoundVariants: [
+      // primary
       {
         primary: true,
-        danger: true,
+        // danger: true,
+        color: "danger",
         className: [
-          "border-error bg-error",
-          "hover:border-error-hover hover:bg-error-hover",
+          "border-danger bg-danger",
+          "hover:border-danger-hover hover:bg-danger-hover",
+        ],
+      },
+
+      // light
+      {
+        variant: "light",
+        className: [
+          "bg-primary-300 text-primary-600",
+          "hover:bg-primary-700 hover:text-white",
         ],
       },
       {
         variant: "light",
-        color: "action",
-        className: ["text-info bg-info/10", "hover:text-white hover:bg-info"],
+        color: "accent",
+        className: [
+          "text-accent bg-accent-muted",
+          // "hover:text-white hover:bg-info",
+          "hover:text-white hover:bg-accent-hover",
+        ],
       },
       {
         variant: "light",
         color: "danger",
         className: [
-          "text-danger bg-danger/10",
-          "hover:text-white hover:bg-danger",
+          "text-danger bg-danger-muted",
+          "hover:text-white hover:bg-danger-hover",
+        ],
+      },
+      {
+        variant: "light",
+        color: "success",
+        className: [
+          "text-success bg-success/10",
+          "hover:text-white hover:bg-success",
         ],
       },
       {
@@ -96,9 +117,10 @@ const buttonVariants = cva(
           "hover:bg-blue-100 dark:hover:bg-blue-300",
         ],
       },
+      // outline
       {
-        danger: true,
         variant: "outline",
+        color: "danger",
         className: [
           "border-error",
           "hover:border-error-hover  hover:text-error-hover",
@@ -155,7 +177,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       className,
       color,
-      danger,
       disabled,
       loading,
       primary,
@@ -176,16 +197,16 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             "relative",
             buttonVariants({
               color,
-              danger,
               disabled,
               primary: !primary && !!variant ? null : !primary ? true : primary,
               size,
-              shape: icon && !children ? shape ?? "icon" : shape,
+              shape: icon && !children ? (shape ?? "icon") : shape,
               variant,
               className,
             }),
           )}
           disabled={loading ?? disabled}
+          type="button"
           {...props}
         >
           {asChild ? (
@@ -193,11 +214,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           ) : (
             <>
               {(!!loading || icon) && (
-                <span className={clsm(children ? "mr-2" : "")}>
-                  <Slot className="size-5">
-                    {loading ? <LoadingIcon /> : icon}
-                  </Slot>
-                </span>
+                <Slot
+                  className={clsm(
+                    size === "sm" ? "" : "size-4",
+                    children ? "mr-2" : "",
+                  )}
+                >
+                  {loading ? <LoadingIcon /> : icon}
+                </Slot>
               )}
               {children}
             </>

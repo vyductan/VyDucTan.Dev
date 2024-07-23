@@ -4,7 +4,7 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 
 import { clsm } from "..";
 import { Icon } from "../icons";
-import { inputStatusVariants } from "../input";
+import { inputSizeVariants, inputStatusVariants } from "../input";
 
 type SelectRootProps = SelectPrimitive.SelectProps;
 const SelectRoot = SelectPrimitive.Root;
@@ -24,7 +24,8 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={clsm(
-      inputStatusVariants({ borderless, size, status }),
+      inputStatusVariants({ borderless, status }),
+      inputSizeVariants({ size }),
       "items-center justify-between bg-background placeholder:text-placeholder",
       "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
       "disabled:cursor-not-allowed disabled:bg-background-disabled disabled:text-placeholder [&>span]:line-clamp-1",
@@ -34,7 +35,7 @@ const SelectTrigger = React.forwardRef<
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <Icon icon="mingcute:down-fill" className="size-4 opacity-50" />
+      <Icon icon="icon-[mingcute--down-fill]" className="size-4 opacity-50" />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ));
@@ -52,7 +53,7 @@ const SelectScrollUpButton = React.forwardRef<
     )}
     {...props}
   >
-    <Icon icon="mingcute:up-fill" className="size-4" />
+    <Icon icon="icon-[mingcute--up-fill]" className="size-4" />
   </SelectPrimitive.ScrollUpButton>
 ));
 SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName;
@@ -69,7 +70,7 @@ const SelectScrollDownButton = React.forwardRef<
     )}
     {...props}
   >
-    <Icon icon="mingcute:down-fill" className="size-4" />
+    <Icon icon="icon-[mingcute--down-fill]" className="size-4" />
   </SelectPrimitive.ScrollDownButton>
 ));
 SelectScrollDownButton.displayName =
@@ -133,7 +134,7 @@ const SelectItem = React.forwardRef<
   >
     <span className="absolute left-2 flex size-3.5 items-center justify-center">
       <SelectPrimitive.ItemIndicator>
-        <Icon icon="mingcute:check-fill" className="size-4" />
+        <Icon icon="icon-[mingcute--check-fill]" className="size-4" />
       </SelectPrimitive.ItemIndicator>
     </span>
 

@@ -1,18 +1,19 @@
+"use client";
+
 import type { VariantProps } from "class-variance-authority";
 import * as React from "react";
 import { useHover } from "ahooks";
 import { cva } from "class-variance-authority";
 import { useMergedState } from "rc-util";
 
-import { clsm } from "@acme/ui";
-
+import { clsm } from "..";
 import { triggerNativeEventFor } from "../_util/event";
 import { Icon } from "../icons";
 
 export const inputStatusVariants = cva(
   [
     "w-full",
-    "flex rounded-md border border-input ring-offset-background",
+    "flex border border-input ring-offset-background",
     "text-sm",
     "focus-within:outline-none",
     "disabled:cursor-not-allowed disabled:opacity-50",
@@ -22,12 +23,16 @@ export const inputStatusVariants = cva(
     variants: {
       borderless: {
         true: ["border-0", "focus-within:outline-none"],
-        false: ["border", "rounded-md", "focus-within:ring-2"],
+        false: [
+          "border",
+          "rounded-md [&>.addon-before]:rounded-s-md [&>.addon-after]:rounded-e-md",
+          "focus-within:ring-2",
+        ],
       },
       size: {
         sm: "",
-        default: "px-[11px] py-[5px]",
-        lg: "px-[11px] py-[9px]",
+        default: "",
+        lg: "",
       },
       status: {
         default: [
@@ -43,11 +48,24 @@ export const inputStatusVariants = cva(
     },
   },
 );
+export const inputSizeVariants = cva([], {
+  variants: {
+    size: {
+      sm: "",
+      default: "px-[11px] py-[5px]",
+      lg: "px-[11px] py-[9px]",
+    },
+  },
+  defaultVariants: {
+    size: "default",
+  },
+});
 type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> &
   VariantProps<typeof inputStatusVariants> & {
     /** If allow to remove input content with clear icon */
     allowClear?: boolean | { clearIcon: React.ReactNode };
     suffix?: React.ReactNode;
+    addonBefore?: React.ReactNode;
   };
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
@@ -55,10 +73,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       allowClear,
       borderless,
       className,
-      id: idProp,
+      hidden,
       size,
       status,
+
+      addonBefore,
       suffix,
+
+      id: idProp,
       onChange,
       ...props
     },
@@ -95,8 +117,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           }}
         >
           <Icon
-            icon="ant-design:close-circle-filled"
-            type="button"
+            icon="icon-[ant-design--close-circle-filled]"
             className="pointer-events-none size-4"
           />
         </button>
@@ -108,25 +129,37 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <span
         ref={wrapperRef}
+        aria-hidden={hidden ? "true" : undefined}
         className={clsm(
           inputStatusVariants({ borderless, size, status }),
           "cursor-text",
           className,
         )}
-        aria-hidden="true"
         onClick={() => {
           document.getElementById(id)?.focus();
         }}
       >
+        {addonBefore && (
+          <span
+            className={clsm(
+              "addon-before",
+              "border-e bg-muted",
+              inputSizeVariants({ size }),
+            )}
+          >
+            {addonBefore}
+          </span>
+        )}
         <input
           id={id}
+          ref={inputRef}
           className={clsm(
             "w-full",
             "bg-transparent",
             "placeholder:text-muted-foreground",
             "border-none outline-none",
+            inputSizeVariants({ size }),
           )}
-          ref={inputRef}
           onChange={(e) => {
             setValue(e.currentTarget.value);
             onChange?.(e);

@@ -7,7 +7,7 @@ import type {
   HTMLAttributes,
   ReactNode,
 } from "react";
-import React, { forwardRef, useRef, useState } from "react";
+import React, { forwardRef, Fragment, useRef, useState } from "react";
 import {
   flexRender,
   getCoreRowModel,
@@ -51,6 +51,7 @@ type TableProps<TRecord extends RecordWithCustomRow> =
     dataSource: TRecord[] | undefined;
     bordered?: boolean;
     // emptyRender?: EmptyProps;
+    /** Expandable config */
     expandable?: {
       expandedRowKeys: string[];
       expandedRowRender: (record: TRecord) => ReactNode;
@@ -71,7 +72,7 @@ type TableProps<TRecord extends RecordWithCustomRow> =
           offsetScroll?: number;
           getContainer?: () => HTMLElement;
         };
-    size?: "smal" | "default";
+    size?: "sm" | "default";
     /** Whether the table can be scrollable */
     scroll?: {
       x: number;
@@ -81,12 +82,17 @@ type TableProps<TRecord extends RecordWithCustomRow> =
 const TableInner = <TRecord extends Record<string, unknown>>(
   {
     className,
+    bordered,
+    size,
+
     columns: columnsProp,
     dataSource = [],
     pagination,
+    expandable,
     rowKey = "id",
     rowClassName,
     rowSelection: rowSelectionProp,
+
     sticky,
     scroll,
     ...props
@@ -101,8 +107,9 @@ const TableInner = <TRecord extends Record<string, unknown>>(
       transformColumnDefs(columnsProp, {
         rowKey,
         rowSelection: rowSelectionProp,
+        expandable,
       }),
-    [columnsProp, rowKey, rowSelectionProp],
+    [columnsProp, rowKey, rowSelectionProp, expandable],
   );
 
   const [expanded, setExpanded] = useState<ExpandedState>({});
@@ -170,9 +177,11 @@ const TableInner = <TRecord extends Record<string, unknown>>(
     },
     getCoreRowModel: getCoreRowModel(),
     // expandable
+    enableExpanding: !!expandable,
+    getExpandedRowModel: getExpandedRowModel(),
+    getRowCanExpand: () => true,
     getSubRows: (record) => record.children as TRecord[],
     onExpandedChange: setExpanded,
-    getExpandedRowModel: getExpandedRowModel(),
     // selection
     enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
@@ -214,9 +223,10 @@ const TableInner = <TRecord extends Record<string, unknown>>(
             className={clsm(
               !scroll?.x && "w-full",
               "caption-bottom text-sm",
-              "border-separate border-spacing-0",
-              // bordered &&
-              //   "tw-border tw-rounded-xl tw-border-solid tw-border-neutral-40",
+              // bordered
+              bordered &&
+                "border-separate border-spacing-0 rounded-md border-s border-t",
+              size === "sm" ? "[&_th]:" : "",
               className,
             )}
             style={tableStyles}
@@ -252,8 +262,11 @@ const TableInner = <TRecord extends Record<string, unknown>>(
                         key={header.id}
                         scope="col"
                         colSpan={header.colSpan}
+                        size={size}
                         style={getCommonPinningStyles(header.column)}
                         className={clsm(
+                          // bordered
+                          bordered && "border-b border-e",
                           // align
                           header.column.columnDef.meta?.align === "center" &&
                             "text-center",
@@ -334,6 +347,7 @@ const TableInner = <TRecord extends Record<string, unknown>>(
                     <TableRow key={row.id}>
                       <TableCell
                         colSpan={columns.length}
+                        size={size}
                         className={clsm(
                           row.original._customRowClassName as string,
                         )}
@@ -342,54 +356,74 @@ const TableInner = <TRecord extends Record<string, unknown>>(
                       </TableCell>
                     </TableRow>
                   ) : (
-                    <TableRow
-                      key={row.id}
-                      data-state={row.getIsSelected() && "selected"}
-                      className={rowClassName?.(row.original, index)}
-                    >
-                      {row.getVisibleCells().map((cell) => {
-                        return (
+                    <Fragment key={row.id}>
+                      <TableRow
+                        data-state={row.getIsSelected() && "selected"}
+                        className={clsm(
+                          rowClassName?.(row.original, index),
+                          row.getIsExpanded() ? "border-l border-r" : "",
+                        )}
+                      >
+                        {row.getVisibleCells().map((cell) => {
+                          return (
+                            <TableCell
+                              key={cell.id}
+                              size={size}
+                              style={getCommonPinningStyles(cell.column)}
+                              className={clsm(
+                                typeof cell.column.columnDef.meta?.className ===
+                                  "string"
+                                  ? cell.column.columnDef.meta.className
+                                  : cell.column.columnDef.meta?.className?.(
+                                      row.original,
+                                      index,
+                                    ),
+                                // bordered
+                                bordered && "border-e",
+                                // align
+                                cell.column.columnDef.meta?.align ===
+                                  "center" && "text-center",
+                                cell.column.columnDef.meta?.align === "right" &&
+                                  "text-right",
+                                // pinning
+                                scroll?.x &&
+                                  getCommonPinningClassName(cell.column, {
+                                    scrollLeft: wrapperScrollLeft,
+                                    scrollRight: wrapperScrollRight,
+                                  }),
+                                // selection column
+                                cell.id.endsWith("selection") && "px-0",
+                              )}
+                            >
+                              {flexRender(
+                                cell.column.columnDef.cell,
+                                cell.getContext(),
+                              )}
+                            </TableCell>
+                          );
+                        })}
+                      </TableRow>
+                      {row.getIsExpanded() && expandable && (
+                        <TableRow className="bg-gray-100">
+                          {/* 2nd row is a custom 1 cell row */}
                           <TableCell
-                            key={cell.id}
-                            style={getCommonPinningStyles(cell.column)}
-                            className={clsm(
-                              typeof cell.column.columnDef.meta?.className ===
-                                "string"
-                                ? cell.column.columnDef.meta.className
-                                : cell.column.columnDef.meta?.className?.(
-                                    row.original,
-                                    index,
-                                  ),
-                              // align
-                              cell.column.columnDef.meta?.align === "center" &&
-                                "text-center",
-                              cell.column.columnDef.meta?.align === "right" &&
-                                "text-right",
-                              // pinning
-                              scroll?.x &&
-                                getCommonPinningClassName(cell.column, {
-                                  scrollLeft: wrapperScrollLeft,
-                                  scrollRight: wrapperScrollRight,
-                                }),
-                              // selection column
-                              cell.id.endsWith("selection") && "px-0",
-                            )}
+                            colSpan={row.getVisibleCells().length}
+                            size={size}
+                            className="border-b border-l border-r px-2 text-[13px]"
                           >
-                            {flexRender(
-                              cell.column.columnDef.cell,
-                              cell.getContext(),
-                            )}
+                            {expandable.expandedRowRender(row.original)}
                           </TableCell>
-                        );
-                      })}
-                    </TableRow>
+                        </TableRow>
+                      )}
+                    </Fragment>
                   ),
                 )
               ) : (
                 <TableRow>
                   <TableCell
                     colSpan={columns.length}
-                    className="h-24 text-center"
+                    size={size}
+                    className={clsm("h-24 text-center", bordered && "border-e")}
                   >
                     No results.
                   </TableCell>

@@ -18,7 +18,7 @@ type Meta<TRecord> = {
   sorter?: boolean | BuiltInSortingFn | ((a: TRecord, b: TRecord) => number);
 };
 declare module "@tanstack/react-table" {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-interface
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-object-type
   interface ColumnMeta<TData extends RowData, TValue> extends Meta<TData> {}
 }
 
@@ -48,7 +48,7 @@ export type TableColumnDef<TRecord> = ExtraTableColumnDef<TRecord> &
           [K in keyof TRecord]-?: {
             dataIndex: K;
             render?: (
-              ctx: RenderContext<TRecord> & {
+              ctx: RenderContext<TRecord, K> & {
                 value: TRecord[K];
               },
             ) => ReactNode;
@@ -56,11 +56,12 @@ export type TableColumnDef<TRecord> = ExtraTableColumnDef<TRecord> &
         }[keyof TRecord])
   );
 
-type RenderContext<TRecord> = {
+type RenderContext<TRecord, TKey extends keyof TRecord | null = null> = {
   record: TRecord;
   index: number;
   row: Row<TRecord>;
   column: Column<TRecord>;
+  value: TKey extends keyof TRecord ? TRecord[TKey] : null;
 };
 
 export type RowSelection<TRecord> = {
@@ -72,3 +73,5 @@ export type RowSelection<TRecord> = {
   /** Callback executed when selected rows change */
   onChange?: (selectedRowKeys: TRecord[keyof TRecord][]) => void;
 };
+
+export type TableSize = "sm" | "default";

@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import colors from "tailwindcss/colors";
 import { fontSize } from "tailwindcss/defaultTheme";
 
 export default {
@@ -10,7 +11,6 @@ export default {
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         link: "hsl(var(--link))",
-        foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary-600))",
           hover: "hsl(var(--primary-hover))",
@@ -38,6 +38,7 @@ export default {
           900: "hsl(var(--ds-gray-900))",
           1000: "hsl(var(--ds-gray-1000))",
         },
+        foreground: "hsl(var(--foreground))",
         background: {
           DEFAULT: "hsl(var(--background))",
           hover: "hsl(var(--background-hover))",
@@ -48,17 +49,29 @@ export default {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
         muted: {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
+          DEFAULT: "var(--ds-blue-600)",
+          hover: "var(--ds-blue-700)",
           foreground: "hsl(var(--accent-foreground))",
+          muted: {
+            DEFAULT: "var(--ds-blue-100)",
+          },
+        },
+        danger: {
+          DEFAULT: "var(--ds-red-800)",
+          hover: "var(--ds-red-900)",
+          muted: {
+            DEFAULT: "var(--ds-red-100)",
+          },
+        },
+
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
         },
         error: {
           DEFAULT: "hsl(var(--error))",

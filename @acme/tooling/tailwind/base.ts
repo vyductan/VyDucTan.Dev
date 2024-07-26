@@ -177,4 +177,5 @@ export default {
       },
     },
   },
+  plugins: [addDynamicIconSelectors()],
 } satisfies Config;

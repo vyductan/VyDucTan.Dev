@@ -95,7 +95,10 @@ const FieldInner = <
                       })
                     : cloneElement(children, {
                         ...field,
-                        value: field.value || "",
+                        value:
+                          field.value !== undefined || field.value !== null
+                            ? field.value
+                            : "",
                         onChange: (e) => {
                           children.props.onChange?.(e);
                           field.onChange(e);

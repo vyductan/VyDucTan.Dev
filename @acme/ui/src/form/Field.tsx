@@ -54,7 +54,7 @@ const FieldInner = <
     // children,
     // className,
     ...props
-  }: FormItemProps<TFieldValues, TName>,
+  }: FieldProps<TFieldValues, TName>,
   ref: ForwardedRef<HTMLDivElement>,
 ) => {
   const id = useId();

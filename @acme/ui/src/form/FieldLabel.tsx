@@ -6,7 +6,7 @@ import { clsm } from "@acme/ui";
 import { Label } from "../label";
 import { useField } from "./useField";
 
-const FormLabel = React.forwardRef<
+const FieldLabel = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
 >(({ className, ...props }, ref) => {
@@ -21,6 +21,6 @@ const FormLabel = React.forwardRef<
     />
   );
 });
-FormLabel.displayName = "FormLabel";
+FieldLabel.displayName = "FieldLabel";
 
-export { FormLabel };
+export { FieldLabel };

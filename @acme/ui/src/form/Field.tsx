@@ -17,10 +17,10 @@ import { Controller, useFormContext } from "react-hook-form";
 import { clsm } from "..";
 import { FormFieldContext } from "./context";
 import { FieldDescription } from "./FieldDescription";
-import { FormLabel } from "./FieldLabel";
+import { FieldLabel } from "./FieldLabel";
 import { FieldMessage } from "./FieldMessage";
 
-type FormItemProps<
+type FieldProps<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > = Omit<ControllerProps<TFieldValues, TName>, "render" | "name"> & {

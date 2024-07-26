@@ -241,16 +241,25 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           ) : (
             <>
               {(!!loading || icon) && (
-                <Slot
+                <GenericSlot<Partial<IconProps>>
                   className={clsm(
                     size === "sm" ? "" : "size-4",
-                    children ? "mr-2" : "",
+                    // children ? "mr-2" : "",
                   )}
+                  // srOnly={
+                  //   srOnly && typeof children === "string"
+                  //     ? children
+                  //     : undefined
+                  // }
                 >
                   {loading ? <LoadingIcon /> : icon}
-                </Slot>
+                </GenericSlot>
               )}
-              {children}
+              {srOnly && typeof children === "string" ? (
+                <span className="sr-only sm:not-sr-only">{children}</span>
+              ) : (
+                children
+              )}
             </>
           )}
         </Comp>

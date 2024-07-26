@@ -157,6 +157,7 @@ const buttonVariants = cva(
       {
         size: "default",
         shape: ["icon", "circle"],
+        // srOnly: false,
         className: "min-w-8 w-8",
       },
       {
@@ -187,7 +188,8 @@ export interface ButtonProps
   asChild?: boolean;
   href?: string;
   loading?: boolean;
-  icon?: React.ReactNode;
+  // icon?: React.ReactNode;
+  icon?: React.ReactElement<IconProps>;
   color?: NonNullable<ButtonVariants["color"]>;
   variant?: Exclude<ButtonVariants["variant"], "primary">;
 }

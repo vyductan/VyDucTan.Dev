@@ -34,13 +34,10 @@ const Radio = React.forwardRef<
           />
         </RadioGroupPrimitive.Indicator>
       </RadioGroupPrimitive.Item>
-      <Label htmlFor={id} className="cursor-pointer px-2">
-        {label}
-      </Label>
-    </div>
+      <span className="cursor-pointer px-2">{label}</span>
+    </label>
   );
 });
 Radio.displayName = RadioGroupPrimitive.Item.displayName;
 
-export { RadioGroup, Radio };
-export type { RadioGroupProps, RadioOption };
+export { Radio };

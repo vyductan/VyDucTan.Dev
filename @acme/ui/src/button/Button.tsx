@@ -204,6 +204,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       primary,
       size,
       shape,
+      srOnly,
       variant,
       icon,
       ...props

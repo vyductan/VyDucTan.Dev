@@ -18,20 +18,41 @@ const Checkbox = React.forwardRef<
   CheckboxProps
 >(
   (
-    { checked, defaultChecked, className, indeterminate, onChange, ...props },
+    {
+      id,
+      "aria-describedby": ariaDescribedBy,
+      "aria-invalid": ariaInvalid,
+
+      children,
+      checked,
+      defaultChecked,
+      className,
+      indeterminate,
+      onChange,
+      ...props
+    },
     ref,
   ) => {
-    const id = React.useId();
     return (
-      <label className={clsm("inline-flex", className)} htmlFor={id}>
+      <label
+        id={id}
+        aria-describedby={ariaDescribedBy}
+        aria-invalid={ariaInvalid}
+        className={clsm("inline-flex items-baseline", "text-sm", className)}
+      >
         <CheckboxPrimitive.Root
-          id={id}
           ref={ref}
-          checked={indeterminate ? "indeterminate" : checked}
+          checked={
+            indeterminate
+              ? "indeterminate"
+              : typeof props.value === "boolean"
+                ? props.value
+                : checked
+          }
           defaultChecked={indeterminate ? "indeterminate" : defaultChecked}
           className={clsm(
             "peer size-4 shrink-0 self-center rounded-[4px]",
-            "border border-ds-gray-500 bg-background ring-offset-background",
+            "border-ds-gray-500 border bg-background ring-offset-background",
             "disabled:cursor-not-allowed disabled:opacity-50",
             "data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-white",
             "data-[state=indeterminate]:text-ds-gray-900",
@@ -42,15 +63,25 @@ const Checkbox = React.forwardRef<
           {...props}
         >
           <CheckboxPrimitive.Indicator
-            className={clsm("flex items-center justify-center text-current")}
+            className={clsm(
+              "flex h-full w-full items-center justify-center text-current",
+            )}
           >
             {indeterminate ? (
-              <Icon icon="ant-design:x-filled" className="size-[10px]" />
+              <Icon
+                icon="icon-[ant-design--x-filled]"
+                className="size-[10px]"
+              />
             ) : (
-              <Icon icon="mingcute:check-fill" className="size-[14px]" />
+              <Icon
+                icon="icon-[mingcute--check-fill]"
+                // className="size-4"
+                className="size-[14px]"
+              />
             )}
           </CheckboxPrimitive.Indicator>
         </CheckboxPrimitive.Root>
+        <span className="cursor-pointer px-2">{children}</span>
       </label>
     );
   },

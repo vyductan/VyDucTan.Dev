@@ -5,13 +5,15 @@ import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
 
+import type { IconProps } from "../icons";
 import { clsm } from "..";
 import Wave from "../_util/wave";
+import { GenericSlot } from "../slot";
 import { LoadingIcon } from "./LoadingIcon";
 
 const buttonVariants = cva(
   [
-    "inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-white transition-colors",
+    "inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-white transition-colors gap-2",
     "border",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-950 focus-visible:ring-offset-2",
     "dark:ring-offset-gray-950 dark:focus-visible:ring-gray-300",
@@ -44,7 +46,7 @@ const buttonVariants = cva(
           "border border-dashed border-border",
           "hover:border-primary-hover hover:text-primary-hover",
         ],
-        ghost: ["border-transparent", "hover:bg-gray-100 hover:text-gray-900"],
+        ghost: ["border-transparent", "hover:bg-gray-300 hover:text-gray-900"],
         light: ["border-transparent", "hover:bg-gray-100 hover:text-gray-900"],
         link: "text-gray-900 underline-offset-4 hover:underline dark:text-gray-50",
       },

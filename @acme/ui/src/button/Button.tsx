@@ -223,7 +223,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               disabled,
               primary: !primary && !!variant ? null : !primary ? true : primary,
               size,
-              shape: icon && !children ? (shape ?? "icon") : shape,
+              shape: (icon && !children) || srOnly ? (shape ?? "icon") : shape,
+              // shape:
+              //   (icon && !children) || icon?.props.srOnly
+              //     ? (shape ?? "icon")
+              //     : shape,
               variant,
               className,
             }),

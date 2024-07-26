@@ -1,6 +1,88 @@
 import type { Config } from "tailwindcss";
-import colors from "tailwindcss/colors";
+import type {
+  RecursiveKeyValuePair,
+  ResolvableTo,
+} from "tailwindcss/types/config";
+import { addDynamicIconSelectors } from "@iconify/tailwind";
 import { fontSize } from "tailwindcss/defaultTheme";
+
+const baseColors = {
+  primary: {
+    DEFAULT: "hsl(var(--primary-600))",
+    hover: "hsl(var(--primary-hover))",
+    foreground: "hsl(var(--primary-foreground))",
+    100: "hsl(var(--primary-100))",
+    200: "hsl(var(--primary-200))",
+    300: "hsl(var(--primary-300))",
+    400: "hsl(var(--primary-400))",
+    500: "hsl(var(--primary-500))",
+    600: "hsl(var(--primary-600))",
+    700: "hsl(var(--primary-700))",
+    800: "hsl(var(--primary-800))",
+    900: "hsl(var(--primary-900))",
+    950: "hsl(var(--primary-950))",
+  },
+  gray: {
+    100: "oklch(var(--ds-gray-100) / <alpha-value>)",
+    200: "oklch(var(--ds-gray-200) / <alpha-value>)",
+    300: "oklch(var(--ds-gray-300) / <alpha-value>)",
+    400: "oklch(var(--ds-gray-400) / <alpha-value>)",
+    500: "oklch(var(--ds-gray-500) / <alpha-value>)",
+    600: "oklch(var(--ds-gray-600) / <alpha-value>)",
+    700: "oklch(var(--ds-gray-700) / <alpha-value>)",
+    800: "oklch(var(--ds-gray-800) / <alpha-value>)",
+    900: "oklch(var(--ds-gray-900) / <alpha-value>)",
+    950: "oklch(var(--ds-gray-950) / <alpha-value>)",
+  },
+  blue: {
+    100: "oklch(var(--ds-blue-100) / <alpha-value>)",
+    200: "oklch(var(--ds-blue-200) / <alpha-value>)",
+    300: "oklch(var(--ds-blue-300) / <alpha-value>)",
+    400: "oklch(var(--ds-blue-400) / <alpha-value>)",
+    500: "oklch(var(--ds-blue-500) / <alpha-value>)",
+    600: "oklch(var(--ds-blue-600) / <alpha-value>)",
+    700: "oklch(var(--ds-blue-700) / <alpha-value>)",
+    800: "oklch(var(--ds-blue-800) / <alpha-value>)",
+    900: "oklch(var(--ds-blue-900) / <alpha-value>)",
+    950: "oklch(var(--ds-blue-950) / <alpha-value>)",
+  },
+  green: {
+    100: "oklch(var(--ds-green-100) / <alpha-value>)",
+    200: "oklch(var(--ds-green-200) / <alpha-value>)",
+    300: "oklch(var(--ds-green-300) / <alpha-value>)",
+    400: "oklch(var(--ds-green-400) / <alpha-value>)",
+    500: "oklch(var(--ds-green-500) / <alpha-value>)",
+    600: "oklch(var(--ds-green-600) / <alpha-value>)",
+    700: "oklch(var(--ds-green-700) / <alpha-value>)",
+    800: "oklch(var(--ds-green-800) / <alpha-value>)",
+    900: "oklch(var(--ds-green-900) / <alpha-value>)",
+    950: "oklch(var(--ds-green-950) / <alpha-value>)",
+  },
+  red: {
+    100: "oklch(var(--ds-red-100) / <alpha-value>)",
+    200: "oklch(var(--ds-red-200) / <alpha-value>)",
+    300: "oklch(var(--ds-red-300) / <alpha-value>)",
+    400: "oklch(var(--ds-red-400) / <alpha-value>)",
+    500: "oklch(var(--ds-red-500) / <alpha-value>)",
+    600: "oklch(var(--ds-red-600) / <alpha-value>)",
+    700: "oklch(var(--ds-red-700) / <alpha-value>)",
+    800: "oklch(var(--ds-red-800) / <alpha-value>)",
+    900: "oklch(var(--ds-red-900) / <alpha-value>)",
+    950: "oklch(var(--ds-red-950) / <alpha-value>)",
+  },
+  teal: {
+    100: "oklch(var(--ds-teal-100) / <alpha-value>)",
+    200: "oklch(var(--ds-teal-200) / <alpha-value>)",
+    300: "oklch(var(--ds-teal-300) / <alpha-value>)",
+    400: "oklch(var(--ds-teal-400) / <alpha-value>)",
+    500: "oklch(var(--ds-teal-500) / <alpha-value>)",
+    600: "oklch(var(--ds-teal-600) / <alpha-value>)",
+    700: "oklch(var(--ds-teal-700) / <alpha-value>)",
+    800: "oklch(var(--ds-teal-800) / <alpha-value>)",
+    900: "oklch(var(--ds-teal-900) / <alpha-value>)",
+    950: "oklch(var(--ds-teal-950) / <alpha-value>)",
+  },
+} satisfies ResolvableTo<RecursiveKeyValuePair>;
 
 export default {
   darkMode: ["class"],
@@ -8,42 +90,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        link: "hsl(var(--link))",
-        primary: {
-          DEFAULT: "hsl(var(--primary-600))",
-          hover: "hsl(var(--primary-hover))",
-          foreground: "hsl(var(--primary-foreground))",
-          100: "hsl(var(--primary-100))",
-          200: "hsl(var(--primary-200))",
-          300: "hsl(var(--primary-300))",
-          400: "hsl(var(--primary-400))",
-          500: "hsl(var(--primary-500))",
-          600: "hsl(var(--primary-600))",
-          700: "hsl(var(--primary-700))",
-          800: "hsl(var(--primary-800))",
-          900: "hsl(var(--primary-900))",
-          950: "hsl(var(--primary-950))",
+        ...baseColors,
+        foreground: {
+          DEFAULT: "hsl(var(--foreground))",
+          muted: {
+            DEFAULT: baseColors.gray[900],
+          },
         },
-        "ds-gray": {
-          100: "hsl(var(--ds-gray-100))",
-          200: "hsl(var(--ds-gray-200))",
-          300: "hsl(var(--ds-gray-300))",
-          400: "hsl(var(--ds-gray-400))",
-          500: "hsl(var(--ds-gray-500))",
-          600: "hsl(var(--ds-gray-600))",
-          700: "hsl(var(--ds-gray-700))",
-          800: "hsl(var(--ds-gray-800))",
-          900: "hsl(var(--ds-gray-900))",
-          1000: "hsl(var(--ds-gray-1000))",
-        },
-        foreground: "hsl(var(--foreground))",
         background: {
           DEFAULT: "hsl(var(--background))",
           hover: "hsl(var(--background-hover))",
           disabled: "hsl(var(--background-disabled))",
-          200: "hsl(var(--background-200))",
+          muted: {
+            DEFAULT: baseColors.gray[100],
+          },
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",

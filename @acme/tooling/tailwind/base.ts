@@ -114,52 +114,48 @@ export default {
           foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT: "var(--ds-blue-600)",
-          hover: "var(--ds-blue-700)",
+          DEFAULT: baseColors.blue[600],
+          hover: baseColors.blue[700],
           foreground: "hsl(var(--accent-foreground))",
           muted: {
-            DEFAULT: "var(--ds-blue-100)",
+            DEFAULT: baseColors.blue[100],
           },
         },
         danger: {
-          DEFAULT: "var(--ds-red-800)",
-          hover: "var(--ds-red-900)",
+          DEFAULT: baseColors.red[800],
+          hover: baseColors.red[900],
           muted: {
-            DEFAULT: "var(--ds-red-100)",
+            DEFAULT: baseColors.red[100],
           },
         },
-
+        success: {
+          DEFAULT: baseColors.green[600],
+          hover: baseColors.green[700],
+          muted: {
+            DEFAULT: baseColors.green[100],
+          },
+        },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
-        error: {
-          DEFAULT: "hsl(var(--error))",
-          active: "hsl(var(--error-active))",
-          hover: "hsl(var(--error-hover))",
-        },
-        warning: {
-          DEFAULT: "hsl(var(--warning))",
-        },
+
         border: {
           DEFAULT: "var(--border)",
           hover: "var(--border-hover)",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
         },
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        placeholder: "hsl(var(--placeholder))",
+        input: "hsl(var(--input))",
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        ring: "hsl(var(--ring))",
       },
-      // textColor: ({ theme }) => ({
-      //   // color: THEME_TOKEN.colorText,
-      //   // foreground: theme("colors.gray.800"),
-      //   // warning: THEME_TOKEN.colorWarningText,
-      // }),
+      /* End Colors */
 
       fontSize: {
         md: fontSize.base,

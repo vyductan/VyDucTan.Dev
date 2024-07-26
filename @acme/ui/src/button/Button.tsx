@@ -57,8 +57,28 @@ const buttonVariants = cva(
       },
       shape: {
         default: "",
-        icon: "p-0",
+        icon: [
+          // "p-0 ",
+          // "sm:[&:has(span.sm:not-sr-only)]:w-auto [&:not(:has(span.sm\\:not-sr-only))]:p-0",
+          // '[&:has(span[class*="sm:not-sr-only"])]:w-auto [&:not(:has(span.sm\\:not-sr-only))]:p-0',
+          // "sm:[&:has(span.size-4)]:w-auto [&:not(:has(span.sm\\:not-sr-only))]:p-0",
+          // "sm:has-[span.size-4]:w-auto [&:not(:has(span.sm\\:not-sr-only))]:p-0",
+          // "has-[span.sm\\:not-sr-only]:w-auto [&:not(:has(span.sm\\:not-sr-only))]:p-0",
+          // "has-[span.sm\\:not-sr-only]:w-auto",
+          // 'has-[span[class*="sm:not-sr-only"]]:sm:w-auto [&:not(:has(span.sm\\:not-sr-only))]:p-0',
+          // '[&:has(span[class*="sm:not-sr-only"])]:sm:w-auto [&:not(:has(span.sm\\:not-sr-only))]:p-0',
+          // "!p-[unset]",
+          // 'has-[span[class*="sm:not-sr-only"]]:sm:w-auto has-[span[class*="sm:not-sr-only"]]:p-0 has-[span[class*="sm:not-sr-only"]]:sm:p-[auto]',
+          'has-[span[class*="sm:not-sr-only"]]:sm:w-auto',
+          'has-[span[class*="sm:not-sr-only"]]:max-sm:p-0',
+          '[&:not(:has(span[class*="sm:not-sr-only"]))]:p-0',
+        ],
         circle: "rounded-full",
+      },
+      /* Whenever to hidden text at mobile view */
+      srOnly: {
+        true: "",
+        false: "",
       },
       disabled: {
         true: "pointer-events-none opacity-50",

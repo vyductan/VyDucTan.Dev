@@ -22,10 +22,12 @@ import { useMergedState } from "rc-util";
 import type { PaginationProps } from "../pagination";
 import type { RowSelection, TableColumnDef } from "./types";
 import { clsm } from "..";
-import { useTranslation } from "../../../../apps/nextjs/src/locales/client";
 import { Icon } from "../icons";
 import { Pagination } from "../pagination";
+import { Skeleton } from "../skeleton";
+import { Spin } from "../spin";
 import { Tooltip } from "../tooltip";
+import { tableLocale_en } from "./locale/en_US";
 import { getCommonPinningClassName, getCommonPinningStyles } from "./styles";
 import { TableBody } from "./TableBody";
 import { TableCell } from "./TableCell";
@@ -47,13 +49,13 @@ type RecordWithCustomRow<
     });
 type TableProps<TRecord extends RecordWithCustomRow> =
   HTMLAttributes<HTMLTableElement> & {
-    columns: TableColumnDef<TRecord>[];
-    dataSource: TRecord[] | undefined;
+    columns?: TableColumnDef<TRecord>[];
+    dataSource?: TRecord[] | undefined;
     bordered?: boolean;
     // emptyRender?: EmptyProps;
     /** Expandable config */
     expandable?: {
-      expandedRowKeys: string[];
+      expandedRowKeys?: string[];
       expandedRowRender: (record: TRecord) => ReactNode;
       rowExpandable?: (record: TRecord) => boolean;
       onExpand?: (record: TRecord) => void;
@@ -64,6 +66,7 @@ type TableProps<TRecord extends RecordWithCustomRow> =
     rowSelection?: RowSelection<TRecord>;
     pagination?: PaginationProps;
     loading?: boolean;
+    skeleton?: boolean;
     /** Set sticky header and scroll bar */
     sticky?:
       | boolean
@@ -77,6 +80,8 @@ type TableProps<TRecord extends RecordWithCustomRow> =
     scroll?: {
       x: number;
     };
+    /** Translation */
+    locale?: typeof tableLocale_en.Table;
   };
 
 const TableInner = <TRecord extends Record<string, unknown>>(
@@ -84,8 +89,10 @@ const TableInner = <TRecord extends Record<string, unknown>>(
     className,
     bordered,
     size,
+    loading = false,
+    skeleton = false,
 
-    columns: columnsProp,
+    columns: columnsProp = [],
     dataSource = [],
     pagination,
     expandable,
@@ -95,12 +102,11 @@ const TableInner = <TRecord extends Record<string, unknown>>(
 
     sticky,
     scroll,
+    locale = tableLocale_en.Table,
     ...props
   }: TableProps<TRecord>,
   ref: ForwardedRef<HTMLTableElement>,
 ) => {
-  const { t } = useTranslation();
-
   const data = React.useMemo(() => dataSource, [dataSource]);
   const columns = React.useMemo(
     () =>
@@ -212,12 +218,11 @@ const TableInner = <TRecord extends Record<string, unknown>>(
 
   return (
     <>
-      <div className="relative">
+      <Spin spinning={loading} className="relative">
         <div
           ref={wrapperRef}
           className={clsm(scroll?.x && "overflow-x-auto overflow-y-hidden")}
         >
-          {/* {loading && <Loader backdrop className="tw-z-10" />} */}
           <table
             ref={ref}
             className={clsm(
@@ -265,6 +270,8 @@ const TableInner = <TRecord extends Record<string, unknown>>(
                         size={size}
                         style={getCommonPinningStyles(header.column)}
                         className={clsm(
+                          // column className
+                          header.column.columnDef.meta?.className,
                           // bordered
                           bordered && "border-b border-e",
                           // align
@@ -291,10 +298,10 @@ const TableInner = <TRecord extends Record<string, unknown>>(
                           title={
                             header.column.getCanSort()
                               ? header.column.getNextSortingOrder() === "asc"
-                                ? t("Table.triggerAsc")
+                                ? locale.triggerAsc
                                 : header.column.getNextSortingOrder() === "desc"
-                                  ? t("Table.triggerDesc")
-                                  : t("Table.cancelSort")
+                                  ? locale.triggerDesc
+                                  : locale.cancelSort
                               : undefined
                           }
                         >
@@ -340,100 +347,125 @@ const TableInner = <TRecord extends Record<string, unknown>>(
               ))}
             </TableHeader>
 
-            <TableBody>
-              {table.getRowModel().rows.length ? (
-                table.getRowModel().rows.map((row, index) =>
-                  row.original._customRow ? (
-                    <TableRow key={row.id}>
-                      <TableCell
-                        colSpan={columns.length}
-                        size={size}
-                        className={clsm(
-                          row.original._customRowClassName as string,
-                        )}
-                      >
-                        {row.original._customRow as React.ReactNode}
-                      </TableCell>
-                    </TableRow>
-                  ) : (
-                    <Fragment key={row.id}>
-                      <TableRow
-                        data-state={row.getIsSelected() && "selected"}
-                        className={clsm(
-                          rowClassName?.(row.original, index),
-                          row.getIsExpanded() ? "border-l border-r" : "",
-                        )}
-                      >
-                        {row.getVisibleCells().map((cell) => {
-                          return (
+            {!skeleton ? (
+              <TableBody>
+                {table.getRowModel().rows.length ? (
+                  table.getRowModel().rows.map((row, index) =>
+                    row.original._customRow ? (
+                      <TableRow key={row.id}>
+                        <TableCell
+                          colSpan={columns.length}
+                          size={size}
+                          className={clsm(
+                            row.original._customRowClassName as string,
+                          )}
+                        >
+                          {row.original._customRow as React.ReactNode}
+                        </TableCell>
+                      </TableRow>
+                    ) : (
+                      <Fragment key={row.id}>
+                        <TableRow
+                          data-state={row.getIsSelected() && "selected"}
+                          className={clsm(
+                            rowClassName?.(row.original, index),
+                            row.getIsExpanded() ? "border-l border-r" : "",
+                          )}
+                        >
+                          {row.getVisibleCells().map((cell) => {
+                            return (
+                              <TableCell
+                                key={cell.id}
+                                size={size}
+                                style={getCommonPinningStyles(cell.column)}
+                                className={clsm(
+                                  // column className
+                                  cell.column.columnDef.meta?.className,
+                                  // row className
+                                  // typeof cell.column.columnDef.meta?.className ===
+                                  //   "string"
+                                  //   ? cell.column.columnDef.meta.className
+                                  //   : cell.column.columnDef.meta?.className?.(
+                                  //       row.original,
+                                  //       index,
+                                  //     ),
+                                  // bordered
+                                  bordered && "border-e",
+                                  // align
+                                  cell.column.columnDef.meta?.align ===
+                                    "center" && "text-center",
+                                  cell.column.columnDef.meta?.align ===
+                                    "right" && "text-right",
+                                  // pinning
+                                  scroll?.x &&
+                                    getCommonPinningClassName(cell.column, {
+                                      scrollLeft: wrapperScrollLeft,
+                                      scrollRight: wrapperScrollRight,
+                                    }),
+                                  // selection column
+                                  cell.id.endsWith("selection") && "px-0",
+                                )}
+                              >
+                                {flexRender(
+                                  cell.column.columnDef.cell,
+                                  cell.getContext(),
+                                )}
+                              </TableCell>
+                            );
+                          })}
+                        </TableRow>
+                        {row.getIsExpanded() && expandable && (
+                          <TableRow className="bg-gray-50">
+                            {/* 2nd row is a custom 1 cell row */}
                             <TableCell
-                              key={cell.id}
+                              colSpan={row.getVisibleCells().length}
                               size={size}
-                              style={getCommonPinningStyles(cell.column)}
-                              className={clsm(
-                                typeof cell.column.columnDef.meta?.className ===
-                                  "string"
-                                  ? cell.column.columnDef.meta.className
-                                  : cell.column.columnDef.meta?.className?.(
-                                      row.original,
-                                      index,
-                                    ),
-                                // bordered
-                                bordered && "border-e",
-                                // align
-                                cell.column.columnDef.meta?.align ===
-                                  "center" && "text-center",
-                                cell.column.columnDef.meta?.align === "right" &&
-                                  "text-right",
-                                // pinning
-                                scroll?.x &&
-                                  getCommonPinningClassName(cell.column, {
-                                    scrollLeft: wrapperScrollLeft,
-                                    scrollRight: wrapperScrollRight,
-                                  }),
-                                // selection column
-                                cell.id.endsWith("selection") && "px-0",
-                              )}
+                              className="border-b border-l border-r px-2 text-[13px]"
                             >
-                              {flexRender(
-                                cell.column.columnDef.cell,
-                                cell.getContext(),
-                              )}
+                              {expandable.expandedRowRender(row.original)}
+                            </TableCell>
+                          </TableRow>
+                        )}
+                      </Fragment>
+                    ),
+                  )
+                ) : (
+                  <TableRow>
+                    <TableCell
+                      colSpan={columns.length}
+                      className={clsm(
+                        "h-48 text-center",
+                        bordered && "border-e",
+                      )}
+                    >
+                      {!loading && "No data"}
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            ) : (
+              <TableBody>
+                {Array(5)
+                  .fill(0)
+                  .map((_, index) => {
+                    return (
+                      <TableRow key={index} className="hover:bg-transparent">
+                        {table.getVisibleFlatColumns().map((x) => {
+                          return (
+                            <TableCell key={x.id}>
+                              <Skeleton className="h-4 w-full" />
                             </TableCell>
                           );
                         })}
                       </TableRow>
-                      {row.getIsExpanded() && expandable && (
-                        <TableRow className="bg-gray-100">
-                          {/* 2nd row is a custom 1 cell row */}
-                          <TableCell
-                            colSpan={row.getVisibleCells().length}
-                            size={size}
-                            className="border-b border-l border-r px-2 text-[13px]"
-                          >
-                            {expandable.expandedRowRender(row.original)}
-                          </TableCell>
-                        </TableRow>
-                      )}
-                    </Fragment>
-                  ),
-                )
-              ) : (
-                <TableRow>
-                  <TableCell
-                    colSpan={columns.length}
-                    size={size}
-                    className={clsm("h-24 text-center", bordered && "border-e")}
-                  >
-                    No results.
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
+                    );
+                  })}
+              </TableBody>
+            )}
           </table>
         </div>
         {pagination && <Pagination className="my-4" {...pagination} />}
-      </div>
+      </Spin>
     </>
   );
 };

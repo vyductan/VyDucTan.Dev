@@ -11,11 +11,11 @@ export const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(
     <td
       ref={ref}
       className={clsm(
-        "px-2",
+        "px-3",
         size === "sm" ? "py-2" : "py-3",
         "border-b",
         "break-words",
-        "group-hover:bg-background-hover",
+        // "group-hover:bg-background-hover",
         className,
       )}
       {...props}

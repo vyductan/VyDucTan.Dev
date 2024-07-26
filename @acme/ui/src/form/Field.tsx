@@ -185,7 +185,7 @@ const FieldRender = forwardRef<HTMLDivElement, FieldRenderProps>(
             {/* Label */}
             {label ? (
               typeof label === "string" ? (
-                <FormLabel>{label}</FormLabel>
+                <FieldLabel>{label}</FieldLabel>
               ) : (
                 label
               )

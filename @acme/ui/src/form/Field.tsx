@@ -155,7 +155,7 @@ type FieldRenderProps = {
   fieldDescriptionId?: string;
   fieldMessageId?: string;
 };
-const FieldRender = forwardRef<HTMLDivElement, FormItemRenderProps>(
+const FieldRender = forwardRef<HTMLDivElement, FieldRenderProps>(
   (
     {
       className,

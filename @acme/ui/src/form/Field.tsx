@@ -143,7 +143,7 @@ const FieldInner = <
   return null;
 };
 
-type FormItemRenderProps = {
+type FieldRenderProps = {
   className?: string;
 
   label?: string | JSX.Element;

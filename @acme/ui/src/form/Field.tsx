@@ -239,7 +239,8 @@ const Field = forwardRef(FieldInner) as <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >(
-  props: FormItemProps<TFieldValues, TName>,
+  props: FieldProps<TFieldValues, TName>,
 ) => ReturnType<typeof FieldInner>;
 
 export { Field };
+export type { FieldProps };

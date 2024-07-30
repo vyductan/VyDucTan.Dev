@@ -145,8 +145,9 @@ export default {
         },
 
         border: {
-          DEFAULT: "var(--border)",
-          hover: "var(--border-hover)",
+          DEFAULT: baseColors.gray[400],
+          hover: baseColors.gray[500],
+          active: baseColors.gray[600],
         },
         card: {
           DEFAULT: "hsl(var(--card))",

@@ -7,9 +7,13 @@ import { addDynamicIconSelectors } from "@iconify/tailwind";
 import { fontSize } from "tailwindcss/defaultTheme";
 
 const baseColors = {
+  surface: {
+    DEFAULT: "oklch(var(--ds-background-100) / <alpha-value>)",
+    secondary: "oklch(var(--ds-background-200) / <alpha-value>)",
+  },
   primary: {
     DEFAULT: "hsl(var(--primary-600))",
-    hover: "hsl(var(--primary-hover))",
+    hover: "hsl(var(--primary-700))",
     foreground: "hsl(var(--primary-foreground))",
     100: "hsl(var(--primary-100))",
     200: "hsl(var(--primary-200))",

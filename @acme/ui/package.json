@@ -6,15 +6,28 @@
   "license": "MIT",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts",
-    "./*": "./src/*/index.ts",
-    "./antd/*": "./src/antd/*/index.ts",
-    "./pro/*": "./src/pro/*/index.ts",
-    "./types": "./src/types.ts"
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "types": "./dist/src/*/index.d.ts",
+      "default": "./src/*/index.ts"
+    },
+    "./antd/*": {
+      "types": "./dist/src/*/index.d.ts",
+      "default": "./src/*/index.ts"
+    },
+    "./pro/*": {
+      "types": "./dist/src/pro/*/index.d.ts",
+      "default": "./src/pro/*/index.ts"
+    }
   },
   "scripts": {
     "add": "pnpm dlx shadcn-ui add",
-    "clean": "rm -rf .turbo node_modules",
+    "build": "tsc",
+    "clean": "rm -rf .turbo dist node_modules",
+    "dev": "tsc",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
@@ -24,6 +37,7 @@
     "@acme/hooks": "workspace:*",
     "@acme/utils": "workspace:*",
     "@hookform/resolvers": "^3.9.0",
+    "@iconify/json": "^2.2.230",
     "@lexical/react": "^0.16.1",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",

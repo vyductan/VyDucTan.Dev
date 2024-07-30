@@ -5,8 +5,14 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./index.ts",
-    "./next/*": "./src/next/*/index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./index.ts"
+    },
+    "./next/*": {
+      "types": "./dist/src/next/*/index.d.ts",
+      "default": "./dist/src/next/*/index.ts"
+    }
   },
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
@@ -20,9 +26,6 @@
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "typescript": "^5.5.3"
-  },
-  "peerDependencies": {
-    "react": "18.2.0"
+    "typescript": "catalog:"
   }
 }

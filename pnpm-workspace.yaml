@@ -7,8 +7,12 @@ packages:
   - "!@acme/.git"
 
 catalog:
-  eslint: ^9.6.0
-  prettier: ^3.3.2
+  "@tanstack/react-query": ^5.51.9
+  "@trpc/client": ^11.0.0-rc.466
+  "@trpc/react-query": ^11.0.0-rc.466
+  "@trpc/server": ^11.0.0-rc.466
+  eslint: ^9.8.0
+  prettier: ^3.3.3
   typescript: ^5.5.3
   zod: ^3.23.8
 

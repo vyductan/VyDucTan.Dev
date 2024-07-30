@@ -5,17 +5,18 @@ import { read, request } from "httpx";
 import { z } from "zod";
 
 import { eq } from "@acme/db";
-import { AddWordSchema, Word } from "@acme/db/schema";
 
 import { paginationSchema, searchSchema } from "../_util/query";
 import { protectedProcedure } from "../trpc";
+import { WordsTable } from "./schema";
+import { AddWordSchema } from "./validator";
 
-export const wordRouter = {
+export const wordsRouter = {
   all: protectedProcedure
     .input(searchSchema.merge(paginationSchema))
     .query(({ ctx }) => {
-      return ctx.db.query.Word.findMany({
-        orderBy: Word.word,
+      return ctx.db.query.WordsTable.findMany({
+        orderBy: WordsTable.word,
         limit: 10,
       });
     }),
@@ -23,7 +24,7 @@ export const wordRouter = {
   byId: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(({ ctx, input }) => {
-      return ctx.db.query.Word.findFirst({
+      return ctx.db.query.WordsTable.findFirst({
         where: (table, { eq }) => eq(table.id, input.id),
       });
     }),
@@ -31,7 +32,7 @@ export const wordRouter = {
   byCambridge: protectedProcedure
     .input(z.object({ word: z.string() }))
     .query(async ({ input }) => {
-      const data: Array<typeof Word.$inferSelect> = [];
+      const data: Array<typeof WordsTable.$inferSelect> = [];
       const res = await request(
         "https://dictionary.cambridge.org/dictionary/english/" + input.word,
         {},
@@ -54,14 +55,14 @@ export const wordRouter = {
               highlight: $(el).find("span.lu.dlu").text(),
               text: $(el).find("span.eg.deg").text(),
             })),
-        } as unknown as typeof Word.$inferSelect;
+        } as unknown as typeof WordsTable.$inferSelect;
         data.push(word);
       });
       return data;
     }),
 
   create: protectedProcedure.input(AddWordSchema).mutation(({ ctx, input }) => {
-    return ctx.db.insert(Word).values(input);
+    return ctx.db.insert(WordsTable).values(input);
   }),
 
   update: protectedProcedure
@@ -73,15 +74,18 @@ export const wordRouter = {
       ),
     )
     .mutation(({ ctx, input }) => {
-      return ctx.db.update(Word).set(input).where(eq(Word.id, input.id));
+      return ctx.db
+        .update(WordsTable)
+        .set(input)
+        .where(eq(WordsTable.id, input.id));
     }),
 
   delete: protectedProcedure.input(z.string()).mutation(({ ctx, input }) => {
-    return ctx.db.delete(Word).where(eq(Word.id, input));
+    return ctx.db.delete(WordsTable).where(eq(WordsTable.id, input));
   }),
 
   getWordToLearn: protectedProcedure.query(({ ctx }) => {
-    return ctx.db.query.Word.findFirst({
+    return ctx.db.query.WordsTable.findFirst({
       where: (t, { and, lt, ne, or, isNull }) =>
         and(
           ne(t.mastery, "5"),
@@ -104,11 +108,11 @@ export const wordRouter = {
     )
     .mutation(({ ctx, input }) => {
       return ctx.db
-        .update(Word)
+        .update(WordsTable)
         .set({
           ...input,
           lastLearnedAt: new Date(),
         })
-        .where(eq(Word.id, input.id));
+        .where(eq(WordsTable.id, input.id));
     }),
 } satisfies TRPCRouterRecord;

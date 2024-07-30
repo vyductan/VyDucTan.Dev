@@ -11,6 +11,7 @@ export const env = createEnv({
       .enum(["development", "production", "test"])
       .default("development"),
     VERCEL_ENV: z.enum(["development", "preview", "production"]).optional(),
+    PORT: z.string().optional(),
   },
   /**
    * Specify your server-side environment variables schema here.
@@ -39,6 +40,7 @@ export const env = createEnv({
   experimental__runtimeEnv: {
     VERCEL_ENV: process.env.VERCEL_ENV,
     NODE_ENV: process.env.NODE_ENV,
+    PORT: process.env.PORT,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   skipValidation:

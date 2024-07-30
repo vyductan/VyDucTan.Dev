@@ -5,7 +5,6 @@ import { AutoForm, useForm } from "@acme/ui/form";
 import { Modal } from "@acme/ui/modal";
 import { Spin } from "@acme/ui/spin";
 import { message } from "@acme/ui/toast";
-import { insertProjectSchema } from "@acme/validators/projects";
 
 import { api } from "~/trpc/react";
 
@@ -51,7 +50,7 @@ const ProjectModalForm = ({ id, isOpen, onCancel, onOpenChange }: Props) => {
   });
 
   const form = useForm<RouterInputs["projects"]["create"]>({
-    schema: insertProjectSchema,
+    schema: CreateProjectSchema,
     defaultValues: {},
     onSubmit: async (values) => {
       !id

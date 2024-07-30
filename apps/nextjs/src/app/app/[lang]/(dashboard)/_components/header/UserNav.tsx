@@ -1,7 +1,7 @@
 // "use client";
 
-import type { Session } from "@acme/auth";
-import { signOut } from "@acme/auth";
+import type { Session } from "@acme/api/auth";
+import { signOut } from "@acme/api/auth";
 import { Avatar } from "@acme/ui/avatar";
 import { Button } from "@acme/ui/button";
 import { Dropdown } from "@acme/ui/dropdown";

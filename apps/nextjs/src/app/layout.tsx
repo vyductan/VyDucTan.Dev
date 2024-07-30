@@ -1,7 +1,4 @@
-/* eslint-disable no-restricted-properties */
 import type { Metadata, Viewport } from "next";
-import { GeistMono } from "geist/font/mono";
-import { GeistSans } from "geist/font/sans";
 
 import { clsm } from "@acme/ui";
 import { ThemeProvider, ThemeToggle } from "@acme/ui/theme";
@@ -19,7 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     env.VERCEL_ENV === "production"
       ? "https://vyductan.com"
-      : `http://localhost:${process.env.PORT ?? 3000}`,
+      : `http://localhost:${env.PORT ?? 3000}`,
   ),
   title: "VyDucTan",
   description: "Simple monorepo with shared backend for web & mobile apps",
@@ -55,8 +52,6 @@ export default function RootLayout({
       <body
         className={clsm(
           "min-h-screen bg-background font-sans text-foreground antialiased",
-          GeistSans.className,
-          GeistMono.className,
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>

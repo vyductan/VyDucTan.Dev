@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import Link from "next/link";
 
-import { auth } from "@acme/auth";
+import { auth } from "@acme/api/auth";
 import { Button } from "@acme/ui/button";
 
 import { SignoutForm } from "./SignoutForm";

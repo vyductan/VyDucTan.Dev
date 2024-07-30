@@ -1,12 +1,13 @@
 import { z } from "zod";
 
 import { eq, ilike } from "@acme/db";
-import { CreateProjectSchema, Project } from "@acme/db/schema";
 
 import { paginationSchema, searchSchema, withPagination } from "../_util/query";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { ProjectsTable } from "./schema";
+import { CreateProjectSchema } from "./validator";
 
-export const projectRouter = createTRPCRouter({
+export const projectsRouter = createTRPCRouter({
   notion_list: protectedProcedure
     .input(searchSchema)
     .query(({ ctx, input }) => {
@@ -28,8 +29,8 @@ export const projectRouter = createTRPCRouter({
   all: protectedProcedure
     .input(searchSchema.merge(paginationSchema))
     .query(({ ctx, input }) => {
-      const where = ilike(Project.name, `%${input.query}%`);
-      return withPagination(ctx.db, Project, input, where);
+      const where = ilike(ProjectsTable.name, `%${input.query}%`);
+      return withPagination(ctx.db, ProjectsTable, input, where);
 
       // return ctx.db.query.projects.findMany({
       //   orderBy: desc(schema.projects.createdAt),
@@ -41,22 +42,22 @@ export const projectRouter = createTRPCRouter({
   byId: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(({ ctx, input }) => {
-      return ctx.db.query.Project.findFirst({
-        where: eq(Project.id, input.id),
+      return ctx.db.query.ProjectsTable.findFirst({
+        where: eq(ProjectsTable.id, input.id),
       });
     }),
   bySlug: protectedProcedure
     .input(z.object({ slug: z.string() }))
     .query(({ ctx, input }) => {
-      return ctx.db.query.Project.findFirst({
-        where: eq(Project.slug, input.slug),
+      return ctx.db.query.ProjectsTable.findFirst({
+        where: eq(ProjectsTable.slug, input.slug),
       });
     }),
 
   create: protectedProcedure
     .input(CreateProjectSchema)
     .mutation(({ ctx, input }) => {
-      return ctx.db.insert(Project).values(input);
+      return ctx.db.insert(ProjectsTable).values(input);
     }),
 
   update: protectedProcedure
@@ -68,10 +69,13 @@ export const projectRouter = createTRPCRouter({
       ),
     )
     .mutation(({ ctx, input }) => {
-      return ctx.db.update(Project).set(input).where(eq(Project.id, input.id));
+      return ctx.db
+        .update(ProjectsTable)
+        .set(input)
+        .where(eq(ProjectsTable.id, input.id));
     }),
 
   delete: protectedProcedure.input(z.string()).mutation(({ ctx, input }) => {
-    return ctx.db.delete(Project).where(eq(Project.id, input));
+    return ctx.db.delete(ProjectsTable).where(eq(ProjectsTable.id, input));
   }),
 });

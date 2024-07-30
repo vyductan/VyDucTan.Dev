@@ -1,8 +1,8 @@
 import type { PgTableWithColumns, TableConfig } from "drizzle-orm/pg-core";
 import { z } from "zod";
 
+import type { Database } from "@acme/api/_db";
 import type { SQL } from "@acme/db";
-import type { Database } from "@acme/db/client";
 import { count } from "@acme/db";
 
 export const DEFAULT_PAGE_SIZE = 10;

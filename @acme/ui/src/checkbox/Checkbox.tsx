@@ -52,11 +52,12 @@ const Checkbox = React.forwardRef<
           defaultChecked={indeterminate ? "indeterminate" : defaultChecked}
           className={clsm(
             "peer size-4 shrink-0 self-center rounded-[4px]",
-            "border-ds-gray-500 border bg-background ring-offset-background",
+            "border border-gray-700 ring-offset-background",
+            "transition-colors",
             "disabled:cursor-not-allowed disabled:opacity-50",
             "data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-white",
             "data-[state=indeterminate]:text-ds-gray-900",
-            "hover:border-ds-gray-700",
+            "hover:bg-background-hover",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
           )}
           onCheckedChange={onChange}

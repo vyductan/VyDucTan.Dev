@@ -102,9 +102,9 @@ export default {
           },
         },
         background: {
-          DEFAULT: "hsl(var(--background))",
-          hover: "hsl(var(--background-hover))",
-          disabled: "hsl(var(--background-disabled))",
+          DEFAULT: baseColors.gray[100],
+          hover: baseColors.gray[200],
+          active: baseColors.gray[300],
           muted: {
             DEFAULT: baseColors.gray[100],
           },

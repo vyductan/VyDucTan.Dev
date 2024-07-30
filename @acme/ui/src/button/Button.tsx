@@ -42,13 +42,9 @@ const buttonVariants = cva(
           "border-border bg-background",
           "hover:border-border-hover hover:bg-background-hover",
         ],
-        dashed: [
-          "border border-dashed border-border",
-          "hover:border-primary-hover hover:text-primary-hover",
-        ],
-        ghost: ["border-transparent", "hover:bg-gray-300 hover:text-gray-900"],
-        light: ["border-transparent", "hover:bg-gray-100 hover:text-gray-900"],
-        link: "text-gray-900 underline-offset-4 hover:underline dark:text-gray-50",
+        ghost: ["border-transparent", "hover:bg-background-hover"],
+        light: ["border-transparent", "hover:bg-background-hover"],
+        link: "underline-offset-4 hover:underline",
       },
       size: {
         sm: "h-6 rounded-sm px-2 py-0 font-normal",

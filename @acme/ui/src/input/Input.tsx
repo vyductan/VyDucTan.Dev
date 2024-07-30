@@ -10,7 +10,7 @@ import { clsm } from "..";
 import { triggerNativeEventFor } from "../_util/event";
 import { Icon } from "../icons";
 
-export const inputStatusVariants = cva(
+export const inputVariants = cva(
   [
     "w-full",
     "flex border border-input ring-offset-background",
@@ -23,27 +23,23 @@ export const inputStatusVariants = cva(
     variants: {
       borderless: {
         true: ["border-0", "focus-within:outline-none"],
-        false: [
-          "border",
-          "rounded-md [&>.addon-before]:rounded-s-md [&>.addon-after]:rounded-e-md",
-          "focus-within:ring-2",
-        ],
-      },
-      size: {
-        sm: "",
-        default: "",
-        lg: "",
+        false: ["border", "rounded-md", "focus-within:ring-2"],
       },
       status: {
         default: [
           "hover:border-primary-500",
           "focus-within:!border-primary-600 focus-within:ring-primary-100",
         ],
+        error: [
+          "border-danger text-danger",
+          "hover:border-danger-hover",
+          "focus-within:border-danger focus-within:ring-danger-muted",
+        ],
+        warning: [],
       },
     },
     defaultVariants: {
       borderless: false,
-      size: "default",
       status: "default",
     },
   },
@@ -61,11 +57,13 @@ export const inputSizeVariants = cva([], {
   },
 });
 type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> &
-  VariantProps<typeof inputStatusVariants> & {
+  VariantProps<typeof inputVariants> &
+  VariantProps<typeof inputSizeVariants> & {
     /** If allow to remove input content with clear icon */
     allowClear?: boolean | { clearIcon: React.ReactNode };
     suffix?: React.ReactNode;
     addonBefore?: React.ReactNode;
+    addonAfter?: React.ReactNode;
   };
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
@@ -78,6 +76,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       status,
 
       addonBefore,
+      addonAfter,
       suffix,
 
       id: idProp,
@@ -108,7 +107,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       allowClear && isHovering && value ? (
         <button
           type="button"
-          className="opacity-30 hover:opacity-50"
+          className={clsm(
+            "flex opacity-30 hover:opacity-50",
+            inputSizeVariants({ size }),
+          )}
           onClick={() => {
             triggerNativeEventFor(document.getElementById(id), {
               event: "input",
@@ -122,7 +124,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           />
         </button>
       ) : (
-        suffix
+        <span
+          className={clsm("flex items-center", inputSizeVariants({ size }))}
+        >
+          {suffix}
+        </span>
       )
     ) : null;
 
@@ -131,7 +137,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         ref={wrapperRef}
         aria-hidden={hidden ? "true" : undefined}
         className={clsm(
-          inputStatusVariants({ borderless, size, status }),
+          inputVariants({ borderless, status }),
           "cursor-text",
           className,
         )}
@@ -142,8 +148,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {addonBefore && (
           <span
             className={clsm(
-              "addon-before",
-              "border-e bg-muted",
+              !borderless && "rounded-s-md",
+              "border-e bg-background",
               inputSizeVariants({ size }),
             )}
           >
@@ -166,7 +172,18 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           }}
           {...props}
         />
-        {suffixComp && <span className="flex items-center">{suffixComp}</span>}
+        {suffixComp && suffixComp}
+        {addonAfter && (
+          <span
+            className={clsm(
+              !borderless && "rounded-e-md",
+              "border-s bg-background",
+              inputSizeVariants({ size }),
+            )}
+          >
+            {addonAfter}
+          </span>
+        )}
       </span>
     );
   },

@@ -8,16 +8,33 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "default": "./src/index.ts"
+      "default": "./dist/index.js"
     },
-    "./*": "./src/*/index.ts"
+    "./*": {
+      "default": "./src/*/index.ts",
+      "db": {
+        "types": "./dist/src/_db/index.d.ts",
+        "default": "./dist/src/_db/index.js",
+        "client": {
+          "types": "./dist/src/_db/client.d.ts",
+          "default": "./dist/src/_db/client.js"
+        }
+      },
+      "auth": {
+        "types": "./dist/src/auth/index.d.ts",
+        "default": "./dist/src/auth/index.js"
+      }
+    }
   },
   "scripts": {
     "build": "tsc",
-    "clean": "rm -rf .turbo node_modules",
-    "dev": "tsc --watch",
+    "clean": "rm -rf .turbo dist node_modules",
+    "dev": "tsc",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+    "push": "pnpm with-env drizzle-kit push",
+    "studio": "pnpm with-env drizzle-kit studio",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
+    "with-env": "dotenv -e ../../.env --"
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
@@ -25,19 +42,26 @@
     "@acme/db": "workspace:*",
     "@acme/utils": "workspace:*",
     "@acme/validators": "workspace:*",
-    "@trpc/server": "11.0.0-rc.364",
-    "@vercel/blob": "^0.23.2",
+    "@t3-oss/env-core": "^0.10.1",
+    "@trpc/server": "catalog:",
+    "@vercel/blob": "^0.23.4",
+    "@vercel/postgres": "^0.9.0",
     "cheerio": "1.0.0-rc.12",
+    "drizzle-orm": "^0.32.0",
+    "drizzle-zod": "^0.5.1",
     "httpx": "^2.3.2",
     "superjson": "2.2.1",
-    "zod": "^3.23.8"
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "eslint": "^9.3.0",
-    "prettier": "^3.2.5",
-    "typescript": "^5.4.5"
+    "dotenv-cli": "^7.4.2",
+    "drizzle-kit": "^0.23.0",
+    "eslint": "catalog:",
+    "pg": "^8.12.0",
+    "prettier": "catalog:",
+    "typescript": "catalog:"
   }
 }

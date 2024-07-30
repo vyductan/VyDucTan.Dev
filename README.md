@@ -2,13 +2,20 @@
 
 ## T3 Turbo <https://github.com/t3-oss/create-t3-turbo>
 
-May 17, 2024
-<https://github.com/t3-oss/create-t3-turbo/commit/38c20cd6212482282e896ae0ae1904679fb11324>
+Jul 29, 2024
+<https://github.com/t3-oss/create-t3-turbo/commit/8a0f830c1a049c29fe3cad41ee948ea0644642b6>
 
 ## Multi Platform <https://github.com/vercel/platforms>
 
 Nov 15, 2023
 <https://github.com/vercel/platforms/commit/29e20e790eaf17d4d5051c23a69636dce724c174>
+Docs <https://vercel.com/guides/nextjs-multi-tenant-application>
+
+## TTS (Text to Speech) <https://github.com/openai-translator/openai-translator>
+
+- Speaker
+  Dec 15, 2023
+  <https://github.com/openai-translator/openai-translator/blob/baa9d8dfc1b0d6c444a6ca76897ee2c3619ad711/src/common/components/SpeakerMotion.tsx>
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

@@ -1,13 +1,16 @@
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-import { schema } from "@acme/db";
+import { TasksTable } from "./schema";
 
-import type { RouterOutputs } from "..";
-
-export const insertTaskSchema = createInsertSchema(schema.tasks, {
+export const CreateTaskSchema = createInsertSchema(TasksTable, {
   content: z.string(),
 })
+  .omit({
+    id: true,
+    createdAt: true,
+    updatedAt: true,
+  })
   .omit({
     estimatedStart: true,
     estimatedEnd: true,
@@ -22,4 +25,3 @@ export const insertTaskSchema = createInsertSchema(schema.tasks, {
         .optional(),
     }),
   );
-export type Task = NonNullable<RouterOutputs["tasks"]["byId"]>;

@@ -1,21 +1,22 @@
 import type { TRPCRouterRecord } from "@trpc/server";
 import { load } from "cheerio";
 import { subDays } from "date-fns";
-import httpx from "httpx";
+import { read, request } from "httpx";
 import { z } from "zod";
 
-import { eq, schema } from "@acme/db";
-import { insertWordSchema } from "@acme/validators/words";
+import { eq } from "@acme/db";
 
 import { paginationSchema, searchSchema } from "../_util/query";
 import { protectedProcedure } from "../trpc";
+import { WordsTable } from "./schema";
+import { AddWordSchema } from "./validator";
 
 export const wordsRouter = {
   all: protectedProcedure
     .input(searchSchema.merge(paginationSchema))
     .query(({ ctx }) => {
-      return ctx.db.query.words.findMany({
-        orderBy: schema.words.word,
+      return ctx.db.query.WordsTable.findMany({
+        orderBy: WordsTable.word,
         limit: 10,
       });
     }),
@@ -23,7 +24,7 @@ export const wordsRouter = {
   byId: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(({ ctx, input }) => {
-      return ctx.db.query.words.findFirst({
+      return ctx.db.query.WordsTable.findFirst({
         where: (table, { eq }) => eq(table.id, input.id),
       });
     }),
@@ -31,12 +32,12 @@ export const wordsRouter = {
   byCambridge: protectedProcedure
     .input(z.object({ word: z.string() }))
     .query(async ({ input }) => {
-      const data: Array<typeof schema.words.$inferSelect> = [];
-      const res = await httpx.request(
+      const data: Array<typeof WordsTable.$inferSelect> = [];
+      const res = await request(
         "https://dictionary.cambridge.org/dictionary/english/" + input.word,
         {},
       );
-      const body = await httpx.read(res, "utf-8");
+      const body = await read(res, "utf-8");
       const $ = load(body);
       const nodes = $("div.dictionary").first().find("div.dsense");
       nodes.first().find();
@@ -54,21 +55,19 @@ export const wordsRouter = {
               highlight: $(el).find("span.lu.dlu").text(),
               text: $(el).find("span.eg.deg").text(),
             })),
-        } as unknown as typeof schema.words.$inferSelect;
+        } as unknown as typeof WordsTable.$inferSelect;
         data.push(word);
       });
       return data;
     }),
 
-  create: protectedProcedure
-    .input(insertWordSchema)
-    .mutation(({ ctx, input }) => {
-      return ctx.db.insert(schema.words).values(input);
-    }),
+  create: protectedProcedure.input(AddWordSchema).mutation(({ ctx, input }) => {
+    return ctx.db.insert(WordsTable).values(input);
+  }),
 
   update: protectedProcedure
     .input(
-      insertWordSchema.partial().merge(
+      AddWordSchema.merge(
         z.object({
           id: z.string(),
         }),
@@ -76,17 +75,17 @@ export const wordsRouter = {
     )
     .mutation(({ ctx, input }) => {
       return ctx.db
-        .update(schema.words)
+        .update(WordsTable)
         .set(input)
-        .where(eq(schema.words.id, input.id));
+        .where(eq(WordsTable.id, input.id));
     }),
 
   delete: protectedProcedure.input(z.string()).mutation(({ ctx, input }) => {
-    return ctx.db.delete(schema.words).where(eq(schema.words.id, input));
+    return ctx.db.delete(WordsTable).where(eq(WordsTable.id, input));
   }),
 
   getWordToLearn: protectedProcedure.query(({ ctx }) => {
-    return ctx.db.query.words.findFirst({
+    return ctx.db.query.WordsTable.findFirst({
       where: (t, { and, lt, ne, or, isNull }) =>
         and(
           ne(t.mastery, "5"),
@@ -99,24 +98,21 @@ export const wordsRouter = {
   }),
   mastery: protectedProcedure
     .input(
-      insertWordSchema
-        .pick({
-          mastery: true,
-        })
-        .partial()
-        .merge(
-          z.object({
-            id: z.string(),
-          }),
-        ),
+      AddWordSchema.pick({
+        mastery: true,
+      }).merge(
+        z.object({
+          id: z.string(),
+        }),
+      ),
     )
     .mutation(({ ctx, input }) => {
       return ctx.db
-        .update(schema.words)
+        .update(WordsTable)
         .set({
           ...input,
           lastLearnedAt: new Date(),
         })
-        .where(eq(schema.words.id, input.id));
+        .where(eq(WordsTable.id, input.id));
     }),
 } satisfies TRPCRouterRecord;

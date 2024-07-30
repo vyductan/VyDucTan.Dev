@@ -6,8 +6,10 @@ export const env = createEnv({
     BLOB_READ_WRITE_TOKEN: z.string().min(1),
 
     GOOGLE_APP_PASSWORD: z.string().min(1),
+    NOTION_TOKEN: z.string().min(1),
   },
   client: {},
   experimental__runtimeEnv: {},
-  skipValidation: !!process.env.CI || !!process.env.SKIP_ENV_VALIDATION,
+  skipValidation:
+    !!process.env.CI || process.env.npm_lifecycle_event === "lint",
 });

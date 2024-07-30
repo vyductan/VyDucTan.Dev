@@ -3,33 +3,33 @@
   "name": "vyductan-apps",
   "private": true,
   "scripts": {
-    "build": "turbo build",
+    "build": "turbo run build",
     "build:nextjs": "turbo build -F nextjs",
     "clean": "git clean -xdf node_modules",
-    "clean:workspaces": "turbo clean",
-    "db:push": "pnpm -F db push",
-    "db:studio": "pnpm -F db studio",
-    "dev": "turbo dev --parallel",
-    "dev:nextjs": "turbo dev --filter nextjs",
+    "clean:workspaces": "turbo run clean",
+    "db:push": "pnpm -F @acme/db push",
+    "db:studio": "pnpm -F @acmedb studio",
+    "dev": "turbo watch dev",
+    "dev:nextjs": "turbo watch dev -F nextjs...",
     "app:dev": "turbo run dev --filter=app",
-    "format": "turbo format --continue -- --cache --cache-location node_modules/.cache/.prettiercache",
-    "format:fix": "turbo format --continue -- --write --cache --cache-location node_modules/.cache/.prettiercache",
-    "postinstall": "pnpm lint:ws",
-    "lint": "turbo lint --continue -- --cache --cache-location node_modules/.cache/.eslintcache",
-    "lint:fix": "turbo lint --continue -- --fix --cache --cache-location node_modules/.cache/.eslintcache",
+    "format": "turbo run format --continue -- --cache --cache-location node_modules/.cache/.prettiercache",
+    "format:fix": "turbo run format --continue -- --write --cache --cache-location node_modules/.cache/.prettiercache",
+    "lint": "turbo run lint --continue -- --cache --cache-location node_modules/.cache/.eslintcache",
+    "lint:fix": "turbo run lint --continue -- --fix --cache --cache-location node_modules/.cache/.eslintcache",
     "lint:ws": "pnpm dlx sherif@latest",
-    "typecheck": "turbo typecheck"
+    "typecheck": "turbo run typecheck",
+    "ui-add": "turbo run ui-add"
   },
   "devDependencies": {
     "@acme/prettier-config": "workspace:*",
-    "@turbo/gen": "^1.13.3",
-    "node-gyp-build": "4.8.0",
-    "prettier": "^3.2.5",
-    "turbo": "^1.13.3",
-    "typescript": "^5.4.5"
+    "@turbo/gen": "^2.0.6",
+    "node-gyp-build": "4.8.1",
+    "prettier": "catalog:",
+    "turbo": "^2.0.6",
+    "typescript": "catalog:"
   },
-  "packageManager": "pnpm@9.1.1",
+  "packageManager": "pnpm@9.6.0",
   "engines": {
-    "node": ">=v20.12.0"
+    "node": ">=v20.16.0"
   }
 }

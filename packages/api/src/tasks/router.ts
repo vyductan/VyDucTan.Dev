@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { and, eq, ilike, schema } from "@acme/db";
+import { and, eq, ilike } from "@acme/db";
 
 import {
   countQuery,
@@ -9,9 +9,60 @@ import {
   withPaginationQuery,
 } from "../_util/query";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { insertTaskSchema } from "./types";
+import { TasksTable } from "./schema";
+import { CreateTaskSchema } from "./validator";
 
 export const tasksRouter = createTRPCRouter({
+  notion_retrieve: protectedProcedure.query(({ ctx }) => {
+    return ctx.notion.databases.retrieve({
+      database_id: "23cf9e6f0a454ecabbcd9e267f192772",
+    });
+  }),
+  notion_list: protectedProcedure
+    .input(
+      searchSchema
+        .merge(
+          z.object({
+            sortBy: z.string(),
+            sortOrder: z.enum(["ascending", "descending"]),
+          }),
+        )
+        .merge(
+          z.object({
+            status: z.array(z.string()),
+          }),
+        ),
+    )
+    .query(({ ctx, input }) => {
+      return ctx.notion.databases.query({
+        database_id: "23cf9e6f0a454ecabbcd9e267f192772",
+        filter: {
+          and: [
+            // {
+            //   property: "Task Name",
+            //   rich_text: {
+            //     contains: input.query ?? "",
+            //   },
+            // },
+            {
+              or: [
+                ...input.status.map((x) => ({
+                  property: "Status",
+                  status: { equals: x },
+                })),
+              ],
+            },
+          ],
+        },
+        sorts: [
+          {
+            property: input.sortBy,
+            direction: input.sortOrder,
+          },
+        ],
+      });
+    }),
+
   all: protectedProcedure
     .input(
       z
@@ -24,14 +75,12 @@ export const tasksRouter = createTRPCRouter({
     )
     .query(async ({ ctx, input }) => {
       const where = and(
-        input.projectId
-          ? eq(schema.tasks.projectId, input.projectId)
-          : undefined,
-        ilike(schema.tasks.name, `%${input.query}%`),
+        input.projectId ? eq(TasksTable.projectId, input.projectId) : undefined,
+        ilike(TasksTable.name, `%${input.query}%`),
       );
 
       const [data, count] = await Promise.all([
-        ctx.db.query.tasks.findMany({
+        ctx.db.query.TasksTable.findMany({
           limit: input.pageSize,
           offset: (input.page - 1) * input.pageSize,
           where,
@@ -39,7 +88,7 @@ export const tasksRouter = createTRPCRouter({
             project: true,
           },
         }),
-        countQuery(ctx.db, schema.tasks, where),
+        countQuery(ctx.db, TasksTable, where),
       ]);
       // return withPagination(ctx.db, schema.tasks, input, where);
       return withPaginationQuery(data, count, input);
@@ -48,20 +97,20 @@ export const tasksRouter = createTRPCRouter({
   byId: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(({ ctx, input }) => {
-      return ctx.db.query.tasks.findFirst({
-        where: eq(schema.tasks.id, input.id),
+      return ctx.db.query.TasksTable.findFirst({
+        where: eq(TasksTable.id, input.id),
       });
     }),
 
   create: protectedProcedure
-    .input(insertTaskSchema)
+    .input(CreateTaskSchema)
     .mutation(({ ctx, input }) => {
-      return ctx.db.insert(schema.tasks).values(input);
+      return ctx.db.insert(TasksTable).values(input);
     }),
 
   update: protectedProcedure
     .input(
-      insertTaskSchema.merge(
+      CreateTaskSchema.merge(
         z.object({
           id: z.string(),
         }),
@@ -69,12 +118,12 @@ export const tasksRouter = createTRPCRouter({
     )
     .mutation(({ ctx, input }) => {
       return ctx.db
-        .update(schema.tasks)
+        .update(TasksTable)
         .set(input)
-        .where(eq(schema.tasks.id, input.id));
+        .where(eq(TasksTable.id, input.id));
     }),
 
   delete: protectedProcedure.input(z.string()).mutation(({ ctx, input }) => {
-    return ctx.db.delete(schema.tasks).where(eq(schema.tasks.id, input));
+    return ctx.db.delete(TasksTable).where(eq(TasksTable.id, input));
   }),
 });

@@ -1,10 +1,12 @@
 "use client";
 
+import type { VariantProps } from "class-variance-authority";
 import type { ForwardedRef, ReactElement, ReactNode } from "react";
 import type {
   ControllerFieldState,
   ControllerProps,
   ControllerRenderProps,
+  FieldError,
   FieldPath,
   FieldValues,
   UseFormReturn,
@@ -14,11 +16,14 @@ import { cloneElement, forwardRef, useId } from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { Controller, useFormContext } from "react-hook-form";
 
+import type { inputVariants } from "../input";
 import { clsm } from "..";
+import { GenericSlot } from "../slot";
 import { FormFieldContext } from "./context";
 import { FieldDescription } from "./FieldDescription";
 import { FieldLabel } from "./FieldLabel";
 import { FieldMessage } from "./FieldMessage";
+import { useField } from "./useField";
 
 type FieldProps<
   TFieldValues extends FieldValues = FieldValues,
@@ -40,19 +45,24 @@ type FieldProps<
   label?: string | JSX.Element;
   description?: ReactNode;
   className?: string;
+  /*
+   * Custome output for input component (like DatePicker)
+   * */
+  onChange?: (...event: any[]) => any;
 };
 const FieldInner = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >(
   {
-    // control,
+    control,
     name,
     children,
     // label,
     // description,
     // children,
     // className,
+    onChange,
     ...props
   }: FieldProps<TFieldValues, TName>,
   ref: ForwardedRef<HTMLDivElement>,
@@ -77,14 +87,23 @@ const FieldInner = <
         }}
       >
         <Controller
-          control={form.control}
+          control={control}
           name={name}
+          // defaultValue=""
+          // render={(x) => {
+          //   console.log("rrrrrrr", x.fieldState.error);
+          //   return <>rrrr{x.fieldState.error?.message}</>;
+          // }}
           //{...props}
           render={({ field, fieldState, formState }) => (
             <FieldRender
               fieldId={fieldId}
               fieldMessageId={fieldMessageId}
               fieldDescriptionId={fieldDescriptionId}
+              fieldState={fieldState}
+              // formState={formState}
+              // error={fieldState.errors[name]}
+              // error={formState.errors[name]}
               children={
                 children
                   ? typeof children === "function"
@@ -100,8 +119,9 @@ const FieldInner = <
                             ? field.value
                             : "",
                         onChange: (e) => {
+                          console.log("ffff", fieldState, formState);
                           children.props.onChange?.(e);
-                          field.onChange(e);
+                          field.onChange(onChange ? onChange(e) : e);
                         },
                       })
                   : null
@@ -148,12 +168,16 @@ type FieldRenderProps = {
 
   label?: string | JSX.Element;
   description?: ReactNode;
-  error?: string;
+  // error?: string FieldError;
+  // error?: FieldError;
   children?: ReactElement | null;
 
   fieldId?: string;
   fieldDescriptionId?: string;
   fieldMessageId?: string;
+
+  fieldState?: ControllerFieldState;
+  // formState?: UseFormStateReturn<any>;
 };
 const FieldRender = forwardRef<HTMLDivElement, FieldRenderProps>(
   (
@@ -161,12 +185,15 @@ const FieldRender = forwardRef<HTMLDivElement, FieldRenderProps>(
       className,
       label,
       description,
-      error,
+      // error,
       children,
 
       fieldId,
       fieldDescriptionId,
       fieldMessageId,
+
+      fieldState,
+      // formState,
 
       ...props
     },
@@ -174,7 +201,11 @@ const FieldRender = forwardRef<HTMLDivElement, FieldRenderProps>(
   ) => {
     return (
       <div
-        className={clsm("space-y-2", "mb-6", className)}
+        className={clsm(
+          "flex flex-col",
+          !fieldState?.error ? "mb-6" : "",
+          className,
+        )}
         ref={ref}
         {...props}
       >
@@ -185,21 +216,22 @@ const FieldRender = forwardRef<HTMLDivElement, FieldRenderProps>(
             {/* Label */}
             {label ? (
               typeof label === "string" ? (
-                <FieldLabel>{label}</FieldLabel>
+                <FieldLabel className="pb-2">{label}</FieldLabel>
               ) : (
                 label
               )
             ) : null}
 
             {/* Input */}
-            <Slot
+            <GenericSlot<VariantProps<typeof inputVariants>>
               id={fieldId}
               aria-describedby={
-                !error
+                !fieldState?.error
                   ? `${fieldDescriptionId}`
                   : `${fieldDescriptionId} ${fieldMessageId}`
               }
-              aria-invalid={!!error}
+              aria-invalid={!!fieldState?.error}
+              status={fieldState?.error ? "error" : "default"}
             >
               {children}
               {/* {children */}
@@ -216,11 +248,9 @@ const FieldRender = forwardRef<HTMLDivElement, FieldRenderProps>(
               {/*       }) */}
               {/*     : cloneElement(children, field) */}
               {/*   : null} */}
-            </Slot>
-
+            </GenericSlot>
             {/* Description */}
             {description && <FieldDescription>{description}</FieldDescription>}
-
             {/* Message */}
             <FieldMessage />
           </>

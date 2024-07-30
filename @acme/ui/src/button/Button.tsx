@@ -253,7 +253,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 </GenericSlot>
               )}
               {srOnly && typeof children === "string" ? (
-                <span className="sr-only sm:not-sr-only">{children}</span>
+                <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                  {children}
+                </span>
               ) : (
                 children
               )}

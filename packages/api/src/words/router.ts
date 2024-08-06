@@ -4,8 +4,7 @@ import { subDays } from "date-fns";
 import { read, request } from "httpx";
 import { z } from "zod";
 
-import { eq } from "@acme/db";
-
+import { eq } from "../_db";
 import { paginationSchema, searchSchema } from "../_util/query";
 import { protectedProcedure } from "../trpc";
 import { WordsTable } from "./schema";

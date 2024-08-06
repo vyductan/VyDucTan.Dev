@@ -27,7 +27,6 @@
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
-    "@acme/db": "workspace:*",
     "drizzle-graphql": "^0.3.5",
     "gql.tada": "^1.6.3",
     "graphql": "^16.8.1",

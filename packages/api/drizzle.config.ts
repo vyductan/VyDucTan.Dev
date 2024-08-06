@@ -1,6 +1,6 @@
 import type { Config } from "drizzle-kit";
 
-import { DB_PREFIX } from "~/_db";
+import { DB_PREFIX } from "./src/_db";
 
 if (!process.env.POSTGRES_URL) {
   throw new Error("Missing POSTGRES_URL");

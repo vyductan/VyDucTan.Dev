@@ -2,8 +2,9 @@ import type { PgTableWithColumns, TableConfig } from "drizzle-orm/pg-core";
 import { z } from "zod";
 
 import type { Database } from "@acme/api/_db";
-import type { SQL } from "@acme/db";
-import { count } from "@acme/db";
+
+import type { SQL } from "../_db";
+import { count } from "../_db";
 
 export const DEFAULT_PAGE_SIZE = 10;
 export type Pagination = z.infer<typeof paginationSchema>;

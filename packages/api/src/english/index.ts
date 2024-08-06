@@ -1,5 +1,5 @@
-import { z } from "zod";
+import type { z } from "zod";
 
-import { EnglishAddSchema } from "./validator";
+import type { EnglishAddSchema } from "./validator";
 
 export type EnglishAdd = z.infer<typeof EnglishAddSchema>;

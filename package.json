@@ -3,6 +3,7 @@
   "name": "vyductan-apps",
   "private": true,
   "scripts": {
+    "app:dev": "turbo run dev --filter=app",
     "build": "turbo run build",
     "build:nextjs": "turbo build -F nextjs",
     "clean": "git clean -xdf node_modules",
@@ -11,19 +12,19 @@
     "db:studio": "pnpm -F @acmedb studio",
     "dev": "turbo watch dev",
     "dev:nextjs": "turbo watch dev -F nextjs...",
-    "app:dev": "turbo run dev --filter=app",
     "format": "turbo run format --continue -- --cache --cache-location node_modules/.cache/.prettiercache",
     "format:fix": "turbo run format --continue -- --write --cache --cache-location node_modules/.cache/.prettiercache",
+    "postinstall": "pnpm lint:ws",
     "lint": "turbo run lint --continue -- --cache --cache-location node_modules/.cache/.eslintcache",
     "lint:fix": "turbo run lint --continue -- --fix --cache --cache-location node_modules/.cache/.eslintcache",
     "lint:ws": "pnpm dlx sherif@latest",
     "typecheck": "turbo run typecheck",
     "ui-add": "turbo run ui-add"
   },
+  "prettier": "@acme/prettier-config",
   "devDependencies": {
     "@acme/prettier-config": "workspace:*",
     "@turbo/gen": "^2.0.6",
-    "node-gyp-build": "4.8.1",
     "prettier": "catalog:",
     "turbo": "^2.0.11",
     "typescript": "catalog:"

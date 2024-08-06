@@ -1,7 +1,6 @@
 import { z } from "zod";
 
-import { and, eq, ilike } from "@acme/db";
-
+import { and, eq, ilike } from "../_db";
 import {
   countQuery,
   paginationSchema,

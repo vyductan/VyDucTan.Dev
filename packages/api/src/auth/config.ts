@@ -7,9 +7,8 @@ import { skipCSRFCheck } from "@auth/core";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import Google from "next-auth/providers/google";
 
-import { env } from "@acme/auth/env";
-
 import { db } from "../_db/client";
+import { env } from "../../env";
 import { Account, Session, User } from "./schema";
 
 export type { Session } from "next-auth";
@@ -30,7 +29,7 @@ const adapter = DrizzleAdapter(db, {
 
 export const isSecureContext = env.NODE_ENV !== "development";
 
-export const authConfig = {
+export const authConfig: NextAuthConfig = {
   adapter,
   // In development, we need to skip checks to allow Expo to work
   ...(!isSecureContext
@@ -59,7 +58,7 @@ export const authConfig = {
       };
     },
   },
-} satisfies NextAuthConfig;
+};
 
 export const validateToken = async (
   token: string,

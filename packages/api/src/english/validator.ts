@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { NotionSelectSchema } from "../_libs/notion";
+
 const NotionTitleSchema = z.object({
   title: z.array(
     z.object({
@@ -18,17 +20,21 @@ const NotionRichTextSchema = z.object({
     }),
   ),
 });
-const NotionSelectSchema = z.object({
-  select: z.object({
-    name: z.string(),
-  }),
-});
+
 export const EnglishAddSchema = z.object({
   "Words/Phrases": NotionTitleSchema,
-  IPA: NotionRichTextSchema.nullish(),
-  English: NotionRichTextSchema.nullish(),
+  IPA: NotionRichTextSchema,
+  English: NotionRichTextSchema,
   Vietnamese: NotionRichTextSchema,
-  Example: NotionRichTextSchema,
-  Gram: NotionSelectSchema.nullish(),
-  Level: NotionSelectSchema.nullish(),
+  Examples: NotionRichTextSchema,
+  Gram: NotionSelectSchema,
+  Level: NotionSelectSchema,
+
+  // English: NotionRichTextSchema.nullish(),
+  // Vietnamese: NotionRichTextSchema,
+  // Example: NotionRichTextSchema,
+  // Gram: NotionSelectSchema.nullish(),
+  // Level: NotionSelectSchema.nullish(),
 });
+
+export const WordUpdateSchema = EnglishAddSchema;

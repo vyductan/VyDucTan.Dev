@@ -17,7 +17,6 @@
   "prettier": "@acme/prettier-config",
   "dependencies": {
     "@acme/api": "workspace:*",
-    "@acme/auth": "workspace:*",
     "@acme/hooks": "workspace:*",
     "@acme/tts": "workspace:*",
     "@acme/ui": "workspace:*",
@@ -81,7 +80,8 @@
     "@types/node": "^20.14.10",
     "@types/nodemailer": "^6.4.14",
     "@types/nprogress": "^0.2.3",
-    "@types/react": "^18.3.3",
+    "@types/react": "catalog:react18",
+    "@types/react-dom": "catalog:react18",
     "@types/react-scroll": "^1.8.10",
     "dotenv-cli": "^7.4.2",
     "eslint": "catalog:",

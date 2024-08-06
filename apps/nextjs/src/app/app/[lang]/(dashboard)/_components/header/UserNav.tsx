@@ -73,7 +73,7 @@ export const UserNav = ({ user }: UserNavProps) => {
         ],
       }}
       asChild
-      placement="bottom-end"
+      placement="bottomRight"
     >
       <Button variant="ghost" className="relative size-10 rounded-full">
         <Avatar

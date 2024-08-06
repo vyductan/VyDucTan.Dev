@@ -6,24 +6,18 @@
   "license": "MIT",
   "type": "module",
   "exports": {
+    "./env": "./env.ts",
     ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "types": "./dist/src/index.d.ts",
+      "default": "./src/index.ts"
     },
     "./*": {
-      "default": "./src/*/index.ts",
-      "db": {
-        "types": "./dist/src/_db/index.d.ts",
-        "default": "./dist/src/_db/index.js",
-        "client": {
-          "types": "./dist/src/_db/client.d.ts",
-          "default": "./dist/src/_db/client.js"
-        }
-      },
-      "auth": {
-        "types": "./dist/src/auth/index.d.ts",
-        "default": "./dist/src/auth/index.js"
-      }
+      "types": "./dist/src/*/index.d.ts",
+      "default": "./src/*/index.ts"
+    },
+    "./libs/*": {
+      "types": "./dist/src/_libs/*/index.d.ts",
+      "default": "./src/_libs/*/index.ts"
     }
   },
   "scripts": {
@@ -38,10 +32,10 @@
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
-    "@acme/auth": "workspace:*",
-    "@acme/db": "workspace:*",
     "@acme/utils": "workspace:*",
     "@acme/validators": "workspace:*",
+    "@auth/core": "0.32.0",
+    "@auth/drizzle-adapter": "^1.4.1",
     "@t3-oss/env-core": "^0.10.1",
     "@trpc/server": "catalog:",
     "@vercel/blob": "^0.23.4",
@@ -50,6 +44,7 @@
     "drizzle-orm": "^0.32.0",
     "drizzle-zod": "^0.5.1",
     "httpx": "^2.3.2",
+    "next-auth": "5.0.0-beta.19",
     "superjson": "2.2.1",
     "zod": "catalog:"
   },

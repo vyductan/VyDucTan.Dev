@@ -51,8 +51,8 @@ build
 coverage
 
 # typescript
-*.tsbuildinfo
 dist/
+.cache
 
 # turbo
 .turbo

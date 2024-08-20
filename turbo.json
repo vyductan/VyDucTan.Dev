@@ -11,15 +11,15 @@
     },
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["node_modules/.cache/tsbuildinfo.json", "dist/**"]
+      "outputs": [".cache/tsbuildinfo.json"]
     },
     "format": {
-      "outputs": ["node_modules/.cache/.prettiercache"],
+      "outputs": [".cache/tsbuildinfo.json"],
       "outputLogs": "new-only"
     },
     "lint": {
       "dependsOn": ["^topo", "^build"],
-      "outputs": ["node_modules/.cache/.eslintcache"]
+      "outputs": [".cache/tsbuildinfo.json"]
     },
     "clean": {
       "cache": false
@@ -38,7 +38,7 @@
     },
     "typecheck": {
       "dependsOn": ["^topo", "^build"],
-      "outputs": ["node_modules/.cache/tsbuildinfo.json"]
+      "outputs": [".cache/tsbuildinfo.json"]
     }
   },
   "globalEnv": [

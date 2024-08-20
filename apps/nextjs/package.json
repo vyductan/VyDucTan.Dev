@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "pnpm with-env next build",
-    "clean": "git clean -xdf .next .turbo node_modules",
+    "clean": "git clean -xdf .cache .next .turbo node_modules",
     "dev": "pnpm with-env next dev --port 8080 --experimental-https --experimental-https-key ../../vyductan.com+1-key.pem --experimental-https-cert ../../vyductan.com+1.pem",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
@@ -88,6 +88,7 @@
     "jiti": "^1.21.6",
     "postcss-replace": "^2.0.1",
     "prettier": "catalog:",
+    "tailwindcss": "catalog:",
     "typescript": "catalog:"
   }
 }

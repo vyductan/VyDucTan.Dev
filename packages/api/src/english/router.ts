@@ -159,12 +159,17 @@ export const englishRouter = createTRPCRouter({
             //   color: "gray"
             // }
             // },
-            // K: null,
             // X: {
             //   // type: "title",
             //   title: [{text: {content: "123"}}]
             // },
-            // G: input.IPA
+            // G: {
+            // select: {
+            //   name: "213",
+            //   color
+            // }
+            // }
+
             // ...input,
             Mastery: {
               select: {

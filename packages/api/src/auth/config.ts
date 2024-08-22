@@ -29,7 +29,7 @@ const adapter = DrizzleAdapter(db, {
 
 export const isSecureContext = env.NODE_ENV !== "development";
 
-export const authConfig: NextAuthConfig = {
+export const authConfig = {
   adapter,
   // In development, we need to skip checks to allow Expo to work
   ...(!isSecureContext
@@ -58,7 +58,7 @@ export const authConfig: NextAuthConfig = {
       };
     },
   },
-};
+} satisfies NextAuthConfig;
 
 export const validateToken = async (
   token: string,

@@ -1,12 +1,10 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import _ from "lodash";
 
 import { Button } from "@acme/ui/button";
 import { Modal } from "@acme/ui/modal";
 import { Tag } from "@acme/ui/tag";
-import { message, notification } from "@acme/ui/toast";
+import { notification } from "@acme/ui/toast";
 import { Tooltip } from "@acme/ui/tooltip";
 
 import type { Word } from "../types";
@@ -27,14 +25,16 @@ export const PracticeModal = ({ open, onOpenChange }: PracticeModalProps) => {
   const updateMasteryWord = api.english.notion.updateMastery.useMutation({
     onSuccess: async () => {
       // await refetch();
-      message.success("Updated");
+      // message.success("Updated");
     },
     onError: (error) => {
       notification.error(error.message);
     },
   });
 
-  const practiceWords = practicesQuery.data?.results as unknown as Word[];
+  const practiceWords = practicesQuery.data?.results as unknown as
+    | Word[]
+    | undefined;
 
   useEffect(() => {
     if (practiceWords) {
@@ -109,24 +109,24 @@ export const PracticeModal = ({ open, onOpenChange }: PracticeModalProps) => {
           <Button
             className="w-full"
             variant="outline"
-            loading={updateMasteryWord.isPending}
+            // loading={updateMasteryWord.isPending}
             onClick={() => {
               const randomWord = _.sample(practiceWords)!;
               setCurrentWord(randomWord);
               document.title = `English learning: ${randomWord.properties["Words/Phrases"].title[0]?.plain_text}`;
-              // updateMasteryWord.mutate({
-              //   id: currentWord?.id ?? "",
-              //   mastery: (
-              //     Number(currentWord?.properties.Mastery.select?.name) - 1
-              //   ).toString(),
-              // });
+              updateMasteryWord.mutate({
+                id: currentWord?.id ?? "",
+                mastery: (
+                  Number(currentWord?.properties.Mastery.select?.name) - 1
+                ).toString(),
+              });
             }}
           >
             Ignore
           </Button>
           <Button
             className="w-full"
-            loading={updateMasteryWord.isPending}
+            // loading={updateMasteryWord.isPending}
             onClick={() => {
               const randomWord = _.sample(practiceWords)!;
               setCurrentWord(randomWord);

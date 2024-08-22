@@ -1,14 +1,13 @@
 import type { Metadata, Viewport } from "next";
 
 import { clsm } from "@acme/ui";
+import { TailwindIndicator } from "@acme/ui/pro/tailwind-indicator";
 import { ThemeProvider, ThemeToggle } from "@acme/ui/theme";
+import { Toaster } from "@acme/ui/toast";
 
 import { TRPCReactProvider } from "~/trpc/react";
 
-import "../app/globals.css";
-
-import { TailwindIndicator } from "@acme/ui/pro/tailwind-indicator";
-import { Toaster } from "@acme/ui/toast";
+import "~/app/globals.css";
 
 import { env } from "~/env";
 

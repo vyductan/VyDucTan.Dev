@@ -4,7 +4,6 @@ packages:
   - "@acme/*"
   - "@acme/tooling/*"
   - "!@acme/tooling"
-  - "!@acme/.git"
 
 catalog:
   "@tanstack/react-query": ^5.51.23
@@ -12,7 +11,8 @@ catalog:
   "@trpc/react-query": ^11.0.0-rc.477
   "@trpc/server": ^11.0.0-rc.477
   eslint: ^9.9.0
-  prettier: ^3.4.10
+  prettier: ^3.3.3
+  tailwindcss: ^3.4.10
   typescript: ^5.5.4
   zod: ^3.23.8
 

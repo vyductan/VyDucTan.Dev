@@ -32,10 +32,6 @@
       "cache": false,
       "persistent": true
     },
-    "ui-add": {
-      "cache": false,
-      "interactive": true
-    },
     "typecheck": {
       "dependsOn": ["^topo", "^build"],
       "outputs": [".cache/tsbuildinfo.json"]

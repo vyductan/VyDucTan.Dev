@@ -1,34 +1,29 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
 # dependencies
 node_modules
 .pnp
 .pnp.js
 
-# Logs
-logs
-*.log
+# production
+build
+
+# testing
+coverage
+
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+.pnpm-debug.log*
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# misc
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
 *.pem
 
 # local env files
 .env
-.env*
-!.env*.example
-*.local
+.env*.local
 
 # next.js
 .next/
@@ -40,15 +35,11 @@ expo-env.d.ts
 apps/expo/.gitignore
 apps/expo/ios
 apps/expo/android
-
 # tauri
 dist-ssr
 
-# production
-build
-
-# testing
-coverage
+# vercel
+.vercel
 
 # typescript
 dist/
@@ -57,5 +48,3 @@ dist/
 # turbo
 .turbo
 
-# vercel
-.vercel

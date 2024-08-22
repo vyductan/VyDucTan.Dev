@@ -1,3 +1,4 @@
+import { subDays } from "date-fns";
 import { z } from "zod";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
@@ -17,6 +18,132 @@ export const englishRouter = createTRPCRouter({
       ]);
       return { info, data };
     }),
+    practices: protectedProcedure.query(async ({ ctx }) => {
+      return await ctx.notion.databases.query({
+        database_id: ENGLISH_NOTION_DB_ID,
+        filter: {
+          or: [
+            // Level 0
+            {
+              property: "Mastery",
+              select: {
+                is_empty: true,
+              },
+            },
+            {
+              property: "Mastery",
+              select: {
+                equals: "0",
+              },
+            },
+            // Level 1
+            {
+              and: [
+                {
+                  property: "Last studied",
+                  date: {
+                    after: subDays(new Date(), 1).toISOString(),
+                  },
+                },
+                {
+                  property: "Mastery",
+                  select: {
+                    equals: "1",
+                  },
+                },
+              ],
+            },
+            // Level 2
+            {
+              and: [
+                {
+                  property: "Last studied",
+                  date: {
+                    after: subDays(new Date(), 3).toISOString(),
+                  },
+                },
+                {
+                  property: "Mastery",
+                  select: {
+                    equals: "2",
+                  },
+                },
+              ],
+            },
+            // Level 3
+            {
+              and: [
+                {
+                  property: "Last studied",
+                  date: {
+                    after: subDays(new Date(), 7).toISOString(),
+                  },
+                },
+                {
+                  property: "Mastery",
+                  select: {
+                    equals: "3",
+                  },
+                },
+              ],
+            },
+            // Level 3
+            {
+              and: [
+                {
+                  property: "Last studied",
+                  date: {
+                    after: subDays(new Date(), 30).toISOString(),
+                  },
+                },
+                {
+                  property: "Mastery",
+                  select: {
+                    equals: "3",
+                  },
+                },
+              ],
+            },
+            // Level 4
+            {
+              and: [
+                {
+                  property: "Last studied",
+                  date: {
+                    after: subDays(new Date(), 90).toISOString(),
+                  },
+                },
+                {
+                  property: "Mastery",
+                  select: {
+                    equals: "4",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      });
+    }),
+    updateMastery: protectedProcedure
+      .input(
+        z.object({
+          id: z.string(),
+          mastery: z.string(),
+        }),
+      )
+      .mutation(async ({ ctx, input: { id, mastery } }) => {
+        return ctx.notion.pages.update({
+          page_id: id,
+          properties: {
+            Mastery: {
+              select: {
+                name: mastery,
+              },
+            },
+          },
+        });
+      }),
     insert: protectedProcedure
       .input(EnglishAddSchema)
       .mutation(async ({ ctx, input }) => {
@@ -24,17 +151,25 @@ export const englishRouter = createTRPCRouter({
           parent: { database_id: ENGLISH_NOTION_DB_ID },
           properties: {
             ...input,
-            // IPA: input.IPA,
-            // X: "123",
+            // IPA: input.Level,
+            // // X: "123",
             //   Z: {
-            //   rich_text: [{text: {content: "123"}}]
+            //   select: {
+            //   name: "1",
+            //   color: "gray"
+            // }
             // },
-            // K: null,
             // X: {
             //   // type: "title",
             //   title: [{text: {content: "123"}}]
             // },
-            // G: input.IPA
+            // G: {
+            // select: {
+            //   name: "213",
+            //   color
+            // }
+            // }
+
             // ...input,
             Mastery: {
               select: {

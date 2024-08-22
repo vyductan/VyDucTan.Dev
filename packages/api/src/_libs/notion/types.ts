@@ -1,4 +1,7 @@
-import type { RichTextItemResponse } from "@notionhq/client/build/src/api-endpoints";
+import type {
+  RichTextItemResponse,
+  SelectPropertyItemObjectResponse,
+} from "@notionhq/client/build/src/api-endpoints";
 import { z } from "zod";
 
 // type PropertyBase<TType = "title"> = {
@@ -37,11 +40,26 @@ export type NotionRichText = {
   rich_text: RichTextItemResponse[];
 };
 
+export type NotionSelectColor = NonNullable<
+  SelectPropertyItemObjectResponse["select"]
+>["color"];
+// type SelectColor = ;
 export const NotionSelectSchema = z.object({
   select: z
     .object({
       name: z.string(),
-      color: z.string(),
+      color: z.enum([
+        "default",
+        "gray",
+        "brown",
+        "orange",
+        "yellow",
+        "green",
+        "blue",
+        "purple",
+        "pink",
+        "red",
+      ]),
       // name: NotionRichTextSchema,
     })
     .nullable(),

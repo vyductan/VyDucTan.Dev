@@ -22,7 +22,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "clean": "rm -rf .turbo dist node_modules",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
     "dev": "tsc",
     "lint": "eslint",
     "push": "pnpm with-env drizzle-kit push",
@@ -34,7 +34,7 @@
   "dependencies": {
     "@acme/utils": "workspace:*",
     "@acme/validators": "workspace:*",
-    "@auth/core": "0.32.0",
+    "@auth/core": "0.34.2",
     "@auth/drizzle-adapter": "^1.4.1",
     "@t3-oss/env-core": "^0.10.1",
     "@trpc/server": "catalog:",
@@ -44,7 +44,7 @@
     "drizzle-orm": "^0.32.0",
     "drizzle-zod": "^0.5.1",
     "httpx": "^2.3.2",
-    "next-auth": "5.0.0-beta.19",
+    "next-auth": "5.0.0-beta.20",
     "superjson": "2.2.1",
     "zod": "catalog:"
   },

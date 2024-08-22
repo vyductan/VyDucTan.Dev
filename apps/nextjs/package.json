@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "pnpm with-env next build",
-    "clean": "git clean -xdf .next .turbo node_modules",
+    "clean": "git clean -xdf .cache .next .turbo node_modules",
     "dev": "pnpm with-env next dev --port 8080 --experimental-https --experimental-https-key ../../vyductan.com+1-key.pem --experimental-https-cert ../../vyductan.com+1.pem",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
@@ -32,8 +32,8 @@
     "@stitches/react": "^1.2.8",
     "@t3-oss/env-nextjs": "^0.10.1",
     "@tanstack/react-query": "catalog:",
-    "@tanstack/react-router": "^1.45.2",
-    "@tanstack/router-devtools": "^1.45.2",
+    "@tanstack/react-router": "^1.48.1",
+    "@tanstack/router-devtools": "^1.48.1",
     "@trpc/client": "catalog:",
     "@trpc/react-query": "catalog:",
     "@trpc/server": "catalog:",
@@ -43,7 +43,7 @@
     "axios": "^1.7.2",
     "date-fns": "^3.6.0",
     "eventsource-parser": "^1.1.1",
-    "framer-motion": "^11.3.2",
+    "framer-motion": "^11.3.28",
     "lodash": "^4.17.21",
     "negotiator": "^0.6.3",
     "next": "^14.2.5",
@@ -75,7 +75,6 @@
     "@acme/prettier-config": "workspace:*",
     "@acme/tailwind-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "@types/eslint": "^8.56.10",
     "@types/lodash": "^4.17.7",
     "@types/node": "^20.14.10",
     "@types/nodemailer": "^6.4.14",
@@ -88,6 +87,7 @@
     "jiti": "^1.21.6",
     "postcss-replace": "^2.0.1",
     "prettier": "catalog:",
+    "tailwindcss": "catalog:",
     "typescript": "catalog:"
   }
 }

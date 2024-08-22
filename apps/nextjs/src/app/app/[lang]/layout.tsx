@@ -1,7 +1,5 @@
 import type { ReactElement } from "react";
 
-import { ConfigProvider } from "@acme/ui/antd/config-provider";
-
 import { I18nProviderClient } from "~/locales/client";
 
 export default function SubLayout({
@@ -11,9 +9,5 @@ export default function SubLayout({
   params: { lang: string };
   children: ReactElement;
 }) {
-  return (
-    <I18nProviderClient locale={lang}>
-      <ConfigProvider>{children}</ConfigProvider>
-    </I18nProviderClient>
-  );
+  return <I18nProviderClient locale={lang}>{children}</I18nProviderClient>;
 }

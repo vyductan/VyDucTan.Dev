@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@acme/eslint-config",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./base": "./base.js",
+    "./nextjs": "./nextjs.js",
+    "./react": "./react.js",
+    "./tailwind": "./tailwind.js"
+  },
+  "scripts": {
+    "clean": "git clean -xdf .cache .turbo node_modules",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "typecheck": "tsc --noEmit"
+  },
+  "prettier": "@acme/prettier-config",
+  "dependencies": {
+    "@eslint/compat": "^1.1.1",
+    "@next/eslint-plugin-next": "^14.2.5",
+    "eslint-plugin-drizzle": "^0.2.3",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsx-a11y": "^6.9.0",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "rc",
+    "eslint-plugin-tailwindcss": "^3.17.4",
+    "eslint-plugin-turbo": "^2.0.14",
+    "typescript-eslint": "^8.2.0"
+  },
+  "devDependencies": {
+    "@acme/prettier-config": "workspace:*",
+    "@acme/tsconfig": "workspace:*",
+    "eslint": "catalog:",
+    "eslint-plugin-unicorn": "^55.0.0",
+    "prettier": "catalog:",
+    "typescript": "catalog:"
+  }
+}

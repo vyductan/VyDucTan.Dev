@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { createI18nMiddleware } from "next-international/middleware";
 
-import { auth } from "@acme/api/auth";
+import { auth } from "@acme/auth";
+
+import { env as environment } from "./env";
 
 // import { auth } from "@acme/auth";
 
@@ -10,46 +12,45 @@ const I18nMiddleware = createI18nMiddleware({
   defaultLocale: "en",
   urlMappingStrategy: "rewriteDefault",
 });
-export default auth((req) => {
-  const nextUrl = req.nextUrl;
+export default auth((request) => {
+  const nextUrl = request.nextUrl;
 
   /**
    * Rewrite URL
    */
   // Get hostname of request (e.g. demo.vercel.pub, demo.localhost:3000)
-  let hostname = req.headers
+  let hostname = request.headers
     .get("host")
     ?.replace(
-      `.localhost:${process.env.PORT ?? 3000}`,
-      `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`,
+      `.localhost:${environment.PORT ?? 3000}`,
+      `.${environment.NEXT_PUBLIC_ROOT_DOMAIN}`,
     );
 
   // special case for Vercel preview deployment URLs
   if (
-    hostname &&
-    hostname.includes("---") &&
-    hostname.endsWith(`.${process.env.NEXT_PUBLIC_VERCEL_DEPLOYMENT_SUFFIX}`)
+    hostname?.includes("---") &&
+    hostname.endsWith(`.${environment.NEXT_PUBLIC_VERCEL_DEPLOYMENT_SUFFIX}`)
   ) {
     hostname = `${hostname.split("---")[0]}.${
-      process.env.NEXT_PUBLIC_ROOT_DOMAIN
+      environment.NEXT_PUBLIC_ROOT_DOMAIN
     }`;
   }
 
-  const searchParams = req.nextUrl.searchParams.toString();
+  const searchParams = request.nextUrl.searchParams.toString();
   // Get the pathname of the request (e.g. /, /about, /blog/first-post)
   const path = `${nextUrl.pathname}${
     searchParams.length > 0 ? `?${searchParams}` : ""
   }`;
 
   // rewrites for app pages
-  if (hostname == `app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) {
+  if (hostname == `app.${environment.NEXT_PUBLIC_ROOT_DOMAIN}`) {
     /**
      * I18n auto set lang path
      * only for app.* domain
      */
-    const i18nResponse = I18nMiddleware(req);
+    const i18nResponse = I18nMiddleware(request);
     // To get current url in server side
-    i18nResponse.headers.set("x-url", req.url);
+    i18nResponse.headers.set("x-url", request.url);
     // Temporary redirect (no need add local when NextResponse.(redirect|rewrite))
     if (i18nResponse.status === 307) {
       return i18nResponse;
@@ -64,22 +65,22 @@ export default auth((req) => {
     //   return NextResponse.redirect(new URL("/", req.url));
     // }
     return NextResponse.rewrite(
-      new URL(`/app${path === "/" ? "" : path}`, req.url),
+      new URL(`/app${path === "/" ? "" : path}`, request.url),
     );
   }
 
   // rewrite root application to `/home` folder
   if (
-    hostname === `localhost:${process.env.PORT ?? 3000}` ||
-    hostname === process.env.NEXT_PUBLIC_ROOT_DOMAIN
+    hostname === `localhost:${environment.PORT ?? 3000}` ||
+    hostname === environment.NEXT_PUBLIC_ROOT_DOMAIN
   ) {
     return NextResponse.rewrite(
-      new URL(`/home${path === "/" ? "" : path}`, req.url),
+      new URL(`/home${path === "/" ? "" : path}`, request.url),
     );
   }
 
   // rewrite everything else to `/[domain]/[slug] dynamic route
-  return NextResponse.rewrite(new URL(`/${hostname}${path}`, req.url));
+  return NextResponse.rewrite(new URL(`/${hostname}${path}`, request.url));
 });
 
 export const config = {
@@ -90,7 +91,8 @@ export const config = {
    * 3. /_static (inside /public)
    * 4. all root files inside /public (e.g. /favicon.ico)
    */
-  matcher: ["/((?!api/|_next/|_static/|_vercel/|[\\w-]+\\.\\w+).*)"],
+  // matcher: ["/((?!api/|_next/|_static/|_vercel/|[\\w-]+\\.\\w+).*)"],
+  matcher: [String.raw`/((?!api/|_next/|_static/|_vercel/|[\w-]+\.\w+).*)`],
 };
 
 // // Or like this if you need to do something here.

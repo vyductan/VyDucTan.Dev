@@ -2,36 +2,32 @@ import type {
   DatabaseObjectResponse,
   PageObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
-import type { TableColumnsType } from "antd";
-import { Table } from "antd";
-
-import { TanstackTable, TanstackTableProps } from "@acme/ui/tanstack-table";
 
 export const TodoTable = ({
-  data,
-  properties,
+  data: __,
+  properties: _,
 }: {
   data: PageObjectResponse[];
   properties: DatabaseObjectResponse["properties"];
 }) => {
-  const columns: TanstackTableProps<PageObjectResponse>["columns"] =
-    Object.entries(properties).map(([key, value]) => {
-      const column: TanstackTableProps<PageObjectResponse>["columns"][number] =
-        {
-          id: key,
-          header: key,
-        };
-      // const record = props.row.original;
-      if (value.type === "title") {
-        column.cell = (props) => {
-          const prop = props.row.original.properties[key];
-          if (prop?.type === "title") {
-            return prop.title[0]?.plain_text;
-          }
-        };
-      }
-      return column;
-    });
+  // const columns: TableProps<PageObjectResponse>["columns"] =
+  //   Object.entries(properties).map(([key, value]) => {
+  //     const column: TableProps<PageObjectResponse>["columns"][number] =
+  //       {
+  //         id: key,
+  //         header: key,
+  //       };
+  //     // const record = props.row.original;
+  //     if (value.type === "title") {
+  //       column.cell = (props) => {
+  //         const prop = props.row.original.properties[key];
+  //         if (prop?.type === "title") {
+  //           return prop.title[0]?.plain_text;
+  //         }
+  //       };
+  //     }
+  //     return column;
+  //   });
   //   [
   //   {
   //     // title: "Task name",
@@ -66,11 +62,13 @@ export const TodoTable = ({
   //   },
   // ];
   return (
-    <TanstackTable
-      // rowKey="id"
-      columns={columns}
-      data={data}
-      // pagination={false}
-    />
+    <>
+      {/* <Table */}
+      {/*   // rowKey="id" */}
+      {/*   columns={columns} */}
+      {/*   data={data} */}
+      {/*   // pagination={false} */}
+      {/* /> */}
+    </>
   );
 };

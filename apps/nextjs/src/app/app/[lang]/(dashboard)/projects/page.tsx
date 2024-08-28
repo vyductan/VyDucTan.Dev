@@ -9,10 +9,12 @@ import { PageContainer } from "@acme/ui/pro/page-container";
 import { api } from "~/trpc/react";
 import ProjectModalForm from "./components/ProjectsForm";
 import { ProjectsTable } from "./components/ProjectsTable";
-import { ProjectsRoute } from "./routeDef";
 
-export default function ProjectsPage() {
-  const searchParams = ProjectsRoute.useSearch();
+export default function ProjectsPage({
+  searchParams,
+}: {
+  searchParams: { query: string; page: number; pageSize: number };
+}) {
   const listQuery = api.projects.all.useQuery(searchParams);
   const [currentRow, setCurrentRow] =
     useState<RouterOutputs["projects"]["all"]["data"][number]>();

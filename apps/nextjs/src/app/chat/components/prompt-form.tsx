@@ -1,7 +1,7 @@
 import type { UseChatHelpers } from "ai/react";
 import * as React from "react";
 
-import { useEnterSubmit } from "@acme/hooks";
+import { useEnterSubmit } from "@acme/hooks/useEnterSubmit";
 import { Button } from "@acme/ui/button";
 import { Icon } from "@acme/ui/icons";
 import { Textarea } from "@acme/ui/textarea";
@@ -32,9 +32,9 @@ export function PromptForm({
 
   return (
     <form
-      onSubmit={async (e) => {
-        e.preventDefault();
-        if (!input?.trim()) {
+      onSubmit={async (event) => {
+        event.preventDefault();
+        if (!input.trim()) {
           return;
         }
         setInput("");
@@ -69,7 +69,7 @@ export function PromptForm({
         spellCheck={false}
         tabIndex={0}
         value={input}
-        onChange={(e) => setInput(e.currentTarget.value)}
+        onChange={(event) => setInput(event.currentTarget.value)}
         onKeyDown={onKeyDown}
       />
 

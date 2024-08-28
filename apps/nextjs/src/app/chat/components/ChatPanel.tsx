@@ -3,8 +3,8 @@ import type { UseChatHelpers } from "ai/react";
 import { Button } from "@acme/ui/button";
 import { Icon } from "@acme/ui/icons";
 
-import { ButtonScrollToBottom } from "./ButtonScrollToBottom";
-import { PromptForm } from "./PromptForm";
+import { ButtonScrollToBottom } from "./button-scroll-to-bottom";
+import { PromptForm } from "./prompt-form";
 
 export interface ChatPanelProps
   extends Pick<

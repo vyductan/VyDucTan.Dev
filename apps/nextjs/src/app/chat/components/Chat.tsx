@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { useChat } from "ai/react";
 
-import { useLocalStorage } from "@acme/hooks";
+import { useLocalStorage } from "@acme/hooks/use-local-storage";
 import { clsm } from "@acme/ui";
 import { Button } from "@acme/ui/button";
 import { Icon } from "@acme/ui/icons";
@@ -13,9 +13,9 @@ import { Input } from "@acme/ui/input";
 import { Modal } from "@acme/ui/modal";
 import { message } from "@acme/ui/toast";
 
+import { ChatScrollAnchor } from "./chat-scroll-anchor";
 import { ChatList } from "./ChatList";
 import { ChatPanel } from "./ChatPanel";
-import { ChatScrollAnchor } from "./ChatScrollAnchor";
 
 export interface ChatProps extends Omit<React.ComponentProps<"div">, "title"> {
   initialMessages?: Message[];
@@ -82,7 +82,7 @@ export const Chat = ({
       </div>
 
       <div className={clsm("h-full pb-[200px]", className)}>
-        {messages.length ? (
+        {messages.length > 0 ? (
           <>
             <ChatList messages={messages} />
             <ChatScrollAnchor trackVisibility={isLoading} />

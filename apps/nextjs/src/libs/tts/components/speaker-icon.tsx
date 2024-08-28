@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { LangCode } from "../lang";
 import type { TTSProvider } from "../tts/types";
 import { defaultTTSProvider, doSpeak } from "../tts";
-import { SpeakerMotion } from "./SpeakerMotion";
+import { SpeakerMotion } from "./speaker-motion";
 
 import "./index.css";
 

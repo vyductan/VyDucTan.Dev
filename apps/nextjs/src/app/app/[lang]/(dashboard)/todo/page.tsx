@@ -4,18 +4,20 @@ import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoint
 import { isFullPage } from "@notionhq/client";
 import { format } from "date-fns";
 
-import { Search } from "@acme/ui/input";
+import { InputSearch } from "@acme/ui/input";
 import { PageContainer } from "@acme/ui/pro/page-container";
 
 import { DEFAULT_DATE_FORMAT } from "~/libs/date-fns";
 import { api } from "~/trpc/react";
-import { TodoTable } from "./_components/TodoTable";
-import { TodoRoute } from "./routeDef";
+import { TodoTable } from "./_components/todo-table";
 
-export default function TodoPage() {
-  const searchParams = TodoRoute.useSearch();
-  const infoQuery = api.task.notion_retrieve.useQuery();
-  const { data } = api.task.notion_list.useQuery(
+export default function TodoPage({
+  searchParams,
+}: {
+  searchParams: { query: string; pageSize: number; page: number };
+}) {
+  const infoQuery = api.tasks.notion_retrieve.useQuery();
+  const { data } = api.tasks.notion_list.useQuery(
     {
       ...searchParams,
       sortBy: "Due",
@@ -36,41 +38,39 @@ export default function TodoPage() {
 
   if (!data || !infoQuery.data) return <>No Data</>;
   // console.log("data", data);
-  const groupByDueObj: Record<string, PageObjectResponse[]> = {};
+  const groupByDueObject: Record<string, PageObjectResponse[]> = {};
 
   const addProp = (dueDate: string, item: PageObjectResponse) => {
     // let group = groupByDueObj[dueDate];
     // if(groupByDueObj[dueDate]){
     // }
     // const x = groupByDueObj[dueDate]
-    if (groupByDueObj[dueDate]) {
-      groupByDueObj[dueDate]?.push(item);
+    if (groupByDueObject[dueDate]) {
+      groupByDueObject[dueDate].push(item);
       // group.push(item);
     } else {
-      groupByDueObj[dueDate] = [item];
+      groupByDueObject[dueDate] = [item];
       // group = [item];
     }
   };
-  data.results.forEach((x) => {
-    if (isFullPage(x)) {
-      if (x.properties.Due?.type === "date") {
-        if (x.properties.Due.date) {
-          if (x.properties.Due.date.end) {
-            addProp(x.properties.Due.date.end, x);
-          } else {
-            addProp(x.properties.Due.date.start, x);
-          }
+  for (const x of data.results) {
+    if (isFullPage(x) && x.properties.Due?.type === "date") {
+      if (x.properties.Due.date) {
+        if (x.properties.Due.date.end) {
+          addProp(x.properties.Due.date.end, x);
         } else {
-          addProp("null", x);
+          addProp(x.properties.Due.date.start, x);
         }
+      } else {
+        addProp("null", x);
       }
     }
-  });
-  console.log("xxxx", groupByDueObj, infoQuery);
+  }
+  console.log("xxxx", groupByDueObject, infoQuery);
   return (
     <PageContainer>
-      <Search placeholder="Search tasks..." />
-      {Object.entries(groupByDueObj).map(([k, v]) => {
+      <InputSearch placeholder="Search tasks..." />
+      {Object.entries(groupByDueObject).map(([k, v]) => {
         return (
           <div key={k}>
             <div>{k === "null" ? "null" : format(k, DEFAULT_DATE_FORMAT)}</div>

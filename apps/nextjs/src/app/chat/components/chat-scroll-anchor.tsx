@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useInView } from "react-intersection-observer";
 
-import { useAtBottom } from "@acme/hooks";
+import { useAtBottom } from "@acme/hooks/use-at-bottom";
 
 interface ChatScrollAnchorProps {
   trackVisibility?: boolean;

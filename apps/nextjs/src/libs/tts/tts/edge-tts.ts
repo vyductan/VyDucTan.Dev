@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
 import { v4 as uuidv4 } from "uuid";
 
 import type { SpeakOptions } from "./types";
@@ -29,13 +27,10 @@ function ssmlHeadersPlusData(
 
 function getHeadersAndData(data: string) {
   const headers: Record<string, string> = {};
-  data
-    .slice(0, data.indexOf("\r\n\r\n"))
-    .split("\r\n")
-    .forEach((line) => {
-      const [key, value] = line.split(":", 2);
-      if (key && value) headers[key] = value;
-    });
+  for (const line of data.slice(0, data.indexOf("\r\n\r\n")).split("\r\n")) {
+    const [key, value] = line.split(":", 2);
+    if (key && value) headers[key] = value;
+  }
   return { headers, data: data.slice(data.indexOf("\r\n\r\n") + 4) };
 }
 
@@ -186,20 +181,20 @@ function dictReplace(s: string, d: Record<string, string>): string {
 }
 
 function escape(data: string, entities: Record<string, string> = {}): string {
-  data = data.replace(/&/g, "&amp;");
-  data = data.replace(/>/g, "&gt;");
-  data = data.replace(/</g, "&lt;");
+  data = data.replaceAll("&", "&amp;");
+  data = data.replaceAll(">", "&gt;");
+  data = data.replaceAll("<", "&lt;");
   if (Object.keys(entities).length > 0) {
     data = dictReplace(data, entities);
   }
   return data;
 }
 
-function removeIncompatibleCharacters(str: string): string {
-  const chars: string[] = Array.from(str);
+function removeIncompatibleCharacters(string_: string): string {
+  const chars: string[] = [...string_];
 
-  for (let idx = 0; idx < chars.length; idx++) {
-    const char = chars[idx];
+  for (let index = 0; index < chars.length; index++) {
+    const char = chars[index];
     const code = char?.charCodeAt(0);
     if (
       code &&
@@ -207,7 +202,7 @@ function removeIncompatibleCharacters(str: string): string {
         (code >= 11 && code <= 12) ||
         (code >= 14 && code <= 31))
     ) {
-      chars[idx] = " ";
+      chars[index] = " ";
     }
   }
 
@@ -227,7 +222,7 @@ function* splitTextByByteLength(
     let splitAt = text.lastIndexOf(" ", byteLength);
 
     // If no space found, splitAt is byteLength
-    splitAt = splitAt !== -1 ? splitAt : byteLength;
+    splitAt = splitAt === -1 ? byteLength : splitAt;
 
     // Verify all & are terminated with a ;
     while (text.slice(0, splitAt).includes("&")) {
@@ -263,7 +258,7 @@ function* splitTextByByteLength(
 }
 
 function calcMaxMesgSize(voice: string, rate: number, volume: number): number {
-  const connectId = uuidv4().replace(/-/g, "");
+  const connectId = uuidv4().replaceAll("-", "");
   const date = new Date().toString();
   const websocketMaxSize: number = 2 ** 16;
   const overheadPerMessage: number =
@@ -290,7 +285,7 @@ export function speak({
   onStartSpeaking,
 }: EdgeTTSOptions) {
   const lang = langCode2TTSLang[lang_ ?? "en"] ?? "en-US";
-  const connectId = uuidv4().replace(/-/g, "");
+  const connectId = uuidv4().replaceAll("-", "");
   const date = new Date().toString();
   const audioContext = new AudioContext();
   const audioBufferSource = audioContext.createBufferSource();
@@ -308,7 +303,7 @@ export function speak({
       try {
         stopped = true;
         audioBufferSource.stop();
-      } catch (e) {
+      } catch {
         // ignore
       }
     },
@@ -318,13 +313,13 @@ export function speak({
   for (const text of texts) {
     const ws = new WebSocket(`${wssURL}&ConnectionId=${connectId}`);
     ws.binaryType = "arraybuffer";
-    ws.onerror = (ev) => {
-      console.log("onerror", ev);
-    };
-    ws.onclose = (ev) => {
-      console.log("onclose", ev);
-    };
-    ws.onopen = () => {
+    ws.addEventListener("error", (event) => {
+      console.log("onerror", event);
+    });
+    ws.addEventListener("close", (event) => {
+      console.log("onclose", event);
+    });
+    ws.addEventListener("open", () => {
       ws.send(
         `X-Timestamp:${date}\r\n` +
           "Content-Type:application/json; charset=utf-8\r\n" +
@@ -357,14 +352,14 @@ export function speak({
           ),
         ),
       );
-    };
+    });
 
     signal.addEventListener(
       "abort",
       () => {
         try {
           ws.close();
-        } catch (e) {
+        } catch {
           // ignore
         }
       },
@@ -374,14 +369,16 @@ export function speak({
     let audioData = new ArrayBuffer(0);
     let downloadAudio = false;
     let startSpeaking = false;
+    // eslint-disable-next-line unicorn/prefer-add-event-listener
     ws.onmessage = async (event) => {
       if (typeof event.data === "string") {
         const { headers } = getHeadersAndData(event.data);
         const path = headers.Path;
         switch (path) {
-          case "turn.start":
+          case "turn.start": {
             downloadAudio = true;
             break;
+          }
           case "turn.end": {
             downloadAudio = false;
             if (!audioData.byteLength || stopped) {
@@ -395,10 +392,10 @@ export function speak({
               onStartSpeaking?.();
             }
             audioBufferSource.start();
-            audioBufferSource.onended = () => {
+            audioBufferSource.addEventListener("ended", () => {
               onFinish?.();
               void audioContext.close();
-            };
+            });
             break;
           }
         }

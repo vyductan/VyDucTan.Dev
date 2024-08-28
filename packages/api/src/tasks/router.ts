@@ -1,6 +1,8 @@
 import { z } from "zod";
 
-import { and, eq, ilike } from "../_db";
+import { and, eq, ilike } from "@acme/db";
+import { TasksTable } from "@acme/db/schema";
+
 import {
   countQuery,
   paginationSchema,
@@ -8,7 +10,6 @@ import {
   withPaginationQuery,
 } from "../_util/query";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { TasksTable } from "./schema";
 import { CreateTaskSchema } from "./validator";
 
 export const tasksRouter = createTRPCRouter({
@@ -44,12 +45,10 @@ export const tasksRouter = createTRPCRouter({
             //   },
             // },
             {
-              or: [
-                ...input.status.map((x) => ({
-                  property: "Status",
-                  status: { equals: x },
-                })),
-              ],
+              or: input.status.map((x) => ({
+                property: "Status",
+                status: { equals: x },
+              })),
             },
           ],
         },

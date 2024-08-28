@@ -76,6 +76,7 @@ export async function doSpeak({
   utterance.rate = rate;
   utterance.volume = volume ? volume / 100 : 1;
 
+  // eslint-disable-next-line unicorn/no-null
   const defaultVoice = supportVoices.find((v) => v.lang === ttsLang) ?? null;
   const settingsVoice = supportVoices.find((v) => v.voiceURI === voice);
   utterance.voice = settingsVoice ?? defaultVoice;

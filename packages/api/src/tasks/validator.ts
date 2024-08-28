@@ -1,7 +1,7 @@
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-import { TasksTable } from "./schema";
+import { TasksTable } from "@acme/db/schema";
 
 export const CreateTaskSchema = createInsertSchema(TasksTable, {
   content: z.string(),

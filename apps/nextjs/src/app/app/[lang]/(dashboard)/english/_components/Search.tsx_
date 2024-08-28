@@ -1,15 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { message, Popover, Spin } from "antd";
 import axios from "axios";
 
-import { useDebounce } from "@acme/hooks";
-import { InputSearch } from "@acme/ui/antd/input";
-import { Select } from "@acme/ui/antd/select";
-import { RadioOption } from "@acme/ui/radio";
+import type { RadioOption } from "@acme/ui/radio";
+import { InputSearch } from "@acme/ui/input";
+import { Select } from "@acme/ui/select";
 
-import { Link } from "~/routes/Link";
 import { api } from "~/trpc/react";
 
 export const Search = () => {
@@ -45,7 +42,9 @@ export const Search = () => {
         arrow={false}
         content={
           <div className="flex min-w-[500px] flex-col gap-2">
-            {!loading ? (
+            {loading ? (
+              <Spin size="small" />
+            ) : (
               options.map((o) => (
                 <Link
                   to="/english/dictionary/$word"
@@ -55,8 +54,6 @@ export const Search = () => {
                   {o.label}
                 </Link>
               ))
-            ) : (
-              <Spin size="small" />
             )}
           </div>
         }

@@ -1,7 +1,7 @@
 import type { SVGProps } from "react";
 import React from "react";
 
-import { signIn } from "@acme/api/authauth";
+import { signIn } from "@acme/auth";
 import { Button } from "@acme/ui/button";
 
 export default async function LoginPage({

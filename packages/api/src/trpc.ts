@@ -10,10 +10,10 @@ import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
-import type { Session } from "@acme/api/auth";
-import { auth, validateToken } from "@acme/api/auth";
+import type { Session } from "@acme/auth";
+import { auth, validateToken } from "@acme/auth";
+import { db as database } from "@acme/db/client";
 
-import { db } from "./_db/client";
 import { notion } from "./_libs/notion";
 
 /**
@@ -39,11 +39,11 @@ const isomorphicGetSession = async (headers: Headers) => {
  *
  * @see https://trpc.io/docs/server/context
  */
-export const createTRPCContext = async (opts: {
+export const createTRPCContext = async (options: {
   headers: Headers;
   session: Session | null;
 }) => {
-  const authToken = opts.headers.get("Authorization") ?? null;
+  const authToken = options.headers.get("Authorization") ?? null;
   // const session = await isomorphicGetSession(opts.headers);
   const session = {
     user: {
@@ -53,12 +53,12 @@ export const createTRPCContext = async (opts: {
     expires: "1234567",
   };
 
-  const source = opts.headers.get("x-trpc-source") ?? "unknown";
+  const source = options.headers.get("x-trpc-source") ?? "unknown";
   console.log(">>> tRPC Request from", source, "by", session.user);
 
   return {
     session,
-    db,
+    db: database,
     token: authToken,
     notion,
   };

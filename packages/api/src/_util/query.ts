@@ -1,10 +1,8 @@
 import type { PgTableWithColumns, TableConfig } from "drizzle-orm/pg-core";
 import { z } from "zod";
 
-import type { Database } from "@acme/api/_db";
-
-import type { SQL } from "../_db";
-import { count } from "../_db";
+import type { Database, SQL } from "@acme/db";
+import { count } from "@acme/db";
 
 export const DEFAULT_PAGE_SIZE = 10;
 export type Pagination = z.infer<typeof paginationSchema>;
@@ -19,19 +17,19 @@ export const searchSchema = z.object({
 });
 
 export const withPagination = async <T extends TableConfig>(
-  db: Database,
+  database: Database,
   table: PgTableWithColumns<T>,
   { page, pageSize = DEFAULT_PAGE_SIZE }: Pagination,
   where?: SQL,
 ) => {
   const [data, [lenghts]] = await Promise.all([
-    db
+    database
       .select()
       .from(table)
       .where(where)
       .limit(pageSize)
       .offset((page - 1) * pageSize),
-    db.select({ count: count() }).from(table).where(where),
+    database.select({ count: count() }).from(table).where(where),
   ]);
   return {
     data,
@@ -44,10 +42,12 @@ export const withPagination = async <T extends TableConfig>(
 };
 
 export const countQuery = async <T extends TableConfig>(
-  db: Database,
+  database: Database,
   table: PgTableWithColumns<T>,
   where?: SQL,
-) => (await db.select({ count: count() }).from(table).where(where))[0]?.count;
+) =>
+  (await database.select({ count: count() }).from(table).where(where))[0]
+    ?.count;
 
 export const withPaginationQuery = async <T>(
   data: T,

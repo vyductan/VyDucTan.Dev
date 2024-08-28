@@ -1,4 +1,4 @@
-import { CefrLevelEnum, WordClassEnum, WordMasteryEnum } from "./schema";
+import { CefrLevelEnum, WordClassEnum, WordMasteryEnum } from "@acme/db/schema";
 
 export type WordClass = (typeof WordClassEnum.enumValues)[number];
 export type WordCEFRLevel = (typeof CefrLevelEnum.enumValues)[number];

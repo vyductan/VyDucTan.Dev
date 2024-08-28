@@ -3,7 +3,7 @@
 import * as React from "react";
 
 import type { ButtonProps } from "@acme/ui/button";
-import { useAtBottom } from "@acme/hooks";
+import { useAtBottom } from "@acme/hooks/use-at-bottom";
 import { clsm } from "@acme/ui";
 import { Button } from "@acme/ui/button";
 import { ArrowDownFilled } from "@acme/ui/icons";

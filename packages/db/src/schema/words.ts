@@ -1,6 +1,6 @@
 import { pgEnum, text, timestamp } from "drizzle-orm/pg-core";
 
-import { pgTable } from "../_db";
+import { pgTable } from "..";
 
 /*
  * Word

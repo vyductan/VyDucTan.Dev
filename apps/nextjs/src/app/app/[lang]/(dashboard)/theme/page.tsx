@@ -6,7 +6,7 @@ import { generate } from "@ant-design/colors";
 import { CodeBlock } from "@acme/ui/code-block";
 import { Input } from "@acme/ui/input";
 import { ExternalLink } from "@acme/ui/link";
-import { hexToHsl } from "@acme/utils";
+import { hexToHsl } from "@acme/utils/color";
 
 export default function ThemePage() {
   const [input, setInput] = useState<{
@@ -67,8 +67,8 @@ export default function ThemePage() {
           })
           .join("\n")}
       </CodeBlock>
-      {palette.map((c, i) => (
-        <div key={i} style={{ color: c }}>
+      {palette.map((c, index) => (
+        <div key={index} style={{ color: c }}>
           {c}
         </div>
       ))}
@@ -82,8 +82,8 @@ export default function ThemePage() {
           })
           .join("\n")}
       </CodeBlock>
-      {darkPalete.map((c, i) => (
-        <div key={i} style={{ color: c }}>
+      {darkPalete.map((c, index) => (
+        <div key={index} style={{ color: c }}>
           {c}
         </div>
       ))}

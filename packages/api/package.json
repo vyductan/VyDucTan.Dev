@@ -32,19 +32,16 @@
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
+    "@acme/auth": "workspace:*",
+    "@acme/db": "workspace:*",
     "@acme/utils": "workspace:*",
     "@acme/validators": "workspace:*",
-    "@auth/core": "0.34.2",
-    "@auth/drizzle-adapter": "^1.4.1",
     "@t3-oss/env-core": "^0.10.1",
     "@trpc/server": "catalog:",
     "@vercel/blob": "^0.23.4",
     "@vercel/postgres": "^0.9.0",
     "cheerio": "1.0.0-rc.12",
-    "drizzle-orm": "^0.32.0",
-    "drizzle-zod": "^0.5.1",
     "httpx": "^2.3.2",
-    "next-auth": "5.0.0-beta.20",
     "superjson": "2.2.1",
     "zod": "catalog:"
   },
@@ -53,9 +50,7 @@
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
     "dotenv-cli": "^7.4.2",
-    "drizzle-kit": "^0.23.0",
     "eslint": "catalog:",
-    "pg": "^8.12.0",
     "prettier": "catalog:",
     "typescript": "catalog:"
   }

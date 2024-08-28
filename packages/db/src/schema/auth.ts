@@ -2,7 +2,7 @@ import type { AdapterAccountType } from "next-auth/adapters";
 import { relations } from "drizzle-orm";
 import { integer, primaryKey, text, timestamp } from "drizzle-orm/pg-core";
 
-import { pgTable } from "../_db";
+import { pgTable } from "..";
 
 /*
  * Next Auth

@@ -1,6 +1,6 @@
 import { createInsertSchema } from "drizzle-zod";
 
-import { ProjectsTable } from "./schema";
+import { ProjectsTable } from "@acme/db/schema";
 
 export const CreateProjectSchema = createInsertSchema(ProjectsTable).omit({
   id: true,

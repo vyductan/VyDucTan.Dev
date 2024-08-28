@@ -1,8 +1,8 @@
 import { relations, sql } from "drizzle-orm";
 import { json, pgEnum, text, timestamp } from "drizzle-orm/pg-core";
 
-import { pgTable } from "../_db";
-import { ProjectsTable } from "../projects/schema";
+import { pgTable } from "..";
+import { ProjectsTable } from "./projects";
 
 /*
  * Task

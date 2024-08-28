@@ -15,14 +15,14 @@
       "default": "./src/client.ts"
     },
     "./schema": {
-      "types": "./dist/schema.d.ts",
-      "default": "./src/schema.ts"
+      "types": "./dist/schema/index.d.ts",
+      "default": "./src/schema/index.ts"
     }
   },
   "scripts": {
-    "//build": "tsc",
-    "clean": "rm -rf .turbo dist node_modules",
-    "dev": "tsc --watch",
+    "build": "tsc",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "dev": "tsc",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "push": "pnpm with-env drizzle-kit push",

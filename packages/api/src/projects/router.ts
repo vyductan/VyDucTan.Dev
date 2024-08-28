@@ -1,9 +1,10 @@
 import { z } from "zod";
 
-import { eq, ilike } from "../_db";
+import { eq, ilike } from "@acme/db";
+import { ProjectsTable } from "@acme/db/schema";
+
 import { paginationSchema, searchSchema, withPagination } from "../_util/query";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { ProjectsTable } from "./schema";
 import { CreateProjectSchema } from "./validator";
 
 export const projectsRouter = createTRPCRouter({

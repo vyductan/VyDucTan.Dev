@@ -4,10 +4,11 @@ import { subDays } from "date-fns";
 import { read, request } from "httpx";
 import { z } from "zod";
 
-import { eq } from "../_db";
+import { eq } from "@acme/db";
+import { WordsTable } from "@acme/db/schema";
+
 import { paginationSchema, searchSchema } from "../_util/query";
 import { protectedProcedure } from "../trpc";
-import { WordsTable } from "./schema";
 import { AddWordSchema } from "./validator";
 
 export const wordsRouter = {
@@ -40,7 +41,7 @@ export const wordsRouter = {
       const $ = load(body);
       const nodes = $("div.dictionary").first().find("div.dsense");
       nodes.first().find();
-      nodes.toArray().forEach((x) => {
+      for (const x of nodes.toArray()) {
         const word = {
           word: $(x).find("span.dsense_hw").text(),
           pos: $(x).find("span.dsense_pos").text(),
@@ -50,13 +51,13 @@ export const wordsRouter = {
           examples: $(x)
             .find("div.examp.dexamp")
             .toArray()
-            .map((el) => ({
-              highlight: $(el).find("span.lu.dlu").text(),
-              text: $(el).find("span.eg.deg").text(),
+            .map((element) => ({
+              highlight: $(element).find("span.lu.dlu").text(),
+              text: $(element).find("span.eg.deg").text(),
             })),
         } as unknown as typeof WordsTable.$inferSelect;
         data.push(word);
-      });
+      }
       return data;
     }),
 

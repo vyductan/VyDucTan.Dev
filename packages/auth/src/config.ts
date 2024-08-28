@@ -7,9 +7,10 @@ import { skipCSRFCheck } from "@auth/core";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import Google from "next-auth/providers/google";
 
-import { db } from "../_db/client";
-import { env } from "../../env";
-import { Account, Session, User } from "./schema";
+import { db } from "@acme/db/client";
+import { Account, Session, User } from "@acme/db/schema";
+
+import { env } from "../env";
 
 export type { Session } from "next-auth";
 

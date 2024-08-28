@@ -2,8 +2,6 @@ packages:
   - apps/*
   - packages/*
   - "@acme/*"
-  - "@acme/tooling/*"
-  - "!@acme/tooling"
 
 catalog:
   "@tanstack/react-query": ^5.51.23

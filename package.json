@@ -18,8 +18,7 @@
     "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",
     "lint:fix": "turbo run lint --continue -- --fix --cache --cache-location .cache/.eslintcache",
     "lint:ws": "pnpm dlx sherif@latest",
-    "typecheck": "turbo run typecheck",
-    "ui-add": "turbo run ui-add"
+    "typecheck": "turbo run typecheck"
   },
   "prettier": "@acme/prettier-config",
   "devDependencies": {
@@ -29,8 +28,8 @@
     "turbo": "^2.0.14",
     "typescript": "catalog:"
   },
-  "packageManager": "pnpm@9.7.1",
+  "packageManager": "pnpm@9.9.0",
   "engines": {
-    "node": ">=v20.16.0"
+    "node": ">=v20.17.0"
   }
 }

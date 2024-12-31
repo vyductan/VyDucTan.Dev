@@ -8,7 +8,7 @@ import { AutoForm, useForm } from "@acme/ui/form";
 import { MailOutlined } from "@acme/ui/icons";
 import { message } from "@acme/ui/toast";
 
-import type { ResumeData } from "../resumeData";
+import type { ResumeData } from "../resume-data";
 
 type ContactProps = {
   data: ResumeData["main"];

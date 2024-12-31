@@ -2,8 +2,7 @@ import { NextResponse } from "next/server";
 import { createI18nMiddleware } from "next-international/middleware";
 
 import { auth } from "@acme/auth";
-
-import { env as environment } from "./env";
+import { env } from "./env";
 
 // import { auth } from "@acme/auth";
 
@@ -22,17 +21,18 @@ export default auth((request) => {
   let hostname = request.headers
     .get("host")
     ?.replace(
-      `.localhost:${environment.PORT ?? 3000}`,
-      `.${environment.NEXT_PUBLIC_ROOT_DOMAIN}`,
+      `.localhost:${env.PORT ?? 3000}`,
+      `.${env.NEXT_PUBLIC_ROOT_DOMAIN}`,
     );
 
   // special case for Vercel preview deployment URLs
   if (
-    hostname?.includes("---") &&
-    hostname.endsWith(`.${environment.NEXT_PUBLIC_VERCEL_DEPLOYMENT_SUFFIX}`)
+    hostname &&
+    hostname.includes("---") &&
+    hostname.endsWith(`.${env.NEXT_PUBLIC_VERCEL_DEPLOYMENT_SUFFIX}`)
   ) {
     hostname = `${hostname.split("---")[0]}.${
-      environment.NEXT_PUBLIC_ROOT_DOMAIN
+      env.NEXT_PUBLIC_ROOT_DOMAIN
     }`;
   }
 
@@ -43,7 +43,7 @@ export default auth((request) => {
   }`;
 
   // rewrites for app pages
-  if (hostname == `app.${environment.NEXT_PUBLIC_ROOT_DOMAIN}`) {
+  if (hostname == `app.${env.NEXT_PUBLIC_ROOT_DOMAIN}`) {
     /**
      * I18n auto set lang path
      * only for app.* domain
@@ -71,8 +71,8 @@ export default auth((request) => {
 
   // rewrite root application to `/home` folder
   if (
-    hostname === `localhost:${environment.PORT ?? 3000}` ||
-    hostname === environment.NEXT_PUBLIC_ROOT_DOMAIN
+    hostname === `localhost:${env.PORT ?? 3000}` ||
+    hostname === env.NEXT_PUBLIC_ROOT_DOMAIN
   ) {
     return NextResponse.rewrite(
       new URL(`/home${path === "/" ? "" : path}`, request.url),
@@ -91,8 +91,8 @@ export const config = {
    * 3. /_static (inside /public)
    * 4. all root files inside /public (e.g. /favicon.ico)
    */
-  // matcher: ["/((?!api/|_next/|_static/|_vercel/|[\\w-]+\\.\\w+).*)"],
-  matcher: [String.raw`/((?!api/|_next/|_static/|_vercel/|[\w-]+\.\w+).*)`],
+  matcher: ["/((?!api/|_next/|_static/|_vercel/|[\\w-]+\\.\\w+).*)"],
+  // matcher: [String.raw`/((?!api/|_next/|_static/|_vercel/|[\w-]+\.\w+).*)`],
 };
 
 // // Or like this if you need to do something here.

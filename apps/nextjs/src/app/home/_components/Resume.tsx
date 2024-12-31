@@ -1,4 +1,4 @@
-import type { ResumeData } from "../resumeData";
+import type { ResumeData } from "../resume-data";
 
 type ResumeProps = {
   data: ResumeData["resume"];

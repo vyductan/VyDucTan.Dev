@@ -10,8 +10,8 @@
     "clean:workspaces": "turbo run clean",
     "db:push": "pnpm -F @acme/db push",
     "db:studio": "pnpm -F @acmedb studio",
-    "dev": "turbo watch dev",
-    "dev:nextjs": "turbo watch dev -F nextjs...",
+    "dev": "turbo watch dev --continue",
+    "dev:nextjs": "turbo watch dev --continue -F nextjs...",
     "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
     "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
     "postinstall": "pnpm lint:ws",
@@ -25,11 +25,12 @@
     "@acme/prettier-config": "workspace:*",
     "@turbo/gen": "^2.0.14",
     "prettier": "catalog:",
-    "turbo": "^2.0.14",
+    "turbo": "^2.1.0",
     "typescript": "catalog:"
   },
-  "packageManager": "pnpm@9.9.0",
+  "packageManager": "pnpm@9.14.2",
   "engines": {
-    "node": ">=v20.17.0"
+    "node": ">=v20.17.0",
+    "pnpm": "^9.14.2"
   }
 }

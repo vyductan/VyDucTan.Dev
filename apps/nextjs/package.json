@@ -43,6 +43,7 @@
     "@vercel/kv": "^2.0.0",
     "ai": "^3.2.24",
     "axios": "^1.7.2",
+    "colorjs.io": "^0.5.2",
     "date-fns": "^3.6.0",
     "eventsource-parser": "^1.1.1",
     "framer-motion": "^11.3.28",

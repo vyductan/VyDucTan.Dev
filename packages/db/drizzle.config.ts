@@ -15,4 +15,5 @@ export default {
   dialect: "postgresql",
   dbCredentials: { url: nonPoolingUrl },
   tablesFilter: [DB_PREFIX + "*"],
+  casing: "snake_case",
 } satisfies Config;

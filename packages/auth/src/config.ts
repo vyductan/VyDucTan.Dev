@@ -63,7 +63,7 @@ export const authConfig = {
 
 export const validateToken = async (
   token: string,
-): Promise<NextAuthSession | null> => {
+): Promise<NextAuthSession | undefined> => {
   const sessionToken = token.slice("Bearer ".length);
   const session = await adapter.getSessionAndUser?.(sessionToken);
   return session
@@ -73,9 +73,10 @@ export const validateToken = async (
         },
         expires: session.session.expires.toISOString(),
       }
-    : null;
+    : undefined;
 };
 
 export const invalidateSessionToken = async (token: string) => {
-  await adapter.deleteSession?.(token);
+  const sessionToken = token.slice("Bearer ".length);
+  await adapter.deleteSession?.(sessionToken);
 };

@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 
 import { FloatButtonBackToTop } from "@acme/ui/float-button";
 
-import { resumeData } from "./resumeData";
+import { resumeData } from "./resume-data";
 
 const Header = dynamic(() => import("./_components/Header"));
 const About = dynamic(() => import("./_components/About"));

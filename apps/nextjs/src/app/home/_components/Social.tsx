@@ -1,6 +1,6 @@
 import { Icon } from "@acme/ui/icons";
 
-import type { ResumeData } from "../resumeData";
+import type { ResumeData } from "../resume-data";
 
 const IconMap = {
   facebook: <Icon icon="entypo-social:facebook" />,

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import { Icon } from "@acme/ui/icons";
 
-import type { ResumeData } from "../resumeData";
+import type { ResumeData } from "../resume-data";
 
 type PortfolioProps = {
   data: ResumeData["portfolio"];

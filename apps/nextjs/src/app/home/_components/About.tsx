@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import { Icon } from "@acme/ui/icons";
 
-import type { ResumeData } from "../resumeData";
+import type { ResumeData } from "../resume-data";
 
 type AboutProps = {
   data: ResumeData["main"];
@@ -21,7 +21,7 @@ const About = ({ data }: AboutProps) => {
             fill={true}
           />
         </div>
-        <div className="flex-1  lg:ml-28">
+        <div className="flex-1 lg:ml-28">
           <h2>About Me</h2>
           <p>{bio}</p>
           <div className="mt-10 flex flex-wrap">

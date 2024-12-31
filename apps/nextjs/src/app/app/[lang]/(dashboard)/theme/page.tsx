@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { generate } from "@ant-design/colors";
+import Color from "colorjs.io";
 
 import { CodeBlock } from "@acme/ui/code-block";
 import { Input } from "@acme/ui/input";
@@ -57,6 +58,7 @@ export default function ThemePage() {
           setInput({ ...input, backgroundColor: e.target.value })
         }
       />
+      <div>To HSL</div>
       <CodeBlock language="css">
         {palette
           .map((c, index) => {
@@ -79,6 +81,47 @@ export default function ThemePage() {
             return `--${input.slug}-${
               index === palette.length - 1 ? 950 : (index + 1) * 100
             }: ${hsl.h} ${hsl.s}% ${hsl.l}%;`;
+          })
+          .join("\n")}
+      </CodeBlock>
+      {darkPalete.map((c, index) => (
+        <div key={index} style={{ color: c }}>
+          {c}
+        </div>
+      ))}
+
+      <div>To OKLCH</div>
+      <CodeBlock language="css">
+        {palette
+          .map((c, index) => {
+            const oklch = new Color(c).to("oklch");
+            const value = oklch
+              .toString({ precision: 4 })
+              .replace("oklch(", "")
+              .slice(0, -1);
+
+            return `--${input.slug}-${
+              index === palette.length - 1 ? 950 : (index + 1) * 100
+            }: ${value};`;
+          })
+          .join("\n")}
+      </CodeBlock>
+      {palette.map((c, index) => (
+        <div key={index} style={{ color: c }}>
+          {c}
+        </div>
+      ))}
+      <CodeBlock language="css">
+        {darkPalete
+          .map((c, index) => {
+            const oklch = new Color(c).to("oklch");
+            const value = oklch
+              .toString({ precision: 4 })
+              .replace("oklch(", "")
+              .slice(0, -1);
+            return `--${input.slug}-${
+              index === palette.length - 1 ? 950 : (index + 1) * 100
+            }: ${value};`;
           })
           .join("\n")}
       </CodeBlock>

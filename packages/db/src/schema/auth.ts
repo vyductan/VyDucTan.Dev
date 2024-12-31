@@ -7,15 +7,13 @@ import { pgTable } from "..";
 /*
  * Next Auth
  */
-export const User = pgTable("user", {
-  id: text("id")
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
-  name: text("name"),
-  email: text("email").notNull(),
-  emailVerified: timestamp("emailVerified", { mode: "date" }),
-  image: text("image"),
-});
+export const User = pgTable("user", (t) => ({
+  id: t.uuid().primaryKey().defaultRandom(),
+  name: t.text(),
+  email: t.text().notNull(),
+  emailVerified: t.timestamp({ mode: "date" }),
+  image: t.text(),
+}));
 
 export const UserRelations = relations(User, ({ many }) => ({
   accounts: many(Account),

@@ -59,7 +59,7 @@ export const NotionSelectSchema = z.object({
         "purple",
         "pink",
         "red",
-      ]),
+      ]).optional(),
       // name: NotionRichTextSchema,
     })
     .nullable(),
